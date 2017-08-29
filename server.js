@@ -3,10 +3,19 @@ const path = require('path');
 const http = require('http');
 const api=require("./server/routes/api.js");
 const app = express();
-
+const mongoose = require ('mongoose');
+mongoose.connect('mongodb://GeorgeSp:6979658539@ds111124.mlab.com:11124/bridge-app')
 app.use(express.static(path.join(__dirname, 'dist')));
 
+const Schema =mongoose.Schema;
 
+const auctionSchema = new Schema ({
+  array: [],
+  numericBid: Number,
+  suitBid: String,
+  comments: String
+})
+const auctionInfo = mongoose.model('Bid',auctionSchema);
 
 /**
  * Create HTTP server.

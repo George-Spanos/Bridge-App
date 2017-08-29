@@ -1,0 +1,11 @@
+.card {
+  float: left;
+  width: 90px;
+  height: auto;
+  display: block;
+  border: 3px solid;
+  margin: 5px;
+  border-radius: 3px;
+  border-color: lightblue;;
+  padding: 10px;
+}

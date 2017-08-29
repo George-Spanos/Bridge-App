@@ -4,7 +4,7 @@ import {Injectable} from '@angular/core';
 export class BridgeApi {
 
   deck() {
-    const names = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K'];
+    const names = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A'];
     const suits = ['Hearts', 'Diamonds', 'Spades', 'Clubs'];
     const cards = [];
       for ( let s = 0; s < suits.length; s++ ) {
@@ -21,6 +21,41 @@ export class BridgeApi {
         array[i] = array[j];
         array[j] = temp;
     }
-    return array.slice(0, 13);
-}
+    const shuffledArray = array.slice(0, 13);
+    shuffledArray.sort((a, b) => {
+      const suit1 = a.suit;
+      const suit2 = b.suit;
+      if (suit1 > suit2) {
+        return -1;
+      }
+      if (suit1 < suit2) {
+        return 1;
+       }
+       return 0;
+    });
+    return shuffledArray;
+  }
+  sortArrayValues(array) {
+    array.sort(
+      (a , b) => {
+        const value1 = a.value;
+        const value2 = b.value;
+        if (value1 < value2) {
+          return 1;
+        }
+        if (value2 > value2) {
+          return -1;
+         }
+         return 0;
+      }
+    ); return array;
+  }
+  filterArray(array: Card[], condition: string) {
+    const newArray = array.filter(
+      (el) => {
+       return el.suit === condition;
+      }
+    );
+    return newArray;
+  }
 }
