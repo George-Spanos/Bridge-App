@@ -2,10 +2,12 @@ const express = require('express');
 const path = require('path');
 const http = require('http');
 const api=require("./server/routes/api.js");
+var bodyParser = require('body-parser')
 const app = express();
 const mongoose = require ('mongoose');
 mongoose.connect('mongodb://GeorgeSp:6979658539@ds111124.mlab.com:11124/bridge-app')
 app.use(express.static(path.join(__dirname, 'dist')));
+app.use(bodyParser.json())
 
 const Schema =mongoose.Schema;
 
@@ -18,7 +20,6 @@ const auctionSchema = new Schema ({
 })
 const Bid = mongoose.model('Bid',auctionSchema);
 app.post('/addauction', function (req, res ,next) {
-     console.log(req);
   var bid = Bid({
       array: req.body.hand,
       hcp: req.body.hcp,
