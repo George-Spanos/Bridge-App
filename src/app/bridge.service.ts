@@ -1,5 +1,5 @@
 import {Card} from './card.model';
-import {Observable} from 'rxjs/Rx';
+import {Observable} from 'rxjs';
 import 'rxjs/Rx';
 import {Http, Headers, Response} from '@angular/http';
 import {Injectable} from '@angular/core';

@@ -40,7 +40,7 @@ app.post('/addauction', function (req, res ,next) {
         });
       }
     );
-})
+});
 /**
  * Create HTTP server.
  */
