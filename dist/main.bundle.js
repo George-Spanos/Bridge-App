@@ -185,8 +185,8 @@ var BidFormComponent = (function () {
     BidFormComponent.prototype.onSubmit = function () {
         this.bridgeApi.saveBid(this.bridgeForm.value.numericBid, this.bridgeForm.value.suitBid, this.bridgeForm.value.comments);
         console.log(this.bridgeApi.bid);
+        this.bridgeApi.toDatabase().subscribe(function (data) { console.log(data); }, function (error) { console.error(error); });
         this.bridgeForm.reset();
-        this.bridgeApi.toDatabase().subscribe(function (data) { console.log(data); }, function (error) { console.log(error); });
     };
     BidFormComponent.prototype.ngOnInit = function () {
     };
