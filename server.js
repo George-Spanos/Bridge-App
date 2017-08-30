@@ -14,7 +14,7 @@ const Schema =mongoose.Schema;
 const auctionSchema = new Schema ({
   array: [],
   hcp: Number,
-  numericBid: Number,
+  numericBid: String,
   suitBid: String,
   comments: String
 })
