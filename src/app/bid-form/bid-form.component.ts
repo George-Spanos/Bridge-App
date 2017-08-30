@@ -18,7 +18,10 @@ onSubmit() {
      this.bridgeForm.value.comments);
      console.log(this.bridgeApi.bid);
      this.bridgeForm.reset();
-     this.bridgeApi.toDatabase().subscribe();
+     this.bridgeApi.toDatabase().subscribe(
+       (data) => {console.log(data); },
+       (error) => {console.log(error); }
+     );
 }
   constructor(public bridgeApi: BridgeApi, private http: Http) {
 

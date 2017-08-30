@@ -26,7 +26,20 @@ app.post('/', function (req, res ,next) {
       suitBid: req.body.suit,
       comments: req.body.comment
     });
-    bid.save();
+    bid.save(
+      function(err, result) {
+        if (err) {
+          return res.status(500).json({
+            title: 'An error occured',
+            err: error
+          })
+        }
+        res.status(201).json({
+          message: 'Saved data',
+          obj: result
+        });
+      }
+    );
 })
 /**
  * Create HTTP server.

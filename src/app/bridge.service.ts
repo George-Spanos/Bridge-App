@@ -1,5 +1,7 @@
 import {Card} from './card.model';
-import {Http, Headers} from '@angular/http';
+import {Observable} from 'rxjs/Rx';
+import 'rxjs/Rx';
+import {Http, Headers, Response} from '@angular/http';
 import {Injectable} from '@angular/core';
 @Injectable()
 export class BridgeApi {
@@ -79,6 +81,11 @@ export class BridgeApi {
     toDatabase() {
       const header = new Headers({'Content-Type': 'application/json'});
       const body = JSON.stringify(this.bid);
-      return this.http.post('https://bridge-auction-app.herokuapp.com/', body, {headers: header});
+      return this.http.post('https://bridge-auction-app.herokuapp.com/', body, {headers: header})
+      .map(
+        ( response: Response) => { response.json(); }
+      ).catch(
+        (error: Response) =>  Observable.throw(error.json())
+      );
     }
 }
