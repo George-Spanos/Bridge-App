@@ -183,10 +183,7 @@ var BidFormComponent = (function () {
     BidFormComponent.prototype.onSubmit = function () {
         this.bridgeApi.saveBid(this.bridgeForm.value.numericBid, this.bridgeForm.value.suitBid, this.bridgeForm.value.comments);
         console.log(this.bridgeApi.bid);
-        //  this.bridgeApi.toDatabase().subscribe(
-        //    data => console.log('A bid was succesfully sent'),
-        //    error => console.error(error)
-        //  );
+        this.bridgeApi.toDatabase().subscribe(function (data) { return console.log('A bid was succesfully sent'); }, function (error) { return console.error(error); });
         this.bridgeForm.reset();
     };
     BidFormComponent.prototype.ngOnInit = function () {
@@ -364,7 +361,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/main-section/main-section.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"row\">\r\n  <div class=\"col-xs-12\" style=\"display:flex; justify-content:center; margin-top:30px; padding:20px;\">\r\n    <button class=\"btn btn-primary\" (click)=\"getHand(cardsArray)\">Initialize Hand</button>\r\n  </div>\r\n</div>\r\n<div class=\"row\">\r\n  <div class=\"col-xs-12\">\r\n    <div class=\"row\">\r\n      <div class=\"col-xs-6\">\r\n        <div class=\"card\" *ngFor=\"let card of spades\">{{card.name}} {{card.suit}} <br>\r\n          <div *ngIf=\"card.value>0\"> HCP = {{card.value}}</div>\r\n        </div>\r\n      </div>\r\n    </div>\r\n    <div class=\"row\">\r\n      <div class=\"col-xs-6\">\r\n        <div class=\"card\" *ngFor=\"let card of hearts\">{{card.name}} {{card.suit}} <br>\r\n          <div *ngIf=\"card.value>0\"> HCP = {{card.value}}</div>\r\n        </div>\r\n      </div>\r\n    </div>\r\n    <div class=\"row\">\r\n      <div class=\"col-xs-6\">\r\n        <div class=\"card\" *ngFor=\"let card of diamonds\">{{card.name}} {{card.suit}} <br>\r\n          <div *ngIf=\"card.value>0\"> HCP = {{card.value}}</div>\r\n        </div>\r\n      </div>\r\n    </div>\r\n    <div class=\"row\">\r\n      <div class=\"col-xs-6\">\r\n        <div class=\"card\" *ngFor=\"let card of clubs\">{{card.name}} {{card.suit}} <br>\r\n          <div *ngIf=\"card.value>0\"> HCP = {{card.value}}</div>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n<div class=\"row\">\r\n  <div class=\"col-xs-12\">\r\n    <div *ngIf=\"handInitialized\"  style=\"margin:10px\">\r\n      <app-bid-form></app-bid-form>\r\n    </div>\r\n  </div>\r\n</div>\r\n"
+module.exports = "<div class=\"row\">\r\n  <div class=\"col-xs-12\" style=\"display:flex; justify-content:center; margin-top:30px; padding:20px;\">\r\n    <button class=\"btn btn-primary\" (click)=\"getHand(cardsArray)\">Initialize Hand</button>\r\n  </div>\r\n</div>\r\n<div class=\"row\">\r\n  <div class=\"col-xs-12\">\r\n    <div class=\"row\">\r\n      <div class=\"col-xs-12\">\r\n        <div class=\"card\" *ngFor=\"let card of spades\">{{card.name}} {{card.suit}} <br>\r\n          <div *ngIf=\"card.value>0\"> HCP = {{card.value}}</div>\r\n        </div>\r\n      </div>\r\n    </div>\r\n    <div class=\"row\">\r\n      <div class=\"col-xs-12\">\r\n        <div class=\"card\" *ngFor=\"let card of hearts\">{{card.name}} {{card.suit}} <br>\r\n          <div *ngIf=\"card.value>0\"> HCP = {{card.value}}</div>\r\n        </div>\r\n      </div>\r\n    </div>\r\n    <div class=\"row\">\r\n      <div class=\"col-xs-12\">\r\n        <div class=\"card\" *ngFor=\"let card of diamonds\">{{card.name}} {{card.suit}} <br>\r\n          <div *ngIf=\"card.value>0\"> HCP = {{card.value}}</div>\r\n        </div>\r\n      </div>\r\n    </div>\r\n    <div class=\"row\">\r\n      <div class=\"col-xs-12\">\r\n        <div class=\"card\" *ngFor=\"let card of clubs\">{{card.name}} {{card.suit}} <br>\r\n          <div *ngIf=\"card.value>0\"> HCP = {{card.value}}</div>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n<div class=\"row\">\r\n  <div class=\"col-xs-12\">\r\n    <div *ngIf=\"handInitialized\"  style=\"margin:10px\">\r\n      <app-bid-form></app-bid-form>\r\n    </div>\r\n  </div>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -420,6 +417,7 @@ var MainSectionComponent = (function () {
         });
         this.bridgeApi.saveHand(this.hand, sum);
         console.log(this.bridgeApi.bid);
+        this.cardsArray = this.bridgeApi.deck();
     };
     MainSectionComponent.prototype.ngOnInit = function () {
         this.cardsArray = this.bridgeApi.deck();

@@ -45,9 +45,9 @@ getHand(array) {
   );
   this.bridgeApi.saveHand(this.hand, sum);
 console.log(this.bridgeApi.bid);
+this.cardsArray = this.bridgeApi.deck();
 }
   ngOnInit() {
     this.cardsArray = this.bridgeApi.deck();
-
   }
 }
