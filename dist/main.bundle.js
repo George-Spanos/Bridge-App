@@ -149,7 +149,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/bid-form/bid-form.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<form (ngSubmit)=\"onSubmit()\" #f=\"ngForm\">\n  <div class=\"row\" style=\"margin: 5px;\">\n    <div class=\"col-xs-4\" role=\"group\" aria-label=\"...\">\n      <label for=\"num\">Choose a number</label>\n      <select class=\"form-control\" name=\"numericBid\" id=\"num\" required ngModel #num=\"ngModel\">\n            <option value=\"1\">1</option>\n            <option value=\"1\">2</option>\n            <option value=\"1\">3</option>\n            <option value=\"1\">4</option>\n            <option value=\"1\">5</option>\n            <option value=\"1\">6</option>\n            <option value=\"1\">7</option>\n        </select>\n      <span *ngIf=\"num.invalid && num.touched\"> You need to choose a numeric bid</span>\n      <select class=\"form-control pull-right\" name=\"suitBid\" id=\"suit\" required ngModel #suit=\"ngModel\">\n            <option value=\"Spades\">Spades</option>\n            <option value=\"Hearts\">Hearts</option>\n            <option value=\"Diamonds\">Diamonds</option>\n            <option value=\"Clubs\">Clubs</option>\n            <option value=\"NoTrump\">NoTrump</option>\n          </select>\n      <div class=\"row\">\n        <span *ngIf=\"suit.invalid && suit.touched\">\n              You need to choose a suit bid\n            </span>\n      </div>\n    </div>\n  </div>\n  <div class=\"form-group\">\n    <label for=\"comment\">Comment:</label>\n    <textarea class=\"form-control\" rows=\"5\" id=\"comment\" ngModel name=\"comments\" required #comment=\"ngModel\"></textarea>\n  </div>\n  <span *ngIf=\"comment.invalid && comment.touched\">You need to type a comment</span>\n  <br>\n  <button type=\"submit\" class=\"btn btn-primary\" [disabled]=\"!f.valid\">Submit Auction</button>\n</form>\n"
+module.exports = "<form (ngSubmit)=\"onSubmit()\" #f=\"ngForm\">\n  <div class=\"row\" style=\"margin: 5px;\">\n    <div class=\"col-xs-4\" role=\"group\" aria-label=\"...\">\n      <label for=\"num\">Choose a number</label>\n      <select class=\"form-control\" name=\"numericBid\" id=\"num\" required ngModel #num=\"ngModel\">\n            <option value=\"1\">1</option>\n            <option value=\"1\">2</option>\n            <option value=\"1\">3</option>\n            <option value=\"1\">4</option>\n            <option value=\"1\">5</option>\n            <option value=\"1\">6</option>\n            <option value=\"1\">7</option>\n            <option value=\"Pass\">Pass</option>\n        </select>\n      <span *ngIf=\"num.invalid && num.touched\"> You need to choose a numeric bid</span>\n      <label for=\"suit\">Choose a Suit</label>\n      <select class=\"form-control pull-right\" name=\"suitBid\" id=\"suit\" required ngModel #suit=\"ngModel\">\n            <option value=\"Spades\">Spades</option>\n            <option value=\"Hearts\">Hearts</option>\n            <option value=\"Diamonds\">Diamonds</option>\n            <option value=\"Clubs\">Clubs</option>\n            <option value=\"NoTrump\">NoTrump</option>\n            <option value=\"Pass\">Pass</option>\n          </select>\n      <div class=\"row\">\n        <span *ngIf=\"suit.invalid && suit.touched\">\n              You need to choose a suit bid\n            </span>\n            <div class=\"row\">\n        <button type=\"button\" class=\"btn btn-primary\" (click)=\"Pass()\">Pass</button>\n      </div>\n      </div>\n    </div>\n  </div>\n  <div class=\"form-group\">\n    <label for=\"comment\">Comment:</label>\n    <textarea class=\"form-control\" rows=\"5\" id=\"comment\" ngModel name=\"comments\" required #comment=\"ngModel\"></textarea>\n  </div>\n  <span *ngIf=\"comment.invalid && comment.touched\">You need to type a comment</span>\n  <br>\n  <button type=\"submit\" class=\"btn btn-primary\" [disabled]=\"!f.valid\">Submit Auction</button>\n</form>\n"
 
 /***/ }),
 
@@ -183,11 +183,16 @@ var BidFormComponent = (function () {
     BidFormComponent.prototype.onSubmit = function () {
         this.bridgeApi.saveBid(this.bridgeForm.value.numericBid, this.bridgeForm.value.suitBid, this.bridgeForm.value.comments);
         console.log(this.bridgeApi.bid);
-        this.bridgeApi.toDatabase().subscribe(function (data) { return console.log('A bid was succesfully sent'); }, function (error) { return console.error(error); });
+        //  this.bridgeApi.toDatabase().subscribe(
+        //    data => console.log('A bid was succesfully sent'),
+        //    error => console.error(error)
+        //  );
         this.bridgeForm.reset();
     };
-    BidFormComponent.prototype.ngOnInit = function () {
+    BidFormComponent.prototype.Pass = function () {
+        this.bridgeForm.setValue({ numericBid: 'Pass', suitBid: 'Pass', comments: '' });
     };
+    BidFormComponent.prototype.ngOnInit = function () { };
     return BidFormComponent;
 }());
 __decorate([
