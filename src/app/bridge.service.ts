@@ -2,7 +2,14 @@ import {Card} from './card.model';
 import {Injectable} from '@angular/core';
 @Injectable()
 export class BridgeApi {
-
+  bid= {
+    hand: [],
+    hcp: 0,
+    numbid: '',
+    suit: '',
+    comment: ''
+  };
+  hcp: number;
   deck() {
     const names = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A'];
     const suits = ['Hearts', 'Diamonds', 'Spades', 'Clubs'];
@@ -58,4 +65,14 @@ export class BridgeApi {
     );
     return newArray;
   }
+  saveHand(hand: Card[], hcp: number) {
+    this.bid.hand = hand;
+    this.bid.hcp = hcp;
+  }
+  saveBid(no: string, suit: string, comment: string) {
+      this.bid.comment = comment;
+      this.bid.numbid = no;
+      this.bid.suit = suit;
+    }
+    toDatabase(bid) {}
 }

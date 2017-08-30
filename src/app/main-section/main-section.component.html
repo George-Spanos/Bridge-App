@@ -8,28 +8,28 @@
     <div class="row">
       <div class="col-xs-6">
         <div class="card" *ngFor="let card of spades">{{card.name}} {{card.suit}} <br>
-          <div *ngIf="card.value > 10"> HCP = {{card.value %10 +1}}</div>
+          <div *ngIf="card.value>0"> HCP = {{card.value}}</div>
         </div>
       </div>
     </div>
     <div class="row">
       <div class="col-xs-6">
         <div class="card" *ngFor="let card of hearts">{{card.name}} {{card.suit}} <br>
-          <div *ngIf="card.value > 10"> HCP = {{card.value %10 +1}}</div>
+          <div *ngIf="card.value>0"> HCP = {{card.value}}</div>
         </div>
       </div>
     </div>
     <div class="row">
       <div class="col-xs-6">
         <div class="card" *ngFor="let card of diamonds">{{card.name}} {{card.suit}} <br>
-          <div *ngIf="card.value > 10"> HCP = {{card.value %10 +1}}</div>
+          <div *ngIf="card.value>0"> HCP = {{card.value}}</div>
         </div>
       </div>
     </div>
     <div class="row">
       <div class="col-xs-6">
         <div class="card" *ngFor="let card of clubs">{{card.name}} {{card.suit}} <br>
-          <div *ngIf="card.value > 10"> HCP = {{card.value %10 +1}}</div>
+          <div *ngIf="card.value>0"> HCP = {{card.value}}</div>
         </div>
       </div>
     </div>

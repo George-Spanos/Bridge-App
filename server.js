@@ -11,12 +11,22 @@ const Schema =mongoose.Schema;
 
 const auctionSchema = new Schema ({
   array: [],
+  hcp: Number,
   numericBid: Number,
   suitBid: String,
   comments: String
 })
 const auctionInfo = mongoose.model('Bid',auctionSchema);
-
+app.post('/', function (req, res ,next) {
+    var bid = new auctionInfo ({
+      array: req.body.hand,
+      hcp: req.body.hcp,
+      numbericBid: req.body.numBid,
+      suitBid: req.body.suit,
+      comments: req.body.comment
+    });
+    bid.save();
+})
 /**
  * Create HTTP server.
  */
