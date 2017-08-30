@@ -179,7 +179,7 @@ var BidFormComponent = (function () {
     function BidFormComponent(bridgeApi, http) {
         this.bridgeApi = bridgeApi;
         this.http = http;
-        this.obs = this.http.post('https://bridge-auction-app.herokuapp.com/', this.bridgeApi.bid);
+        this.obs = this.http.post('https://bridge-auction-app.herokuapp.com/', JSON.stringify(this.bridgeApi.bid));
         this.defaultSuit = 'Spades';
         this.defaultNum = 1;
     }

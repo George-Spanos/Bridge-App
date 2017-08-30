@@ -9,7 +9,7 @@ import {NgForm} from '@angular/forms';
   styleUrls: ['./bid-form.component.css']
 })
 export class BidFormComponent implements OnInit {
-  obs = this.http.post('https://bridge-auction-app.herokuapp.com/', this.bridgeApi.bid);
+  obs = this.http.post('https://bridge-auction-app.herokuapp.com/', JSON.stringify(this.bridgeApi.bid));
   @ViewChild('f') bridgeForm: NgForm;
   defaultSuit = 'Spades';
   defaultNum = 1;
