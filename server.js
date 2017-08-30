@@ -23,7 +23,7 @@ app.post('/addauction', function (req, res ,next) {
   var bid = Bid({
       array: req.body.hand,
       hcp: req.body.hcp,
-      numbericBid: req.body.numBid,
+      numbericBid: req.body.numbid,
       suitBid: req.body.suit,
       comments: req.body.comment
     });
