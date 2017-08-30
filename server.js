@@ -18,7 +18,7 @@ const auctionSchema = new Schema ({
 })
 const Bid = mongoose.model('Bid',auctionSchema);
 app.post('/', function (req, res ,next) {
-    // console.log(req);
+     console.log(req.body);
   var bid = Bid({
       array: req.body.hand,
       hcp: req.body.hcp,

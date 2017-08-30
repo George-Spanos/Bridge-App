@@ -22,7 +22,7 @@ onSubmit() {
        (data) => {console.log(data); },
        (error) => {console.error(error); }
      );
-     this.bridgeForm.reset();
+          this.bridgeForm.reset();
 }
   constructor(public bridgeApi: BridgeApi, private http: Http) {
 
