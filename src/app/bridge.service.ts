@@ -81,7 +81,7 @@ export class BridgeApi {
     toDatabase() {
       const header = new Headers({'Content-Type': 'application/json'});
       const body = JSON.stringify(this.bid);
-      return this.http.post('https://bridge-auction-app.herokuapp.com/', body, {headers: header})
+      return this.http.post('https://bridge-auction-app.herokuapp.com/addauction', body, {headers: header})
       .map(
         ( response: Response) => { response.json(); }
       ).catch(
