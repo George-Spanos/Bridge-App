@@ -116,7 +116,7 @@ AppModule = __decorate([
         imports: [
             __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["a" /* BrowserModule */],
             __WEBPACK_IMPORTED_MODULE_3__angular_forms__["a" /* FormsModule */],
-            __WEBPACK_IMPORTED_MODULE_4__angular_http__["b" /* HttpModule */],
+            __WEBPACK_IMPORTED_MODULE_4__angular_http__["c" /* HttpModule */],
             __WEBPACK_IMPORTED_MODULE_2__angular_router__["a" /* RouterModule */].forRoot(routes),
         ],
         providers: [__WEBPACK_IMPORTED_MODULE_7__bridge_service__["a" /* BridgeApi */]],
@@ -179,7 +179,8 @@ var BidFormComponent = (function () {
     function BidFormComponent(bridgeApi, http) {
         this.bridgeApi = bridgeApi;
         this.http = http;
-        this.obs = this.http.post('https://bridge-auction-app.herokuapp.com/', JSON.stringify(this.bridgeApi.bid));
+        this.headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* Headers */]({ 'Content-Type': 'application/json' });
+        this.obs = this.http.post('https://bridge-auction-app.herokuapp.com/', JSON.stringify(this.bridgeApi.bid), { headers: this.headers });
         this.defaultSuit = 'Spades';
         this.defaultNum = 1;
     }
@@ -203,7 +204,7 @@ BidFormComponent = __decorate([
         template: __webpack_require__("../../../../../src/app/bid-form/bid-form.component.html"),
         styles: [__webpack_require__("../../../../../src/app/bid-form/bid-form.component.css")]
     }),
-    __metadata("design:paramtypes", [typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__bridge_service__["a" /* BridgeApi */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__bridge_service__["a" /* BridgeApi */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* Http */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* Http */]) === "function" && _c || Object])
+    __metadata("design:paramtypes", [typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__bridge_service__["a" /* BridgeApi */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__bridge_service__["a" /* BridgeApi */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Http */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Http */]) === "function" && _c || Object])
 ], BidFormComponent);
 
 var _a, _b, _c;

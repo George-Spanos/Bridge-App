@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild} from '@angular/core';
-import {Http} from '@angular/http';
+import {Http, Headers} from '@angular/http';
 
 import { BridgeApi} from '../bridge.service';
 import {NgForm} from '@angular/forms';
@@ -9,7 +9,9 @@ import {NgForm} from '@angular/forms';
   styleUrls: ['./bid-form.component.css']
 })
 export class BidFormComponent implements OnInit {
-  obs = this.http.post('https://bridge-auction-app.herokuapp.com/', JSON.stringify(this.bridgeApi.bid));
+  headers = new Headers({'Content-Type': 'application/json'});
+  obs = this.http.post('https://bridge-auction-app.herokuapp.com/',
+   JSON.stringify(this.bridgeApi.bid), { headers: this.headers});
   @ViewChild('f') bridgeForm: NgForm;
   defaultSuit = 'Spades';
   defaultNum = 1;
