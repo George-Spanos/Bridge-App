@@ -27,7 +27,6 @@ export class MainSectionComponent implements OnInit {
   }
 getHand(array) {
   this.hand = this.bridgeApi.initializeHand(array);
-  this.hand = this.fixHcp(this.hand);
   this.spades = this.bridgeApi.filterArray(this.hand, 'Spades');
   this.bridgeApi.sortArrayValues(this.spades);
   this.hearts = this.bridgeApi.filterArray(this.hand, 'Hearts');
@@ -37,6 +36,7 @@ getHand(array) {
   this.clubs = this.bridgeApi.filterArray(this.hand, 'Clubs');
   this.bridgeApi.sortArrayValues(this.clubs);
   this.handInitialized = true;
+  this.hand = this.fixHcp(this.hand);
   let sum = 0;
   this.hand.forEach(
     (el) => {

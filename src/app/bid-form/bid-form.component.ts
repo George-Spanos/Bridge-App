@@ -10,16 +10,15 @@ import {NgForm} from '@angular/forms';
 })
 export class BidFormComponent implements OnInit {
   @ViewChild('f') bridgeForm: NgForm;
-  defaultSuit = 'Spades';
-  defaultNum = 1;
 onSubmit() {
   this.bridgeApi.saveBid(this.bridgeForm.value.numericBid,
     this.bridgeForm.value.suitBid,
      this.bridgeForm.value.comments);
-     this.bridgeApi.toDatabase().subscribe(
-       data => console.log('A bid was succesfully sent'),
-       error => console.error(error)
-     );
+     console.log(this.bridgeApi.bid);
+    //  this.bridgeApi.toDatabase().subscribe(
+    //    data => console.log('A bid was succesfully sent'),
+    //    error => console.error(error)
+    //  );
      this.bridgeForm.reset();
 }
   constructor(public bridgeApi: BridgeApi, private http: Http) {

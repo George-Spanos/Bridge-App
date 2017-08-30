@@ -179,12 +179,14 @@ var BidFormComponent = (function () {
     function BidFormComponent(bridgeApi, http) {
         this.bridgeApi = bridgeApi;
         this.http = http;
-        this.defaultSuit = 'Spades';
-        this.defaultNum = 1;
     }
     BidFormComponent.prototype.onSubmit = function () {
         this.bridgeApi.saveBid(this.bridgeForm.value.numericBid, this.bridgeForm.value.suitBid, this.bridgeForm.value.comments);
-        this.bridgeApi.toDatabase().subscribe(function (data) { return console.log('A bid was succesfully sent'); }, function (error) { return console.error(error); });
+        console.log(this.bridgeApi.bid);
+        //  this.bridgeApi.toDatabase().subscribe(
+        //    data => console.log('A bid was succesfully sent'),
+        //    error => console.error(error)
+        //  );
         this.bridgeForm.reset();
     };
     BidFormComponent.prototype.ngOnInit = function () {
@@ -402,7 +404,6 @@ var MainSectionComponent = (function () {
     };
     MainSectionComponent.prototype.getHand = function (array) {
         this.hand = this.bridgeApi.initializeHand(array);
-        this.hand = this.fixHcp(this.hand);
         this.spades = this.bridgeApi.filterArray(this.hand, 'Spades');
         this.bridgeApi.sortArrayValues(this.spades);
         this.hearts = this.bridgeApi.filterArray(this.hand, 'Hearts');
@@ -412,6 +413,7 @@ var MainSectionComponent = (function () {
         this.clubs = this.bridgeApi.filterArray(this.hand, 'Clubs');
         this.bridgeApi.sortArrayValues(this.clubs);
         this.handInitialized = true;
+        this.hand = this.fixHcp(this.hand);
         var sum = 0;
         this.hand.forEach(function (el) {
             sum = el.value + sum;
