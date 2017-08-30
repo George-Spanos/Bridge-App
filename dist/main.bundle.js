@@ -179,8 +179,6 @@ var BidFormComponent = (function () {
     function BidFormComponent(bridgeApi, http) {
         this.bridgeApi = bridgeApi;
         this.http = http;
-        this.headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* Headers */]({ 'Content-Type': 'application/json' });
-        this.obs = this.http.post('https://bridge-auction-app.herokuapp.com/', JSON.stringify(this.bridgeApi.bid), { headers: this.headers });
         this.defaultSuit = 'Spades';
         this.defaultNum = 1;
     }
@@ -188,7 +186,7 @@ var BidFormComponent = (function () {
         this.bridgeApi.saveBid(this.bridgeForm.value.numericBid, this.bridgeForm.value.suitBid, this.bridgeForm.value.comments);
         console.log(this.bridgeApi.bid);
         this.bridgeForm.reset();
-        this.obs.subscribe();
+        this.bridgeApi.toDatabase().subscribe();
     };
     BidFormComponent.prototype.ngOnInit = function () {
     };
@@ -218,17 +216,23 @@ var _a, _b, _c;
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return BridgeApi; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__card_model__ = __webpack_require__("../../../../../src/app/card.model.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__("../../../http/@angular/http.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
 
 
 var BridgeApi = (function () {
-    function BridgeApi() {
+    function BridgeApi(http) {
+        this.http = http;
         this.bid = {
             hand: [],
             hcp: 0,
@@ -298,13 +302,19 @@ var BridgeApi = (function () {
         this.bid.numbid = no;
         this.bid.suit = suit;
     };
-    BridgeApi.prototype.toDatabase = function (bid) { };
+    BridgeApi.prototype.toDatabase = function () {
+        var header = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* Headers */]({ 'Content-Type': 'application/json' });
+        var body = JSON.stringify(this.bid);
+        return this.http.post('https://bridge-auction-app.herokuapp.com/', body, { headers: header });
+    };
     return BridgeApi;
 }());
 BridgeApi = __decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["C" /* Injectable */])()
+    Object(__WEBPACK_IMPORTED_MODULE_2__angular_core__["C" /* Injectable */])(),
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Http */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Http */]) === "function" && _a || Object])
 ], BridgeApi);
 
+var _a;
 //# sourceMappingURL=bridge.service.js.map
 
 /***/ }),

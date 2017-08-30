@@ -9,9 +9,6 @@ import {NgForm} from '@angular/forms';
   styleUrls: ['./bid-form.component.css']
 })
 export class BidFormComponent implements OnInit {
-  headers = new Headers({'Content-Type': 'application/json'});
-  obs = this.http.post('https://bridge-auction-app.herokuapp.com/',
-   JSON.stringify(this.bridgeApi.bid), { headers: this.headers});
   @ViewChild('f') bridgeForm: NgForm;
   defaultSuit = 'Spades';
   defaultNum = 1;
@@ -21,7 +18,7 @@ onSubmit() {
      this.bridgeForm.value.comments);
      console.log(this.bridgeApi.bid);
      this.bridgeForm.reset();
-     this.obs.subscribe();
+     this.bridgeApi.toDatabase().subscribe();
 }
   constructor(public bridgeApi: BridgeApi, private http: Http) {
 

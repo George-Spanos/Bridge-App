@@ -1,7 +1,9 @@
 import {Card} from './card.model';
+import {Http, Headers} from '@angular/http';
 import {Injectable} from '@angular/core';
 @Injectable()
 export class BridgeApi {
+  constructor(public http: Http) {}
   bid= {
     hand: [],
     hcp: 0,
@@ -74,5 +76,9 @@ export class BridgeApi {
       this.bid.numbid = no;
       this.bid.suit = suit;
     }
-    toDatabase(bid) {}
+    toDatabase() {
+      const header = new Headers({'Content-Type': 'application/json'});
+      const body = JSON.stringify(this.bid);
+      return this.http.post('https://bridge-auction-app.herokuapp.com/', body, {headers: header});
+    }
 }
