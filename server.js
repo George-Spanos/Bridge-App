@@ -16,10 +16,10 @@ const auctionSchema = new Schema ({
   suitBid: String,
   comments: String
 })
-const auctionInfo = mongoose.model('Bid',auctionSchema);
+const Bid = mongoose.model('Bid',auctionSchema);
 app.post('/', function (req, res ,next) {
     // console.log(req);
-  var bid = auctionInfo ({
+  var bid = Bid({
       array: req.body.hand,
       hcp: req.body.hcp,
       numbericBid: req.body.numBid,
