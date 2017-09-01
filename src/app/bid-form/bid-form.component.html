@@ -1,6 +1,6 @@
 <form (ngSubmit)="onSubmit()" #f="ngForm">
   <div class="row" style="margin: 5px;">
-    <div class="col-xs-4" role="group" aria-label="...">
+    <div class="col-xs-12" role="group" aria-label="...">
       <label for="num">Choose a number</label>
       <select class="form-control" name="numericBid" id="num" required ngModel #num="ngModel">
             <option value="1">1</option>
@@ -26,15 +26,17 @@
         <span *ngIf="suit.invalid && suit.touched">
               You need to choose a suit bid
             </span>
-            <div class="row">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12" style="display: flex; justify-content: center; margin-top: 10px;">
         <button type="button" class="btn btn-primary" (click)="Pass()">Pass</button>
       </div>
       </div>
-    </div>
   </div>
   <div class="form-group">
     <label for="comment">Comment:</label>
-    <textarea class="form-control" rows="5" id="comment" ngModel name="comments" required #comment="ngModel"></textarea>
+    <textarea class="form-control col-xs-12" rows="5" id="comment" ngModel name="comments" required #comment="ngModel"></textarea>
   </div>
   <span *ngIf="comment.invalid && comment.touched">You need to type a comment</span>
   <br>

@@ -5,40 +5,28 @@
 </div>
 <div class="row">
   <div class="col-xs-12">
-    <div class="row">
-      <div class="col-xs-12">
-        <div class="card" *ngFor="let card of spades">{{card.name}} {{card.suit}} <br>
-          <div *ngIf="card.value>0"> HCP = {{card.value}}</div>
-        </div>
+    <div class="col-xs-6">
+      <div class="card" *ngFor="let card of spades">{{card.name}}
+        <br>
+        <img class="suit" src="http://i.imgur.com/tXgx0h3.png">
+      </div>
+      <div class="card" *ngFor="let card of hearts">{{card.name}}
+        <br>
+        <img class="suit" src="http://i.imgur.com/Chg6eQ8.jpg">
+      </div>
+      <div class="card" *ngFor="let card of diamonds">{{card.name}}
+        <br>
+        <img class="suit" src="http://i.imgur.com/khCb5Vu.jpg">
+      </div>
+      <div class="card" *ngFor="let card of clubs">{{card.name}}
+        <br>
+        <img class="suit" src="http://i.imgur.com/TsBK3k9.jpg">
       </div>
     </div>
-    <div class="row">
-      <div class="col-xs-12">
-        <div class="card" *ngFor="let card of hearts">{{card.name}} {{card.suit}} <br>
-          <div *ngIf="card.value>0"> HCP = {{card.value}}</div>
-        </div>
+    <div class="col-xs-6">
+      <div *ngIf="handInitialized" style="margin:10px">
+        <app-bid-form></app-bid-form>
       </div>
-    </div>
-    <div class="row">
-      <div class="col-xs-12">
-        <div class="card" *ngFor="let card of diamonds">{{card.name}} {{card.suit}} <br>
-          <div *ngIf="card.value>0"> HCP = {{card.value}}</div>
-        </div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-xs-12">
-        <div class="card" *ngFor="let card of clubs">{{card.name}} {{card.suit}} <br>
-          <div *ngIf="card.value>0"> HCP = {{card.value}}</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-<div class="row">
-  <div class="col-xs-12">
-    <div *ngIf="handInitialized"  style="margin:10px">
-      <app-bid-form></app-bid-form>
     </div>
   </div>
 </div>
