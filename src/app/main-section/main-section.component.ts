@@ -8,6 +8,7 @@ import { Card } from '../card.model';
 })
 export class MainSectionComponent implements OnInit {
   handInitialized = false;
+  hcp: number;
   cardsArray: Card[];
   spades: Card[];
   hearts: Card[];
@@ -43,6 +44,7 @@ getHand(array) {
       sum = el.value + sum;
     }
   );
+  this.hcp = sum;
   this.bridgeApi.saveHand(this.hand, sum);
 console.log(this.bridgeApi.bid);
 this.cardsArray = this.bridgeApi.deck();
