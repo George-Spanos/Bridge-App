@@ -33,3 +33,15 @@
   display: flex;
   justify-content: center;
 }
+@media screen and (max-width: 480px) {
+  .board {
+    padding: 20px 20px 20px 20px;
+    background-color: green;
+    display: flex;
+    justify-content: center;
+    border-radius: 10px;
+  }
+  .card {
+    height: auto;
+  }
+}
