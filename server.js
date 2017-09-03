@@ -46,6 +46,21 @@ app.use(function (req, res, next) {
       }
     );
   });
+  app.get('/randomhand', function (req, res, next) {
+    Bid.statics.random = function(callback) {
+      this.count(function(err, count) {
+        if (err) {
+          return callback(err);
+        }
+        var rand = Math.floor(Math.random() * count);
+        this.findOne().skip(rand).exec(callback);
+      }.bind(this));
+    };
+    res.status(200).json({
+      message: 'Sucess',
+      obj: count
+    })
+  });
   /**
    * Create HTTP server.
    */
