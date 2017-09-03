@@ -5,6 +5,7 @@ const api = require("./server/routes/api.js");
 var bodyParser = require('body-parser')
 const app = express();
 const mongoose = require('mongoose');
+const randomEl = require('mongoose-simple-random');
 mongoose.connect('mongodb://GeorgeSp:6979658539@ds111124.mlab.com:11124/bridge-app')
 app.use(express.static(path.join(__dirname, 'dist')));
 app.use(bodyParser.json())
@@ -22,6 +23,7 @@ app.use(function (req, res, next) {
     suitBid: String,
     comments: String
   })
+  auctionSchema.plugin(randomEl);
   const Bid = mongoose.model('Bid', auctionSchema);
   app.post('/addauction', function (req, res, next) {
     var bid = Bid({
@@ -47,19 +49,15 @@ app.use(function (req, res, next) {
     );
   });
   app.get('/randomhand', function (req, res, next) {
-    Bid.statics.random = function(callback) {
-      this.count(function(err, count) {
-        if (err) {
-          return callback(err);
-        }
-        var rand = Math.floor(Math.random() * count);
-        this.findOne().skip(rand).exec(callback);
-      }.bind(this));
-    };
-    res.status(200).json({
-      message: 'Sucess',
-      obj: count
-    })
+    Bid.findOneRandom( function (err, result) {
+      if (err) {
+        return err;
+      }
+      res.status(200).json({
+        title:' Success',
+        result: result
+      })
+    });
   });
   /**
    * Create HTTP server.
