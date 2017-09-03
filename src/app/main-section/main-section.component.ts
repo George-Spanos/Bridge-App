@@ -29,7 +29,7 @@ export class MainSectionComponent implements OnInit {
   }
 getExistingHand() {
 const header = new Headers({'Content-Type': 'application/json'});
-this.http.get('https://bridge-auction-app.herokuapp.com/randomhand').subscribe(
+this.http.get('/randomhand').subscribe(
   (results) => { console.log(results); }
 );
 }

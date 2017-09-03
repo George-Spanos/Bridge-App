@@ -408,7 +408,7 @@ var MainSectionComponent = (function () {
     };
     MainSectionComponent.prototype.getExistingHand = function () {
         var header = new Headers({ 'Content-Type': 'application/json' });
-        this.http.get('https://bridge-auction-app.herokuapp.com/randomhand').subscribe(function (results) { console.log(results); });
+        this.http.get('/randomhand').subscribe(function (results) { console.log(results); });
     };
     MainSectionComponent.prototype.getHand = function (array) {
         this.hand = this.bridgeApi.initializeHand(array);
