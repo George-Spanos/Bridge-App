@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Http} from '@angular/http';
+import { Http, Response} from '@angular/http';
 import { BridgeApi} from '../bridge.service';
 import { Card } from '../card.model';
 @Component({
@@ -29,7 +29,9 @@ export class MainSectionComponent implements OnInit {
   }
 getExistingHand() {
 // const header = new Headers({'Content-Type': 'application/json'});
-this.http.get('/randomhand').subscribe(
+this.http.get('/randomhand').map(
+  ( response: Response) =>  response.json().result
+).subscribe(
   (results) => { console.log(results); }
 );
 }

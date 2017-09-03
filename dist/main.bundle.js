@@ -408,7 +408,7 @@ var MainSectionComponent = (function () {
     };
     MainSectionComponent.prototype.getExistingHand = function () {
         // const header = new Headers({'Content-Type': 'application/json'});
-        this.http.get('/randomhand').subscribe(function (results) { console.log(results); });
+        this.http.get('/randomhand').map(function (response) { return response.json().result; }).subscribe(function (results) { console.log(results); });
     };
     MainSectionComponent.prototype.getHand = function (array) {
         this.hand = this.bridgeApi.initializeHand(array);
