@@ -49,12 +49,8 @@ app.post('/addauction', function (req, res, next) {
   );
 });
 app.get('/randomhand', function (req, res, next) {
-  var ran = Bid.findOneRandom(function (err, result) {
-    if (err) {
-      return err;
-    }
-    return result.json();
-  });
+  var ran = Bid.findOneRandom().json();
+  console.log(ran);
     Bid.find({ "hand": ran.array }, function (err, result) {
       if (err) {
         return err;
