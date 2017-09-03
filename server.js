@@ -55,7 +55,7 @@ app.use(function (req, res, next) {
       }
       res.status(200).json({
         title:' Success',
-        result: result._body
+        result: JSON.parse(result)
       })
     });
   });

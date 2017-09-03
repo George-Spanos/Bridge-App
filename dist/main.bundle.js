@@ -407,7 +407,7 @@ var MainSectionComponent = (function () {
         return array;
     };
     MainSectionComponent.prototype.getExistingHand = function () {
-        var header = new Headers({ 'Content-Type': 'application/json' });
+        // const header = new Headers({'Content-Type': 'application/json'});
         this.http.get('/randomhand').subscribe(function (results) { console.log(results); });
     };
     MainSectionComponent.prototype.getHand = function (array) {

@@ -28,7 +28,7 @@ export class MainSectionComponent implements OnInit {
     return array;
   }
 getExistingHand() {
-const header = new Headers({'Content-Type': 'application/json'});
+// const header = new Headers({'Content-Type': 'application/json'});
 this.http.get('/randomhand').subscribe(
   (results) => { console.log(results); }
 );
