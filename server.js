@@ -14,42 +14,48 @@ app.use(function (req, res, next) {
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   next();
 });
-  const Schema = mongoose.Schema;
+const Schema = mongoose.Schema;
 
-  const auctionSchema = new Schema({
-    array: [],
-    hcp: Number,
-    numericBid: String,
-    suitBid: String,
-    comments: String
-  })
-  auctionSchema.plugin(randomEl);
-  const Bid = mongoose.model('Bid', auctionSchema);
-  app.post('/addauction', function (req, res, next) {
-    var bid = Bid({
-      array: req.body.hand,
-      hcp: req.body.hcp,
-      numericBid: req.body.numbid,
-      suitBid: req.body.suit,
-      comments: req.body.comment
-    });
-    bid.save(
-      function (err, result) {
-        if (err) {
-          return res.status(500).json({
-            title: 'An error occured',
-            err: error
-          })
-        }
-        res.status(201).json({
-          message: 'Saved data',
-          obj: result
-        });
-      }
-    );
+const auctionSchema = new Schema({
+  array: [],
+  hcp: Number,
+  numericBid: String,
+  suitBid: String,
+  comments: String
+})
+auctionSchema.plugin(randomEl);
+const Bid = mongoose.model('Bid', auctionSchema);
+app.post('/addauction', function (req, res, next) {
+  var bid = Bid({
+    array: req.body.hand,
+    hcp: req.body.hcp,
+    numericBid: req.body.numbid,
+    suitBid: req.body.suit,
+    comments: req.body.comment
   });
-  app.get('/randomhand', function (req, res, next) {
-    Bid.findOneRandom( function (err, result) {
+  bid.save(
+    function (err, result) {
+      if (err) {
+        return res.status(500).json({
+          title: 'An error occured',
+          err: error
+        })
+      }
+      res.status(201).json({
+        message: 'Saved data',
+        obj: result
+      });
+    }
+  );
+});
+app.get('/randomhand', function (req, res, next) {
+  var ran = Bid.findOneRandom(function (err, result) {
+    if (err) {
+      return err;
+    }
+    return result.json();
+  });
+    Bid.find({ "hand": ran.array }, function (err, result) {
       if (err) {
         return err;
       }
@@ -57,29 +63,31 @@ app.use(function (req, res, next) {
         title:' Success',
         result: result
       })
-    });
-  });
-  /**
-   * Create HTTP server.
-   */
+    })
 
-  const server = http.createServer(app);
+});
 
-  // Set our api routes
-  app.use('/api', api);
+/**
+ * Create HTTP server.
+ */
 
-  // Catch all other routes and return the index file
-  app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'dist/index.html'));
-  });
-  /**
-   * Get port from environment and store in Express.
-   */
-  const port = process.env.PORT || '3000';
-  app.set('port', port);
+const server = http.createServer(app);
+
+// Set our api routes
+app.use('/api', api);
+
+// Catch all other routes and return the index file
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'dist/index.html'));
+});
+/**
+ * Get port from environment and store in Express.
+ */
+const port = process.env.PORT || '3000';
+app.set('port', port);
 
 
-  /**
-   * Listen on provided port, on all network interfaces.
-   */
-  server.listen(port, () => console.log(`API running on localhost:${port}`));
+/**
+ * Listen on provided port, on all network interfaces.
+ */
+server.listen(port, () => console.log(`API running on localhost:${port}`));
