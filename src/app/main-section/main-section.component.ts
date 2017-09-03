@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Http} from '@angular/http';
 import { BridgeApi} from '../bridge.service';
 import { Card } from '../card.model';
 @Component({
@@ -14,7 +15,7 @@ export class MainSectionComponent implements OnInit {
   hearts: Card[];
   diamonds: Card[];
   clubs: Card[];
-  constructor( public bridgeApi: BridgeApi) { }
+  constructor( public bridgeApi: BridgeApi, private http: Http) { }
   hand: Card[];
   fixHcp(array: Card[]) {
     array.forEach(element => {
@@ -26,6 +27,12 @@ export class MainSectionComponent implements OnInit {
     });
     return array;
   }
+getExistingHand() {
+const header = new Headers({'Content-Type': 'application/json'});
+this.http.get('https://bridge-auction-app.herokuapp.com/randomhand').subscribe(
+  (results) => { console.log(results); }
+);
+}
 getHand(array) {
   this.hand = this.bridgeApi.initializeHand(array);
   this.spades = this.bridgeApi.filterArray(this.hand, 'Spades');
