@@ -51,6 +51,7 @@ export class MainSectionComponent implements OnInit {
         }
       );
     }else {
+      this.comment = '';
       this.hand = this.bridgeApi.initializeHand(array);
       this.hand = this.fixHcp(this.hand);
       this.spades = this.bridgeApi.filterArray(this.hand, 'Spades');
