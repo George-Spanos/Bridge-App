@@ -15,7 +15,6 @@ app.use(function (req, res, next) {
   next();
 });
   const Schema = mongoose.Schema;
-
   const auctionSchema = new Schema({
     array: [],
     hcp: Number,
@@ -25,6 +24,8 @@ app.use(function (req, res, next) {
   })
   auctionSchema.plugin(randomEl);
   const Bid = mongoose.model('Bid', auctionSchema);
+  // let randomBidArray = Bid.find();
+  // console.log(randomBidArray);
   app.post('/addauction', function (req, res, next) {
     var bid = Bid({
       array: req.body.hand,

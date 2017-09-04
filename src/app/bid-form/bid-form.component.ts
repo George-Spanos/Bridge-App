@@ -15,10 +15,10 @@ export class BidFormComponent implements OnInit {
       this.bridgeForm.value.suitBid,
       this.bridgeForm.value.comments);
     console.log(this.bridgeApi.bid);
-    //  this.bridgeApi.toDatabase().subscribe(
-    //    data => console.log('A bid was succesfully sent'),
-    //    error => console.error(error)
-    //  );
+     this.bridgeApi.toDatabase().subscribe(
+       data => console.log('A bid was succesfully sent'),
+       error => console.error(error)
+     );
     this.bridgeForm.reset();
   }
   Pass() {
