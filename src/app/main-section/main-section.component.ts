@@ -34,26 +34,22 @@ export class MainSectionComponent implements OnInit {
     if (coin) {
       this.bridgeApi.fetchHand().subscribe(
         (results) => {
+          console.log(results[0].array);
           this.hand = results[0].array;
           this.hcp = results[0].hcp;
           this.comment = results[0].comments;
           this.spades = this.bridgeApi.filterArray(this.hand, 'Spades');
-          this.bridgeApi.sortArrayValues(this.spades);
           this.hearts = this.bridgeApi.filterArray(this.hand, 'Hearts');
-          this.bridgeApi.sortArrayValues(this.hearts);
           this.diamonds = this.bridgeApi.filterArray(this.hand, 'Diamonds');
-          this.bridgeApi.sortArrayValues(this.diamonds);
           this.clubs = this.bridgeApi.filterArray(this.hand, 'Clubs');
-          this.bridgeApi.sortArrayValues(this.clubs);
           this.handInitialized = true;
           this.bridgeApi.saveHand(this.hand, this.hcp);
           console.log(this.bridgeApi.bid);
         }
       );
-    }else {
+    } else {
       this.comment = '';
       this.hand = this.bridgeApi.initializeHand(array);
-      this.hand = this.fixHcp(this.hand);
       this.spades = this.bridgeApi.filterArray(this.hand, 'Spades');
       this.bridgeApi.sortArrayValues(this.spades);
       this.hearts = this.bridgeApi.filterArray(this.hand, 'Hearts');
@@ -63,6 +59,9 @@ export class MainSectionComponent implements OnInit {
       this.clubs = this.bridgeApi.filterArray(this.hand, 'Clubs');
       this.bridgeApi.sortArrayValues(this.clubs);
       this.handInitialized = true;
+      this.hand = this.fixHcp(this.hand);
+      this.hand = this.spades.concat(this.hearts).concat(this.clubs).concat(this.diamonds);
+      console.log(this.hand);
       let sum = 0;
       this.hand.forEach(
         (el) => {

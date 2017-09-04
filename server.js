@@ -15,9 +15,6 @@ app.use(function (req, res, next) {
   next();
 });
 let bidsArray;
-function randomHand() {
-
-}
 const Schema = mongoose.Schema;
 const auctionSchema = new Schema({
   array: [],
@@ -51,6 +48,7 @@ app.post('/addauction', function (req, res, next) {
     }
   );
 });
+// Get a random hand, and find all hands that are the same with the random one.
 app.get('/randomhand', function (req, res, next) {
   Bid.findOneRandom(function (err, result) {
     if (err) {
@@ -67,22 +65,6 @@ app.get('/randomhand', function (req, res, next) {
     );
   });
 });
-
-
-// app.get('/randomhand', function (req, res, next) {
-//   let bidsArray;
-//   Bid.findOneRandom( function (err, result) {
-//     if (err) {
-//       return err;
-//     }
-//     // bidsArray = results.array;
-//     res.status(200).json({
-//       title:' Success',
-//       result: result
-//     })
-
-//   });
-// });
 /**
  * Create HTTP server.
  */

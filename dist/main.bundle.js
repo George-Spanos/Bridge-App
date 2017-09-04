@@ -245,7 +245,8 @@ var BridgeApi = (function () {
         };
     }
     BridgeApi.prototype.coinFlip = function () {
-        return (Math.random() < 0.5 ? 0 : 1);
+        // return (Math.random() < 0.5 ? 0 : 1);
+        return false;
     };
     BridgeApi.prototype.deck = function () {
         var names = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A'];
@@ -414,17 +415,14 @@ var MainSectionComponent = (function () {
         var coin = this.bridgeApi.coinFlip();
         if (coin) {
             this.bridgeApi.fetchHand().subscribe(function (results) {
+                console.log(results[0].array);
                 _this.hand = results[0].array;
                 _this.hcp = results[0].hcp;
                 _this.comment = results[0].comments;
                 _this.spades = _this.bridgeApi.filterArray(_this.hand, 'Spades');
-                _this.bridgeApi.sortArrayValues(_this.spades);
                 _this.hearts = _this.bridgeApi.filterArray(_this.hand, 'Hearts');
-                _this.bridgeApi.sortArrayValues(_this.hearts);
                 _this.diamonds = _this.bridgeApi.filterArray(_this.hand, 'Diamonds');
-                _this.bridgeApi.sortArrayValues(_this.diamonds);
                 _this.clubs = _this.bridgeApi.filterArray(_this.hand, 'Clubs');
-                _this.bridgeApi.sortArrayValues(_this.clubs);
                 _this.handInitialized = true;
                 _this.bridgeApi.saveHand(_this.hand, _this.hcp);
                 console.log(_this.bridgeApi.bid);
@@ -433,7 +431,6 @@ var MainSectionComponent = (function () {
         else {
             this.comment = '';
             this.hand = this.bridgeApi.initializeHand(array);
-            this.hand = this.fixHcp(this.hand);
             this.spades = this.bridgeApi.filterArray(this.hand, 'Spades');
             this.bridgeApi.sortArrayValues(this.spades);
             this.hearts = this.bridgeApi.filterArray(this.hand, 'Hearts');
@@ -443,6 +440,9 @@ var MainSectionComponent = (function () {
             this.clubs = this.bridgeApi.filterArray(this.hand, 'Clubs');
             this.bridgeApi.sortArrayValues(this.clubs);
             this.handInitialized = true;
+            this.hand = this.fixHcp(this.hand);
+            this.hand = this.spades.concat(this.hearts).concat(this.clubs).concat(this.diamonds);
+            console.log(this.hand);
             var sum_1 = 0;
             this.hand.forEach(function (el) {
                 sum_1 = el.value + sum_1;
