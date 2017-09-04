@@ -2,7 +2,6 @@
   <div class="row">
     <div class="col-xs-12" style="display:flex; justify-content:center; margin-top:30px; padding:20px;">
       <button class="btn btn-primary" (click)="getHand(cardsArray)">Initialize Hand</button>
-      <button class="btn btn-primary" (click)="getExistingHand()">Get Existing Hand</button>
     </div>
   </div>
   <div class="row">
@@ -42,7 +41,7 @@
   <div class="row" *ngIf="handInitialized">
     <div class="col-xs-12">
       <label for="comments"> Bid and Comments</label>
-      <div class="form-control"></div>
+      <div class="form-control" row="2">{{comment}} </div>
     </div>
   </div>
 </div>

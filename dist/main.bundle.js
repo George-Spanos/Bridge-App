@@ -244,6 +244,9 @@ var BridgeApi = (function () {
             comment: ''
         };
     }
+    BridgeApi.prototype.coinFlip = function () {
+        return (Math.random() < 0.5 ? 0 : 1);
+    };
     BridgeApi.prototype.deck = function () {
         var names = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A'];
         var suits = ['Hearts', 'Diamonds', 'Spades', 'Clubs'];
@@ -311,6 +314,9 @@ var BridgeApi = (function () {
         return this.http.post('https://bridge-auction-app.herokuapp.com/addauction', body, { headers: header })
             .map(function (response) { response.json(); }).catch(function (error) { return __WEBPACK_IMPORTED_MODULE_1_rxjs_Rx__["Observable"].throw(error.json()); });
     };
+    BridgeApi.prototype.fetchHand = function () {
+        return this.http.get('/randomhand').map(function (response) { return response.json().result; }).catch(function (error) { return __WEBPACK_IMPORTED_MODULE_1_rxjs_Rx__["Observable"].throw(error.json()); });
+    };
     return BridgeApi;
 }());
 BridgeApi = __decorate([
@@ -362,7 +368,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/main-section/main-section.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\r\n  <div class=\"row\">\r\n    <div class=\"col-xs-12\" style=\"display:flex; justify-content:center; margin-top:30px; padding:20px;\">\r\n      <button class=\"btn btn-primary\" (click)=\"getHand(cardsArray)\">Initialize Hand</button>\r\n      <button class=\"btn btn-primary\" (click)=\"getExistingHand()\">Get Existing Hand</button>\r\n    </div>\r\n  </div>\r\n  <div class=\"row\">\r\n    <div class=\"col-xs-12\">\r\n      <div class=\"col-xs-6\">\r\n        <div class=\"board\" *ngIf=\"handInitialized\">\r\n          <div class=\"row\">\r\n            <div class=\"card\" *ngFor=\"let card of spades\">{{card.name}}\r\n              <br>\r\n              <img class=\"suit\" src=\"http://i.imgur.com/tXgx0h3.png\">\r\n            </div>\r\n            <div class=\"card red\" *ngFor=\"let card of hearts\">{{card.name}}\r\n              <br>\r\n              <img class=\"suit\" src=\"http://i.imgur.com/Chg6eQ8.jpg\">\r\n            </div>\r\n            <div class=\"card\" *ngFor=\"let card of clubs\">{{card.name}}\r\n              <br>\r\n              <img class=\"suit\" src=\"http://i.imgur.com/TsBK3k9.jpg\">\r\n            </div>\r\n            <div class=\"card red\" *ngFor=\"let card of diamonds\">{{card.name}}\r\n              <br>\r\n              <img class=\"suit\" src=\"http://i.imgur.com/khCb5Vu.jpg\">\r\n            </div>\r\n          </div>\r\n        </div>\r\n        <div class=\"row\" *ngIf=\"handInitialized\">\r\n          <div class=\"col-xs-12 hcpdisplay\">Total HCP = {{hcp}}</div>\r\n        </div>\r\n      </div>\r\n      <div class=\"col-xs-6\">\r\n        <div *ngIf=\"handInitialized\" style=\"margin:10px\">\r\n          <app-bid-form></app-bid-form>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </div>\r\n  <div class=\"row\" *ngIf=\"handInitialized\">\r\n    <div class=\"col-xs-12\">\r\n      <label for=\"comments\"> Bid and Comments</label>\r\n      <div class=\"form-control\"></div>\r\n    </div>\r\n  </div>\r\n</div>\r\n"
+module.exports = "<div class=\"container\">\r\n  <div class=\"row\">\r\n    <div class=\"col-xs-12\" style=\"display:flex; justify-content:center; margin-top:30px; padding:20px;\">\r\n      <button class=\"btn btn-primary\" (click)=\"getHand(cardsArray)\">Initialize Hand</button>\r\n    </div>\r\n  </div>\r\n  <div class=\"row\">\r\n    <div class=\"col-xs-12\">\r\n      <div class=\"col-xs-6\">\r\n        <div class=\"board\" *ngIf=\"handInitialized\">\r\n          <div class=\"row\">\r\n            <div class=\"card\" *ngFor=\"let card of spades\">{{card.name}}\r\n              <br>\r\n              <img class=\"suit\" src=\"http://i.imgur.com/tXgx0h3.png\">\r\n            </div>\r\n            <div class=\"card red\" *ngFor=\"let card of hearts\">{{card.name}}\r\n              <br>\r\n              <img class=\"suit\" src=\"http://i.imgur.com/Chg6eQ8.jpg\">\r\n            </div>\r\n            <div class=\"card\" *ngFor=\"let card of clubs\">{{card.name}}\r\n              <br>\r\n              <img class=\"suit\" src=\"http://i.imgur.com/TsBK3k9.jpg\">\r\n            </div>\r\n            <div class=\"card red\" *ngFor=\"let card of diamonds\">{{card.name}}\r\n              <br>\r\n              <img class=\"suit\" src=\"http://i.imgur.com/khCb5Vu.jpg\">\r\n            </div>\r\n          </div>\r\n        </div>\r\n        <div class=\"row\" *ngIf=\"handInitialized\">\r\n          <div class=\"col-xs-12 hcpdisplay\">Total HCP = {{hcp}}</div>\r\n        </div>\r\n      </div>\r\n      <div class=\"col-xs-6\">\r\n        <div *ngIf=\"handInitialized\" style=\"margin:10px\">\r\n          <app-bid-form></app-bid-form>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </div>\r\n  <div class=\"row\" *ngIf=\"handInitialized\">\r\n    <div class=\"col-xs-12\">\r\n      <label for=\"comments\"> Bid and Comments</label>\r\n      <div class=\"form-control\" row=\"2\">{{comment}} </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -403,29 +409,47 @@ var MainSectionComponent = (function () {
         });
         return array;
     };
-    MainSectionComponent.prototype.getExistingHand = function () {
-        // const header = new Headers({'Content-Type': 'application/json'});
-        this.http.get('/randomhand').map(function (response) { return response.json().result; }).subscribe(function (results) { console.log(results); });
-    };
     MainSectionComponent.prototype.getHand = function (array) {
-        this.hand = this.bridgeApi.initializeHand(array);
-        this.spades = this.bridgeApi.filterArray(this.hand, 'Spades');
-        this.bridgeApi.sortArrayValues(this.spades);
-        this.hearts = this.bridgeApi.filterArray(this.hand, 'Hearts');
-        this.bridgeApi.sortArrayValues(this.hearts);
-        this.diamonds = this.bridgeApi.filterArray(this.hand, 'Diamonds');
-        this.bridgeApi.sortArrayValues(this.diamonds);
-        this.clubs = this.bridgeApi.filterArray(this.hand, 'Clubs');
-        this.bridgeApi.sortArrayValues(this.clubs);
-        this.handInitialized = true;
-        this.hand = this.fixHcp(this.hand);
-        var sum = 0;
-        this.hand.forEach(function (el) {
-            sum = el.value + sum;
-        });
-        this.hcp = sum;
-        this.bridgeApi.saveHand(this.hand, sum);
-        console.log(this.bridgeApi.bid);
+        var _this = this;
+        var coin = this.bridgeApi.coinFlip();
+        if (coin) {
+            this.bridgeApi.fetchHand().subscribe(function (results) {
+                _this.hand = results[0].array;
+                _this.hcp = results[0].hcp;
+                _this.comment = results[0].comments;
+                _this.spades = _this.bridgeApi.filterArray(_this.hand, 'Spades');
+                _this.bridgeApi.sortArrayValues(_this.spades);
+                _this.hearts = _this.bridgeApi.filterArray(_this.hand, 'Hearts');
+                _this.bridgeApi.sortArrayValues(_this.hearts);
+                _this.diamonds = _this.bridgeApi.filterArray(_this.hand, 'Diamonds');
+                _this.bridgeApi.sortArrayValues(_this.diamonds);
+                _this.clubs = _this.bridgeApi.filterArray(_this.hand, 'Clubs');
+                _this.bridgeApi.sortArrayValues(_this.clubs);
+                _this.handInitialized = true;
+                _this.bridgeApi.saveHand(_this.hand, _this.hcp);
+                console.log(_this.bridgeApi.bid);
+            });
+        }
+        else {
+            this.hand = this.bridgeApi.initializeHand(array);
+            this.hand = this.fixHcp(this.hand);
+            this.spades = this.bridgeApi.filterArray(this.hand, 'Spades');
+            this.bridgeApi.sortArrayValues(this.spades);
+            this.hearts = this.bridgeApi.filterArray(this.hand, 'Hearts');
+            this.bridgeApi.sortArrayValues(this.hearts);
+            this.diamonds = this.bridgeApi.filterArray(this.hand, 'Diamonds');
+            this.bridgeApi.sortArrayValues(this.diamonds);
+            this.clubs = this.bridgeApi.filterArray(this.hand, 'Clubs');
+            this.bridgeApi.sortArrayValues(this.clubs);
+            this.handInitialized = true;
+            var sum_1 = 0;
+            this.hand.forEach(function (el) {
+                sum_1 = el.value + sum_1;
+            });
+            this.hcp = sum_1;
+            this.bridgeApi.saveHand(this.hand, this.hcp);
+            console.log(this.bridgeApi.bid);
+        }
         this.cardsArray = this.bridgeApi.deck();
     };
     MainSectionComponent.prototype.ngOnInit = function () {
