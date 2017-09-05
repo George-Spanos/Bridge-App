@@ -6,6 +6,7 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class BridgeApi {
   constructor(public http: Http) { }
+  submitted= false;
   bid = {
     hand: [],
     hcp: 0,
@@ -16,7 +17,6 @@ export class BridgeApi {
   hcp: number;
   coinFlip() {
     return (Math.random() < 0.5 ? 0 : 1);
-
   }
   deck() {
     const names = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A'];
@@ -85,6 +85,7 @@ export class BridgeApi {
   toDatabase() {
     const header = new Headers({ 'Content-Type': 'application/json' });
     const body = JSON.stringify(this.bid);
+    this.submitted = true;
     return this.http.post('https://bridge-auction-app.herokuapp.com/addauction', body, { headers: header })
       .map(
       (response: Response) => { response.json(); }

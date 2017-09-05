@@ -10,7 +10,8 @@ import { Card } from '../card.model';
 export class MainSectionComponent implements OnInit {
   call: boolean;
   handInitialized = false;
-  comment: string;
+  bids= [];
+  newHand= false;
   hcp: number;
   cardsArray: Card[];
   spades: Card[];
@@ -30,14 +31,19 @@ export class MainSectionComponent implements OnInit {
     return array;
   }
   getHand(array) {
+    this.bridgeApi.submitted = false;
     const coin = this.bridgeApi.coinFlip();
+    this.bids = [];
     if (coin) {
       this.bridgeApi.fetchHand().subscribe(
         (results) => {
-          console.log(results[0].array);
+          console.log('This is an existing hand', results);
+          this.newHand = false;
           this.hand = results[0].array;
           this.hcp = results[0].hcp;
-          this.comment = results[0].comments;
+          results.forEach(
+            ( el ) => { this.bids.push(el); }
+          );
           this.spades = this.bridgeApi.filterArray(this.hand, 'Spades');
           this.hearts = this.bridgeApi.filterArray(this.hand, 'Hearts');
           this.diamonds = this.bridgeApi.filterArray(this.hand, 'Diamonds');
@@ -48,7 +54,8 @@ export class MainSectionComponent implements OnInit {
         }
       );
     } else {
-      this.comment = '';
+      this.newHand = true;
+      this.bids = [];
       this.hand = this.bridgeApi.initializeHand(array);
       this.spades = this.bridgeApi.filterArray(this.hand, 'Spades');
       this.bridgeApi.sortArrayValues(this.spades);

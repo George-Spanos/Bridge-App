@@ -236,6 +236,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var BridgeApi = (function () {
     function BridgeApi(http) {
         this.http = http;
+        this.submitted = false;
         this.bid = {
             hand: [],
             hcp: 0,
@@ -311,6 +312,7 @@ var BridgeApi = (function () {
     BridgeApi.prototype.toDatabase = function () {
         var header = new __WEBPACK_IMPORTED_MODULE_2__angular_http__["a" /* Headers */]({ 'Content-Type': 'application/json' });
         var body = JSON.stringify(this.bid);
+        this.submitted = true;
         return this.http.post('https://bridge-auction-app.herokuapp.com/addauction', body, { headers: header })
             .map(function (response) { response.json(); }).catch(function (error) { return __WEBPACK_IMPORTED_MODULE_1_rxjs_Rx__["Observable"].throw(error.json()); });
     };
@@ -355,7 +357,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, ".card {\r\n  float: left;\r\n  width: auto;\r\n  height: 150px;\r\n  display: block;\r\n  border: 1px solid;\r\n  border-right:1px bold;\r\n  border-color: grey;;\r\n  padding: 6px;\r\n  text-align: center;\r\n  font-weight: bold;\r\n  font-size: 20px;\r\n  background-color: white;\r\n  border-radius: 3px;\r\n}\r\n.suit {\r\n  width: 20px;\r\n  height: 20px;\r\n}\r\n.board {\r\n  padding: 100px 30px 60px 30px;\r\n  background-color: green;\r\n  display: -webkit-box;\r\n  display: -ms-flexbox;\r\n  display: flex;\r\n  -webkit-box-pack: center;\r\n      -ms-flex-pack: center;\r\n          justify-content: center;\r\n  border-radius: 10px;\r\n}\r\n.red {\r\n  color:#E31818;\r\n}\r\n.hcpdisplay {\r\n  font-weight: bold;\r\n  font-size: 18px;\r\n  display: -webkit-box;\r\n  display: -ms-flexbox;\r\n  display: flex;\r\n  -webkit-box-pack: center;\r\n      -ms-flex-pack: center;\r\n          justify-content: center;\r\n}\r\n@media screen and (max-width: 480px) {\r\n  .board {\r\n    padding: 20px 20px 20px 20px;\r\n    background-color: green;\r\n    display: -webkit-box;\r\n    display: -ms-flexbox;\r\n    display: flex;\r\n    -webkit-box-pack: center;\r\n        -ms-flex-pack: center;\r\n            justify-content: center;\r\n    border-radius: 10px;\r\n  }\r\n  .card {\r\n    height: auto;\r\n  }\r\n}\r\n", ""]);
+exports.push([module.i, ".card {\r\n  float: left;\r\n  width: auto;\r\n  height: 150px;\r\n  display: block;\r\n  border: 1px solid;\r\n  border-right:1px bold;\r\n  border-color: grey;;\r\n  padding: 6px;\r\n  text-align: center;\r\n  font-weight: bold;\r\n  font-size: 20px;\r\n  background-color: white;\r\n  border-radius: 3px;\r\n}\r\n.suit {\r\n  width: 20px;\r\n  height: 20px;\r\n}\r\n.board {\r\n  padding: 100px 30px 60px 30px;\r\n  background-color: green;\r\n  display: -webkit-box;\r\n  display: -ms-flexbox;\r\n  display: flex;\r\n  -webkit-box-pack: center;\r\n      -ms-flex-pack: center;\r\n          justify-content: center;\r\n  border-radius: 10px;\r\n}\r\n.red {\r\n  color:#E31818;\r\n}\r\n.hcpdisplay {\r\n  font-weight: bold;\r\n  font-size: 18px;\r\n  display: -webkit-box;\r\n  display: -ms-flexbox;\r\n  display: flex;\r\n  -webkit-box-pack: center;\r\n      -ms-flex-pack: center;\r\n          justify-content: center;\r\n}\r\n.form-control {\r\n  height: auto;\r\n  margin-bottom: 3px;\r\n}\r\n@media screen and (max-width: 480px) {\r\n  .board {\r\n    padding: 20px 20px 20px 20px;\r\n    background-color: green;\r\n    display: -webkit-box;\r\n    display: -ms-flexbox;\r\n    display: flex;\r\n    -webkit-box-pack: center;\r\n        -ms-flex-pack: center;\r\n            justify-content: center;\r\n    border-radius: 10px;\r\n  }\r\n  .card {\r\n    height: auto;\r\n    font-size: 15px;\r\n  }\r\n  .suit {\r\n    width: 18px;\r\n    height: 18px;\r\n  }\r\n}\r\n", ""]);
 
 // exports
 
@@ -368,7 +370,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/main-section/main-section.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\r\n  <div class=\"row\">\r\n    <div class=\"col-xs-12\" style=\"display:flex; justify-content:center; margin-top:30px; padding:20px;\">\r\n      <button class=\"btn btn-primary\" (click)=\"getHand(cardsArray)\">Initialize Hand</button>\r\n    </div>\r\n  </div>\r\n  <div class=\"row\">\r\n    <div class=\"col-xs-12\">\r\n      <div class=\"col-xs-6\">\r\n        <div class=\"board\" *ngIf=\"handInitialized\">\r\n          <div class=\"row\">\r\n            <div class=\"card\" *ngFor=\"let card of spades\">{{card.name}}\r\n              <br>\r\n              <img class=\"suit\" src=\"https://i.imgur.com/tXgx0h3.png\">\r\n            </div>\r\n            <div class=\"card red\" *ngFor=\"let card of hearts\">{{card.name}}\r\n              <br>\r\n              <img class=\"suit\" src=\"https://i.imgur.com/Chg6eQ8.jpg\">\r\n            </div>\r\n            <div class=\"card\" *ngFor=\"let card of clubs\">{{card.name}}\r\n              <br>\r\n              <img class=\"suit\" src=\"https://i.imgur.com/TsBK3k9.jpg\">\r\n            </div>\r\n            <div class=\"card red\" *ngFor=\"let card of diamonds\">{{card.name}}\r\n              <br>\r\n              <img class=\"suit\" src=\"https://i.imgur.com/khCb5Vu.jpg\">\r\n            </div>\r\n          </div>\r\n        </div>\r\n        <div class=\"row\" *ngIf=\"handInitialized\">\r\n          <div class=\"col-xs-12 hcpdisplay\">Total HCP = {{hcp}}</div>\r\n        </div>\r\n      </div>\r\n      <div class=\"col-xs-6\">\r\n        <div *ngIf=\"handInitialized\" style=\"margin:10px\">\r\n          <app-bid-form></app-bid-form>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </div>\r\n  <div class=\"row\" *ngIf=\"handInitialized\">\r\n    <div class=\"col-xs-12\">\r\n      <label for=\"comments\"> Bid and Comments</label>\r\n      <div class=\"form-control\" row=\"2\">{{comment}} </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n"
+module.exports = "<div class=\"container\">\r\n  <div class=\"row\">\r\n    <div class=\"col-xs-12\" style=\"display:flex; justify-content:center; margin-top:30px; padding:20px;\">\r\n      <button class=\"btn btn-primary\" (click)=\"getHand(cardsArray)\">Initialize Hand</button>\r\n    </div>\r\n  </div>\r\n  <div class=\"row\">\r\n    <div class=\"col-xs-12\">\r\n      <div class=\"col-xs-6\">\r\n        <div class=\"board\" *ngIf=\"handInitialized\">\r\n          <div class=\"row\">\r\n            <div class=\"card\" *ngFor=\"let card of spades\">{{card.name}}\r\n              <br>\r\n              <img class=\"suit\" src=\"https://i.imgur.com/tXgx0h3.png\">\r\n            </div>\r\n            <div class=\"card red\" *ngFor=\"let card of hearts\">{{card.name}}\r\n              <br>\r\n              <img class=\"suit\" src=\"https://i.imgur.com/Chg6eQ8.jpg\">\r\n            </div>\r\n            <div class=\"card\" *ngFor=\"let card of clubs\">{{card.name}}\r\n              <br>\r\n              <img class=\"suit\" src=\"https://i.imgur.com/TsBK3k9.jpg\">\r\n            </div>\r\n            <div class=\"card red\" *ngFor=\"let card of diamonds\">{{card.name}}\r\n              <br>\r\n              <img class=\"suit\" src=\"https://i.imgur.com/khCb5Vu.jpg\">\r\n            </div>\r\n          </div>\r\n        </div>\r\n        <div class=\"row\" *ngIf=\"handInitialized\">\r\n          <div class=\"col-xs-12 hcpdisplay\">Total HCP = {{hcp}}</div>\r\n        </div>\r\n      </div>\r\n      <div class=\"col-xs-6\">\r\n        <div *ngIf=\"handInitialized\" style=\"margin:10px\">\r\n          <app-bid-form></app-bid-form>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </div>\r\n  <div class=\"row\" *ngIf=\"newHand\">\r\n    <div class=\"col-xs-12 form-control\">\r\n      <label> This is a new hand. Thank you for contributing!</label>\r\n    </div>\r\n  </div>\r\n  <div class=\"row\" *ngIf=\"handInitialized && bridgeApi.submitted && bids!== []\">\r\n    <div class=\"col-xs-12\">\r\n      <label for=\"comments\"> Bid and Comments</label>\r\n      <div class=\"form-control\" *ngFor=\"let bid of bids\">\r\n        <strong> Bid : {{bid.numericBid}} </strong>\r\n        <p *ngIf=\"bid.numericBid==='!Pass'\">{{bid.suitBid}}</p> <br>\r\n        <strong> Comments</strong> : {{bid.comments}} </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -397,6 +399,8 @@ var MainSectionComponent = (function () {
         this.bridgeApi = bridgeApi;
         this.http = http;
         this.handInitialized = false;
+        this.bids = [];
+        this.newHand = false;
     }
     MainSectionComponent.prototype.fixHcp = function (array) {
         array.forEach(function (element) {
@@ -411,13 +415,16 @@ var MainSectionComponent = (function () {
     };
     MainSectionComponent.prototype.getHand = function (array) {
         var _this = this;
+        this.bridgeApi.submitted = false;
         var coin = this.bridgeApi.coinFlip();
+        this.bids = [];
         if (coin) {
             this.bridgeApi.fetchHand().subscribe(function (results) {
-                console.log(results[0].array);
+                console.log('This is an existing hand', results);
+                _this.newHand = false;
                 _this.hand = results[0].array;
                 _this.hcp = results[0].hcp;
-                _this.comment = results[0].comments;
+                results.forEach(function (el) { _this.bids.push(el); });
                 _this.spades = _this.bridgeApi.filterArray(_this.hand, 'Spades');
                 _this.hearts = _this.bridgeApi.filterArray(_this.hand, 'Hearts');
                 _this.diamonds = _this.bridgeApi.filterArray(_this.hand, 'Diamonds');
@@ -428,7 +435,8 @@ var MainSectionComponent = (function () {
             });
         }
         else {
-            this.comment = '';
+            this.newHand = true;
+            this.bids = [];
             this.hand = this.bridgeApi.initializeHand(array);
             this.spades = this.bridgeApi.filterArray(this.hand, 'Spades');
             this.bridgeApi.sortArrayValues(this.spades);

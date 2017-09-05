@@ -33,6 +33,10 @@
   display: flex;
   justify-content: center;
 }
+.form-control {
+  height: auto;
+  margin-bottom: 3px;
+}
 @media screen and (max-width: 480px) {
   .board {
     padding: 20px 20px 20px 20px;
@@ -43,5 +47,10 @@
   }
   .card {
     height: auto;
+    font-size: 15px;
+  }
+  .suit {
+    width: 18px;
+    height: 18px;
   }
 }

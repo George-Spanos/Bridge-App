@@ -38,10 +38,18 @@
       </div>
     </div>
   </div>
-  <div class="row" *ngIf="handInitialized">
+  <div class="row" *ngIf="newHand">
+    <div class="col-xs-12 form-control">
+      <label> This is a new hand. Thank you for contributing!</label>
+    </div>
+  </div>
+  <div class="row" *ngIf="handInitialized && bridgeApi.submitted && bids!== []">
     <div class="col-xs-12">
       <label for="comments"> Bid and Comments</label>
-      <div class="form-control" row="2">{{comment}} </div>
+      <div class="form-control" *ngFor="let bid of bids">
+        <strong> Bid : {{bid.numericBid}} </strong>
+        <p *ngIf="bid.numericBid==='!Pass'">{{bid.suitBid}}</p> <br>
+        <strong> Comments</strong> : {{bid.comments}} </div>
     </div>
   </div>
 </div>
