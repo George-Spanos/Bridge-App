@@ -43,7 +43,7 @@
       <label> This is a new hand. Thank you for contributing!</label>
     </div>
   </div>
-  <div class="row" *ngIf="handInitialized && bridgeApi.submitted && bids!== []">
+  <div class="row" *ngIf="handInitialized && bridgeApi.submitted && !newHand">
     <div class="col-xs-12">
       <label for="comments"> Bid and Comments</label>
       <div class="form-control" *ngFor="let bid of bids">
