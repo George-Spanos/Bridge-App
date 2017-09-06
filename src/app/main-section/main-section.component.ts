@@ -8,7 +8,6 @@ import { Card } from '../card.model';
   styleUrls: ['./main-section.component.css']
 })
 export class MainSectionComponent implements OnInit {
-  call: boolean;
   handInitialized = false;
   bids= [];
   newHand= false;
