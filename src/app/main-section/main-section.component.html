@@ -48,7 +48,7 @@
     <label for="comments"> Bid and Comments</label>
     <div class="form-control" *ngFor="let bid of bids">
       <strong> Bid : {{bid.numericBid}} </strong>
-      <p *ngIf="bid.numericBid==='!Pass'">{{bid.suitBid}}</p> <br>
+      <p *ngIf="bid.numericBid!=='Pass'">{{bid.suitBid}}</p> <br>
       <strong> Comments</strong> : {{bid.comments}} </div>
   </div>
 </div>
