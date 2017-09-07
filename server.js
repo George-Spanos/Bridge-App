@@ -65,7 +65,7 @@ app.post('/addpracticebid', function (req, res, next) {
     suitBid: req.body.suit,
     comments: req.body.comment
   });
-  bid.save(
+  practiceBid.save(
     function (err, result) {
       if (err) {
         return res.status(500).json({
