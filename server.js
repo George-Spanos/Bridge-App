@@ -22,14 +22,15 @@ const auctionSchema = new Schema({
   hcp: Number,
   numericBid: String,
   suitBid: String,
-  comments: String
+  comments: String,
+  votes: 0
 })
 const practiceSchema= new Schema({
   array: [],
   hcp: Number,
   numericBid: String,
   suitBid: String,
-  comments: String
+  comments: String,
 })
 const practiceBids = mongoose.model('Practice Bids', practiceSchema);
 auctionSchema.plugin(randomEl);
@@ -40,7 +41,7 @@ app.post('/addauction', function (req, res, next) {
     hcp: req.body.hcp,
     numericBid: req.body.numbid,
     suitBid: req.body.suit,
-    comments: req.body.comment
+    comments: req.body.comment,
   });
   bid.save(
     function (err, result) {
