@@ -16,6 +16,7 @@ app.use(function (req, res, next) {
 });
 let bidsArray;
 const Schema = mongoose.Schema;
+// Make a schema for the stored bids.
 const auctionSchema = new Schema({
   array: [],
   hcp: Number,
@@ -23,10 +24,41 @@ const auctionSchema = new Schema({
   suitBid: String,
   comments: String
 })
+const practiceSchema= new Schema({
+  array: [],
+  hcp: Number,
+  numericBid: String,
+  suitBid: String,
+  comments: String
+})
+const practiceBids = mongoose.model('Practice Bids', practiceSchema);
 auctionSchema.plugin(randomEl);
 const Bid = mongoose.model('Bid', auctionSchema);
 app.post('/addauction', function (req, res, next) {
   var bid = Bid({
+    array: req.body.hand,
+    hcp: req.body.hcp,
+    numericBid: req.body.numbid,
+    suitBid: req.body.suit,
+    comments: req.body.comment
+  });
+  bid.save(
+    function (err, result) {
+      if (err) {
+        return res.status(500).json({
+          title: 'An error occured',
+          err: error
+        })
+      }
+      res.status(201).json({
+        message: 'Saved data',
+        obj: result
+      });
+    }
+  );
+});
+app.post('/addpracticebid', function (req, res, next) {
+  var practiceBid = practiceBids({
     array: req.body.hand,
     hcp: req.body.hcp,
     numericBid: req.body.numbid,
@@ -75,7 +107,7 @@ const server = http.createServer(app);
 app.use('/api', api);
 
 // Catch all other routes and return the index file
-app.get('/', (req, res) => {
+app.get('**', (req, res) => {
   res.sendFile(path.join(__dirname, 'dist/index.html'));
 });
 /**

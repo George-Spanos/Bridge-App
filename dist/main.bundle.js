@@ -87,6 +87,7 @@ AppComponent = __decorate([
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__practice_practice_component__ = __webpack_require__("../../../../../src/app/practice/practice.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__donate_donate_component__ = __webpack_require__("../../../../../src/app/donate/donate.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__contact_contact_component__ = __webpack_require__("../../../../../src/app/contact/contact.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__lead_lead_component__ = __webpack_require__("../../../../../src/app/lead/lead.component.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -107,12 +108,15 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
+
 var routes = [
     { path: '', component: __WEBPACK_IMPORTED_MODULE_10__homepage_homepage_component__["a" /* HomepageComponent */] },
     { path: 'bid', component: __WEBPACK_IMPORTED_MODULE_6__main_section_main_section_component__["a" /* MainSectionComponent */] },
     { path: 'practice', component: __WEBPACK_IMPORTED_MODULE_11__practice_practice_component__["a" /* PracticeComponent */] },
     { path: 'donate', component: __WEBPACK_IMPORTED_MODULE_12__donate_donate_component__["a" /* DonateComponent */] },
-    { path: 'contact', component: __WEBPACK_IMPORTED_MODULE_13__contact_contact_component__["a" /* ContactComponent */] }
+    { path: 'contact', component: __WEBPACK_IMPORTED_MODULE_13__contact_contact_component__["a" /* ContactComponent */] },
+    { path: 'lead', component: __WEBPACK_IMPORTED_MODULE_14__lead_lead_component__["a" /* LeadComponent */] },
+    { path: '**', redirectTo: '' }
 ];
 var AppModule = (function () {
     function AppModule() {
@@ -129,7 +133,8 @@ AppModule = __decorate([
             __WEBPACK_IMPORTED_MODULE_10__homepage_homepage_component__["a" /* HomepageComponent */],
             __WEBPACK_IMPORTED_MODULE_11__practice_practice_component__["a" /* PracticeComponent */],
             __WEBPACK_IMPORTED_MODULE_12__donate_donate_component__["a" /* DonateComponent */],
-            __WEBPACK_IMPORTED_MODULE_13__contact_contact_component__["a" /* ContactComponent */]
+            __WEBPACK_IMPORTED_MODULE_13__contact_contact_component__["a" /* ContactComponent */],
+            __WEBPACK_IMPORTED_MODULE_14__lead_lead_component__["a" /* LeadComponent */]
         ],
         imports: [
             __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["a" /* BrowserModule */],
@@ -167,7 +172,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/bid-form/bid-form.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<form (ngSubmit)=\"onSubmit()\" #f=\"ngForm\">\n  <div class=\"row\" style=\"margin: 5px;\">\n    <div class=\"col-xs-12\" role=\"group\" aria-label=\"...\">\n      <label for=\"num\">Choose a number</label>\n      <select class=\"form-control\" name=\"numericBid\" id=\"num\" required ngModel #num=\"ngModel\">\n            <option value=\"1\">1</option>\n            <option value=\"1\">2</option>\n            <option value=\"1\">3</option>\n            <option value=\"1\">4</option>\n            <option value=\"1\">5</option>\n            <option value=\"1\">6</option>\n            <option value=\"1\">7</option>\n            <option value=\"Pass\">Pass</option>\n        </select>\n      <span *ngIf=\"num.invalid && num.touched\"> You need to choose a numeric bid</span>\n      <label for=\"suit\">Choose a Suit</label>\n      <select class=\"form-control pull-right\" name=\"suitBid\" id=\"suit\" required ngModel #suit=\"ngModel\">\n            <option value=\"Spades\">Spades</option>\n            <option value=\"Hearts\">Hearts</option>\n            <option value=\"Diamonds\">Diamonds</option>\n            <option value=\"Clubs\">Clubs</option>\n            <option value=\"NoTrump\">NoTrump</option>\n            <option value=\"Pass\">Pass</option>\n          </select>\n      <div class=\"row\">\n        <span *ngIf=\"suit.invalid && suit.touched\">\n              You need to choose a suit bid\n            </span>\n      </div>\n    </div>\n    <div class=\"row\">\n      <div class=\"col-xs-12\" style=\"display: flex; justify-content: center; margin-top: 10px;\">\n        <button type=\"button\" class=\"btn btn-primary\" (click)=\"Pass()\">Pass</button>\n      </div>\n      </div>\n  </div>\n  <div class=\"form-group\">\n    <label for=\"comment\">Comment:</label>\n    <textarea class=\"form-control col-xs-12\" rows=\"5\" id=\"comment\" ngModel name=\"comments\" required #comment=\"ngModel\"></textarea>\n  </div>\n  <span *ngIf=\"comment.invalid && comment.touched\">You need to type a comment</span>\n  <br>\n  <button type=\"submit\" class=\"btn btn-primary\" [disabled]=\"!f.valid\">Submit Auction</button>\n</form>\n"
+module.exports = "<form (ngSubmit)=\"onSubmit()\" #f=\"ngForm\">\n  <div class=\"row\" style=\"margin: 5px;\">\n    <div class=\"col-xs-12\" role=\"group\" aria-label=\"...\">\n      <label for=\"num\">Choose a number</label>\n      <select class=\"form-control\" name=\"numericBid\" id=\"num\" required ngModel #num=\"ngModel\">\n            <option value=\"1\">1</option>\n            <option value=\"1\">2</option>\n            <option value=\"1\">3</option>\n            <option value=\"1\">4</option>\n            <option value=\"1\">5</option>\n            <option value=\"1\">6</option>\n            <option value=\"1\">7</option>\n            <option value=\"Pass\">Pass</option>\n        </select>\n      <span *ngIf=\"num.invalid && num.touched\"> You need to choose a numeric bid</span>\n      <label for=\"suit\">Choose a Suit</label>\n      <select class=\"form-control pull-right\" name=\"suitBid\" id=\"suit\" required ngModel #suit=\"ngModel\">\n            <option value=\"Spades\">Spades</option>\n            <option value=\"Hearts\">Hearts</option>\n            <option value=\"Diamonds\">Diamonds</option>\n            <option value=\"Clubs\">Clubs</option>\n            <option value=\"NoTrump\">NoTrump</option>\n            <option value=\"Pass\">Pass</option>\n          </select>\n      <div class=\"row\">\n        <span *ngIf=\"suit.invalid && suit.touched\">\n              You need to choose a suit bid\n            </span>\n      </div>\n    </div>\n    <div class=\"row\">\n      <div class=\"col-xs-12\" style=\"display: flex; justify-content: center; margin-top: 10px;\">\n        <button type=\"button\" class=\"btn btn-primary\" (click)=\"Pass()\">Pass</button>\n      </div>\n      </div>\n  </div>\n  <div class=\"form-group\">\n    <label for=\"comment\">Comment:</label>\n    <textarea class=\"form-control col-xs-12\" rows=\"5\" id=\"comment\" ngModel name=\"comments\" required #comment=\"ngModel\"></textarea>\n  </div>\n  <span *ngIf=\"comment.invalid && comment.touched\">You need to type a comment</span>\n  <br>\n  <button type=\"submit\" class=\"btn btn-primary\" [disabled]=\"!f.valid\">Submit Auction</button>\n  <button type=\"button\" (click)=\"toPracticeBids()\" class=\"btn btn-primary\" [disabled]=\"!f.valid\">To practice Bids</button>\n</form>\n"
 
 /***/ }),
 
@@ -203,6 +208,11 @@ var BidFormComponent = (function () {
         console.log(this.bridgeApi.bid);
         this.bridgeApi.toDatabase().subscribe(function (data) { return console.log('A bid was succesfully sent'); }, function (error) { return console.error(error); });
         this.bridgeForm.reset();
+    };
+    BidFormComponent.prototype.toPracticeBids = function () {
+        this.bridgeApi.saveBid(this.bridgeForm.value.numericBid, this.bridgeForm.value.suitBid, this.bridgeForm.value.comments);
+        console.log(this.bridgeApi.bid);
+        this.bridgeApi.toPracticeCollection().subscribe(function (data) { return console.log('A bid was succesfully sent'); }, function (error) { return console.error(error); });
     };
     BidFormComponent.prototype.Pass = function () {
         this.bridgeForm.setValue({ numericBid: 'Pass', suitBid: 'Pass', comments: '' });
@@ -333,6 +343,12 @@ var BridgeApi = (function () {
         var body = JSON.stringify(this.bid);
         this.submitted = true;
         return this.http.post('https://bridge-auction-app.herokuapp.com/addauction', body, { headers: header })
+            .map(function (response) { response.json(); }).catch(function (error) { return __WEBPACK_IMPORTED_MODULE_1_rxjs_Rx__["Observable"].throw(error.json()); });
+    };
+    BridgeApi.prototype.toPracticeCollection = function () {
+        var header = new __WEBPACK_IMPORTED_MODULE_2__angular_http__["a" /* Headers */]({ 'Content-Type': 'application/json' });
+        var body = JSON.stringify(this.bid);
+        return this.http.post('https://bridge-auction-app.herokuapp.com/addpracticebid', body, { headers: header })
             .map(function (response) { response.json(); }).catch(function (error) { return __WEBPACK_IMPORTED_MODULE_1_rxjs_Rx__["Observable"].throw(error.json()); });
     };
     BridgeApi.prototype.fetchHand = function () {
@@ -511,7 +527,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/header/header.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"row\">\n  <div class=\"col-xs-12\">\n    <nav class=\"navbar navbar-inverse\" style=\"background: linear-gradient(to right, darkgreen , green)\">\n        <div class=\"collapse navbar-collapse\" id=\"bs-example-navbar-collapse-1\">\n            <ul class=\"nav navbar-nav\">\n              <li style=\"cursor:pointer;\" routerLinkActive=\"active\" [routerLinkActiveOptions]=\"{exact: true}\">\n              <a id=\"menu-item\" routerLink=\"\"  >Home</a></li>\n              <li style=\"cursor:pointer\" routerLinkActive=\"active\">\n              <a id=\"menu-item\" routerLink=\"/bid\" >Bid Now</a></li>\n              <li style=\"cursor:pointer\" routerLinkActive=\"active\">\n                <a id=\"menu-item\" routerLink=\"/practice\">Practice</a> </li>\n              <li style=\"cursor:pointer\" routerLinkActive=\"active\">\n                <a id=\"menu-item\" routerLink=\"/contact\">Donate</a></li>\n            </ul>\n        </div>\n      </nav>\n    </div>\n  </div>\n"
+module.exports = "<div class=\"row\">\n  <div class=\"col-xs-12\">\n    <nav class=\"navbar navbar-inverse\" style=\"background: linear-gradient(to right, darkgreen , green)\">\n      <div class=\"collapse navbar-collapse\" id=\"bs-example-navbar-collapse-1\">\n        <ul class=\"nav navbar-nav\">\n          <li style=\"cursor:pointer;\" routerLinkActive=\"active\" [routerLinkActiveOptions]=\"{exact: true}\">\n            <a id=\"menu-item\" routerLink=\"/\">Home</a></li>\n          <li style=\"cursor:pointer\" routerLinkActive=\"active\">\n            <a id=\"menu-item\" routerLink=\"/bid\">Bid Now</a></li>\n          <li style=\"cursor:pointer\" routerLinkActive=\"active\">\n            <a id=\"menu-item\" routerLink=\"/practice\">Practice</a> </li>\n          <li style=\"cursor:pointer\" routerLinkActive=\"active\">\n            <a id=\"menu-item\" routerLink=\"/lead\">Lead</a></li>\n            <li style=\"cursor:pointer\" routerLinkActive=\"active\">\n              <a id=\"menu-item\" routerLink=\"/donate\">Donate</a></li>\n              <li style=\"cursor:pointer\" routerLinkActive=\"active\">\n                <a id=\"menu-item\" routerLink=\"/contact\">Contact</a></li>\n        </ul>\n      </div>\n    </nav>\n  </div>\n</div>\n"
 
 /***/ }),
 
@@ -609,6 +625,67 @@ HomepageComponent = __decorate([
 ], HomepageComponent);
 
 //# sourceMappingURL=homepage.component.js.map
+
+/***/ }),
+
+/***/ "../../../../../src/app/lead/lead.component.css":
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "", ""]);
+
+// exports
+
+
+/*** EXPORTS FROM exports-loader ***/
+module.exports = module.exports.toString();
+
+/***/ }),
+
+/***/ "../../../../../src/app/lead/lead.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<p>\n  lead works!\n</p>\n"
+
+/***/ }),
+
+/***/ "../../../../../src/app/lead/lead.component.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return LeadComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+var LeadComponent = (function () {
+    function LeadComponent() {
+    }
+    LeadComponent.prototype.ngOnInit = function () {
+    };
+    return LeadComponent;
+}());
+LeadComponent = __decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["o" /* Component */])({
+        selector: 'app-lead',
+        template: __webpack_require__("../../../../../src/app/lead/lead.component.html"),
+        styles: [__webpack_require__("../../../../../src/app/lead/lead.component.css")]
+    }),
+    __metadata("design:paramtypes", [])
+], LeadComponent);
+
+//# sourceMappingURL=lead.component.js.map
 
 /***/ }),
 

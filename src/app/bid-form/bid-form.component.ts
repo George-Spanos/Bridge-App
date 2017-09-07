@@ -21,6 +21,16 @@ export class BidFormComponent implements OnInit {
      );
     this.bridgeForm.reset();
   }
+  toPracticeBids() {
+    this.bridgeApi.saveBid(this.bridgeForm.value.numericBid,
+      this.bridgeForm.value.suitBid,
+      this.bridgeForm.value.comments);
+    console.log(this.bridgeApi.bid);
+     this.bridgeApi.toPracticeCollection().subscribe(
+       data => console.log('A bid was succesfully sent'),
+       error => console.error(error)
+     );
+  }
   Pass() {
     this.bridgeForm.setValue({numericBid: 'Pass', suitBid: 'Pass', comments: ''});
   }

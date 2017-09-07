@@ -41,4 +41,5 @@
   <span *ngIf="comment.invalid && comment.touched">You need to type a comment</span>
   <br>
   <button type="submit" class="btn btn-primary" [disabled]="!f.valid">Submit Auction</button>
+  <button type="button" (click)="toPracticeBids()" class="btn btn-primary" [disabled]="!f.valid">To practice Bids</button>
 </form>

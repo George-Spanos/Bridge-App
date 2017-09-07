@@ -93,6 +93,16 @@ export class BridgeApi {
       (error: Response) => Observable.throw(error.json())
       );
   }
+  toPracticeCollection() {
+    const header = new Headers({ 'Content-Type': 'application/json' });
+    const body = JSON.stringify(this.bid);
+    return this.http.post('https://bridge-auction-app.herokuapp.com/addpracticebid', body, { headers: header })
+      .map(
+      (response: Response) => { response.json(); }
+      ).catch(
+      (error: Response) => Observable.throw(error.json())
+      );
+  }
   fetchHand() {
     return this.http.get('/randomhand').map(
       (response: Response) => response.json().result
