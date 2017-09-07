@@ -9,6 +9,7 @@ import { NgForm } from '@angular/forms';
   styleUrls: ['./bid-form.component.css']
 })
 export class BidFormComponent implements OnInit {
+  password: string;
   @ViewChild('f') bridgeForm: NgForm;
   onSubmit() {
     this.bridgeApi.saveBid(this.bridgeForm.value.numericBid,
@@ -27,9 +28,14 @@ export class BidFormComponent implements OnInit {
       this.bridgeForm.value.comments);
     console.log(this.bridgeApi.bid);
      this.bridgeApi.toPracticeCollection().subscribe(
-       data => console.log('A bid was succesfully sent'),
+       data => console.log('A practice bid was succesfully sent'),
        error => console.error(error)
      );
+     this.bridgeApi.toDatabase().subscribe(
+      data => console.log('A bid was succesfully sent'),
+      error => console.error(error)
+    );
+   this.bridgeForm.reset();
   }
   Pass() {
     this.bridgeForm.setValue({numericBid: 'Pass', suitBid: 'Pass', comments: ''});

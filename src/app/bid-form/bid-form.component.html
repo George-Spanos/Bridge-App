@@ -32,7 +32,7 @@
       <div class="col-xs-12" style="display: flex; justify-content: center; margin-top: 10px;">
         <button type="button" class="btn btn-primary" (click)="Pass()">Pass</button>
       </div>
-      </div>
+    </div>
   </div>
   <div class="form-group">
     <label for="comment">Comment:</label>
@@ -40,6 +40,12 @@
   </div>
   <span *ngIf="comment.invalid && comment.touched">You need to type a comment</span>
   <br>
-  <button type="submit" class="btn btn-primary" [disabled]="!f.valid">Submit Auction</button>
-  <button type="button" (click)="toPracticeBids()" class="btn btn-primary" [disabled]="!f.valid">To practice Bids</button>
+  <button type="submit" class="btn btn-primary" [disabled]="!f.valid">Submit Bid</button>
+  <br>
+    <strong>Password : </strong>
+    <input type="password" [(ngModel)]="password" [ngModelOptions]="{standalone: true}">
+    <button type="button" (click)="toPracticeBids()" class="btn btn-primary"
+    [disabled]="f.invalid || password !== 'FKI'">
+      To practice Bids
+      </button>
 </form>
