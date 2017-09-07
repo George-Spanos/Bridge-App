@@ -96,6 +96,7 @@ export class BridgeApi {
   toPracticeCollection() {
     const header = new Headers({ 'Content-Type': 'application/json' });
     const body = JSON.stringify(this.bid);
+    this.submitted = true;
     return this.http.post('https://bridge-auction-app.herokuapp.com/addpracticebid', body, { headers: header })
       .map(
       (response: Response) => { response.json(); }

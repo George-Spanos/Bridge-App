@@ -350,6 +350,7 @@ var BridgeApi = (function () {
     BridgeApi.prototype.toPracticeCollection = function () {
         var header = new __WEBPACK_IMPORTED_MODULE_2__angular_http__["a" /* Headers */]({ 'Content-Type': 'application/json' });
         var body = JSON.stringify(this.bid);
+        this.submitted = true;
         return this.http.post('https://bridge-auction-app.herokuapp.com/addpracticebid', body, { headers: header })
             .map(function (response) { response.json(); }).catch(function (error) { return __WEBPACK_IMPORTED_MODULE_1_rxjs_Rx__["Observable"].throw(error.json()); });
     };
