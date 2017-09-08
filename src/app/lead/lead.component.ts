@@ -61,6 +61,19 @@ export class LeadComponent implements OnInit {
       error => console.error(error)
     );
     this.contractform.reset();
+    this.deck = this.bridgeApi.deck();
+    this.spades = this.bridgeApi.filterArray(this.deck, 'Spades');
+    this.spades = this.bridgeApi.sortArrayValues(this.spades);
+    this.hearts = this.bridgeApi.filterArray(this.deck, 'Hearts');
+    this.hearts = this.bridgeApi.sortArrayValues(this.hearts);
+    this.diamonds = this.bridgeApi.filterArray(this.deck, 'Diamonds');
+    this.diamonds = this.bridgeApi.sortArrayValues(this.diamonds);
+    this.clubs = this.bridgeApi.filterArray(this.deck, 'Clubs');
+    this.clubs = this.bridgeApi.sortArrayValues(this.clubs);
+    this.contract.North = [];
+    this.contract.South = [];
+    this.contract.East = [];
+    this.contract.West = [];
     console.log(this.contract);
   }
 
