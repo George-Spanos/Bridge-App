@@ -32,9 +32,46 @@ const practiceSchema= new Schema({
   suitBid: String,
   comments: String,
 })
+const leadsSchema= new Schema({
+  colors: Object,
+  comments: String,
+  lead: Object,
+  hand: [],
+  NorthBid: [],
+  EastBid:[],
+  SouthBid: [],
+  WestBid: []
+})
+const leadPractice = mongoose.model('LeadPractice',leadsSchema);
 const practiceBids = mongoose.model('Practice Bids', practiceSchema);
 auctionSchema.plugin(randomEl);
 const Bid = mongoose.model('Bid', auctionSchema);
+app.post('/addlead',function (req, res , next){
+  var lead= leadPractice({
+    colors: req.body.colors,
+    comments: req.body.comments,
+    lead: req.body.lead,
+    hand: req.body.hand,
+    NorthBid: req.body.North,
+    EastBid: req.body.East,
+    SouthBid: req.body.South,
+    WestBid: req.body.West
+  });
+  lead.save(
+    function (err, result) {
+      if (err) {
+        return res.status(500).json({
+          title: 'An error occured',
+          err: error
+        })
+      }
+      res.status(201).json({
+        message: 'Saved data',
+        obj: result
+      });
+    }
+  );
+})
 app.post('/addauction', function (req, res, next) {
   var bid = Bid({
     array: req.body.hand,

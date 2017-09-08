@@ -19,16 +19,6 @@ export class MainSectionComponent implements OnInit {
   clubs: Card[];
   constructor(public bridgeApi: BridgeApi, private http: Http) { }
   hand: Card[];
-  fixHcp(array: Card[]) {
-    array.forEach(element => {
-      if (element.value >= 10) {
-        element.value = element.value % 10 + 1;
-      } else {
-        element.value = 0;
-      }
-    });
-    return array;
-  }
   getHand(array) {
     this.bridgeApi.submitted = false;
     const coin = this.bridgeApi.coinFlip();
@@ -57,15 +47,15 @@ export class MainSectionComponent implements OnInit {
       this.bids = [];
       this.hand = this.bridgeApi.initializeHand(array);
       this.spades = this.bridgeApi.filterArray(this.hand, 'Spades');
-      this.bridgeApi.sortArrayValues(this.spades);
+      this.spades = this.bridgeApi.sortArrayValues(this.spades);
       this.hearts = this.bridgeApi.filterArray(this.hand, 'Hearts');
-      this.bridgeApi.sortArrayValues(this.hearts);
+      this.hearts = this.bridgeApi.sortArrayValues(this.hearts);
       this.diamonds = this.bridgeApi.filterArray(this.hand, 'Diamonds');
-      this.bridgeApi.sortArrayValues(this.diamonds);
+      this.diamonds = this.bridgeApi.sortArrayValues(this.diamonds);
       this.clubs = this.bridgeApi.filterArray(this.hand, 'Clubs');
-      this.bridgeApi.sortArrayValues(this.clubs);
+      this.clubs = this.bridgeApi.sortArrayValues(this.clubs);
       this.handInitialized = true;
-      this.hand = this.fixHcp(this.hand);
+      this.hand = this.bridgeApi.fixHcp(this.hand);
       this.hand = this.spades.concat(this.hearts).concat(this.clubs).concat(this.diamonds);
       console.log(this.hand);
       let sum = 0;

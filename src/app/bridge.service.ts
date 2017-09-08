@@ -18,6 +18,16 @@ export class BridgeApi {
   coinFlip() {
     return (Math.random() < 0.5 ? 0 : 1);
   }
+  fixHcp(array: Card[]) {
+    array.forEach(element => {
+      if (element.value >= 10) {
+        element.value = element.value % 10 + 1;
+      } else {
+        element.value = 0;
+      }
+    });
+    return array;
+  }
   deck() {
     const names = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A'];
     const suits = ['Hearts', 'Diamonds', 'Spades', 'Clubs'];
@@ -38,6 +48,7 @@ export class BridgeApi {
     }
     const shuffledArray = array.slice(0, 13);
     shuffledArray.sort((a, b) => {
+      // suits are ordered alphabetically, from weakest to strongest. This is why this sort is viable.
       const suit1 = a.suit;
       const suit2 = b.suit;
       if (suit1 > suit2) {
@@ -51,17 +62,17 @@ export class BridgeApi {
     return shuffledArray;
   }
   sortArrayValues(array) {
+    // this is glitchy. There is no 100% working sort algorithm for all broswers. Return 0 is not defined so this works only if
+    // no element is equal to any of the rest
     array.sort(
       (a, b) => {
         const value1 = a.value;
         const value2 = b.value;
         if (value1 < value2) {
           return 1;
-        }
-        if (value2 > value2) {
+        }else {
           return -1;
         }
-        return 0;
       }
     ); return array;
   }

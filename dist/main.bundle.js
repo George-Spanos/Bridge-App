@@ -279,6 +279,17 @@ var BridgeApi = (function () {
     BridgeApi.prototype.coinFlip = function () {
         return (Math.random() < 0.5 ? 0 : 1);
     };
+    BridgeApi.prototype.fixHcp = function (array) {
+        array.forEach(function (element) {
+            if (element.value >= 10) {
+                element.value = element.value % 10 + 1;
+            }
+            else {
+                element.value = 0;
+            }
+        });
+        return array;
+    };
     BridgeApi.prototype.deck = function () {
         var names = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A'];
         var suits = ['Hearts', 'Diamonds', 'Spades', 'Clubs'];
@@ -299,6 +310,7 @@ var BridgeApi = (function () {
         }
         var shuffledArray = array.slice(0, 13);
         shuffledArray.sort(function (a, b) {
+            // suits are ordered alphabetically, from weakest to strongest. This is why this sort is viable.
             var suit1 = a.suit;
             var suit2 = b.suit;
             if (suit1 > suit2) {
@@ -312,16 +324,17 @@ var BridgeApi = (function () {
         return shuffledArray;
     };
     BridgeApi.prototype.sortArrayValues = function (array) {
+        // this is glitchy. There is no 100% working sort algorithm for all broswers. Return 0 is not defined so this works only if
+        // no element is equal to any of the rest
         array.sort(function (a, b) {
             var value1 = a.value;
             var value2 = b.value;
             if (value1 < value2) {
                 return 1;
             }
-            if (value2 > value2) {
+            else {
                 return -1;
             }
-            return 0;
         });
         return array;
     };
@@ -445,6 +458,82 @@ ContactComponent = __decorate([
 ], ContactComponent);
 
 //# sourceMappingURL=contact.component.js.map
+
+/***/ }),
+
+/***/ "../../../../../src/app/contract.model.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Contract; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_rxjs_Rx__ = __webpack_require__("../../../../rxjs/Rx.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_rxjs_Rx___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_rxjs_Rx__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_http__ = __webpack_require__("../../../http/@angular/http.es5.js");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+var Contract = (function () {
+    function Contract(http) {
+        this.http = http;
+        this.North = [];
+        this.East = [];
+        this.South = [];
+        this.West = [];
+        this.Hand = [];
+    }
+    Contract.prototype.setValue = function (name, obj) {
+        if (name === 'North') {
+            this.North.push(obj.value);
+            console.log(this.North);
+        }
+        else if (name === 'South') {
+            this.South.push(obj.value);
+            console.log(this.South);
+        }
+        else if (name === 'West') {
+            this.West.push(obj.value);
+            console.log(this.West);
+        }
+        else if (name === 'East') {
+            this.East.push(obj.value);
+            console.log(this.East);
+        }
+    };
+    Contract.prototype.leadtoDatabase = function () {
+        var header = new __WEBPACK_IMPORTED_MODULE_2__angular_http__["a" /* Headers */]({ 'Content-Type': 'application/json' });
+        var leadObj = {
+            colors: this.colors,
+            lead: this.lead,
+            hand: this.Hand,
+            comments: this.comments,
+            North: this.North,
+            East: this.East,
+            South: this.South,
+            West: this.West
+        };
+        var body = JSON.stringify(leadObj);
+        return this.http.post('https://bridge-auction-app.herokuapp.com/addlead', body, { headers: header })
+            .map(function (response) { response.json(); }).catch(function (error) { return __WEBPACK_IMPORTED_MODULE_0_rxjs_Rx__["Observable"].throw(error.json()); });
+    };
+    return Contract;
+}());
+Contract = __decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["C" /* Injectable */])(),
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2__angular_http__["b" /* Http */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_http__["b" /* Http */]) === "function" && _a || Object])
+], Contract);
+
+var _a;
+//# sourceMappingURL=contract.model.js.map
 
 /***/ }),
 
@@ -639,7 +728,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, "", ""]);
+exports.push([module.i, ".card {\r\n  float: left;\r\n  width: auto;\r\n  height: 100px;\r\n  display: block;\r\n  border: 1px solid;\r\n  border-right:1px bold;\r\n  border-color: grey;;\r\n  padding: 6px;\r\n  text-align: center;\r\n  font-weight: bold;\r\n  font-size: 20px;\r\n  background-color: white;\r\n  border-radius: 3px;\r\n  cursor: pointer;\r\n}\r\n.suit {\r\n  width: 20px;\r\n  height: 20px;\r\n}\r\n.contract-table {\r\n  border: 1px solid black;\r\n}\r\n", ""]);
 
 // exports
 
@@ -652,7 +741,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/lead/lead.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<p>\n  lead works!\n</p>\n"
+module.exports = "<div class=\"container\">\n  <div class=\"col-xs-12\">\n    <form (ngSubmit)=\"onSubmit()\" #f=\"ngForm\">\n      <div class=\"row\">\n        <div class=\"col-xs-12\" ngModelGroup=\"Colors\" required>\n          <div class=\"row\" style=\"display:flex; color: red; justify-content: center; border:1px dashed black\">\n            <label>Set Colors</label>\n          </div>\n          <div class=\"col-xs-3\" >\n            <label for=\"\">North</label>\n            <div class=\"radio\" *ngFor=\"let color of colors\">\n              <label>\n              <input type=\"radio\"\n              name=\"colorNorth\"\n              ngModel\n              required\n              [value]=\"color\">\n              {{color}}\n            </label>\n            </div>\n          </div>\n          <div class=\"col-xs-3\" >\n            <label for=\"\">East</label>\n            <div class=\"radio\" *ngFor=\"let color of colors\">\n              <label>\n                <input type=\"radio\"\n                name=\"colorEast\"\n                ngModel\n                required\n                [value]=\"color\">\n                {{color}}\n              </label>\n            </div>\n          </div>\n          <div class=\"col-xs-3\" >\n            <label for=\"\">South</label>\n            <div class=\"radio\" *ngFor=\"let color of colors\">\n              <label>\n                  <input type=\"radio\"\n                  name=\"colorSouth\"\n                  ngModel\n                  required\n                  [value]=\"color\">\n                  {{color}}\n                </label>\n            </div>\n          </div>\n          <div class=\"col-xs-3\" >\n            <label for=\"\">West</label>\n            <div class=\"radio\" *ngFor=\"let color of colors\">\n              <label>\n                    <input type=\"radio\"\n                    name=\"colorWest\"\n                    ngModel\n                    required\n                    [value]=\"color\">\n                    {{color}}\n                  </label>\n            </div>\n          </div>\n        </div>\n        <div>\n          <hr style=\"border: 1px solid lightblue;\">\n        </div>\n      </div>\n      <div class=\"row\">\n        <div class=\"col-xs-3\" ngModelGroup=\"North\" #northBid=\"ngModelGroup\">\n          <label for=\"North\"> North</label>\n          <select name=\"numBidNorth\" id=\"numbidNorth\" class=\"form-control\" ngModel>\n              <option value=\"Empty\"></option>\n              <option value=\"1\">1</option>\n              <option value=\"2\">2</option>\n              <option value=\"3\">3</option>\n              <option value=\"4\">4</option>\n              <option value=\"5\">5</option>\n              <option value=\"6\">6</option>\n              <option value=\"7\">7</option>\n              <option value=\"Pass\">Pass</option>\n              <option value=\"Double\">Double</option>\n          </select>\n          <select class=\"form-control\" name=\"suitBidNorth\" id=\"suitbidNorth\" ngModel>\n              <option value=\"Empty\"></option>\n              <option value=\"Spades\">Spades</option>\n              <option value=\"Hearts\">Hearts</option>\n              <option value=\"Diamonds\">Diamonds</option>\n              <option value=\"Clubs\">Clubs</option>\n              <option value=\"NoTrump\">NoTrump</option>\n              <option value=\"Pass\">Pass</option>\n              <option value=\"Double\">Double</option>\n          </select>\n          <button type=\"button\" class=\"btn btn-primary\" (click)=\"toSideArray('North',northBid)\">Submit</button>\n        </div>\n        <div class=\"col-xs-3\" ngModelGroup=\"East\" #eastBid=\"ngModelGroup\">\n          <label for=\"East\"> East</label>\n          <select name=\"numBidEast\" id=\"numbideast\" class=\"form-control\" ngModel>\n              <option value=\"Empty\"></option>\n              <option value=\"1\">1</option>\n              <option value=\"2\">2</option>\n              <option value=\"3\">3</option>\n              <option value=\"4\">4</option>\n              <option value=\"5\">5</option>\n              <option value=\"6\">6</option>\n              <option value=\"7\">7</option>\n              <option value=\"Pass\">Pass</option>\n              <option value=\"Double\">Double</option>\n    </select>\n          <select class=\"form-control\" name=\"suitBidEast\" id=\"suitbideast\" ngModel>\n              <option value=\"Empty\"></option>\n              <option value=\"Spades\">Spades</option>\n              <option value=\"Hearts\">Hearts</option>\n              <option value=\"Diamonds\">Diamonds</option>\n              <option value=\"Clubs\">Clubs</option>\n              <option value=\"NoTrump\">NoTrump</option>\n              <option value=\"Pass\">Pass</option>\n              <option value=\"Double\">Double</option>\n      </select>\n          <button type=\"button\" class=\"btn btn-primary\" (click)=\"toSideArray('East',eastBid)\">Submit</button>\n        </div>\n        <div class=\"col-xs-3\" ngModelGroup=\"South\" #southBid=\"ngModelGroup\">\n          <label for=\"South\">South</label>\n          <select name=\"numBidSouth\" id=\"numbidsouth\" class=\"form-control\" ngModel>\n              <option value=\"Empty\"></option>\n              <option value=\"1\">1</option>\n              <option value=\"2\">2</option>\n              <option value=\"3\">3</option>\n              <option value=\"4\">4</option>\n              <option value=\"5\">5</option>\n              <option value=\"6\">6</option>\n              <option value=\"7\">7</option>\n              <option value=\"Pass\">Pass</option>\n              <option value=\"Double\">Double</option>\n    </select>\n          <select class=\"form-control\" name=\"suitBidSouth\" id=\"suitbidsouth\" ngModel>\n              <option value=\"Empty\"></option>\n              <option value=\"Spades\">Spades</option>\n              <option value=\"Hearts\">Hearts</option>\n              <option value=\"Diamonds\">Diamonds</option>\n              <option value=\"Clubs\">Clubs</option>\n              <option value=\"NoTrump\">NoTrump</option>\n              <option value=\"Pass\">Pass</option>\n              <option value=\"Double\">Double</option>\n      </select>\n          <button type=\"button\" class=\"btn btn-primary\" (click)=\"toSideArray('South',southBid)\">Submit</button>\n        </div>\n        <div class=\"col-xs-3\" ngModelGroup=\"West\" #westBid=\"ngModelGroup\">\n          <label for=\"West\">West</label>\n          <select name=\"numBidWest\" id=\"numbidwest\" class=\"form-control\" ngModel>\n                <option value=\"Empty\"></option>\n                <option value=\"1\">1</option>\n                <option value=\"2\">2</option>\n                <option value=\"3\">3</option>\n                <option value=\"4\">4</option>\n                <option value=\"5\">5</option>\n                <option value=\"6\">6</option>\n                <option value=\"7\">7</option>\n        <option value=\"Pass\">Pass</option>\n        <option value=\"Double\">Double</option>\n    </select>\n          <select class=\"form-control\" name=\"suitBidWest\" id=\"suitbidWest\" ngModel>\n                <option value=\"Empty\"></option>\n                <option value=\"Spades\">Spades</option>\n                <option value=\"Hearts\">Hearts</option>\n                <option value=\"Diamonds\">Diamonds</option>\n                <option value=\"Clubs\">Clubs</option>\n                <option value=\"NoTrump\">NoTrump</option>\n                <option value=\"Pass\">Pass</option>\n                <option value=\"Double\">Double</option>\n      </select>\n          <button type=\"button\" class=\"btn btn-primary\" (click)=\"toSideArray('West',westBid)\">Submit</button>\n        </div>\n      </div>\n      <div>\n        <hr style=\"border: 1px solid lightblue;\">\n      </div>\n      <div class=\"row\">\n        <div class=\"col-xs-12\">\n          <div class=\"col-xs-3 contract-table\">\n            <label for=\"NorthBid\">North</label>\n            <div class=\"form-control\" *ngFor=\"let bid of contract.North\">\n              {{bid.numBidNorth}}\n              <span *ngIf=\"bid.numBidNorth!=='Pass'\">{{bid.suitBidNorth}}</span>\n            </div>\n          </div>\n          <div class=\"col-xs-3 contract-table\">\n            <label for=\"EastBid\">East</label>\n            <div class=\"form-control\" *ngFor=\"let bid of contract.East\">\n              {{bid.numBidEast}}\n              <span *ngIf=\"bid.numBidEast!=='Pass'\"> {{bid.suitBidEast}}</span>\n            </div>\n          </div>\n          <div class=\"col-xs-3 contract-table\">\n            <label for=\"SouthBid\">South</label>\n            <div class=\"form-control\" *ngFor=\"let bid of contract.South\">\n              {{bid.numBidSouth}}\n              <span *ngIf=\"bid.numBidSouth!=='Pass'\"> {{bid.suitBidSouth}}</span>\n            </div>\n          </div>\n          <div class=\"col-xs-3 contract-table\">\n            <label for=\"WestBid\">West</label>\n            <div class=\"form-control\" *ngFor=\"let bid of contract.West\">\n              {{bid.numBidWest}}\n              <span *ngIf=\"bid.numBidWest!=='Pass'\"> {{bid.suitBidWest}}</span>\n            </div>\n          </div>\n        </div>\n      </div>\n      <div class=\"row\" *ngIf=\"!handSubmitted\"><label for=\"Hand\" class=\"pull-left\">Create your Hand</label></div>\n      <div class=\"row\" *ngIf=\"handSubmitted\"><label for=\"Hand\" class=\"pull-left\">Choose a Lead</label></div>\n      <div class=\"row pull-right\" style=\"border: 2px solid red; font-size:20px;\" *ngIf=\"leadSubmitted\"><label> You Chose {{contract.lead.name}} of {{contract.lead.suit}}</label></div>\n      <div class=\"row\" *ngIf=\"!handSubmitted\">\n        <div class=\"card\" (click)=\"toHand(card)\" *ngFor=\"let card of spades\">{{card.name}}\n          <br>\n          <img class=\"suit\" src=\"https://i.imgur.com/tXgx0h3.png\">\n        </div>\n        <div class=\"card red\" (click)=\"toHand(card)\" *ngFor=\"let card of hearts\">{{card.name}}\n          <br>\n          <img class=\"suit\" src=\"https://i.imgur.com/Chg6eQ8.jpg\">\n        </div>\n        <div class=\"card\" (click)=\"toHand(card)\" *ngFor=\"let card of clubs\">{{card.name}}\n          <br>\n          <img class=\"suit\" src=\"https://i.imgur.com/TsBK3k9.jpg\">\n        </div>\n        <div class=\"card red\" (click)=\"toHand(card)\" *ngFor=\"let card of diamonds\">{{card.name}}\n          <br>\n          <img class=\"suit\" src=\"https://i.imgur.com/khCb5Vu.jpg\">\n        </div>\n      </div>\n      <div class=\"row\" *ngIf=\"handSubmitted\">\n        <div class=\"card\" (click)=\"chooseLead(card)\" *ngFor=\"let card of handSpades\">{{card.name}}\n          <br>\n          <img class=\"suit\" src=\"https://i.imgur.com/tXgx0h3.png\">\n        </div>\n        <div class=\"card red\" (click)=\"chooseLead(card)\" *ngFor=\"let card of handHearts\">{{card.name}}\n          <br>\n          <img class=\"suit\" src=\"https://i.imgur.com/Chg6eQ8.jpg\">\n        </div>\n        <div class=\"card\" (click)=\"chooseLead(card)\" *ngFor=\"let card of handClubs\">{{card.name}}\n          <br>\n          <img class=\"suit\" src=\"https://i.imgur.com/TsBK3k9.jpg\">\n        </div>\n        <div class=\"card red\" (click)=\"chooseLead(card)\" *ngFor=\"let card of handDiamonds\">{{card.name}}\n          <br>\n          <img class=\"suit\" src=\"https://i.imgur.com/khCb5Vu.jpg\">\n        </div>\n      </div>\n      <div class=\"row\">\n        <div class=\"col-xs-12\" style=\"display: flex; justify-content: center; margin-top: 10px;\">\n          <button type=\"button\" class=\"btn btn-default\" (click)=\"submitHand()\">Submit Hand</button>\n        </div>\n      </div>\n      <div class=\"form-group\">\n        <label for=\"comment\">Comments:</label>\n        <textarea class=\"form-control col-xs-12\" id=\"comment\" ngModel name=\"comments\" required #comment=\"ngModel\"></textarea>\n      </div>\n      <div class=\"row\">\n        <div class=\"col-xs-12\" style=\"display: flex; justify-content: center; margin-top: 10px;\">\n          <button type=\"submit\" class=\"btn btn-danger\" [disabled]=\"!(f.valid && leadSubmitted)\">Submit Contract</button>\n        </div>\n      </div>\n    </form>\n  </div>\n</div>\n"
 
 /***/ }),
 
@@ -662,6 +751,9 @@ module.exports = "<p>\n  lead works!\n</p>\n"
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return LeadComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_forms__ = __webpack_require__("../../../forms/@angular/forms.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__bridge_service__ = __webpack_require__("../../../../../src/app/bridge.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__contract_model__ = __webpack_require__("../../../../../src/app/contract.model.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -672,22 +764,80 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
+
+
+
 var LeadComponent = (function () {
-    function LeadComponent() {
+    function LeadComponent(bridgeApi, contract) {
+        this.bridgeApi = bridgeApi;
+        this.contract = contract;
+        this.colors = ['Red', 'Green'];
+        this.handSubmitted = false;
+        this.leadSubmitted = false;
     }
+    LeadComponent.prototype.formlog = function () {
+        console.log(this.contractform);
+    };
+    LeadComponent.prototype.toSideArray = function (name, el) {
+        this.contract.setValue(name, el);
+    };
+    LeadComponent.prototype.toHand = function (card) {
+        if (this.handSubmitted === false && this.contract.Hand.length < 13) {
+            this.contract.Hand.push(card);
+            console.log(this.contract.Hand);
+        }
+    };
+    LeadComponent.prototype.chooseLead = function (card) {
+        this.contract.lead = card;
+        console.log('You chose ' + this.contract.lead.name + ' of ' + this.contract.lead.suit + ' as a lead');
+        this.leadSubmitted = true;
+    };
+    LeadComponent.prototype.submitHand = function () {
+        this.handSpades = this.bridgeApi.filterArray(this.contract.Hand, 'Spades');
+        this.handSpades = this.bridgeApi.sortArrayValues(this.handSpades);
+        this.handHearts = this.bridgeApi.filterArray(this.contract.Hand, 'Hearts');
+        this.handHearts = this.bridgeApi.sortArrayValues(this.handHearts);
+        this.handDiamonds = this.bridgeApi.filterArray(this.contract.Hand, 'Diamonds');
+        this.handDiamonds = this.bridgeApi.sortArrayValues(this.handDiamonds);
+        this.handClubs = this.bridgeApi.filterArray(this.contract.Hand, 'Clubs');
+        this.handClubs = this.bridgeApi.sortArrayValues(this.handClubs);
+        this.handSubmitted = true;
+    };
+    LeadComponent.prototype.onSubmit = function () {
+        this.contract.colors = this.contractform.value.Colors;
+        this.contract.comments = this.contractform.value.comments;
+        this.contract.leadtoDatabase().subscribe(function (data) { return console.log('A bid was succesfully sent'); }, function (error) { return console.error(error); });
+        this.contractform.reset();
+        console.log(this.contract);
+    };
     LeadComponent.prototype.ngOnInit = function () {
+        this.deck = this.bridgeApi.deck();
+        this.spades = this.bridgeApi.filterArray(this.deck, 'Spades');
+        this.spades = this.bridgeApi.sortArrayValues(this.spades);
+        this.hearts = this.bridgeApi.filterArray(this.deck, 'Hearts');
+        this.hearts = this.bridgeApi.sortArrayValues(this.hearts);
+        this.diamonds = this.bridgeApi.filterArray(this.deck, 'Diamonds');
+        this.diamonds = this.bridgeApi.sortArrayValues(this.diamonds);
+        this.clubs = this.bridgeApi.filterArray(this.deck, 'Clubs');
+        this.clubs = this.bridgeApi.sortArrayValues(this.clubs);
     };
     return LeadComponent;
 }());
+__decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_16" /* ViewChild */])('f'),
+    __metadata("design:type", typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_forms__["b" /* NgForm */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_forms__["b" /* NgForm */]) === "function" && _a || Object)
+], LeadComponent.prototype, "contractform", void 0);
 LeadComponent = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["o" /* Component */])({
         selector: 'app-lead',
         template: __webpack_require__("../../../../../src/app/lead/lead.component.html"),
-        styles: [__webpack_require__("../../../../../src/app/lead/lead.component.css")]
+        styles: [__webpack_require__("../../../../../src/app/lead/lead.component.css")],
+        providers: [__WEBPACK_IMPORTED_MODULE_3__contract_model__["a" /* Contract */]]
     }),
-    __metadata("design:paramtypes", [])
+    __metadata("design:paramtypes", [typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__bridge_service__["a" /* BridgeApi */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__bridge_service__["a" /* BridgeApi */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_3__contract_model__["a" /* Contract */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__contract_model__["a" /* Contract */]) === "function" && _c || Object])
 ], LeadComponent);
 
+var _a, _b, _c;
 //# sourceMappingURL=lead.component.js.map
 
 /***/ }),
@@ -745,17 +895,6 @@ var MainSectionComponent = (function () {
         this.bids = [];
         this.newHand = false;
     }
-    MainSectionComponent.prototype.fixHcp = function (array) {
-        array.forEach(function (element) {
-            if (element.value >= 10) {
-                element.value = element.value % 10 + 1;
-            }
-            else {
-                element.value = 0;
-            }
-        });
-        return array;
-    };
     MainSectionComponent.prototype.getHand = function (array) {
         var _this = this;
         this.bridgeApi.submitted = false;
@@ -782,15 +921,15 @@ var MainSectionComponent = (function () {
             this.bids = [];
             this.hand = this.bridgeApi.initializeHand(array);
             this.spades = this.bridgeApi.filterArray(this.hand, 'Spades');
-            this.bridgeApi.sortArrayValues(this.spades);
+            this.spades = this.bridgeApi.sortArrayValues(this.spades);
             this.hearts = this.bridgeApi.filterArray(this.hand, 'Hearts');
-            this.bridgeApi.sortArrayValues(this.hearts);
+            this.hearts = this.bridgeApi.sortArrayValues(this.hearts);
             this.diamonds = this.bridgeApi.filterArray(this.hand, 'Diamonds');
-            this.bridgeApi.sortArrayValues(this.diamonds);
+            this.diamonds = this.bridgeApi.sortArrayValues(this.diamonds);
             this.clubs = this.bridgeApi.filterArray(this.hand, 'Clubs');
-            this.bridgeApi.sortArrayValues(this.clubs);
+            this.clubs = this.bridgeApi.sortArrayValues(this.clubs);
             this.handInitialized = true;
-            this.hand = this.fixHcp(this.hand);
+            this.hand = this.bridgeApi.fixHcp(this.hand);
             this.hand = this.spades.concat(this.hearts).concat(this.clubs).concat(this.diamonds);
             console.log(this.hand);
             var sum_1 = 0;
