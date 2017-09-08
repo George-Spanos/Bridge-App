@@ -74,6 +74,9 @@ export class LeadComponent implements OnInit {
     this.contract.South = [];
     this.contract.East = [];
     this.contract.West = [];
+    this.contract.lead = null;
+    this.handSubmitted = false;
+    this.leadSubmitted = false;
     console.log(this.contract);
   }
 
