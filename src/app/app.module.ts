@@ -15,10 +15,12 @@ import { PracticeComponent } from './practice/practice.component';
 import { DonateComponent } from './donate/donate.component';
 import { ContactComponent } from './contact/contact.component';
 import { LeadComponent } from './lead/lead.component';
+import { LeadPracticeComponent } from './lead-practice/lead-practice.component';
 const routes = [
   { path: '', component: HomepageComponent },
   { path: 'bid', component: MainSectionComponent },
   { path: 'practice', component: PracticeComponent },
+  { path: 'leadpractice', component: LeadPracticeComponent },
   { path: 'donate', component: DonateComponent },
   { path: 'contact', component: ContactComponent },
   { path: 'lead', component: LeadComponent },
@@ -35,7 +37,8 @@ const routes = [
     PracticeComponent,
     DonateComponent,
     ContactComponent,
-    LeadComponent
+    LeadComponent,
+    LeadPracticeComponent
   ],
   imports: [
     BrowserModule,
