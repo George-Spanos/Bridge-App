@@ -14,7 +14,6 @@ export class Contract {
   Hand: Card[];
   lead: Card;
   comments: string;
-  contractInfo: string;
   constructor(public http: Http) {
     this.North = [];
     this.East = [];
@@ -22,7 +21,7 @@ export class Contract {
     this.West = [];
     this.Hand = [];
   }
-  setValue(name: string, obj: FormControl) {
+  changeValue(name: string, obj: FormControl) {
     if (name === 'North') {
       this.North.push(obj.value);
       console.log(this.North);
@@ -44,7 +43,6 @@ export class Contract {
       lead: this.lead,
       hand: this.Hand,
       comments: this.comments,
-      contractInfo: this.contractInfo,
       North: this.North,
       East: this.East,
       South: this.South,

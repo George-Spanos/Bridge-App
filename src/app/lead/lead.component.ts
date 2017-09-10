@@ -29,12 +29,44 @@ export class LeadComponent implements OnInit {
     console.log(this.contractform);
   }
   toSideArray(name: string, el: FormControl) {
-    this.contract.setValue(name, el);
+    this.contract.changeValue(name, el);
+    this.contractform.form.patchValue({
+      West: {
+        numBid: '',
+        suitBid: '',
+        bidComment: ''
+      },
+      East: {
+        numBid: '',
+        suitBid: '',
+        bidComment: ''
+      },
+      South: {
+        numBid: '',
+        suitBid: '',
+        bidComment: ''
+      },
+      North: {
+        numBid: '',
+        suitBid: '',
+        bidComment: ''
+      }
+    });
   }
   toHand(card: Card) {
-    if (this.handSubmitted === false && this.contract.Hand.length < 13) {
+    if (this.handSubmitted === false && this.contract.Hand.length < 13 && !card.clicked) {
+      card.clicked = true;
       this.contract.Hand.push(card);
       console.log(this.contract.Hand);
+    } else {
+      card.clicked = false;
+      const i = this.contract.Hand.indexOf(card);
+      if (i > -1) {
+        this.contract.Hand.splice(this.contract.Hand.indexOf(card), 1);
+        console.log(this.contract.Hand);
+      }
+
+
     }
   }
   chooseLead(card: Card) {
@@ -56,7 +88,6 @@ export class LeadComponent implements OnInit {
   onSubmit() {
     this.contract.colors = this.contractform.value.Colors;
     this.contract.comments = this.contractform.value.comments;
-    this.contract.contractInfo = this.contractform.value.contractInfo;
     this.contract.leadtoDatabase().subscribe(
       data => console.log('A bid was succesfully sent'),
       error => console.error(error)
