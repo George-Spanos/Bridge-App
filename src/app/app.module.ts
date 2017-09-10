@@ -16,6 +16,7 @@ import { DonateComponent } from './donate/donate.component';
 import { ContactComponent } from './contact/contact.component';
 import { LeadComponent } from './lead/lead.component';
 import { LeadPracticeComponent } from './lead-practice/lead-practice.component';
+import { PracticeformComponent } from './practiceform/practiceform.component';
 const routes = [
   { path: '', component: HomepageComponent },
   { path: 'bid', component: MainSectionComponent },
@@ -38,7 +39,8 @@ const routes = [
     DonateComponent,
     ContactComponent,
     LeadComponent,
-    LeadPracticeComponent
+    LeadPracticeComponent,
+    PracticeformComponent
   ],
   imports: [
     BrowserModule,

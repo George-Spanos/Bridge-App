@@ -21,7 +21,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, "", ""]);
+exports.push([module.i, ".board {\r\n  padding: 100px 30px 60px 30px;\r\n  background-color: green;\r\n  display: -webkit-box;\r\n  display: -ms-flexbox;\r\n  display: flex;\r\n  -webkit-box-pack: center;\r\n      -ms-flex-pack: center;\r\n          justify-content: center;\r\n  border-radius: 10px;\r\n}\r\n", ""]);
 
 // exports
 
@@ -89,12 +89,14 @@ AppComponent = __decorate([
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__contact_contact_component__ = __webpack_require__("../../../../../src/app/contact/contact.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__lead_lead_component__ = __webpack_require__("../../../../../src/app/lead/lead.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__lead_practice_lead_practice_component__ = __webpack_require__("../../../../../src/app/lead-practice/lead-practice.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__practiceform_practiceform_component__ = __webpack_require__("../../../../../src/app/practiceform/practiceform.component.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
@@ -138,7 +140,8 @@ AppModule = __decorate([
             __WEBPACK_IMPORTED_MODULE_12__donate_donate_component__["a" /* DonateComponent */],
             __WEBPACK_IMPORTED_MODULE_13__contact_contact_component__["a" /* ContactComponent */],
             __WEBPACK_IMPORTED_MODULE_14__lead_lead_component__["a" /* LeadComponent */],
-            __WEBPACK_IMPORTED_MODULE_15__lead_practice_lead_practice_component__["a" /* LeadPracticeComponent */]
+            __WEBPACK_IMPORTED_MODULE_15__lead_practice_lead_practice_component__["a" /* LeadPracticeComponent */],
+            __WEBPACK_IMPORTED_MODULE_16__practiceform_practiceform_component__["a" /* PracticeformComponent */]
         ],
         imports: [
             __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["a" /* BrowserModule */],
@@ -1052,7 +1055,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, "", ""]);
+exports.push([module.i, ".heading {\r\n  display:-webkit-box;\r\n  display:-ms-flexbox;\r\n  display:flex;\r\n  color: black;\r\n   -webkit-box-pack: center;\r\n       -ms-flex-pack: center;\r\n           justify-content: center;\r\n    border:1px solid black;\r\n    text-align: center;\r\n}\r\n#subheading {\r\n  display:-webkit-box;\r\n  display:-ms-flexbox;\r\n  display:flex;\r\n  color: #974141;\r\n  -webkit-box-pack: center;\r\n      -ms-flex-pack: center;\r\n          justify-content: center;\r\n  font-size: large;\r\n  font-weight: bold;\r\n  box-sizing: border-box;\r\n  margin: 10px auto;\r\n  border: 3px dotted lightgrey;\r\n  border-radius: 3px;\r\n  width: 50%;\r\n  text-align: center;\r\n}\r\n.hline {\r\n  border-color: black;\r\n  width: 100%;\r\n}\r\n", ""]);
 
 // exports
 
@@ -1065,7 +1068,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/practice/practice.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<p>\n  practice works!\n</p>\n"
+module.exports = "<div class=\"container\">\n  <div class=\"row\">\n    <div class=\"col-xs-12\">\n      <div class=\"row heading\">\n        <h2>This sections give you the chance to practice on how to open the bidding phase</h2>\n      </div>\n      <div class=\"row\">\n        <span id=\"subheading\"> When you click the \"start practicing\" button, you will be served\n          a specific hand that has a specific bid as an answer</span>\n      </div>\n    </div>\n  </div>\n  <hr class=\"hline\">\n  <div class=\"row\">\n      <div class=\"col-xs-12\" style=\"display:flex; justify-content:center; padding:0px 20px 20px 20px;\">\n        <button class=\"btn btn-primary\" (click)=\"startPractice()\">Start Practicing</button>\n      </div>\n    </div>\n    <div class=\"row\">\n        <div class=\"col-xs-12\">\n          <div class=\"col-xs-6\">\n            <div class=\"board\" *ngIf=\"handInitialized\">\n              <div class=\"row\">\n                <div class=\"card\" *ngFor=\"let card of spades\">{{card.name}}\n                  <br>\n                  <img class=\"suit\" src=\"https://i.imgur.com/tXgx0h3.png\">\n                </div>\n                <div class=\"card red\" *ngFor=\"let card of hearts\">{{card.name}}\n                  <br>\n                  <img class=\"suit\" src=\"https://i.imgur.com/Chg6eQ8.jpg\">\n                </div>\n                <div class=\"card\" *ngFor=\"let card of clubs\">{{card.name}}\n                  <br>\n                  <img class=\"suit\" src=\"https://i.imgur.com/TsBK3k9.jpg\">\n                </div>\n                <div class=\"card red\" *ngFor=\"let card of diamonds\">{{card.name}}\n                  <br>\n                  <img class=\"suit\" src=\"https://i.imgur.com/khCb5Vu.jpg\">\n                </div>\n              </div>\n            </div>\n            <div class=\"row\" *ngIf=\"handInitialized\">\n              <div class=\"col-xs-12 hcpdisplay\">Total HCP = {{hcp}}</div>\n            </div>\n          </div>\n          <div class=\"col-xs-6\">\n            <div *ngIf=\"handInitialized\" style=\"margin:10px\">\n              <app-practiceform></app-practiceform>\n            </div>\n          </div>\n        </div>\n      </div>\n</div>\n"
 
 /***/ }),
 
@@ -1087,7 +1090,11 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 var PracticeComponent = (function () {
     function PracticeComponent() {
+        this.handInitialized = false;
     }
+    PracticeComponent.prototype.startPractice = function () {
+        this.handInitialized = true;
+    };
     PracticeComponent.prototype.ngOnInit = function () {
     };
     return PracticeComponent;
@@ -1102,6 +1109,67 @@ PracticeComponent = __decorate([
 ], PracticeComponent);
 
 //# sourceMappingURL=practice.component.js.map
+
+/***/ }),
+
+/***/ "../../../../../src/app/practiceform/practiceform.component.css":
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "", ""]);
+
+// exports
+
+
+/*** EXPORTS FROM exports-loader ***/
+module.exports = module.exports.toString();
+
+/***/ }),
+
+/***/ "../../../../../src/app/practiceform/practiceform.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<p>\n  practiceform works!\n</p>\n"
+
+/***/ }),
+
+/***/ "../../../../../src/app/practiceform/practiceform.component.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return PracticeformComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+var PracticeformComponent = (function () {
+    function PracticeformComponent() {
+    }
+    PracticeformComponent.prototype.ngOnInit = function () {
+    };
+    return PracticeformComponent;
+}());
+PracticeformComponent = __decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["o" /* Component */])({
+        selector: 'app-practiceform',
+        template: __webpack_require__("../../../../../src/app/practiceform/practiceform.component.html"),
+        styles: [__webpack_require__("../../../../../src/app/practiceform/practiceform.component.css")]
+    }),
+    __metadata("design:paramtypes", [])
+], PracticeformComponent);
+
+//# sourceMappingURL=practiceform.component.js.map
 
 /***/ }),
 

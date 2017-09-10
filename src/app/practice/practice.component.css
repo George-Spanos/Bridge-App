@@ -1,0 +1,24 @@
+.heading {
+  display:flex;
+  color: black;
+   justify-content: center;
+    border:1px solid black;
+    text-align: center;
+}
+#subheading {
+  display:flex;
+  color: #974141;
+  justify-content: center;
+  font-size: large;
+  font-weight: bold;
+  box-sizing: border-box;
+  margin: 10px auto;
+  border: 3px dotted lightgrey;
+  border-radius: 3px;
+  width: 50%;
+  text-align: center;
+}
+.hline {
+  border-color: black;
+  width: 100%;
+}
