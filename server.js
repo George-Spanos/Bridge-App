@@ -23,31 +23,31 @@ const auctionSchema = new Schema({
   numericBid: String,
   suitBid: String,
   comments: String,
-  votes: 0
+  votes: Number,
 })
-const practiceSchema= new Schema({
+const practiceSchema = new Schema({
   array: [],
   hcp: Number,
   numericBid: String,
   suitBid: String,
   comments: String,
 })
-const leadsSchema= new Schema({
+const leadsSchema = new Schema({
   colors: Object,
   comments: String,
   lead: Object,
   hand: [],
   NorthBid: [],
-  EastBid:[],
+  EastBid: [],
   SouthBid: [],
   WestBid: []
 })
-const leadPractice = mongoose.model('LeadPractice',leadsSchema);
+const leadPractice = mongoose.model('LeadPractice', leadsSchema);
 const practiceBids = mongoose.model('Practice Bids', practiceSchema);
 auctionSchema.plugin(randomEl);
 const Bid = mongoose.model('Bid', auctionSchema);
-app.post('/addlead',function (req, res , next){
-  var lead= leadPractice({
+app.post('/addlead', function (req, res, next) {
+  var lead = leadPractice({
     colors: req.body.colors,
     comments: req.body.comments,
     lead: req.body.lead,
@@ -126,7 +126,7 @@ app.get('/randomhand', function (req, res, next) {
       return err;
     }
     this.bidsArray = result.array;
-    Bid.find({array: this.bidsArray}, { hcp:1 ,comments: 1, numericBid: 1, suitBid: 1, array: 1 },
+    Bid.find({ array: this.bidsArray }, { hcp: 1, comments: 1, numericBid: 1, suitBid: 1, array: 1 },
       function (err, arrayFin) {
         res.status(200).json({
           title: ' Success',
@@ -139,7 +139,7 @@ app.get('/randomhand', function (req, res, next) {
 /**
  * Create HTTP server.
  */
-
+// Bid.update({}, { $set: { votes: 0 } }, { multi: true }, () => console.log('done'));
 const server = http.createServer(app);
 
 // Set our api routes
