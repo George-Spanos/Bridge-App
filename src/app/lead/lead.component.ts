@@ -56,6 +56,7 @@ export class LeadComponent implements OnInit {
   onSubmit() {
     this.contract.colors = this.contractform.value.Colors;
     this.contract.comments = this.contractform.value.comments;
+    this.contract.contractInfo = this.contractform.value.contractInfo;
     this.contract.leadtoDatabase().subscribe(
       data => console.log('A bid was succesfully sent'),
       error => console.error(error)

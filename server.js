@@ -34,6 +34,7 @@ const practiceSchema= new Schema({
 })
 const leadsSchema= new Schema({
   colors: Object,
+  contractcomment: String,
   comments: String,
   lead: Object,
   hand: [],
@@ -50,6 +51,7 @@ app.post('/addlead',function (req, res , next){
   var lead= leadPractice({
     colors: req.body.colors,
     comments: req.body.comments,
+    contractcomment: req.body.contractInfo,
     lead: req.body.lead,
     hand: req.body.hand,
     NorthBid: req.body.North,

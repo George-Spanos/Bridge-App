@@ -14,6 +14,7 @@ export class Contract {
   Hand: Card[];
   lead: Card;
   comments: string;
+  contractInfo: string;
   constructor(public http: Http) {
     this.North = [];
     this.East = [];
@@ -43,6 +44,7 @@ export class Contract {
       lead: this.lead,
       hand: this.Hand,
       comments: this.comments,
+      contractInfo: this.contractInfo,
       North: this.North,
       East: this.East,
       South: this.South,
