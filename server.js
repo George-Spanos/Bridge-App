@@ -42,9 +42,11 @@ const leadsSchema = new Schema({
   SouthBid: [],
   WestBid: []
 })
+auctionSchema.plugin(randomEl);
+leadsSchema.plugin(randomEl);
+practiceSchema.plugin(randomEl);
 const leadPractice = mongoose.model('LeadPractice', leadsSchema);
 const practiceBids = mongoose.model('Practice Bids', practiceSchema);
-auctionSchema.plugin(randomEl);
 const Bid = mongoose.model('Bid', auctionSchema);
 app.post('/addlead', function (req, res, next) {
   var lead = leadPractice({
@@ -134,6 +136,17 @@ app.get('/randomhand', function (req, res, next) {
         });
       }
     );
+  });
+});
+app.get('/getpracticehand', function (req, res, next) {
+  practiceBids.findOneRandom(function (err, result) {
+    if (err) {
+      return err;
+    }
+    res.status(200).json({
+      title: ' Success',
+      result: arrayFin
+    });
   });
 });
 /**

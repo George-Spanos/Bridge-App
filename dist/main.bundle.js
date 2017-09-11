@@ -377,6 +377,9 @@ var BridgeApi = (function () {
     BridgeApi.prototype.fetchHand = function () {
         return this.http.get('/randomhand').map(function (response) { return response.json().result; }).catch(function (error) { return __WEBPACK_IMPORTED_MODULE_1_rxjs_Rx__["Observable"].throw(error.json()); });
     };
+    BridgeApi.prototype.fetchPractice = function () {
+        return this.http.get('/getpracticehand').map(function (response) { return response.json().result; }).catch(function (error) { return __WEBPACK_IMPORTED_MODULE_1_rxjs_Rx__["Observable"].throw(error.json()); });
+    };
     return BridgeApi;
 }());
 BridgeApi = __decorate([
@@ -1108,6 +1111,7 @@ module.exports = "<div class=\"container\">\n  <div class=\"row\">\n    <div cla
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return PracticeComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__bridge_service__ = __webpack_require__("../../../../../src/app/bridge.service.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1118,12 +1122,17 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
+
 var PracticeComponent = (function () {
-    function PracticeComponent() {
+    function PracticeComponent(bridgeApi) {
+        this.bridgeApi = bridgeApi;
         this.handInitialized = false;
     }
     PracticeComponent.prototype.startPractice = function () {
         this.handInitialized = true;
+        this.bridgeApi.fetchPractice().subscribe(function (results) {
+            console.log(results);
+        });
     };
     PracticeComponent.prototype.ngOnInit = function () {
     };
@@ -1135,9 +1144,10 @@ PracticeComponent = __decorate([
         template: __webpack_require__("../../../../../src/app/practice/practice.component.html"),
         styles: [__webpack_require__("../../../../../src/app/practice/practice.component.css")]
     }),
-    __metadata("design:paramtypes", [])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__bridge_service__["a" /* BridgeApi */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__bridge_service__["a" /* BridgeApi */]) === "function" && _a || Object])
 ], PracticeComponent);
 
+var _a;
 //# sourceMappingURL=practice.component.js.map
 
 /***/ }),

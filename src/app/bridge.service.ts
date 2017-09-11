@@ -122,4 +122,11 @@ export class BridgeApi {
       (error: Response) => Observable.throw(error.json())
       );
   }
+  fetchPractice() {
+    return this.http.get('/getpracticehand').map(
+      (response: Response) => response.json().result
+    ).catch(
+      (error: Response) => Observable.throw(error.json())
+    );
+  }
 }
