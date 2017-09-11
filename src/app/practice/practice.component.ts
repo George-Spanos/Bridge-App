@@ -12,12 +12,14 @@ export class PracticeComponent implements OnInit {
   hearts: Card[];
   clubs: Card[];
   diamonds: Card[];
+  hand: Card[];
   hcp: number;
   startPractice() {
     this.handInitialized = true;
     this.bridgeApi.fetchPractice().subscribe(
       (results) => {
         console.log(results);
+        // this.hand = results[0];
       }
     );
   }

@@ -139,7 +139,7 @@ app.get('/randomhand', function (req, res, next) {
   });
 });
 app.get('/getpracticehand', function (req, res, next) {
-  practiceBids.findOneRandom(function (err, result) {
+  practiceBids.findOneRandom({} , {_id: 0, __v: 0}, function (err, result) {
     if (err) {
       return err;
     }
