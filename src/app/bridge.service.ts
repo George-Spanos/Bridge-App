@@ -15,6 +15,8 @@ export class BridgeApi {
     comment: ''
   };
   hcp: number;
+  answer= '';
+  answerStatus = false;
   coinFlip() {
     return (Math.random() < 0.5 ? 0 : 1);
   }

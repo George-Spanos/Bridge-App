@@ -14,12 +14,23 @@ export class PracticeComponent implements OnInit {
   diamonds: Card[];
   hand: Card[];
   hcp: number;
+  comment: string;
+  correctbid: string;
   startPractice() {
+    this.bridgeApi.answerStatus = false;
+    this.bridgeApi.answer = '';
     this.handInitialized = true;
     this.bridgeApi.fetchPractice().subscribe(
       (results) => {
-        console.log(results);
-        // this.hand = results[0];
+        this.hand = results.array;
+        this.hcp = results.hcp;
+        this.spades = this.bridgeApi.filterArray(this.hand, 'Spades');
+        this.hearts = this.bridgeApi.filterArray(this.hand, 'Hearts');
+        this.diamonds = this.bridgeApi.filterArray(this.hand, 'Diamonds');
+        this.clubs = this.bridgeApi.filterArray(this.hand, 'Clubs');
+        this.comment = results.comments;
+        this.correctbid = results.numericBid + ' ' + results.suitBid;
+        console.log( this.comment, this.correctbid);
       }
     );
   }

@@ -166,7 +166,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, "select.ng-invalid.ng-touched, textarea.ng-invalid.ng-touched  {\r\n  border: 2px solid red;\r\n}\r\n", ""]);
+exports.push([module.i, "select.ng-invalid.ng-touched, textarea.ng-invalid.ng-touched  {\r\n  border: 2px solid red;\r\n}\r\n.warning {\r\n  margin: 5px 0px;\r\n}\r\n", ""]);
 
 // exports
 
@@ -179,7 +179,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/bid-form/bid-form.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<form (ngSubmit)=\"onSubmit()\" #f=\"ngForm\">\n  <div class=\"row\" style=\"margin: 5px;\">\n    <div class=\"col-xs-12\" role=\"group\" aria-label=\"...\">\n      <label for=\"num\">Choose a number</label>\n      <select class=\"form-control\" name=\"numericBid\" id=\"num\" required ngModel #num=\"ngModel\">\n            <option value=\"1\">1</option>\n            <option value=\"1\">2</option>\n            <option value=\"1\">3</option>\n            <option value=\"1\">4</option>\n            <option value=\"1\">5</option>\n            <option value=\"1\">6</option>\n            <option value=\"1\">7</option>\n            <option value=\"Pass\">Pass</option>\n        </select>\n      <span *ngIf=\"num.invalid && num.touched\"> You need to choose a numeric bid</span>\n      <label for=\"suit\">Choose a Suit</label>\n      <select class=\"form-control pull-right\" name=\"suitBid\" id=\"suit\" required ngModel #suit=\"ngModel\">\n            <option value=\"Spades\">Spades</option>\n            <option value=\"Hearts\">Hearts</option>\n            <option value=\"Diamonds\">Diamonds</option>\n            <option value=\"Clubs\">Clubs</option>\n            <option value=\"NoTrump\">NoTrump</option>\n            <option value=\"Pass\">Pass</option>\n          </select>\n      <div class=\"row\">\n        <span *ngIf=\"suit.invalid && suit.touched\">\n              You need to choose a suit bid\n            </span>\n      </div>\n    </div>\n    <div class=\"row\">\n      <div class=\"col-xs-12\" style=\"display: flex; justify-content: center; margin-top: 10px;\">\n        <button type=\"button\" class=\"btn btn-primary\" (click)=\"Pass()\">Pass</button>\n      </div>\n    </div>\n  </div>\n  <div class=\"form-group\">\n    <label for=\"comment\">Comment:</label>\n    <textarea class=\"form-control col-xs-12\" rows=\"5\" id=\"comment\" ngModel name=\"comments\" required #comment=\"ngModel\"></textarea>\n  </div>\n  <span *ngIf=\"comment.invalid && comment.touched\">You need to type a comment</span>\n  <br>\n  <button type=\"submit\" class=\"btn btn-primary\" [disabled]=\"!f.valid\">Submit Bid</button>\n  <br>\n    <strong>Password : </strong>\n    <input type=\"password\" [(ngModel)]=\"password\" [ngModelOptions]=\"{standalone: true}\">\n    <button type=\"button\" (click)=\"toPracticeBids()\" class=\"btn btn-primary\"\n    [disabled]=\"f.invalid || password !== 'FKI'\">\n      To practice Bids\n      </button>\n</form>\n"
+module.exports = "<form (ngSubmit)=\"onSubmit()\" #f=\"ngForm\">\n  <div class=\"row\" style=\"margin: 5px;\">\n    <div class=\"col-xs-12\" role=\"group\" aria-label=\"...\">\n      <div class=\"row\">\n        <label for=\"num\">Choose a number</label>\n      </div>\n      <select class=\"form-control\" name=\"numericBid\" id=\"num\" required ngModel #num=\"ngModel\">\n            <option value=\"1\">1</option>\n            <option value=\"1\">2</option>\n            <option value=\"1\">3</option>\n            <option value=\"1\">4</option>\n            <option value=\"1\">5</option>\n            <option value=\"1\">6</option>\n            <option value=\"1\">7</option>\n            <option value=\"Pass\">Pass</option>\n        </select>\n      <div class=\"row warning\">\n        <span *ngIf=\"num.invalid && num.touched\"> You need to choose a numeric bid</span>\n      </div>\n      <div class=\"row\">\n        <label for=\"suit\">Choose a Suit</label>\n      </div>\n      <select class=\"form-control pull-right\" name=\"suitBid\" id=\"suit\" required ngModel #suit=\"ngModel\">\n            <option value=\"Spades\">Spades</option>\n            <option value=\"Hearts\">Hearts</option>\n            <option value=\"Diamonds\">Diamonds</option>\n            <option value=\"Clubs\">Clubs</option>\n            <option value=\"NoTrump\">NoTrump</option>\n            <option value=\"Pass\">Pass</option>\n          </select>\n      <div class=\"row warning\">\n        <span *ngIf=\"suit.invalid && suit.touched\">\n              You need to choose a suit bid\n            </span>\n      </div>\n    </div>\n    <div class=\"row\">\n      <div class=\"col-xs-12\" style=\"display: flex; justify-content: center; margin-top: 10px;\">\n        <button type=\"button\" class=\"btn btn-primary\" (click)=\"Pass()\">Pass</button>\n      </div>\n    </div>\n  </div>\n  <div class=\"form-group\">\n    <label for=\"comment\">Comment:</label>\n    <textarea class=\"form-control col-xs-12\" rows=\"5\" id=\"comment\" ngModel name=\"comments\" required #comment=\"ngModel\"></textarea>\n  </div>\n  <span *ngIf=\"comment.invalid && comment.touched\">You need to type a comment</span>\n  <br>\n  <button type=\"submit\" class=\"btn btn-primary\" [disabled]=\"!f.valid\">Submit Bid</button>\n  <br>\n  <strong>Password : </strong>\n  <input type=\"password\" [(ngModel)]=\"password\" [ngModelOptions]=\"{standalone: true}\">\n  <button type=\"button\" (click)=\"toPracticeBids()\" class=\"btn btn-primary\" [disabled]=\"f.invalid || password !== 'FKI'\">\n      To practice Bids\n      </button>\n</form>\n"
 
 /***/ }),
 
@@ -282,6 +282,8 @@ var BridgeApi = (function () {
             suit: '',
             comment: ''
         };
+        this.answer = '';
+        this.answerStatus = false;
     }
     BridgeApi.prototype.coinFlip = function () {
         return (Math.random() < 0.5 ? 0 : 1);
@@ -1088,7 +1090,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, ".heading {\r\n  display:-webkit-box;\r\n  display:-ms-flexbox;\r\n  display:flex;\r\n  color: black;\r\n   -webkit-box-pack: center;\r\n       -ms-flex-pack: center;\r\n           justify-content: center;\r\n    border:1px solid black;\r\n    text-align: center;\r\n}\r\n#subheading {\r\n  display:-webkit-box;\r\n  display:-ms-flexbox;\r\n  display:flex;\r\n  color: #974141;\r\n  -webkit-box-pack: center;\r\n      -ms-flex-pack: center;\r\n          justify-content: center;\r\n  font-size: large;\r\n  font-weight: bold;\r\n  box-sizing: border-box;\r\n  margin: 10px auto;\r\n  border: 3px dotted lightgrey;\r\n  border-radius: 3px;\r\n  width: 50%;\r\n  text-align: center;\r\n}\r\n.hline {\r\n  border-color: black;\r\n  width: 100%;\r\n}\r\n", ""]);
+exports.push([module.i, ".heading {\r\n  display:-webkit-box;\r\n  display:-ms-flexbox;\r\n  display:flex;\r\n  color: black;\r\n   -webkit-box-pack: center;\r\n       -ms-flex-pack: center;\r\n           justify-content: center;\r\n    border:1px solid black;\r\n    text-align: center;\r\n}\r\n#subheading {\r\n  display:-webkit-box;\r\n  display:-ms-flexbox;\r\n  display:flex;\r\n  color: #974141;\r\n  -webkit-box-pack: center;\r\n      -ms-flex-pack: center;\r\n          justify-content: center;\r\n  font-size: large;\r\n  font-weight: bold;\r\n  box-sizing: border-box;\r\n  margin: 10px auto;\r\n  border: 3px dotted lightgrey;\r\n  border-radius: 3px;\r\n  width: 50%;\r\n  text-align: center;\r\n}\r\n.hline {\r\n  border-color: black;\r\n  width: 100%;\r\n}\r\n.hcpdisplay {\r\n  font-weight: bold;\r\n  font-size: 18px;\r\n  display: -webkit-box;\r\n  display: -ms-flexbox;\r\n  display: flex;\r\n  -webkit-box-pack: center;\r\n      -ms-flex-pack: center;\r\n          justify-content: center;\r\n}\r\n.card {\r\n  float: left;\r\n  width: auto;\r\n  height: 150px;\r\n  display: block;\r\n  border: 1px solid;\r\n  border-right:1px bold;\r\n  border-color: grey;;\r\n  padding: 6px;\r\n  text-align: center;\r\n  font-weight: bold;\r\n  font-size: 20px;\r\n  background-color: white;\r\n  border-radius: 3px;\r\n}\r\n.suit {\r\n  width: 20px;\r\n  height: 20px;\r\n}\r\n.board {\r\n  padding: 100px 30px 60px 30px;\r\n  background-color: green;\r\n  display: -webkit-box;\r\n  display: -ms-flexbox;\r\n  display: flex;\r\n  -webkit-box-pack: center;\r\n      -ms-flex-pack: center;\r\n          justify-content: center;\r\n  border-radius: 10px;\r\n}\r\n.red {\r\n  color:#E31818;\r\n}\r\n@media screen and (max-width: 480px) {\r\n  .board {\r\n    padding: 20px 20px 20px 20px;\r\n    background-color: green;\r\n    display: -webkit-box;\r\n    display: -ms-flexbox;\r\n    display: flex;\r\n    -webkit-box-pack: center;\r\n        -ms-flex-pack: center;\r\n            justify-content: center;\r\n    border-radius: 10px;\r\n  }\r\n  .card {\r\n    height: auto;\r\n    font-size: 15px;\r\n  }\r\n  .suit {\r\n    width: 18px;\r\n    height: 18px;\r\n  }\r\n}\r\n.response {\r\n  box-sizing: border-box;\r\n  padding: 10px;\r\n  border: 2px solid lightseagreen;\r\n  border-radius: 1px;\r\n  margin-top: auto;\r\n  display: -webkit-box;\r\n  display: -ms-flexbox;\r\n  display: flex;\r\n  -webkit-box-pack: center;\r\n      -ms-flex-pack: center;\r\n          justify-content: center;\r\n}\r\n#com {\r\n  text-align: center;\r\n}\r\n.form-control {\r\n  height: auto;\r\n  margin-bottom: 3px;\r\n}\r\n", ""]);
 
 // exports
 
@@ -1101,7 +1103,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/practice/practice.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\n  <div class=\"row\">\n    <div class=\"col-xs-12\">\n      <div class=\"row heading\">\n        <h2>This sections give you the chance to practice on how to open the bidding phase</h2>\n      </div>\n      <div class=\"row\">\n        <span id=\"subheading\"> When you click the \"start practicing\" button, you will be served\n          a specific hand that has a specific bid as an answer</span>\n      </div>\n    </div>\n  </div>\n  <hr class=\"hline\">\n  <div class=\"row\">\n      <div class=\"col-xs-12\" style=\"display:flex; justify-content:center; padding:0px 20px 20px 20px;\">\n        <button class=\"btn btn-primary\" (click)=\"startPractice()\">Start Practicing</button>\n      </div>\n    </div>\n    <div class=\"row\">\n        <div class=\"col-xs-12\">\n          <div class=\"col-xs-6\">\n            <div class=\"board\" *ngIf=\"handInitialized\">\n              <div class=\"row\">\n                <div class=\"card\" *ngFor=\"let card of spades\">{{card.name}}\n                  <br>\n                  <img class=\"suit\" src=\"https://i.imgur.com/tXgx0h3.png\">\n                </div>\n                <div class=\"card red\" *ngFor=\"let card of hearts\">{{card.name}}\n                  <br>\n                  <img class=\"suit\" src=\"https://i.imgur.com/Chg6eQ8.jpg\">\n                </div>\n                <div class=\"card\" *ngFor=\"let card of clubs\">{{card.name}}\n                  <br>\n                  <img class=\"suit\" src=\"https://i.imgur.com/TsBK3k9.jpg\">\n                </div>\n                <div class=\"card red\" *ngFor=\"let card of diamonds\">{{card.name}}\n                  <br>\n                  <img class=\"suit\" src=\"https://i.imgur.com/khCb5Vu.jpg\">\n                </div>\n              </div>\n            </div>\n            <div class=\"row\" *ngIf=\"handInitialized\">\n              <div class=\"col-xs-12 hcpdisplay\">Total HCP = {{hcp}}</div>\n            </div>\n          </div>\n          <div class=\"col-xs-6\">\n            <div *ngIf=\"handInitialized\" style=\"margin:10px\">\n              <app-practiceform></app-practiceform>\n            </div>\n          </div>\n        </div>\n      </div>\n</div>\n"
+module.exports = "<div class=\"container\">\n  <div class=\"row\">\n    <div class=\"col-xs-12\">\n      <div class=\"row heading\">\n        <h2>This sections give you the chance to practice on how to open the bidding phase</h2>\n      </div>\n      <div class=\"row\">\n        <span id=\"subheading\"> When you click the \"start practicing\" button, you will be served\n          a specific hand that has a specific bid as an answer</span>\n      </div>\n    </div>\n  </div>\n  <hr class=\"hline\">\n  <div class=\"row\">\n    <div class=\"col-xs-12\" style=\"display:flex; justify-content:center; padding:0px 20px 20px 20px;\">\n      <button class=\"btn btn-primary\" (click)=\"startPractice()\">Start Practicing</button>\n    </div>\n  </div>\n  <div class=\"row\">\n    <div class=\"col-xs-12\">\n      <div class=\"col-xs-6\">\n        <div class=\"board\" *ngIf=\"handInitialized\">\n          <div class=\"row\">\n            <div class=\"card\" *ngFor=\"let card of spades\">{{card.name}}\n              <br>\n              <img class=\"suit\" src=\"https://i.imgur.com/tXgx0h3.png\">\n            </div>\n            <div class=\"card red\" *ngFor=\"let card of hearts\">{{card.name}}\n              <br>\n              <img class=\"suit\" src=\"https://i.imgur.com/Chg6eQ8.jpg\">\n            </div>\n            <div class=\"card\" *ngFor=\"let card of clubs\">{{card.name}}\n              <br>\n              <img class=\"suit\" src=\"https://i.imgur.com/TsBK3k9.jpg\">\n            </div>\n            <div class=\"card red\" *ngFor=\"let card of diamonds\">{{card.name}}\n              <br>\n              <img class=\"suit\" src=\"https://i.imgur.com/khCb5Vu.jpg\">\n            </div>\n          </div>\n        </div>\n        <div class=\"row\" *ngIf=\"handInitialized\">\n          <div class=\"col-xs-12 hcpdisplay\">Total HCP = {{hcp}}</div>\n        </div>\n      </div>\n      <div class=\"col-xs-6\">\n        <div *ngIf=\"handInitialized && !bridgeApi.answerStatus\" style=\"margin:10px\">\n          <app-practiceform></app-practiceform>\n        </div>\n        <div *ngIf=\"bridgeApi.answerStatus\" class=\"response\">\n          <div *ngIf=\"correctbid === bridgeApi.answer\">\n            <h3 id=\"com\">Your answer is correct!</h3><br>\n            <div class=\"form-control\">\n              <strong>Tip: </strong>{{comment}}\n            </div>\n          </div>\n          <div *ngIf=\"correctbid !== bridgeApi.answer\">\n            <h3 id=\"com\">\n              Your answer is incorrect. You should\n              <span *ngIf=\"correctbid !=='Pass Pass'\"> bid {{correctbid}}</span>\n              <span *ngIf=\"correctbid ==='Pass Pass'\"> Pass</span></h3>\n            <div class=\"form-control\"> <strong>Tip: </strong> {{comment}}</div>\n          </div>\n        </div>\n      </div>\n    </div>\n  </div>\n</div>\n"
 
 /***/ }),
 
@@ -1129,9 +1131,20 @@ var PracticeComponent = (function () {
         this.handInitialized = false;
     }
     PracticeComponent.prototype.startPractice = function () {
+        var _this = this;
+        this.bridgeApi.answerStatus = false;
+        this.bridgeApi.answer = '';
         this.handInitialized = true;
         this.bridgeApi.fetchPractice().subscribe(function (results) {
-            console.log(results);
+            _this.hand = results.array;
+            _this.hcp = results.hcp;
+            _this.spades = _this.bridgeApi.filterArray(_this.hand, 'Spades');
+            _this.hearts = _this.bridgeApi.filterArray(_this.hand, 'Hearts');
+            _this.diamonds = _this.bridgeApi.filterArray(_this.hand, 'Diamonds');
+            _this.clubs = _this.bridgeApi.filterArray(_this.hand, 'Clubs');
+            _this.comment = results.comments;
+            _this.correctbid = results.numericBid + ' ' + results.suitBid;
+            console.log(_this.comment, _this.correctbid);
         });
     };
     PracticeComponent.prototype.ngOnInit = function () {
@@ -1160,7 +1173,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, "", ""]);
+exports.push([module.i, "select.ng-invalid.ng-touched, textarea.ng-invalid.ng-touched  {\r\n  border: 2px solid red;\r\n}\r\n.warning {\r\n  margin: 5px 0px;\r\n}\r\n", ""]);
 
 // exports
 
@@ -1173,7 +1186,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/practiceform/practiceform.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<p>\n  practiceform works!\n</p>\n"
+module.exports = "<form (ngSubmit)=\"onSubmit()\" #f=\"ngForm\">\n  <div class=\"row\" style=\"margin: 5px;\">\n    <div class=\"col-xs-12\" role=\"group\" aria-label=\"...\">\n      <div class=\"row\">\n        <label for=\"num\">Choose a number</label>\n      </div>\n      <select class=\"form-control\" name=\"numericBid\" id=\"num\" required ngModel #num=\"ngModel\">\n            <option value=\"1\">1</option>\n            <option value=\"1\">2</option>\n            <option value=\"1\">3</option>\n            <option value=\"1\">4</option>\n            <option value=\"1\">5</option>\n            <option value=\"1\">6</option>\n            <option value=\"1\">7</option>\n            <option value=\"Pass\">Pass</option>\n        </select>\n      <div class=\"row warning\">\n        <span *ngIf=\"num.invalid && num.touched\"> You need to choose a numeric bid</span>\n      </div>\n      <div class=\"row\">\n        <label for=\"suit\">Choose a Suit</label>\n      </div>\n      <select class=\"form-control pull-right\" name=\"suitBid\" id=\"suit\" required ngModel #suit=\"ngModel\">\n            <option value=\"Spades\">Spades</option>\n            <option value=\"Hearts\">Hearts</option>\n            <option value=\"Diamonds\">Diamonds</option>\n            <option value=\"Clubs\">Clubs</option>\n            <option value=\"NoTrump\">NoTrump</option>\n            <option value=\"Pass\">Pass</option>\n          </select>\n      <div class=\"row warning\">\n        <span *ngIf=\"suit.invalid && suit.touched\">\n              You need to choose a suit bid\n            </span>\n      </div>\n    </div>\n    <div class=\"row\">\n      <div class=\"col-xs-12\" style=\"display: flex; justify-content: center; margin-top: 10px;\">\n        <button type=\"button\" class=\"btn btn-primary\" (click)=\"Pass()\">Pass</button>\n      </div>\n    </div>\n  </div>\n  <button type=\"submit\" class=\"btn btn-primary\" [disabled]=\"!f.valid\">Submit your Answer</button>\n"
 
 /***/ }),
 
@@ -1183,6 +1196,8 @@ module.exports = "<p>\n  practiceform works!\n</p>\n"
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return PracticeformComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_forms__ = __webpack_require__("../../../forms/@angular/forms.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__bridge_service__ = __webpack_require__("../../../../../src/app/bridge.service.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1193,22 +1208,41 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
+
+
 var PracticeformComponent = (function () {
-    function PracticeformComponent() {
+    function PracticeformComponent(bridgeApi) {
+        this.bridgeApi = bridgeApi;
+        this.answered = false;
     }
+    PracticeformComponent.prototype.Pass = function () {
+        this.bridgeForm.setValue({ numericBid: 'Pass', suitBid: 'Pass' });
+    };
+    PracticeformComponent.prototype.onSubmit = function () {
+        this.answered = true;
+        this.bridgeApi.answerStatus = true;
+        this.bridgeApi.answer = this.bridgeForm.value.numericBid + ' ' + this.bridgeForm.value.suitBid;
+        console.log(this.bridgeApi.answer);
+        this.bridgeForm.reset();
+    };
     PracticeformComponent.prototype.ngOnInit = function () {
     };
     return PracticeformComponent;
 }());
+__decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_16" /* ViewChild */])('f'),
+    __metadata("design:type", typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_forms__["b" /* NgForm */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_forms__["b" /* NgForm */]) === "function" && _a || Object)
+], PracticeformComponent.prototype, "bridgeForm", void 0);
 PracticeformComponent = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["o" /* Component */])({
         selector: 'app-practiceform',
         template: __webpack_require__("../../../../../src/app/practiceform/practiceform.component.html"),
         styles: [__webpack_require__("../../../../../src/app/practiceform/practiceform.component.css")]
     }),
-    __metadata("design:paramtypes", [])
+    __metadata("design:paramtypes", [typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__bridge_service__["a" /* BridgeApi */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__bridge_service__["a" /* BridgeApi */]) === "function" && _b || Object])
 ], PracticeformComponent);
 
+var _a, _b;
 //# sourceMappingURL=practiceform.component.js.map
 
 /***/ }),
