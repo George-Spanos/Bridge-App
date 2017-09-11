@@ -145,7 +145,7 @@ app.get('/getpracticehand', function (req, res, next) {
     }
     res.status(200).json({
       title: ' Success',
-      result: arrayFin
+      result: result
     });
   });
 });
