@@ -102,6 +102,7 @@ export class LeadComponent implements OnInit {
     this.diamonds = this.bridgeApi.sortArrayValues(this.diamonds);
     this.clubs = this.bridgeApi.filterArray(this.deck, 'Clubs');
     this.clubs = this.bridgeApi.sortArrayValues(this.clubs);
+    this.contract.Hand = [];
     this.contract.North = [];
     this.contract.South = [];
     this.contract.East = [];

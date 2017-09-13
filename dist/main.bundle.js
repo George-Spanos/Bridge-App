@@ -680,7 +680,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, ".bridgeImg {\r\n  background-image: url(https://static.independent.co.uk/s3fs-public/thumbnails/image/2015/05/02/23/7-Bridge-Card-Rex.jpg);\r\n  min-height: 600px;\r\n  min-width: 100%;\r\n  height: 100%;\r\n  background-size: contain;\r\n  background-repeat: no-repeat;\r\n  -webkit-background-size:cover;\r\n  -moz-background-size:cover;\r\n  -o-background-size:cover;\r\n  box-sizing: border-box;\r\n}\r\n.intro {\r\n  display:-webkit-box;\r\n  display:-ms-flexbox;\r\n  display:flex;\r\n  -webkit-box-pack: center;\r\n      -ms-flex-pack: center;\r\n          justify-content: center;\r\n  background-color: rgba(253, 253, 253, 0.70);\r\n  margin: 15% auto;\r\n  width: 50%;\r\n  height: auto;\r\n  max-height: 70%;\r\n  padding: 10px;\r\n  border-radius: 2px;\r\n  position: relative;\r\n}\r\n.sliderText {\r\n  margin-left: 2px;\r\n  color: black;\r\n  font-weight: bold;\r\n  font-size: 20px;\r\n}\r\n", ""]);
+exports.push([module.i, ".bridgeImg {\r\n  height: 100%;\r\n  width: 100%;\r\n  position: fixed;\r\n  background-image: url(https://static.independent.co.uk/s3fs-public/thumbnails/image/2015/05/02/23/7-Bridge-Card-Rex.jpg);\r\n  background-size: cover;\r\n  background-position: center;\r\n  background-repeat: no-repeat;\r\n  -webkit-background-size:cover;\r\n  -moz-background-size:cover;\r\n  -o-background-size:cover;\r\n  box-sizing: border-box;\r\n}\r\n.intro {\r\n  display:-webkit-box;\r\n  display:-ms-flexbox;\r\n  display:flex;\r\n  -webkit-box-pack: center;\r\n      -ms-flex-pack: center;\r\n          justify-content: center;\r\n  background-color: rgba(253, 253, 253, 0.70);\r\n  margin: 15% auto;\r\n  width: 50%;\r\n  height: auto;\r\n  max-height: 70%;\r\n  padding: 10px;\r\n  border-radius: 2px;\r\n  position: relative;\r\n}\r\n.sliderText {\r\n  margin-left: 2px;\r\n  color: black;\r\n  font-weight: bold;\r\n  font-size: 20px;\r\n}\r\n@media screen and (max-width:480px) {\r\n  .sliderText {\r\n    margin-left: 2px;\r\n    color: black;\r\n    font-weight: bold;\r\n    font-size: 14px;\r\n  }\r\n  .intro {\r\n    width: 75%;\r\n  }\r\n}\r\n", ""]);
 
 // exports
 
@@ -693,7 +693,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/homepage/homepage.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container bridgeImg\" >\n<div class=\"row\">\n  <div class=\"col-xs-12 \">\n    <div class=\"intro\">\n     <span class=\"sliderText\"><p>Bridge Teacher is an app that helps you get better at Bridge.</p>\n    <p>You can practice your bidding skills on completely random hands, while being able to read other peoples' answers, after your submission!</p>\n    <p>There will be more sections that will involve Lead Practicing.</p>\n    </span>\n    </div>\n  </div>\n</div>\n</div>\n"
+module.exports = "<div class=\"bridgeImg\" >\n<div class=\"row\">\n  <div class=\"col-xs-12 \">\n    <div class=\"intro\">\n     <span class=\"sliderText\"><p>Bridge Teacher is an app that helps you get better at Bridge.</p>\n    <p>You can practice your bidding skills on completely random hands, while being able to read other peoples' answers, after your submission!</p>\n    <p>There will be more sections that will involve Lead Practicing.</p>\n    </span>\n    </div>\n  </div>\n</div>\n</div>\n"
 
 /***/ }),
 
@@ -922,6 +922,7 @@ var LeadComponent = (function () {
         this.diamonds = this.bridgeApi.sortArrayValues(this.diamonds);
         this.clubs = this.bridgeApi.filterArray(this.deck, 'Clubs');
         this.clubs = this.bridgeApi.sortArrayValues(this.clubs);
+        this.contract.Hand = [];
         this.contract.North = [];
         this.contract.South = [];
         this.contract.East = [];
