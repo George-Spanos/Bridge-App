@@ -1,3 +1,85 @@
-<p>
-  lead-practice works!
-</p>
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="row heading">
+        <h2>This sections give you the chance to practice on how to lead as the defence</h2>
+      </div>
+      <div class="row">
+        <span id="subheading"> When you click the "start practicing" button, you will be served
+          a specific hand as well as the contract. You must find the most suitable lead, and then click it!</span>
+      </div>
+    </div>
+  </div>
+  <hr class="hline">
+  <div class="row">
+    <div class="col-xs-12" style="display:flex; justify-content:center; padding:0px 20px 20px 20px;">
+      <button class="btn btn-primary" (click)="startPractice()">Start Practicing</button>
+    </div>
+  </div>
+  <div class="row contract">
+    <div class="col-xs-3">
+      <label>North</label>
+      <div class="row" *ngFor="let north of North">
+        <div class="form-control">
+          {{north.numBid}} {{north.suitBid}}
+        </div>
+      </div>
+    </div>
+    <div class="col-xs-3">
+      <label>East</label>
+      <div class="row" *ngFor="let east of East">
+        <div class="form-control">
+          {{east.numBid}} {{east.suitBid}}
+        </div>
+      </div>
+    </div>
+    <div class="col-xs-3">
+      <label>South</label>
+      <div class="row" *ngFor="let south of South">
+        <div class="form-control">
+          {{south.numBid}} {{south.suitBid}}
+        </div>
+      </div>
+    </div>
+    <div class="col-xs-3">
+      <label>West</label>
+      <div class="row" *ngFor="let west of West">
+        <div class="form-control">
+          {{west.numBid}} {{west.suitBid}}
+        </div>
+      </div>
+    </div>
+  </div>
+  <hr class="hline">
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="col-xs-6">
+        <div class="board" *ngIf="handInitialized">
+          <div class="row">
+            <div class="card" *ngFor="let card of spades">{{card.name}}
+              <br>
+              <img class="suit" src="https://i.imgur.com/tXgx0h3.png">
+            </div>
+            <div class="card red" *ngFor="let card of hearts">{{card.name}}
+              <br>
+              <img class="suit" src="https://i.imgur.com/Chg6eQ8.jpg">
+            </div>
+            <div class="card" *ngFor="let card of clubs">{{card.name}}
+              <br>
+              <img class="suit" src="https://i.imgur.com/TsBK3k9.jpg">
+            </div>
+            <div class="card red" *ngFor="let card of diamonds">{{card.name}}
+              <br>
+              <img class="suit" src="https://i.imgur.com/khCb5Vu.jpg">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-xs-6">
+        <div *ngIf="handInitialized" style="margin:10px">
+          Hello
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

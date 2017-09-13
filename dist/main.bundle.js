@@ -741,7 +741,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, "", ""]);
+exports.push([module.i, ".heading {\r\n  display:-webkit-box;\r\n  display:-ms-flexbox;\r\n  display:flex;\r\n  color: black;\r\n   -webkit-box-pack: center;\r\n       -ms-flex-pack: center;\r\n           justify-content: center;\r\n    border:1px solid black;\r\n    text-align: center;\r\n}\r\n.contract {\r\n  margin-bottom: 10px;\r\n}\r\n#subheading {\r\n  display:-webkit-box;\r\n  display:-ms-flexbox;\r\n  display:flex;\r\n  color: #974141;\r\n  -webkit-box-pack: center;\r\n      -ms-flex-pack: center;\r\n          justify-content: center;\r\n  font-size: large;\r\n  font-weight: bold;\r\n  box-sizing: border-box;\r\n  margin: 5px auto;\r\n  border: 3px dotted lightgrey;\r\n  border-radius: 3px;\r\n  width: 80%;\r\n  text-align: center;\r\n}\r\n.hline {\r\n  border-color: black;\r\n  width: 100%;\r\n}\r\n.card {\r\n  float: left;\r\n  width: auto;\r\n  height: 150px;\r\n  display: block;\r\n  border: 1px solid;\r\n  border-right:1px bold;\r\n  border-color: grey;;\r\n  padding: 6px;\r\n  text-align: center;\r\n  font-weight: bold;\r\n  font-size: 20px;\r\n  background-color: white;\r\n  border-radius: 3px;\r\n}\r\n.suit {\r\n  width: 20px;\r\n  height: 20px;\r\n}\r\n.board {\r\n  padding: 100px 30px 60px 30px;\r\n  background-color: green;\r\n  display: -webkit-box;\r\n  display: -ms-flexbox;\r\n  display: flex;\r\n  -webkit-box-pack: center;\r\n      -ms-flex-pack: center;\r\n          justify-content: center;\r\n  border-radius: 10px;\r\n}\r\n.red {\r\n  color:#E31818;\r\n}\r\n.hcpdisplay {\r\n  font-weight: bold;\r\n  font-size: 18px;\r\n  display: -webkit-box;\r\n  display: -ms-flexbox;\r\n  display: flex;\r\n  -webkit-box-pack: center;\r\n      -ms-flex-pack: center;\r\n          justify-content: center;\r\n}\r\n.form-control {\r\n  height: auto;\r\n  margin-bottom: 3px;\r\n}\r\n@media screen and (max-width: 480px) {\r\n  .board {\r\n    padding: 20px 20px 20px 20px;\r\n    background-color: green;\r\n    display: -webkit-box;\r\n    display: -ms-flexbox;\r\n    display: flex;\r\n    -webkit-box-pack: center;\r\n        -ms-flex-pack: center;\r\n            justify-content: center;\r\n    border-radius: 10px;\r\n  }\r\n  .card {\r\n    height: auto;\r\n    font-size: 15px;\r\n  }\r\n  .suit {\r\n    width: 18px;\r\n    height: 18px;\r\n  }\r\n}\r\n\r\n", ""]);
 
 // exports
 
@@ -754,7 +754,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/lead-practice/lead-practice.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<p>\n  lead-practice works!\n</p>\n"
+module.exports = "<div class=\"container\">\n  <div class=\"row\">\n    <div class=\"col-xs-12\">\n      <div class=\"row heading\">\n        <h2>This sections give you the chance to practice on how to lead as the defence</h2>\n      </div>\n      <div class=\"row\">\n        <span id=\"subheading\"> When you click the \"start practicing\" button, you will be served\n          a specific hand as well as the contract. You must find the most suitable lead, and then click it!</span>\n      </div>\n    </div>\n  </div>\n  <hr class=\"hline\">\n  <div class=\"row\">\n    <div class=\"col-xs-12\" style=\"display:flex; justify-content:center; padding:0px 20px 20px 20px;\">\n      <button class=\"btn btn-primary\" (click)=\"startPractice()\">Start Practicing</button>\n    </div>\n  </div>\n  <div class=\"row contract\">\n    <div class=\"col-xs-3\">\n      <label>North</label>\n      <div class=\"row\" *ngFor=\"let north of North\">\n        <div class=\"form-control\">\n          {{north.numBid}} {{north.suitBid}}\n        </div>\n      </div>\n    </div>\n    <div class=\"col-xs-3\">\n      <label>East</label>\n      <div class=\"row\" *ngFor=\"let east of East\">\n        <div class=\"form-control\">\n          {{east.numBid}} {{east.suitBid}}\n        </div>\n      </div>\n    </div>\n    <div class=\"col-xs-3\">\n      <label>South</label>\n      <div class=\"row\" *ngFor=\"let south of South\">\n        <div class=\"form-control\">\n          {{south.numBid}} {{south.suitBid}}\n        </div>\n      </div>\n    </div>\n    <div class=\"col-xs-3\">\n      <label>West</label>\n      <div class=\"row\" *ngFor=\"let west of West\">\n        <div class=\"form-control\">\n          {{west.numBid}} {{west.suitBid}}\n        </div>\n      </div>\n    </div>\n  </div>\n  <hr class=\"hline\">\n  <div class=\"row\">\n    <div class=\"col-xs-12\">\n      <div class=\"col-xs-6\">\n        <div class=\"board\" *ngIf=\"handInitialized\">\n          <div class=\"row\">\n            <div class=\"card\" *ngFor=\"let card of spades\">{{card.name}}\n              <br>\n              <img class=\"suit\" src=\"https://i.imgur.com/tXgx0h3.png\">\n            </div>\n            <div class=\"card red\" *ngFor=\"let card of hearts\">{{card.name}}\n              <br>\n              <img class=\"suit\" src=\"https://i.imgur.com/Chg6eQ8.jpg\">\n            </div>\n            <div class=\"card\" *ngFor=\"let card of clubs\">{{card.name}}\n              <br>\n              <img class=\"suit\" src=\"https://i.imgur.com/TsBK3k9.jpg\">\n            </div>\n            <div class=\"card red\" *ngFor=\"let card of diamonds\">{{card.name}}\n              <br>\n              <img class=\"suit\" src=\"https://i.imgur.com/khCb5Vu.jpg\">\n            </div>\n          </div>\n        </div>\n      </div>\n      <div class=\"col-xs-6\">\n        <div *ngIf=\"handInitialized\" style=\"margin:10px\">\n          Hello\n        </div>\n      </div>\n    </div>\n  </div>\n</div>\n"
 
 /***/ }),
 
@@ -764,6 +764,7 @@ module.exports = "<p>\n  lead-practice works!\n</p>\n"
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return LeadPracticeComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__bridge_service__ = __webpack_require__("../../../../../src/app/bridge.service.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -774,10 +775,166 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
+
 var LeadPracticeComponent = (function () {
-    function LeadPracticeComponent() {
+    function LeadPracticeComponent(bridgeApi) {
+        this.bridgeApi = bridgeApi;
+        this.dummyLead = {
+            'colors': {
+                'colorWest': 'Green',
+                'colorSouth': 'Green',
+                'colorEast': 'Green',
+                'colorNorth': 'Green'
+            },
+            'comments': 'Leading a major seems better at this sequence.',
+            'lead': {
+                'suit': 'Hearts',
+                'name': '2',
+                'value': 1,
+                'clicked': true
+            },
+            'WestBid': [
+                {
+                    'bidComment': '',
+                    'suitBid': '',
+                    'numBid': 'Pass'
+                },
+                {
+                    'bidComment': '',
+                    'suitBid': '',
+                    'numBid': 'Pass'
+                }
+            ],
+            'SouthBid': [
+                {
+                    'bidComment': '',
+                    'suitBid': 'NoTrump',
+                    'numBid': '2'
+                },
+                {
+                    'bidComment': '',
+                    'suitBid': '',
+                    'numBid': 'Pass'
+                }
+            ],
+            'EastBid': [
+                {
+                    'bidComment': '',
+                    'suitBid': '',
+                    'numBid': 'Pass'
+                },
+                {
+                    'bidComment': '',
+                    'suitBid': '',
+                    'numBid': 'Pass'
+                }
+            ],
+            'NorthBid': [
+                {
+                    'bidComment': '',
+                    'suitBid': '',
+                    'numBid': 'Pass'
+                },
+                {
+                    'bidComment': '',
+                    'suitBid': 'NoTrump',
+                    'numBid': '3'
+                }
+            ],
+            'hand': [
+                {
+                    'suit': 'Spades',
+                    'name': '8',
+                    'value': 7,
+                    'clicked': true
+                },
+                {
+                    'suit': 'Spades',
+                    'name': '6',
+                    'value': 5,
+                    'clicked': true
+                },
+                {
+                    'suit': 'Hearts',
+                    'name': 'J',
+                    'value': 10,
+                    'clicked': true
+                },
+                {
+                    'suit': 'Hearts',
+                    'name': '9',
+                    'value': 8,
+                    'clicked': true
+                },
+                {
+                    'suit': 'Hearts',
+                    'name': '3',
+                    'value': 2,
+                    'clicked': true
+                },
+                {
+                    'suit': 'Hearts',
+                    'name': '2',
+                    'value': 1,
+                    'clicked': true
+                },
+                {
+                    'suit': 'Diamonds',
+                    'name': 'Q',
+                    'value': 11,
+                    'clicked': true
+                },
+                {
+                    'suit': 'Diamonds',
+                    'name': '5',
+                    'value': 4,
+                    'clicked': true
+                },
+                {
+                    'suit': 'Diamonds',
+                    'name': '4',
+                    'value': 3,
+                    'clicked': true
+                },
+                {
+                    'suit': 'Diamonds',
+                    'name': '3',
+                    'value': 2,
+                    'clicked': true
+                },
+                {
+                    'suit': 'Clubs',
+                    'name': 'A',
+                    'value': 13,
+                    'clicked': true
+                },
+                {
+                    'suit': 'Clubs',
+                    'name': '10',
+                    'value': 9,
+                    'clicked': true
+                },
+                {
+                    'suit': 'Clubs',
+                    'name': '2',
+                    'value': 1,
+                    'clicked': true
+                }
+            ],
+        };
+        this.handInitialized = true;
     }
+    LeadPracticeComponent.prototype.startPractice = function () { };
     LeadPracticeComponent.prototype.ngOnInit = function () {
+        this.East = this.dummyLead.EastBid;
+        this.North = this.dummyLead.NorthBid;
+        this.South = this.dummyLead.SouthBid;
+        this.West = this.dummyLead.WestBid;
+        this.hand = this.dummyLead.hand;
+        this.spades = this.bridgeApi.filterArray(this.hand, 'Spades');
+        this.hearts = this.bridgeApi.filterArray(this.hand, 'Hearts');
+        this.diamonds = this.bridgeApi.filterArray(this.hand, 'Diamonds');
+        this.clubs = this.bridgeApi.filterArray(this.hand, 'Clubs');
     };
     return LeadPracticeComponent;
 }());
@@ -787,9 +944,10 @@ LeadPracticeComponent = __decorate([
         template: __webpack_require__("../../../../../src/app/lead-practice/lead-practice.component.html"),
         styles: [__webpack_require__("../../../../../src/app/lead-practice/lead-practice.component.css")]
     }),
-    __metadata("design:paramtypes", [])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__bridge_service__["a" /* BridgeApi */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__bridge_service__["a" /* BridgeApi */]) === "function" && _a || Object])
 ], LeadPracticeComponent);
 
+var _a;
 //# sourceMappingURL=lead-practice.component.js.map
 
 /***/ }),
