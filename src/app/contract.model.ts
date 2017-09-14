@@ -7,10 +7,26 @@ import { Http, Headers, Response } from '@angular/http';
 @Injectable()
 export class Contract {
   colors: {};
-  North: string[];
-  East: string[];
-  South: string[];
-  West: string[];
+  East: {
+    bidComment: String,
+    suitBid: String,
+    numBid: String
+  }[];
+  North: {
+    bidComment: String,
+    suitBid: String,
+    numBid: String
+  }[];
+  South: {
+    bidComment: String,
+    suitBid: String,
+    numBid: String
+  }[];
+  West: {
+    bidComment: String,
+    suitBid: String,
+    numBid: String
+  }[];
   Hand: Card[];
   lead: Card;
   comments: string;

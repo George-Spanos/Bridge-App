@@ -36,36 +36,36 @@ export class LeadPracticeComponent implements OnInit {
     ],
     'SouthBid': [
       {
-        'bidComment': '',
+        'bidComment': ' Dummy Text 4',
         'suitBid': 'NoTrump',
         'numBid': '2'
       },
       {
-        'bidComment': '',
+        'bidComment': 'Dummy Text 3 ',
         'suitBid': '',
         'numBid': 'Pass'
       }
     ],
     'EastBid': [
       {
-        'bidComment': '',
+        'bidComment': 'Dummy Text',
         'suitBid': '',
         'numBid': 'Pass'
       },
       {
-        'bidComment': '',
+        'bidComment': 'Dummy Text 2',
         'suitBid': '',
         'numBid': 'Pass'
       }
     ],
     'NorthBid': [
       {
-        'bidComment': '',
+        'bidComment': 'Dummy Text',
         'suitBid': '',
         'numBid': 'Pass'
       },
       {
-        'bidComment': '',
+        'bidComment': 'Dummy Text',
         'suitBid': 'NoTrump',
         'numBid': '3'
       }
@@ -152,16 +152,54 @@ export class LeadPracticeComponent implements OnInit {
     ],
   };
   handInitialized = true;
-  East: Object[];
-  North: Object[];
-  South: Object[];
-  West: Object[];
+  East: {
+    bidComment: String,
+    suitBid: String,
+    numBid: String,
+  }[];
+  North: {
+    bidComment: String,
+    suitBid: String,
+    numBid: String
+  }[];
+  South: {
+    bidComment: String,
+    suitBid: String,
+    numBid: String
+  }[];
+  West: {
+    bidComment: String,
+    suitBid: String,
+    numBid: String
+  }[];
+  lead: Card;
+  leadClicked: boolean;
   hand: Card[];
   spades: Card[];
   hearts: Card[];
   clubs: Card[];
   diamonds: Card[];
-  startPractice() {}
+  answerValid: boolean;
+  answerComment: string;
+  answerSubmitted: boolean;
+  startPractice() { }
+  noHover() {
+
+  }
+  chooseLead(lead: Card) {
+    this.lead = lead;
+    this.leadClicked = true;
+  }
+  submitLead() {
+    this.answerSubmitted = true;
+    if (this.lead.name === this.dummyLead.lead.name && this.lead.suit === this.dummyLead.lead.suit) {
+      this.answerValid = true;
+      this.answerComment = 'Your answer was correct';
+    } else {
+      this.answerValid = false;
+      this.answerComment = 'Your answer was incorrect';
+    }
+  }
   constructor(public bridgeApi: BridgeApi) { }
 
   ngOnInit() {
@@ -174,6 +212,9 @@ export class LeadPracticeComponent implements OnInit {
     this.hearts = this.bridgeApi.filterArray(this.hand, 'Hearts');
     this.diamonds = this.bridgeApi.filterArray(this.hand, 'Diamonds');
     this.clubs = this.bridgeApi.filterArray(this.hand, 'Clubs');
+    this.leadClicked = false;
+    this.answerValid = false;
+    this.answerSubmitted = false;
   }
 
 }
