@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Http, Response } from '@angular/http';
-import { BridgeApi } from '../bridge.service';
-import { Card } from '../card.model';
+import { BridgeApi } from '../../Services/bridge.service';
+import { Card } from '../../Services/card.model';
 @Component({
   selector: 'app-main-section',
   templateUrl: './main-section.component.html',

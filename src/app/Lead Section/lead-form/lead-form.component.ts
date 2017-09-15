@@ -1,16 +1,16 @@
 import { Component, OnInit, ViewChild, } from '@angular/core';
 import { NgForm, FormControl } from '@angular/forms';
 
-import { BridgeApi } from '../bridge.service';
-import { Card } from '../card.model';
-import { Contract } from '../contract.model';
+import { BridgeApi } from '../../Services/bridge.service';
+import { Card } from '../../Services/card.model';
+import { Contract } from '../../Services/contract.model';
 @Component({
-  selector: 'app-lead',
-  templateUrl: './lead.component.html',
-  styleUrls: ['./lead.component.css'],
+  selector: 'app-lead-form',
+  templateUrl: './lead-form.component.html',
+  styleUrls: ['./lead-form.component.css'],
   providers: [Contract]
 })
-export class LeadComponent implements OnInit {
+export class LeadFormComponent implements OnInit {
   constructor(private bridgeApi: BridgeApi, public contract: Contract) { }
   @ViewChild('f') contractform: NgForm;
   colors = ['Red', 'Green'];

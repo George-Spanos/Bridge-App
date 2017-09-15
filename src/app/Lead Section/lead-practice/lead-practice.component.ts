@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
-import { Card } from '../card.model';
-import { BridgeApi } from '../bridge.service';
+import { Card } from '../../Services/card.model';
+import { BridgeApi } from '../..//Services/bridge.service';
 @Component({
   selector: 'app-lead-practice',
   templateUrl: './lead-practice.component.html',

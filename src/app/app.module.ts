@@ -6,17 +6,18 @@ import { HttpModule } from '@angular/http';
 import { AppComponent } from './app.component';
 
 
-import { MainSectionComponent } from './main-section/main-section.component';
-import { BridgeApi } from './bridge.service';
-import { BidFormComponent } from './bid-form/bid-form.component';
+import { MainSectionComponent } from './Bid Section/main-section/main-section.component';
+import { BridgeApi } from './Services/bridge.service';
+import { BidFormComponent } from './Bid Section/bid-form/bid-form.component';
 import { HeaderComponent } from './header/header.component';
 import { HomepageComponent } from './homepage/homepage.component';
-import { PracticeComponent } from './practice/practice.component';
+import { PracticeComponent } from './Bid Section/practice/practice.component';
 import { DonateComponent } from './donate/donate.component';
 import { ContactComponent } from './contact/contact.component';
-import { LeadComponent } from './lead/lead.component';
-import { LeadPracticeComponent } from './lead-practice/lead-practice.component';
-import { PracticeformComponent } from './practiceform/practiceform.component';
+import { LeadFormComponent } from './Lead Section/lead-form/lead-form.component';
+import { LeadPracticeComponent } from './Lead Section/lead-practice/lead-practice.component';
+import { PracticeformComponent } from './Bid Section/practiceform/practiceform.component';
+import { LeadMainComponent } from './Lead Section/lead-main/lead-main.component';
 const routes = [
   { path: '', component: HomepageComponent },
   { path: 'bid', component: MainSectionComponent },
@@ -24,7 +25,7 @@ const routes = [
   { path: 'leadpractice', component: LeadPracticeComponent },
   { path: 'donate', component: DonateComponent },
   { path: 'contact', component: ContactComponent },
-  { path: 'lead', component: LeadComponent },
+  { path: 'lead', component: LeadFormComponent },
   { path: '**', redirectTo: '' }
 ];
 
@@ -38,9 +39,10 @@ const routes = [
     PracticeComponent,
     DonateComponent,
     ContactComponent,
-    LeadComponent,
+    LeadFormComponent,
     LeadPracticeComponent,
-    PracticeformComponent
+    PracticeformComponent,
+    LeadMainComponent
   ],
   imports: [
     BrowserModule,

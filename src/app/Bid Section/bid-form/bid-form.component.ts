@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Http, Headers } from '@angular/http';
 
-import { BridgeApi } from '../bridge.service';
+import { BridgeApi } from '../..//Services/bridge.service';
 import { NgForm } from '@angular/forms';
 @Component({
   selector: 'app-bid-form',
