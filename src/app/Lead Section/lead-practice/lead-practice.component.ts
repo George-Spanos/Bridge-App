@@ -176,6 +176,7 @@ export class LeadPracticeComponent implements OnInit {
     numBid: String,
     hover?: boolean
   }[];
+  correctlead: Card;
   lead: Card;
   leadClicked = false;
   hand: Card[];
@@ -187,11 +188,16 @@ export class LeadPracticeComponent implements OnInit {
   start = false;
   answerValid = false;
   answerSubmitted = false;
+  comments: string;
 
 startPractice() {
   this.bridgeApi.fetchleadPractice().subscribe(
     (result) => {
+      this.answerSubmitted = false;
+      this.leadClicked = false;
       this.start = true;
+      this.correctlead = result.lead;
+      this.comments = result.comments;
       this.East = result.EastBid;
       this.North = result.NorthBid;
       this.South = result.SouthBid;
@@ -216,35 +222,13 @@ startPractice() {
     }
   );
 }
-  // this.East = this.dummyLead.EastBid;
-  // this.North = this.dummyLead.NorthBid;
-  // this.South = this.dummyLead.SouthBid;
-  // this.West = this.dummyLead.WestBid;
-  // this.East.forEach(
-  //   (el) => { el.hover = false; }
-  // );
-  // this.North.forEach(
-  //   (el) => { el.hover = false; }
-  // );
-  // this.South.forEach(
-  //   (el) => { el.hover = false; }
-  // );
-  // this.West.forEach(
-  //   (el) => { el.hover = false; }
-  // );
-  // this.hand = this.dummyLead.hand;
-  // this.spades = this.bridgeApi.filterArray(this.hand, 'Spades');
-  // this.hearts = this.bridgeApi.filterArray(this.hand, 'Hearts');
-  // this.diamonds = this.bridgeApi.filterArray(this.hand, 'Diamonds');
-  // this.clubs = this.bridgeApi.filterArray(this.hand, 'Clubs');
-noHover() {}
 chooseLead(lead: Card) {
   this.lead = lead;
   this.leadClicked = true;
 }
 submitLead() {
   this.answerSubmitted = true;
-  if (this.lead.name === this.dummyLead.lead.name && this.lead.suit === this.dummyLead.lead.suit) {
+  if (this.lead.name === this.correctlead.name && this.lead.suit === this.correctlead.suit) {
     this.answerValid = true;
     this.answerComment = 'Your answer was correct';
   } else {
