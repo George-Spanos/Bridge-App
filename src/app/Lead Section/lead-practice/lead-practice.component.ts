@@ -208,7 +208,7 @@ startPractice() {
       this.West.forEach(
         (el) => { el.hover = false; }
       );
-      this.hand = this.dummyLead.hand;
+      this.hand = result.hand;
       this.spades = this.bridgeApi.filterArray(this.hand, 'Spades');
       this.hearts = this.bridgeApi.filterArray(this.hand, 'Hearts');
       this.diamonds = this.bridgeApi.filterArray(this.hand, 'Diamonds');
