@@ -1,0 +1,10 @@
+.hcpdisplay {
+  font-weight: bold;
+  font-size: 18px;
+  display: flex;
+  justify-content: center;
+}
+.form-control {
+  height: auto;
+  margin-bottom: 3px;
+}

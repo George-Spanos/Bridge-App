@@ -6,7 +6,7 @@ import { HttpModule } from '@angular/http';
 import { AppComponent } from './app.component';
 
 
-import { MainSectionComponent } from './Bid Section/main-section/main-section.component';
+import { BidThreadComponent } from './Bid Section/bid-thread/bid-thread.component';
 import { BridgeApi } from './Services/bridge.service';
 import { BidFormComponent } from './Bid Section/bid-form/bid-form.component';
 import { HeaderComponent } from './header/header.component';
@@ -18,21 +18,26 @@ import { LeadFormComponent } from './Lead Section/lead-form/lead-form.component'
 import { LeadPracticeComponent } from './Lead Section/lead-practice/lead-practice.component';
 import { PracticeformComponent } from './Bid Section/practiceform/practiceform.component';
 import { LeadMainComponent } from './Lead Section/lead-main/lead-main.component';
+import { TestpageComponent } from './testpage/testpage.component';
+import { CardBoardComponent } from './shared-components/card-board/card-board.component';
+import { ContractDesignComponent } from './shared-components/contract-design/contract-design.component';
+import { SuitImgComponent } from './shared-components/suit-img/suit-img.component';
 const routes = [
   { path: '', component: HomepageComponent },
-  { path: 'bid', component: MainSectionComponent },
+  { path: 'bid', component: BidThreadComponent },
   { path: 'practice', component: PracticeComponent },
   { path: 'leadpractice', component: LeadPracticeComponent },
   { path: 'donate', component: DonateComponent },
   { path: 'contact', component: ContactComponent },
   { path: 'lead', component: LeadFormComponent },
+  {path: 'test', component: TestpageComponent},
   { path: '**', redirectTo: '' }
 ];
 
 @NgModule({
   declarations: [
     AppComponent,
-    MainSectionComponent,
+    BidThreadComponent,
     BidFormComponent,
     HeaderComponent,
     HomepageComponent,
@@ -42,7 +47,11 @@ const routes = [
     LeadFormComponent,
     LeadPracticeComponent,
     PracticeformComponent,
-    LeadMainComponent
+    LeadMainComponent,
+    TestpageComponent,
+    CardBoardComponent,
+    ContractDesignComponent,
+    SuitImgComponent,
   ],
   imports: [
     BrowserModule,

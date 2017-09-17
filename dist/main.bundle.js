@@ -102,7 +102,7 @@ var _a, _b, _c;
 
 /***/ }),
 
-/***/ "../../../../../src/app/Bid Section/main-section/main-section.component.css":
+/***/ "../../../../../src/app/Bid Section/bid-thread/bid-thread.component.css":
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
@@ -110,7 +110,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, ".card {\r\n  float: left;\r\n  width: auto;\r\n  height: 150px;\r\n  display: block;\r\n  border: 1px solid;\r\n  border-right:1px bold;\r\n  border-color: grey;;\r\n  padding: 6px;\r\n  text-align: center;\r\n  font-weight: bold;\r\n  font-size: 20px;\r\n  background-color: white;\r\n  border-radius: 3px;\r\n}\r\n.suit {\r\n  width: 20px;\r\n  height: 20px;\r\n}\r\n.board {\r\n  padding: 100px 30px 60px 30px;\r\n  background-color: green;\r\n  display: -webkit-box;\r\n  display: -ms-flexbox;\r\n  display: flex;\r\n  -webkit-box-pack: center;\r\n      -ms-flex-pack: center;\r\n          justify-content: center;\r\n  border-radius: 10px;\r\n}\r\n.red {\r\n  color:#E31818;\r\n}\r\n.hcpdisplay {\r\n  font-weight: bold;\r\n  font-size: 18px;\r\n  display: -webkit-box;\r\n  display: -ms-flexbox;\r\n  display: flex;\r\n  -webkit-box-pack: center;\r\n      -ms-flex-pack: center;\r\n          justify-content: center;\r\n}\r\n.form-control {\r\n  height: auto;\r\n  margin-bottom: 3px;\r\n}\r\n@media screen and (max-width: 480px) {\r\n  .board {\r\n    padding: 20px 20px 20px 20px;\r\n    background-color: green;\r\n    display: -webkit-box;\r\n    display: -ms-flexbox;\r\n    display: flex;\r\n    -webkit-box-pack: center;\r\n        -ms-flex-pack: center;\r\n            justify-content: center;\r\n    border-radius: 10px;\r\n  }\r\n  .card {\r\n    height: auto;\r\n    font-size: 15px;\r\n  }\r\n  .suit {\r\n    width: 18px;\r\n    height: 18px;\r\n  }\r\n}\r\n", ""]);
+exports.push([module.i, ".hcpdisplay {\r\n  font-weight: bold;\r\n  font-size: 18px;\r\n  display: -webkit-box;\r\n  display: -ms-flexbox;\r\n  display: flex;\r\n  -webkit-box-pack: center;\r\n      -ms-flex-pack: center;\r\n          justify-content: center;\r\n}\r\n.form-control {\r\n  height: auto;\r\n  margin-bottom: 3px;\r\n}\r\n", ""]);
 
 // exports
 
@@ -120,18 +120,18 @@ module.exports = module.exports.toString();
 
 /***/ }),
 
-/***/ "../../../../../src/app/Bid Section/main-section/main-section.component.html":
+/***/ "../../../../../src/app/Bid Section/bid-thread/bid-thread.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\r\n  <div class=\"row\">\r\n    <div class=\"col-xs-12\" style=\"display:flex; justify-content:center; padding:0px 20px 20px 20px;\">\r\n      <button class=\"btn btn-primary\" (click)=\"getHand(cardsArray)\">Initialize Hand</button>\r\n    </div>\r\n  </div>\r\n  <div class=\"row\">\r\n    <div class=\"col-xs-12\">\r\n      <div class=\"col-xs-6\">\r\n        <div class=\"board\" *ngIf=\"handInitialized\">\r\n          <div class=\"row\">\r\n            <div class=\"card\" *ngFor=\"let card of spades\">{{card.name}}\r\n              <br>\r\n              <img class=\"suit\" src=\"https://i.imgur.com/tXgx0h3.png\">\r\n            </div>\r\n            <div class=\"card red\" *ngFor=\"let card of hearts\">{{card.name}}\r\n              <br>\r\n              <img class=\"suit\" src=\"https://i.imgur.com/Chg6eQ8.jpg\">\r\n            </div>\r\n            <div class=\"card\" *ngFor=\"let card of clubs\">{{card.name}}\r\n              <br>\r\n              <img class=\"suit\" src=\"https://i.imgur.com/TsBK3k9.jpg\">\r\n            </div>\r\n            <div class=\"card red\" *ngFor=\"let card of diamonds\">{{card.name}}\r\n              <br>\r\n              <img class=\"suit\" src=\"https://i.imgur.com/khCb5Vu.jpg\">\r\n            </div>\r\n          </div>\r\n        </div>\r\n        <div class=\"row\" *ngIf=\"handInitialized\">\r\n          <div class=\"col-xs-12 hcpdisplay\">Total HCP = {{hcp}}</div>\r\n        </div>\r\n      </div>\r\n      <div class=\"col-xs-6\">\r\n        <div *ngIf=\"handInitialized\" style=\"margin:10px\">\r\n          <app-bid-form></app-bid-form>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </div>\r\n  <div class=\"row\" *ngIf=\"newHand\">\r\n    <div class=\"col-xs-12 form-control\">\r\n      <label> This is a new hand. Thank you for contributing!</label>\r\n    </div>\r\n  </div>\r\n  <div class=\"row\" *ngIf=\"handInitialized && bridgeApi.submitted && !newHand\">\r\n    <div class=\"col-xs-12\">\r\n      <label for=\"comments\"> Bid and Comments</label>\r\n      <div class=\"form-control\" *ngFor=\"let bid of bids\">\r\n        <strong> Bid : </strong>{{bid.numericBid}}\r\n        <span *ngIf=\"bid.numericBid!=='Pass'\">of {{bid.suitBid}}</span> <br>\r\n        <strong> Comments</strong> : {{bid.comments}} </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n"
+module.exports = "<div class=\"container\">\r\n  <div class=\"row\">\r\n    <div class=\"col-xs-12\" style=\"display:flex; justify-content:center; padding:0px 20px 20px 20px;\">\r\n      <button class=\"btn btn-primary\" (click)=\"getHand(cardsArray)\">Initialize Hand</button>\r\n    </div>\r\n  </div>\r\n  <div class=\"row\">\r\n    <div class=\"col-xs-12\">\r\n      <div class=\"col-xs-6\">\r\n        <app-card-board [cards]=\"hand\" [Initialized]=\"handInitialized\"></app-card-board>\r\n        <div class=\"row\" *ngIf=\"handInitialized\">\r\n          <div class=\"col-xs-12 hcpdisplay\">Total HCP = {{hcp}}</div>\r\n        </div>\r\n      </div>\r\n      <div class=\"col-xs-6\">\r\n        <div *ngIf=\"handInitialized\" style=\"margin:10px\">\r\n          <app-bid-form></app-bid-form>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </div>\r\n  <div class=\"row\" *ngIf=\"newHand\">\r\n    <div class=\"col-xs-12 form-control\">\r\n      <label> This is a new hand. Thank you for contributing!</label>\r\n    </div>\r\n  </div>\r\n  <div class=\"row\" *ngIf=\"handInitialized && bridgeApi.submitted && !newHand\">\r\n    <div class=\"col-xs-12\">\r\n      <label for=\"comments\"> Bid and Comments</label>\r\n      <div class=\"form-control\" *ngFor=\"let bid of bids\">\r\n        <strong> Bid : </strong>{{bid.numericBid}}\r\n        <span *ngIf=\"bid.numericBid!=='Pass'\">of {{bid.suitBid}}</span> <br>\r\n        <strong> Comments</strong> : {{bid.comments}} </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n"
 
 /***/ }),
 
-/***/ "../../../../../src/app/Bid Section/main-section/main-section.component.ts":
+/***/ "../../../../../src/app/Bid Section/bid-thread/bid-thread.component.ts":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MainSectionComponent; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return BidThreadComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__("../../../http/@angular/http.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Services_bridge_service__ = __webpack_require__("../../../../../src/app/Services/bridge.service.ts");
@@ -147,15 +147,15 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-var MainSectionComponent = (function () {
-    function MainSectionComponent(bridgeApi, http) {
+var BidThreadComponent = (function () {
+    function BidThreadComponent(bridgeApi, http) {
         this.bridgeApi = bridgeApi;
         this.http = http;
         this.handInitialized = false;
         this.bids = [];
         this.newHand = false;
     }
-    MainSectionComponent.prototype.getHand = function (array) {
+    BidThreadComponent.prototype.getHand = function (array) {
         var _this = this;
         this.bridgeApi.submitted = false;
         var coin = this.bridgeApi.coinFlip();
@@ -202,22 +202,22 @@ var MainSectionComponent = (function () {
         }
         this.cardsArray = this.bridgeApi.deck();
     };
-    MainSectionComponent.prototype.ngOnInit = function () {
+    BidThreadComponent.prototype.ngOnInit = function () {
         this.cardsArray = this.bridgeApi.deck();
     };
-    return MainSectionComponent;
+    return BidThreadComponent;
 }());
-MainSectionComponent = __decorate([
+BidThreadComponent = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["o" /* Component */])({
-        selector: 'app-main-section',
-        template: __webpack_require__("../../../../../src/app/Bid Section/main-section/main-section.component.html"),
-        styles: [__webpack_require__("../../../../../src/app/Bid Section/main-section/main-section.component.css")]
+        selector: 'app-bid-thread',
+        template: __webpack_require__("../../../../../src/app/Bid Section/bid-thread/bid-thread.component.html"),
+        styles: [__webpack_require__("../../../../../src/app/Bid Section/bid-thread/bid-thread.component.css")]
     }),
     __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2__Services_bridge_service__["a" /* BridgeApi */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__Services_bridge_service__["a" /* BridgeApi */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Http */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Http */]) === "function" && _b || Object])
-], MainSectionComponent);
+], BidThreadComponent);
 
 var _a, _b;
-//# sourceMappingURL=main-section.component.js.map
+//# sourceMappingURL=bid-thread.component.js.map
 
 /***/ }),
 
@@ -242,7 +242,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/Bid Section/practice/practice.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\n  <div class=\"row\">\n    <div class=\"col-xs-12\">\n      <div class=\"row heading\">\n        <h2>This sections give you the chance to practice on how to open the bidding phase</h2>\n      </div>\n      <div class=\"row\">\n        <span id=\"subheading\"> When you click the \"start practicing\" button, you will be served\n          a specific hand that has a specific bid as an answer</span>\n      </div>\n    </div>\n  </div>\n  <hr class=\"hline\">\n  <div class=\"row\">\n    <div class=\"col-xs-12\" style=\"display:flex; justify-content:center; padding:0px 20px 20px 20px;\">\n      <button class=\"btn btn-primary\" (click)=\"startPractice()\">Start Practicing</button>\n    </div>\n  </div>\n  <div class=\"row\">\n    <div class=\"col-xs-12\">\n      <div class=\"col-xs-6\">\n        <div class=\"board\" *ngIf=\"handInitialized\">\n          <div class=\"row\">\n            <div class=\"card\" *ngFor=\"let card of spades\">{{card.name}}\n              <br>\n              <img class=\"suit\" src=\"https://i.imgur.com/tXgx0h3.png\">\n            </div>\n            <div class=\"card red\" *ngFor=\"let card of hearts\">{{card.name}}\n              <br>\n              <img class=\"suit\" src=\"https://i.imgur.com/Chg6eQ8.jpg\">\n            </div>\n            <div class=\"card\" *ngFor=\"let card of clubs\">{{card.name}}\n              <br>\n              <img class=\"suit\" src=\"https://i.imgur.com/TsBK3k9.jpg\">\n            </div>\n            <div class=\"card red\" *ngFor=\"let card of diamonds\">{{card.name}}\n              <br>\n              <img class=\"suit\" src=\"https://i.imgur.com/khCb5Vu.jpg\">\n            </div>\n          </div>\n        </div>\n        <div class=\"row\" *ngIf=\"handInitialized\">\n          <div class=\"col-xs-12 hcpdisplay\">Total HCP = {{hcp}}</div>\n        </div>\n      </div>\n      <div class=\"col-xs-6\">\n        <div *ngIf=\"handInitialized && !bridgeApi.answerStatus\" style=\"margin:10px\">\n          <app-practiceform></app-practiceform>\n        </div>\n        <div *ngIf=\"bridgeApi.answerStatus\" class=\"response\">\n          <div *ngIf=\"correctbid === bridgeApi.answer\">\n            <h3 id=\"com\">Your answer is correct!</h3><br>\n            <div class=\"form-control\">\n              <strong>Tip: </strong>{{comment}}\n            </div>\n          </div>\n          <div *ngIf=\"correctbid !== bridgeApi.answer\">\n            <h3 id=\"com\">\n              Your answer is incorrect. You should\n              <span *ngIf=\"correctbid !=='Pass Pass'\"> bid {{correctbid}}</span>\n              <span *ngIf=\"correctbid ==='Pass Pass'\"> Pass</span></h3>\n            <div class=\"form-control\"> <strong>Tip: </strong> {{comment}}</div>\n          </div>\n        </div>\n      </div>\n    </div>\n  </div>\n</div>\n"
+module.exports = "<div class=\"container\">\n  <div class=\"row\">\n    <div class=\"col-xs-12\">\n      <div class=\"row heading\">\n        <h2>This sections give you the chance to practice on how to open the bidding phase</h2>\n      </div>\n      <div class=\"row\">\n        <span id=\"subheading\"> When you click the \"start practicing\" button, you will be served\n          a specific hand that has a specific bid as an answer</span>\n      </div>\n    </div>\n  </div>\n  <hr class=\"hline\">\n  <div class=\"row\">\n    <div class=\"col-xs-12\" style=\"display:flex; justify-content:center; padding:0px 20px 20px 20px;\">\n      <button class=\"btn btn-primary\" (click)=\"startPractice()\">Start Practicing</button>\n    </div>\n  </div>\n  <div class=\"row\">\n    <div class=\"col-xs-12\">\n      <div class=\"col-xs-6\">\n        <app-card-board [cards]=\"hand\" [Initialized]=\"handInitialized\"></app-card-board>\n        <div class=\"row\" *ngIf=\"handInitialized\">\n          <div class=\"col-xs-12 hcpdisplay\">Total HCP = {{hcp}}</div>\n        </div>\n      </div>\n      <div class=\"col-xs-6\">\n        <div *ngIf=\"handInitialized && !bridgeApi.answerStatus\" style=\"margin:10px\">\n          <app-practiceform></app-practiceform>\n        </div>\n        <div *ngIf=\"bridgeApi.answerStatus\" class=\"response\">\n          <div *ngIf=\"correctbid === bridgeApi.answer\">\n            <h3 id=\"com\">Your answer is correct!</h3><br>\n            <div class=\"form-control\">\n              <strong>Tip: </strong>{{comment}}\n            </div>\n          </div>\n          <div *ngIf=\"correctbid !== bridgeApi.answer\">\n            <h3 id=\"com\">\n              Your answer is incorrect. You should\n              <span *ngIf=\"correctbid !=='Pass Pass'\"> bid {{correctbid}}</span>\n              <span *ngIf=\"correctbid ==='Pass Pass'\"> Pass</span></h3>\n            <div class=\"form-control\"> <strong>Tip: </strong> {{comment}}</div>\n          </div>\n        </div>\n      </div>\n    </div>\n  </div>\n</div>\n"
 
 /***/ }),
 
@@ -638,7 +638,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/Lead Section/lead-practice/lead-practice.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\n  <div class=\"row\">\n    <div class=\"col-xs-12\">\n      <div class=\"row heading\">\n        <h2>This sections give you the chance to practice on how to lead as the defence</h2>\n      </div>\n      <div class=\"row\">\n        <span id=\"subheading\"> When you click the \"start practicing\" button, you will be served\n          a specific hand as well as the contract. You must find the most suitable lead, and then click it!</span>\n      </div>\n    </div>\n  </div>\n  <hr class=\"hline\">\n  <div class=\"row\">\n    <div class=\"col-xs-12\" style=\"display:flex; justify-content:center; padding:0px 20px 20px 20px;\">\n      <button class=\"btn btn-primary\" (click)=\"startPractice()\">Start Practicing</button>\n    </div>\n  </div>\n  <div class=\"row contract\">\n    <div class=\"col-xs-3\">\n      <label>North</label>\n      <div class=\"row\" *ngFor=\"let north of North\">\n        <div id=\"contract-bid\">\n          {{north.numBid}} {{north.suitBid}}\n        </div>\n        <!-- <div id=\"custom-hover\" *ngIf=\"hover\">\n          {{north.bidComment}}\n        </div> -->\n      </div>\n    </div>\n    <div class=\"col-xs-3\">\n      <label>East</label>\n      <div class=\"row\" *ngFor=\"let east of East\">\n        <div id=\"contract-bid\">\n          {{east.numBid}} {{east.suitBid}}\n        </div>\n      </div>\n    </div>\n    <div class=\"col-xs-3\">\n      <label>South</label>\n      <div class=\"row\" *ngFor=\"let south of South\">\n        <div id=\"contract-bid\">\n          {{south.numBid}} {{south.suitBid}}\n        </div>\n      </div>\n    </div>\n    <div class=\"col-xs-3\">\n      <label>West</label>\n      <div class=\"row\" *ngFor=\"let west of West\">\n        <div id=\"contract-bid\">\n          {{west.numBid}} {{west.suitBid}}\n        </div>\n      </div>\n    </div>\n  </div>\n  <hr class=\"hline\">\n  <div class=\"row\">\n    <div class=\"col-xs-12\">\n      <div class=\"col-xs-6\">\n        <div class=\"board\" *ngIf=\"handInitialized\">\n          <div class=\"row\">\n            <div class=\"card\" (click)=\"chooseLead(card)\" *ngFor=\"let card of spades\">{{card.name}}\n              <br>\n              <img class=\"suit\" src=\"https://i.imgur.com/tXgx0h3.png\">\n            </div>\n            <div class=\"card red\" (click)=\"chooseLead(card)\" *ngFor=\"let card of hearts\">{{card.name}}\n              <br>\n              <img class=\"suit\" src=\"https://i.imgur.com/Chg6eQ8.jpg\">\n            </div>\n            <div class=\"card\" (click)=\"chooseLead(card)\" *ngFor=\"let card of clubs\">{{card.name}}\n              <br>\n              <img class=\"suit\" src=\"https://i.imgur.com/TsBK3k9.jpg\">\n            </div>\n            <div class=\"card red\" (click)=\"chooseLead(card)\" *ngFor=\"let card of diamonds\">{{card.name}}\n              <br>\n              <img class=\"suit\" src=\"https://i.imgur.com/khCb5Vu.jpg\">\n            </div>\n          </div>\n        </div>\n      </div>\n      <div class=\"col-xs-6\">\n        <div *ngIf=\"handInitialized\" style=\"margin:10px\">\n          <div *ngIf=\"!leadClicked\" class=\"response\">\n            You can choose a lead.\n          </div>\n          <div class=\"response\" *ngIf=\"leadClicked && !answerSubmitted\">\n            <div class=\"row\">\n              <div class=\"row\" id=\"com\">\n                <div class=\"col-xs-12\">\n                  <h3>You chose {{lead.name}} of {{lead.suit}} as your lead.</h3>\n                </div>\n              </div>\n              <div class=\"row\">\n                <div class=\"col-xs-12\" style=\"display: flex; justify-content: center;\">\n                  <button type=\"button\" class=\"btn btn-primary\" (click)=\"submitLead()\">Confirm\n                  </button>\n                </div>\n              </div>\n            </div>\n          </div>\n          <div class=\"response\" *ngIf=\"answerSubmitted\">\n            <div class=\"row\">\n              <div class=\"row\">\n                <div class=\"col-xs-12\">\n                  <h3 id=\"com\">{{answerComment}}</h3>\n                </div>\n              </div>\n              <div class=\"form-control\" id=\"com\">\n                <div class=\"row\">\n                  <div class=\"col-xs-12\"><strong>\n                    Suggested Lead: {{dummyLead.lead.name}} of {{dummyLead.lead.suit}}.\n                  </strong> <br> {{dummyLead.comments}}\n                  </div>\n                </div>\n              </div>\n            </div>\n          </div>\n        </div>\n      </div>\n    </div>\n  </div>\n</div>\n"
+module.exports = "<div class=\"container\">\n  <div class=\"row\">\n    <div class=\"col-xs-12\">\n      <div class=\"row heading\">\n        <h2>This sections give you the chance to practice on how to lead as the defence</h2>\n      </div>\n      <div class=\"row\">\n        <span id=\"subheading\"> When you click the \"start practicing\" button, you will be served\n          a specific hand as well as the contract. You must find the most suitable lead, and then click it!</span>\n      </div>\n    </div>\n  </div>\n  <hr class=\"hline\">\n  <div class=\"row\">\n    <div class=\"col-xs-12\" style=\"display:flex; justify-content:center; padding:0px 20px 20px 20px;\">\n      <button class=\"btn btn-primary\" (click)=\"startPractice()\">Start Practicing</button>\n    </div>\n  </div>\n  <div class=\"row\" *ngIf=\"start\">\n    <!-- <div class=\"row contract\">\n    <div class=\"col-xs-3\">\n      <label>North</label>\n      <div class=\"row\" *ngFor=\"let north of North\">\n        <div id=\"contract-bid\">\n          {{north.numBid}} {{north.suitBid}}\n        </div>\n      </div>\n    </div>\n    <div class=\"col-xs-3\">\n      <label>East</label>\n      <div class=\"row\" *ngFor=\"let east of East\">\n        <div id=\"contract-bid\">\n          {{east.numBid}} {{east.suitBid}}\n        </div>\n      </div>\n    </div>\n    <div class=\"col-xs-3\">\n      <label>South</label>\n      <div class=\"row\" *ngFor=\"let south of South\">\n        <div id=\"contract-bid\">\n          {{south.numBid}} {{south.suitBid}}\n        </div>\n      </div>\n    </div>\n    <div class=\"col-xs-3\">\n      <label>West</label>\n      <div class=\"row\" *ngFor=\"let west of West\">\n        <div id=\"contract-bid\">\n          {{west.numBid}} {{west.suitBid}}\n        </div>\n      </div>\n    </div>\n  </div> -->\n    <app-contract-design [East]=\"East\" [West]=\"West\" [North]=\"North\" [South]=\"South\"></app-contract-design>\n    <hr class=\"hline\">\n    <div class=\"row\">\n      <div class=\"col-xs-12\">\n        <div class=\"col-xs-6\">\n          <div class=\"board\" *ngIf=\"handInitialized\">\n            <div class=\"row\">\n              <div class=\"card\" (click)=\"chooseLead(card)\" *ngFor=\"let card of spades\">{{card.name}}\n                <br>\n                <img class=\"suit\" src=\"https://i.imgur.com/tXgx0h3.png\">\n              </div>\n              <div class=\"card red\" (click)=\"chooseLead(card)\" *ngFor=\"let card of hearts\">{{card.name}}\n                <br>\n                <img class=\"suit\" src=\"https://i.imgur.com/Chg6eQ8.jpg\">\n              </div>\n              <div class=\"card\" (click)=\"chooseLead(card)\" *ngFor=\"let card of clubs\">{{card.name}}\n                <br>\n                <img class=\"suit\" src=\"https://i.imgur.com/TsBK3k9.jpg\">\n              </div>\n              <div class=\"card red\" (click)=\"chooseLead(card)\" *ngFor=\"let card of diamonds\">{{card.name}}\n                <br>\n                <img class=\"suit\" src=\"https://i.imgur.com/khCb5Vu.jpg\">\n              </div>\n            </div>\n          </div>\n        </div>\n        <div class=\"col-xs-6\">\n          <div *ngIf=\"handInitialized\" style=\"margin:10px\">\n            <div *ngIf=\"!leadClicked\" class=\"response\">\n              You can choose a lead.\n            </div>\n            <div class=\"response\" *ngIf=\"leadClicked && !answerSubmitted\">\n              <div class=\"row\">\n                <div class=\"row\" id=\"com\">\n                  <div class=\"col-xs-12\">\n                    <h3>You chose {{lead.name}} of {{lead.suit}} as your lead.</h3>\n                  </div>\n                </div>\n                <div class=\"row\">\n                  <div class=\"col-xs-12\" style=\"display: flex; justify-content: center;\">\n                    <button type=\"button\" class=\"btn btn-primary\" (click)=\"submitLead()\">Confirm\n                  </button>\n                  </div>\n                </div>\n              </div>\n            </div>\n            <div class=\"response\" *ngIf=\"answerSubmitted\">\n              <div class=\"row\">\n                <div class=\"row\">\n                  <div class=\"col-xs-12\">\n                    <h3 id=\"com\">{{answerComment}}</h3>\n                  </div>\n                </div>\n                <div class=\"form-control\" id=\"com\">\n                  <div class=\"row\">\n                    <div class=\"col-xs-12\"><strong>\n                    Suggested Lead: {{dummyLead.lead.name}} of {{dummyLead.lead.suit}}.\n                  </strong> <br> {{dummyLead.comments}}\n                    </div>\n                  </div>\n                </div>\n              </div>\n            </div>\n          </div>\n        </div>\n      </div>\n    </div>\n  </div>\n</div>\n"
 
 /***/ }),
 
@@ -679,7 +679,7 @@ var LeadPracticeComponent = (function () {
             },
             'WestBid': [
                 {
-                    'bidComment': '',
+                    'bidComment': 'Hello',
                     'suitBid': '',
                     'numBid': 'Pass'
                 },
@@ -691,36 +691,36 @@ var LeadPracticeComponent = (function () {
             ],
             'SouthBid': [
                 {
-                    'bidComment': ' Dummy Text 4',
-                    'suitBid': 'NoTrump',
+                    'bidComment': '',
+                    'suitBid': 'Hearts',
                     'numBid': '2'
                 },
                 {
-                    'bidComment': 'Dummy Text 3 ',
+                    'bidComment': ' hello hello hello hello hello hello',
                     'suitBid': '',
                     'numBid': 'Pass'
                 }
             ],
             'EastBid': [
                 {
-                    'bidComment': 'Dummy Text',
+                    'bidComment': '',
                     'suitBid': '',
                     'numBid': 'Pass'
                 },
                 {
-                    'bidComment': 'Dummy Text 2',
+                    'bidComment': '',
                     'suitBid': '',
                     'numBid': 'Pass'
                 }
             ],
             'NorthBid': [
                 {
-                    'bidComment': 'Dummy Text',
+                    'bidComment': '',
                     'suitBid': '',
                     'numBid': 'Pass'
                 },
                 {
-                    'bidComment': 'Dummy Text',
+                    'bidComment': '',
                     'suitBid': 'NoTrump',
                     'numBid': '3'
                 }
@@ -807,10 +807,52 @@ var LeadPracticeComponent = (function () {
             ],
         };
         this.handInitialized = true;
+        this.leadClicked = false;
+        this.start = false;
+        this.answerValid = false;
+        this.answerSubmitted = false;
     }
-    LeadPracticeComponent.prototype.startPractice = function () { };
-    LeadPracticeComponent.prototype.noHover = function () {
+    LeadPracticeComponent.prototype.startPractice = function () {
+        var _this = this;
+        this.bridgeApi.fetchleadPractice().subscribe(function (result) {
+            _this.start = true;
+            _this.East = result.EastBid;
+            _this.North = result.NorthBid;
+            _this.South = result.SouthBid;
+            _this.West = result.WestBid;
+            _this.East.forEach(function (el) { el.hover = false; });
+            _this.North.forEach(function (el) { el.hover = false; });
+            _this.South.forEach(function (el) { el.hover = false; });
+            _this.West.forEach(function (el) { el.hover = false; });
+            _this.hand = _this.dummyLead.hand;
+            _this.spades = _this.bridgeApi.filterArray(_this.hand, 'Spades');
+            _this.hearts = _this.bridgeApi.filterArray(_this.hand, 'Hearts');
+            _this.diamonds = _this.bridgeApi.filterArray(_this.hand, 'Diamonds');
+            _this.clubs = _this.bridgeApi.filterArray(_this.hand, 'Clubs');
+        });
     };
+    // this.East = this.dummyLead.EastBid;
+    // this.North = this.dummyLead.NorthBid;
+    // this.South = this.dummyLead.SouthBid;
+    // this.West = this.dummyLead.WestBid;
+    // this.East.forEach(
+    //   (el) => { el.hover = false; }
+    // );
+    // this.North.forEach(
+    //   (el) => { el.hover = false; }
+    // );
+    // this.South.forEach(
+    //   (el) => { el.hover = false; }
+    // );
+    // this.West.forEach(
+    //   (el) => { el.hover = false; }
+    // );
+    // this.hand = this.dummyLead.hand;
+    // this.spades = this.bridgeApi.filterArray(this.hand, 'Spades');
+    // this.hearts = this.bridgeApi.filterArray(this.hand, 'Hearts');
+    // this.diamonds = this.bridgeApi.filterArray(this.hand, 'Diamonds');
+    // this.clubs = this.bridgeApi.filterArray(this.hand, 'Clubs');
+    LeadPracticeComponent.prototype.noHover = function () { };
     LeadPracticeComponent.prototype.chooseLead = function (lead) {
         this.lead = lead;
         this.leadClicked = true;
@@ -826,20 +868,7 @@ var LeadPracticeComponent = (function () {
             this.answerComment = 'Your answer was incorrect';
         }
     };
-    LeadPracticeComponent.prototype.ngOnInit = function () {
-        this.East = this.dummyLead.EastBid;
-        this.North = this.dummyLead.NorthBid;
-        this.South = this.dummyLead.SouthBid;
-        this.West = this.dummyLead.WestBid;
-        this.hand = this.dummyLead.hand;
-        this.spades = this.bridgeApi.filterArray(this.hand, 'Spades');
-        this.hearts = this.bridgeApi.filterArray(this.hand, 'Hearts');
-        this.diamonds = this.bridgeApi.filterArray(this.hand, 'Diamonds');
-        this.clubs = this.bridgeApi.filterArray(this.hand, 'Clubs');
-        this.leadClicked = false;
-        this.answerValid = false;
-        this.answerSubmitted = false;
-    };
+    LeadPracticeComponent.prototype.ngOnInit = function () { };
     return LeadPracticeComponent;
 }());
 LeadPracticeComponent = __decorate([
@@ -990,6 +1019,9 @@ var BridgeApi = (function () {
     };
     BridgeApi.prototype.fetchPractice = function () {
         return this.http.get('/getpracticehand').map(function (response) { return response.json().result; }).catch(function (error) { return __WEBPACK_IMPORTED_MODULE_1_rxjs_Rx__["Observable"].throw(error.json()); });
+    };
+    BridgeApi.prototype.fetchleadPractice = function () {
+        return this.http.get('/getrandomleadpractice').map(function (response) { return response.json().result; }).catch(function (error) { return __WEBPACK_IMPORTED_MODULE_1_rxjs_Rx__["Observable"].throw(error.json()); });
     };
     return BridgeApi;
 }());
@@ -1164,7 +1196,7 @@ AppComponent = __decorate([
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_forms__ = __webpack_require__("../../../forms/@angular/forms.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__angular_http__ = __webpack_require__("../../../http/@angular/http.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__app_component__ = __webpack_require__("../../../../../src/app/app.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__Bid_Section_main_section_main_section_component__ = __webpack_require__("../../../../../src/app/Bid Section/main-section/main-section.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__Bid_Section_bid_thread_bid_thread_component__ = __webpack_require__("../../../../../src/app/Bid Section/bid-thread/bid-thread.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__Services_bridge_service__ = __webpack_require__("../../../../../src/app/Services/bridge.service.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__Bid_Section_bid_form_bid_form_component__ = __webpack_require__("../../../../../src/app/Bid Section/bid-form/bid-form.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__header_header_component__ = __webpack_require__("../../../../../src/app/header/header.component.ts");
@@ -1176,6 +1208,10 @@ AppComponent = __decorate([
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__Lead_Section_lead_practice_lead_practice_component__ = __webpack_require__("../../../../../src/app/Lead Section/lead-practice/lead-practice.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__Bid_Section_practiceform_practiceform_component__ = __webpack_require__("../../../../../src/app/Bid Section/practiceform/practiceform.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__Lead_Section_lead_main_lead_main_component__ = __webpack_require__("../../../../../src/app/Lead Section/lead-main/lead-main.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__testpage_testpage_component__ = __webpack_require__("../../../../../src/app/testpage/testpage.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__shared_components_card_board_card_board_component__ = __webpack_require__("../../../../../src/app/shared-components/card-board/card-board.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__shared_components_contract_design_contract_design_component__ = __webpack_require__("../../../../../src/app/shared-components/contract-design/contract-design.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__shared_components_suit_img_suit_img_component__ = __webpack_require__("../../../../../src/app/shared-components/suit-img/suit-img.component.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1200,14 +1236,19 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
+
+
+
+
 var routes = [
     { path: '', component: __WEBPACK_IMPORTED_MODULE_10__homepage_homepage_component__["a" /* HomepageComponent */] },
-    { path: 'bid', component: __WEBPACK_IMPORTED_MODULE_6__Bid_Section_main_section_main_section_component__["a" /* MainSectionComponent */] },
+    { path: 'bid', component: __WEBPACK_IMPORTED_MODULE_6__Bid_Section_bid_thread_bid_thread_component__["a" /* BidThreadComponent */] },
     { path: 'practice', component: __WEBPACK_IMPORTED_MODULE_11__Bid_Section_practice_practice_component__["a" /* PracticeComponent */] },
     { path: 'leadpractice', component: __WEBPACK_IMPORTED_MODULE_15__Lead_Section_lead_practice_lead_practice_component__["a" /* LeadPracticeComponent */] },
     { path: 'donate', component: __WEBPACK_IMPORTED_MODULE_12__donate_donate_component__["a" /* DonateComponent */] },
     { path: 'contact', component: __WEBPACK_IMPORTED_MODULE_13__contact_contact_component__["a" /* ContactComponent */] },
     { path: 'lead', component: __WEBPACK_IMPORTED_MODULE_14__Lead_Section_lead_form_lead_form_component__["a" /* LeadFormComponent */] },
+    { path: 'test', component: __WEBPACK_IMPORTED_MODULE_18__testpage_testpage_component__["a" /* TestpageComponent */] },
     { path: '**', redirectTo: '' }
 ];
 var AppModule = (function () {
@@ -1219,7 +1260,7 @@ AppModule = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["M" /* NgModule */])({
         declarations: [
             __WEBPACK_IMPORTED_MODULE_5__app_component__["a" /* AppComponent */],
-            __WEBPACK_IMPORTED_MODULE_6__Bid_Section_main_section_main_section_component__["a" /* MainSectionComponent */],
+            __WEBPACK_IMPORTED_MODULE_6__Bid_Section_bid_thread_bid_thread_component__["a" /* BidThreadComponent */],
             __WEBPACK_IMPORTED_MODULE_8__Bid_Section_bid_form_bid_form_component__["a" /* BidFormComponent */],
             __WEBPACK_IMPORTED_MODULE_9__header_header_component__["a" /* HeaderComponent */],
             __WEBPACK_IMPORTED_MODULE_10__homepage_homepage_component__["a" /* HomepageComponent */],
@@ -1229,7 +1270,11 @@ AppModule = __decorate([
             __WEBPACK_IMPORTED_MODULE_14__Lead_Section_lead_form_lead_form_component__["a" /* LeadFormComponent */],
             __WEBPACK_IMPORTED_MODULE_15__Lead_Section_lead_practice_lead_practice_component__["a" /* LeadPracticeComponent */],
             __WEBPACK_IMPORTED_MODULE_16__Bid_Section_practiceform_practiceform_component__["a" /* PracticeformComponent */],
-            __WEBPACK_IMPORTED_MODULE_17__Lead_Section_lead_main_lead_main_component__["a" /* LeadMainComponent */]
+            __WEBPACK_IMPORTED_MODULE_17__Lead_Section_lead_main_lead_main_component__["a" /* LeadMainComponent */],
+            __WEBPACK_IMPORTED_MODULE_18__testpage_testpage_component__["a" /* TestpageComponent */],
+            __WEBPACK_IMPORTED_MODULE_19__shared_components_card_board_card_board_component__["a" /* CardBoardComponent */],
+            __WEBPACK_IMPORTED_MODULE_20__shared_components_contract_design_contract_design_component__["a" /* ContractDesignComponent */],
+            __WEBPACK_IMPORTED_MODULE_21__shared_components_suit_img_suit_img_component__["a" /* SuitImgComponent */],
         ],
         imports: [
             __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["a" /* BrowserModule */],
@@ -1487,6 +1532,311 @@ HomepageComponent = __decorate([
 ], HomepageComponent);
 
 //# sourceMappingURL=homepage.component.js.map
+
+/***/ }),
+
+/***/ "../../../../../src/app/shared-components/card-board/card-board.component.css":
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, ".card {\r\n  float: left;\r\n  width: auto;\r\n  height: 150px;\r\n  display: block;\r\n  border: 1px solid;\r\n  border-right:1px bold;\r\n  border-color: grey;;\r\n  padding: 6px;\r\n  text-align: center;\r\n  font-weight: bold;\r\n  font-size: 20px;\r\n  background-color: white;\r\n  border-radius: 3px;\r\n}\r\n.suit {\r\n  width: 20px;\r\n  height: 20px;\r\n}\r\n.board {\r\n  padding: 100px 30px 60px 30px;\r\n  background-color: green;\r\n  display: -webkit-box;\r\n  display: -ms-flexbox;\r\n  display: flex;\r\n  -webkit-box-pack: center;\r\n      -ms-flex-pack: center;\r\n          justify-content: center;\r\n  border-radius: 10px;\r\n}\r\n.red {\r\n  color:#E31818;\r\n}\r\n@media screen and (max-width: 480px) {\r\n  .board {\r\n    padding: 20px 20px 20px 20px;\r\n    background-color: green;\r\n    display: -webkit-box;\r\n    display: -ms-flexbox;\r\n    display: flex;\r\n    -webkit-box-pack: center;\r\n        -ms-flex-pack: center;\r\n            justify-content: center;\r\n    border-radius: 10px;\r\n  }\r\n  .card {\r\n    height: auto;\r\n    font-size: 15px;\r\n  }\r\n  .suit {\r\n    width: 18px;\r\n    height: 18px;\r\n  }\r\n}\r\n", ""]);
+
+// exports
+
+
+/*** EXPORTS FROM exports-loader ***/
+module.exports = module.exports.toString();
+
+/***/ }),
+
+/***/ "../../../../../src/app/shared-components/card-board/card-board.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"board\" *ngIf=\"Initialized\">\n  <div class=\"row\">\n    <div class=\"card\" *ngFor=\"let card of spades\">{{card.name}}\n      <br>\n      <img class=\"suit\" src=\"https://i.imgur.com/tXgx0h3.png\">\n    </div>\n    <div class=\"card red\" *ngFor=\"let card of hearts\">{{card.name}}\n      <br>\n      <img class=\"suit\" src=\"https://i.imgur.com/Chg6eQ8.jpg\">\n    </div>\n    <div class=\"card\" *ngFor=\"let card of clubs\">{{card.name}}\n      <br>\n      <img class=\"suit\" src=\"https://i.imgur.com/TsBK3k9.jpg\">\n    </div>\n    <div class=\"card red\" *ngFor=\"let card of diamonds\">{{card.name}}\n      <br>\n      <img class=\"suit\" src=\"https://i.imgur.com/khCb5Vu.jpg\">\n    </div>\n  </div>\n</div>\n"
+
+/***/ }),
+
+/***/ "../../../../../src/app/shared-components/card-board/card-board.component.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return CardBoardComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Services_bridge_service__ = __webpack_require__("../../../../../src/app/Services/bridge.service.ts");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+var CardBoardComponent = (function () {
+    function CardBoardComponent(bridgeApi) {
+        this.bridgeApi = bridgeApi;
+    }
+    CardBoardComponent.prototype.ngOnInit = function () { };
+    CardBoardComponent.prototype.ngOnChanges = function () {
+        this.spades = this.bridgeApi.filterArray(this.cards, 'Spades');
+        this.hearts = this.bridgeApi.filterArray(this.cards, 'Hearts');
+        this.diamonds = this.bridgeApi.filterArray(this.cards, 'Diamonds');
+        this.clubs = this.bridgeApi.filterArray(this.cards, 'Clubs');
+    };
+    return CardBoardComponent;
+}());
+__decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["F" /* Input */])(),
+    __metadata("design:type", Boolean)
+], CardBoardComponent.prototype, "Initialized", void 0);
+__decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["F" /* Input */])(),
+    __metadata("design:type", Array)
+], CardBoardComponent.prototype, "cards", void 0);
+CardBoardComponent = __decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["o" /* Component */])({
+        selector: 'app-card-board',
+        template: __webpack_require__("../../../../../src/app/shared-components/card-board/card-board.component.html"),
+        styles: [__webpack_require__("../../../../../src/app/shared-components/card-board/card-board.component.css")]
+    }),
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__Services_bridge_service__["a" /* BridgeApi */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__Services_bridge_service__["a" /* BridgeApi */]) === "function" && _a || Object])
+], CardBoardComponent);
+
+var _a;
+//# sourceMappingURL=card-board.component.js.map
+
+/***/ }),
+
+/***/ "../../../../../src/app/shared-components/contract-design/contract-design.component.css":
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, ".contract {\r\n  margin-bottom: 10px;\r\n  padding: 0px 25%;\r\n  text-align: center;\r\n}\r\n#contract-bid {\r\n  background-color: lightgoldenrodyellow;\r\n  border: 1px solid rgba(0, 0, 0, 0.23);\r\n  cursor: pointer;\r\n}\r\n.comment {\r\n  display: block;\r\n  position: absolute;\r\n  right: 20px;\r\n  bottom: 50px;\r\n  border: 1px solid black;\r\n  background-color: rgba(211, 211, 211, 0.95);\r\n  padding: 5px 10px;\r\n  border-radius: 7px;\r\n}\r\n", ""]);
+
+// exports
+
+
+/*** EXPORTS FROM exports-loader ***/
+module.exports = module.exports.toString();
+
+/***/ }),
+
+/***/ "../../../../../src/app/shared-components/contract-design/contract-design.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"row contract\">\n  <div class=\"col-xs-3\">\n    <label>North</label>\n    <div class=\"row\" *ngFor=\"let north of North\" (mouseenter)=\"onHover(north)\" (mouseleave)=\"onHover(north)\">\n      <div id=\"contract-bid\">\n        <div class=\"comment\" *ngIf=\"north.hover && north.bidComment !== ''\">\n          {{north.comment}}\n        </div>\n        {{north.numBid}}\n        <app-suit-img [suit]=\"north.suitBid\"></app-suit-img>\n      </div>\n    </div>\n  </div>\n  <div class=\"col-xs-3\">\n    <label>East</label>\n    <div class=\"row\" *ngFor=\"let east of East\" (mouseenter)=\"onHover(east)\" (mouseleave)=\"onHover(east)\">\n      <div id=\"contract-bid\">\n          <div class=\"comment\" *ngIf=\"east.hover && east.bidComment !== ''\">\n              {{east.bidComment}}\n            </div>\n        {{east.numBid}}\n        <app-suit-img [suit]=\"east.suitBid\"></app-suit-img>\n      </div>\n    </div>\n  </div>\n  <div class=\"col-xs-3\">\n    <label>South</label>\n    <div class=\"row\" *ngFor=\"let south of South\" (mouseenter)=\"onHover(south)\" (mouseleave)=\"onHover(south)\">\n      <div id=\"contract-bid\">\n          <div class=\"comment\" *ngIf=\"south.hover && south.bidComment !== ''\">\n              {{south.bidComment}}\n            </div>\n        {{south.numBid}}\n        <app-suit-img [suit]=\"south.suitBid\"></app-suit-img>\n      </div>\n    </div>\n  </div>\n  <div class=\"col-xs-3\">\n    <label>West</label>\n    <div class=\"row\" *ngFor=\"let west of West\" (mouseenter)=\"onHover(west)\" (mouseleave)=\"onHover(west)\">\n      <div id=\"contract-bid\">\n          <div class=\"comment\" *ngIf=\"west.hover && west.bidComment !== ''\">\n              {{west.bidComment}}\n            </div>\n        {{west.numBid}}\n        <app-suit-img [suit]=\"west.suitBid\"></app-suit-img>\n      </div>\n    </div>\n  </div>\n</div>\n"
+
+/***/ }),
+
+/***/ "../../../../../src/app/shared-components/contract-design/contract-design.component.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ContractDesignComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+var ContractDesignComponent = (function () {
+    function ContractDesignComponent() {
+        this.hover = false;
+    }
+    ContractDesignComponent.prototype.onHover = function (element) {
+        element.hover = !element.hover;
+    };
+    ContractDesignComponent.prototype.ngOnInit = function () {
+    };
+    return ContractDesignComponent;
+}());
+__decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["F" /* Input */])(),
+    __metadata("design:type", Object)
+], ContractDesignComponent.prototype, "North", void 0);
+__decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["F" /* Input */])(),
+    __metadata("design:type", Object)
+], ContractDesignComponent.prototype, "East", void 0);
+__decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["F" /* Input */])(),
+    __metadata("design:type", Object)
+], ContractDesignComponent.prototype, "West", void 0);
+__decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["F" /* Input */])(),
+    __metadata("design:type", Object)
+], ContractDesignComponent.prototype, "South", void 0);
+ContractDesignComponent = __decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["o" /* Component */])({
+        selector: 'app-contract-design',
+        template: __webpack_require__("../../../../../src/app/shared-components/contract-design/contract-design.component.html"),
+        styles: [__webpack_require__("../../../../../src/app/shared-components/contract-design/contract-design.component.css")]
+    }),
+    __metadata("design:paramtypes", [])
+], ContractDesignComponent);
+
+//# sourceMappingURL=contract-design.component.js.map
+
+/***/ }),
+
+/***/ "../../../../../src/app/shared-components/suit-img/suit-img.component.css":
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, ".suit {\r\n  width: 15px;\r\n  height: 15px;\r\n}\r\n", ""]);
+
+// exports
+
+
+/*** EXPORTS FROM exports-loader ***/
+module.exports = module.exports.toString();
+
+/***/ }),
+
+/***/ "../../../../../src/app/shared-components/suit-img/suit-img.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<img *ngIf=\"spades\" class=\"suit\" src=\"https://i.imgur.com/oYXF5go.png\">\n<img *ngIf=\"hearts\" class=\"suit\" src=\"https://i.imgur.com/hJtEt5l.png\">\n<img *ngIf=\"diamonds\" class=\"suit\" src=\"https://i.imgur.com/gYCXbWr.png\">\n<img *ngIf=\"clubs\" class=\"suit\" src=\"https://i.imgur.com/VdH8eYy.png\">\n<span *ngIf=\"nt\">NT</span>\n"
+
+/***/ }),
+
+/***/ "../../../../../src/app/shared-components/suit-img/suit-img.component.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SuitImgComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+var SuitImgComponent = (function () {
+    function SuitImgComponent() {
+        this.spades = false;
+        this.hearts = false;
+        this.clubs = false;
+        this.diamonds = false;
+        this.nt = false;
+    }
+    SuitImgComponent.prototype.ngOnInit = function () {
+        if (this.suit === 'Spades') {
+            this.spades = true;
+        }
+        else if (this.suit === 'Hearts') {
+            this.hearts = true;
+        }
+        else if (this.suit === 'Diamonds') {
+            this.diamonds = true;
+        }
+        else if (this.suit === 'Clubs') {
+            this.clubs = true;
+        }
+        else if (this.suit === 'NoTrump') {
+            this.nt = true;
+        }
+    };
+    return SuitImgComponent;
+}());
+__decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["F" /* Input */])(),
+    __metadata("design:type", String)
+], SuitImgComponent.prototype, "suit", void 0);
+SuitImgComponent = __decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["o" /* Component */])({
+        selector: 'app-suit-img',
+        template: __webpack_require__("../../../../../src/app/shared-components/suit-img/suit-img.component.html"),
+        styles: [__webpack_require__("../../../../../src/app/shared-components/suit-img/suit-img.component.css")]
+    }),
+    __metadata("design:paramtypes", [])
+], SuitImgComponent);
+
+//# sourceMappingURL=suit-img.component.js.map
+
+/***/ }),
+
+/***/ "../../../../../src/app/testpage/testpage.component.css":
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "", ""]);
+
+// exports
+
+
+/*** EXPORTS FROM exports-loader ***/
+module.exports = module.exports.toString();
+
+/***/ }),
+
+/***/ "../../../../../src/app/testpage/testpage.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<app-contract-design></app-contract-design>\n"
+
+/***/ }),
+
+/***/ "../../../../../src/app/testpage/testpage.component.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return TestpageComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+var TestpageComponent = (function () {
+    function TestpageComponent() {
+    }
+    TestpageComponent.prototype.ngOnInit = function () {
+    };
+    return TestpageComponent;
+}());
+TestpageComponent = __decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["o" /* Component */])({
+        selector: 'app-testpage',
+        template: __webpack_require__("../../../../../src/app/testpage/testpage.component.html"),
+        styles: [__webpack_require__("../../../../../src/app/testpage/testpage.component.css")]
+    }),
+    __metadata("design:paramtypes", [])
+], TestpageComponent);
+
+//# sourceMappingURL=testpage.component.js.map
 
 /***/ }),
 

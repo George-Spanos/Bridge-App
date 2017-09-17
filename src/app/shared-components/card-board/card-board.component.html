@@ -1,0 +1,20 @@
+<div class="board" *ngIf="Initialized">
+  <div class="row">
+    <div class="card" *ngFor="let card of spades">{{card.name}}
+      <br>
+      <img class="suit" src="https://i.imgur.com/tXgx0h3.png">
+    </div>
+    <div class="card red" *ngFor="let card of hearts">{{card.name}}
+      <br>
+      <img class="suit" src="https://i.imgur.com/Chg6eQ8.jpg">
+    </div>
+    <div class="card" *ngFor="let card of clubs">{{card.name}}
+      <br>
+      <img class="suit" src="https://i.imgur.com/TsBK3k9.jpg">
+    </div>
+    <div class="card red" *ngFor="let card of diamonds">{{card.name}}
+      <br>
+      <img class="suit" src="https://i.imgur.com/khCb5Vu.jpg">
+    </div>
+  </div>
+</div>

@@ -27,16 +27,6 @@
 .red {
   color:#E31818;
 }
-.hcpdisplay {
-  font-weight: bold;
-  font-size: 18px;
-  display: flex;
-  justify-content: center;
-}
-.form-control {
-  height: auto;
-  margin-bottom: 3px;
-}
 @media screen and (max-width: 480px) {
   .board {
     padding: 20px 20px 20px 20px;

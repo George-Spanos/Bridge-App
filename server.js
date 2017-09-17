@@ -149,6 +149,17 @@ app.get('/getpracticehand', function (req, res, next) {
     });
   });
 });
+app.get('/getrandomleadpractice', function (req, res , next) {
+  leadPractice.findOneRandom({},{_id:0,__v:0}, function(err, result){
+    if (err) {
+      return err;
+    }
+    res.status(200).json({
+      title: 'Success',
+      result: result
+    });
+  });
+});
 /**
  * Create HTTP server.
  */

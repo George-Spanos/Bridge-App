@@ -24,7 +24,7 @@ export class LeadPracticeComponent implements OnInit {
     },
     'WestBid': [
       {
-        'bidComment': '',
+        'bidComment': 'Hello',
         'suitBid': '',
         'numBid': 'Pass'
       },
@@ -36,36 +36,36 @@ export class LeadPracticeComponent implements OnInit {
     ],
     'SouthBid': [
       {
-        'bidComment': ' Dummy Text 4',
-        'suitBid': 'NoTrump',
+        'bidComment': '',
+        'suitBid': 'Hearts',
         'numBid': '2'
       },
       {
-        'bidComment': 'Dummy Text 3 ',
+        'bidComment': ' hello hello hello hello hello hello',
         'suitBid': '',
         'numBid': 'Pass'
       }
     ],
     'EastBid': [
       {
-        'bidComment': 'Dummy Text',
+        'bidComment': '',
         'suitBid': '',
         'numBid': 'Pass'
       },
       {
-        'bidComment': 'Dummy Text 2',
+        'bidComment': '',
         'suitBid': '',
         'numBid': 'Pass'
       }
     ],
     'NorthBid': [
       {
-        'bidComment': 'Dummy Text',
+        'bidComment': '',
         'suitBid': '',
         'numBid': 'Pass'
       },
       {
-        'bidComment': 'Dummy Text',
+        'bidComment': '',
         'suitBid': 'NoTrump',
         'numBid': '3'
       }
@@ -156,65 +156,103 @@ export class LeadPracticeComponent implements OnInit {
     bidComment: String,
     suitBid: String,
     numBid: String,
+    hover?: boolean
   }[];
   North: {
     bidComment: String,
     suitBid: String,
-    numBid: String
+    numBid: String,
+    hover?: boolean
   }[];
   South: {
     bidComment: String,
     suitBid: String,
-    numBid: String
+    numBid: String,
+    hover?: boolean
   }[];
   West: {
     bidComment: String,
     suitBid: String,
-    numBid: String
+    numBid: String,
+    hover?: boolean
   }[];
   lead: Card;
-  leadClicked: boolean;
+  leadClicked = false;
   hand: Card[];
   spades: Card[];
   hearts: Card[];
   clubs: Card[];
   diamonds: Card[];
-  answerValid: boolean;
   answerComment: string;
-  answerSubmitted: boolean;
-  startPractice() { }
-  noHover() {
+  start = false;
+  answerValid = false;
+  answerSubmitted = false;
 
-  }
-  chooseLead(lead: Card) {
-    this.lead = lead;
-    this.leadClicked = true;
-  }
-  submitLead() {
-    this.answerSubmitted = true;
-    if (this.lead.name === this.dummyLead.lead.name && this.lead.suit === this.dummyLead.lead.suit) {
-      this.answerValid = true;
-      this.answerComment = 'Your answer was correct';
-    } else {
-      this.answerValid = false;
-      this.answerComment = 'Your answer was incorrect';
+startPractice() {
+  this.bridgeApi.fetchleadPractice().subscribe(
+    (result) => {
+      this.start = true;
+      this.East = result.EastBid;
+      this.North = result.NorthBid;
+      this.South = result.SouthBid;
+      this.West = result.WestBid;
+      this.East.forEach(
+        (el) => { el.hover = false; }
+      );
+      this.North.forEach(
+        (el) => { el.hover = false; }
+      );
+      this.South.forEach(
+        (el) => { el.hover = false; }
+      );
+      this.West.forEach(
+        (el) => { el.hover = false; }
+      );
+      this.hand = this.dummyLead.hand;
+      this.spades = this.bridgeApi.filterArray(this.hand, 'Spades');
+      this.hearts = this.bridgeApi.filterArray(this.hand, 'Hearts');
+      this.diamonds = this.bridgeApi.filterArray(this.hand, 'Diamonds');
+      this.clubs = this.bridgeApi.filterArray(this.hand, 'Clubs');
     }
-  }
-  constructor(public bridgeApi: BridgeApi) { }
-
-  ngOnInit() {
-    this.East = this.dummyLead.EastBid;
-    this.North = this.dummyLead.NorthBid;
-    this.South = this.dummyLead.SouthBid;
-    this.West = this.dummyLead.WestBid;
-    this.hand = this.dummyLead.hand;
-    this.spades = this.bridgeApi.filterArray(this.hand, 'Spades');
-    this.hearts = this.bridgeApi.filterArray(this.hand, 'Hearts');
-    this.diamonds = this.bridgeApi.filterArray(this.hand, 'Diamonds');
-    this.clubs = this.bridgeApi.filterArray(this.hand, 'Clubs');
-    this.leadClicked = false;
+  );
+}
+  // this.East = this.dummyLead.EastBid;
+  // this.North = this.dummyLead.NorthBid;
+  // this.South = this.dummyLead.SouthBid;
+  // this.West = this.dummyLead.WestBid;
+  // this.East.forEach(
+  //   (el) => { el.hover = false; }
+  // );
+  // this.North.forEach(
+  //   (el) => { el.hover = false; }
+  // );
+  // this.South.forEach(
+  //   (el) => { el.hover = false; }
+  // );
+  // this.West.forEach(
+  //   (el) => { el.hover = false; }
+  // );
+  // this.hand = this.dummyLead.hand;
+  // this.spades = this.bridgeApi.filterArray(this.hand, 'Spades');
+  // this.hearts = this.bridgeApi.filterArray(this.hand, 'Hearts');
+  // this.diamonds = this.bridgeApi.filterArray(this.hand, 'Diamonds');
+  // this.clubs = this.bridgeApi.filterArray(this.hand, 'Clubs');
+noHover() {}
+chooseLead(lead: Card) {
+  this.lead = lead;
+  this.leadClicked = true;
+}
+submitLead() {
+  this.answerSubmitted = true;
+  if (this.lead.name === this.dummyLead.lead.name && this.lead.suit === this.dummyLead.lead.suit) {
+    this.answerValid = true;
+    this.answerComment = 'Your answer was correct';
+  } else {
     this.answerValid = false;
-    this.answerSubmitted = false;
+    this.answerComment = 'Your answer was incorrect';
   }
+}
+constructor(public bridgeApi: BridgeApi) { }
 
+ngOnInit() {}
 }

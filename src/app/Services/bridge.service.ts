@@ -6,7 +6,7 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class BridgeApi {
   constructor(public http: Http) { }
-  submitted= false;
+  submitted = false;
   bid = {
     hand: [],
     hcp: 0,
@@ -15,7 +15,7 @@ export class BridgeApi {
     comment: ''
   };
   hcp: number;
-  answer= '';
+  answer = '';
   answerStatus = false;
   coinFlip() {
     return (Math.random() < 0.5 ? 0 : 1);
@@ -72,7 +72,7 @@ export class BridgeApi {
         const value2 = b.value;
         if (value1 < value2) {
           return 1;
-        }else {
+        } else {
           return -1;
         }
       }
@@ -129,6 +129,13 @@ export class BridgeApi {
       (response: Response) => response.json().result
     ).catch(
       (error: Response) => Observable.throw(error.json())
-    );
+      );
+  }
+  fetchleadPractice() {
+    return this.http.get('/getrandomleadpractice').map(
+      (response: Response) => response.json().result
+    ).catch(
+      (error: Response) => Observable.throw(error.json())
+      );
   }
 }

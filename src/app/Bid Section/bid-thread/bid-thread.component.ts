@@ -3,11 +3,11 @@ import { Http, Response } from '@angular/http';
 import { BridgeApi } from '../../Services/bridge.service';
 import { Card } from '../../Services/card.model';
 @Component({
-  selector: 'app-main-section',
-  templateUrl: './main-section.component.html',
-  styleUrls: ['./main-section.component.css']
+  selector: 'app-bid-thread',
+  templateUrl: './bid-thread.component.html',
+  styleUrls: ['./bid-thread.component.css']
 })
-export class MainSectionComponent implements OnInit {
+export class BidThreadComponent implements OnInit {
   handInitialized = false;
   bids= [];
   newHand= false;
