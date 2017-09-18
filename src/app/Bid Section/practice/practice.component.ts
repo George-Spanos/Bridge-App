@@ -19,7 +19,6 @@ export class PracticeComponent implements OnInit {
   startPractice() {
     this.bridgeApi.answerStatus = false;
     this.bridgeApi.answer = '';
-    this.handInitialized = true;
     this.bridgeApi.fetchPractice().subscribe(
       (results) => {
         this.hand = results.array;
@@ -30,6 +29,7 @@ export class PracticeComponent implements OnInit {
         this.clubs = this.bridgeApi.filterArray(this.hand, 'Clubs');
         this.comment = results.comments;
         this.correctbid = results.numericBid + ' ' + results.suitBid;
+        this.handInitialized = true;
         console.log( this.comment, this.correctbid);
       }
     );

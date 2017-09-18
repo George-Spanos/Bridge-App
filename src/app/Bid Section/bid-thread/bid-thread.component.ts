@@ -9,8 +9,8 @@ import { Card } from '../../Services/card.model';
 })
 export class BidThreadComponent implements OnInit {
   handInitialized = false;
-  bids= [];
-  newHand= false;
+  bids = [];
+  newHand = false;
   hcp: number;
   cardsArray: Card[];
   spades: Card[];
@@ -31,7 +31,7 @@ export class BidThreadComponent implements OnInit {
           this.hand = results[0].array;
           this.hcp = results[0].hcp;
           results.forEach(
-            ( el ) => { this.bids.push(el); }
+            (el) => { this.bids.push(el); }
           );
           this.spades = this.bridgeApi.filterArray(this.hand, 'Spades');
           this.hearts = this.bridgeApi.filterArray(this.hand, 'Hearts');
@@ -45,26 +45,32 @@ export class BidThreadComponent implements OnInit {
     } else {
       this.newHand = true;
       this.bids = [];
-      this.hand = this.bridgeApi.initializeHand(array);
-      this.spades = this.bridgeApi.filterArray(this.hand, 'Spades');
-      this.spades = this.bridgeApi.sortArrayValues(this.spades);
-      this.hearts = this.bridgeApi.filterArray(this.hand, 'Hearts');
-      this.hearts = this.bridgeApi.sortArrayValues(this.hearts);
-      this.diamonds = this.bridgeApi.filterArray(this.hand, 'Diamonds');
-      this.diamonds = this.bridgeApi.sortArrayValues(this.diamonds);
-      this.clubs = this.bridgeApi.filterArray(this.hand, 'Clubs');
-      this.clubs = this.bridgeApi.sortArrayValues(this.clubs);
-      this.handInitialized = true;
-      this.hand = this.bridgeApi.fixHcp(this.hand);
-      this.hand = this.spades.concat(this.hearts).concat(this.clubs).concat(this.diamonds);
-      console.log(this.hand);
-      let sum = 0;
-      this.hand.forEach(
-        (el) => {
-          sum = el.value + sum;
+      let hcpValid = true;
+      while (hcpValid) {
+        this.hand = this.bridgeApi.initializeHand(array);
+        this.spades = this.bridgeApi.filterArray(this.hand, 'Spades');
+        this.spades = this.bridgeApi.sortArrayValues(this.spades);
+        this.hearts = this.bridgeApi.filterArray(this.hand, 'Hearts');
+        this.hearts = this.bridgeApi.sortArrayValues(this.hearts);
+        this.diamonds = this.bridgeApi.filterArray(this.hand, 'Diamonds');
+        this.diamonds = this.bridgeApi.sortArrayValues(this.diamonds);
+        this.clubs = this.bridgeApi.filterArray(this.hand, 'Clubs');
+        this.clubs = this.bridgeApi.sortArrayValues(this.clubs);
+        this.hand = this.bridgeApi.fixHcp(this.hand);
+        this.hand = this.spades.concat(this.hearts).concat(this.clubs).concat(this.diamonds);
+        console.log(this.hand);
+        let sum = 0;
+        this.hand.forEach(
+          (el) => {
+            sum = el.value + sum;
+          }
+        );
+        this.hcp = sum;
+        if (this.hcp >= 11) {
+          hcpValid = false;
+          this.handInitialized = true;
         }
-      );
-      this.hcp = sum;
+      }
       this.bridgeApi.saveHand(this.hand, this.hcp);
       console.log(this.bridgeApi.bid);
     }

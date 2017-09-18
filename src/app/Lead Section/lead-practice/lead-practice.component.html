@@ -17,41 +17,7 @@
     </div>
   </div>
   <div class="row" *ngIf="start">
-    <!-- <div class="row contract">
-    <div class="col-xs-3">
-      <label>North</label>
-      <div class="row" *ngFor="let north of North">
-        <div id="contract-bid">
-          {{north.numBid}} {{north.suitBid}}
-        </div>
-      </div>
-    </div>
-    <div class="col-xs-3">
-      <label>East</label>
-      <div class="row" *ngFor="let east of East">
-        <div id="contract-bid">
-          {{east.numBid}} {{east.suitBid}}
-        </div>
-      </div>
-    </div>
-    <div class="col-xs-3">
-      <label>South</label>
-      <div class="row" *ngFor="let south of South">
-        <div id="contract-bid">
-          {{south.numBid}} {{south.suitBid}}
-        </div>
-      </div>
-    </div>
-    <div class="col-xs-3">
-      <label>West</label>
-      <div class="row" *ngFor="let west of West">
-        <div id="contract-bid">
-          {{west.numBid}} {{west.suitBid}}
-        </div>
-      </div>
-    </div>
-  </div> -->
-    <app-contract-design [East]="East" [West]="West" [North]="North" [South]="South"></app-contract-design>
+    <app-contract-design [East]="East" [West]="West" [North]="North" [South]="South" [Colors]="Colors"></app-contract-design>
     <hr class="hline">
     <div class="row">
       <div class="col-xs-12">

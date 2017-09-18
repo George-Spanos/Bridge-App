@@ -1,0 +1,47 @@
+.card {
+  float: left;
+  width: auto;
+  height: 150px;
+  display: block;
+  border: 1px solid;
+  border-right:1px bold;
+  border-color: grey;;
+  padding: 6px;
+  text-align: center;
+  font-weight: bold;
+  font-size: 20px;
+  background-color: white;
+  border-radius: 3px;
+}
+.suit {
+  width: 20px;
+  height: 20px;
+}
+.board {
+  padding: 100px 30px 60px 30px;
+  background-color: green;
+  display: flex;
+  justify-content: center;
+  border-radius: 10px;
+}
+.red {
+  color:#E31818;
+}
+.hcpdisplay {
+  font-weight: bold;
+  font-size: 18px;
+  display: flex;
+  justify-content: center;
+}
+@media screen and (max-width: 480px) {
+  .board {
+    padding: 20px 20px 20px 20px;
+    background-color: green;
+    display: flex;
+    justify-content: center;
+    border-radius: 10px;
+  }
+  .card {
+    height: auto;
+  }
+}

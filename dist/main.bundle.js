@@ -179,24 +179,34 @@ var BidThreadComponent = (function () {
         else {
             this.newHand = true;
             this.bids = [];
-            this.hand = this.bridgeApi.initializeHand(array);
-            this.spades = this.bridgeApi.filterArray(this.hand, 'Spades');
-            this.spades = this.bridgeApi.sortArrayValues(this.spades);
-            this.hearts = this.bridgeApi.filterArray(this.hand, 'Hearts');
-            this.hearts = this.bridgeApi.sortArrayValues(this.hearts);
-            this.diamonds = this.bridgeApi.filterArray(this.hand, 'Diamonds');
-            this.diamonds = this.bridgeApi.sortArrayValues(this.diamonds);
-            this.clubs = this.bridgeApi.filterArray(this.hand, 'Clubs');
-            this.clubs = this.bridgeApi.sortArrayValues(this.clubs);
-            this.handInitialized = true;
-            this.hand = this.bridgeApi.fixHcp(this.hand);
-            this.hand = this.spades.concat(this.hearts).concat(this.clubs).concat(this.diamonds);
-            console.log(this.hand);
-            var sum_1 = 0;
-            this.hand.forEach(function (el) {
-                sum_1 = el.value + sum_1;
-            });
-            this.hcp = sum_1;
+            var hcpValid = true;
+            var _loop_1 = function () {
+                this_1.hand = this_1.bridgeApi.initializeHand(array);
+                this_1.spades = this_1.bridgeApi.filterArray(this_1.hand, 'Spades');
+                this_1.spades = this_1.bridgeApi.sortArrayValues(this_1.spades);
+                this_1.hearts = this_1.bridgeApi.filterArray(this_1.hand, 'Hearts');
+                this_1.hearts = this_1.bridgeApi.sortArrayValues(this_1.hearts);
+                this_1.diamonds = this_1.bridgeApi.filterArray(this_1.hand, 'Diamonds');
+                this_1.diamonds = this_1.bridgeApi.sortArrayValues(this_1.diamonds);
+                this_1.clubs = this_1.bridgeApi.filterArray(this_1.hand, 'Clubs');
+                this_1.clubs = this_1.bridgeApi.sortArrayValues(this_1.clubs);
+                this_1.hand = this_1.bridgeApi.fixHcp(this_1.hand);
+                this_1.hand = this_1.spades.concat(this_1.hearts).concat(this_1.clubs).concat(this_1.diamonds);
+                console.log(this_1.hand);
+                var sum = 0;
+                this_1.hand.forEach(function (el) {
+                    sum = el.value + sum;
+                });
+                this_1.hcp = sum;
+                if (this_1.hcp >= 11) {
+                    hcpValid = false;
+                    this_1.handInitialized = true;
+                }
+            };
+            var this_1 = this;
+            while (hcpValid) {
+                _loop_1();
+            }
             this.bridgeApi.saveHand(this.hand, this.hcp);
             console.log(this.bridgeApi.bid);
         }
@@ -273,7 +283,6 @@ var PracticeComponent = (function () {
         var _this = this;
         this.bridgeApi.answerStatus = false;
         this.bridgeApi.answer = '';
-        this.handInitialized = true;
         this.bridgeApi.fetchPractice().subscribe(function (results) {
             _this.hand = results.array;
             _this.hcp = results.hcp;
@@ -283,6 +292,7 @@ var PracticeComponent = (function () {
             _this.clubs = _this.bridgeApi.filterArray(_this.hand, 'Clubs');
             _this.comment = results.comments;
             _this.correctbid = results.numericBid + ' ' + results.suitBid;
+            _this.handInitialized = true;
             console.log(_this.comment, _this.correctbid);
         });
     };
@@ -638,7 +648,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/Lead Section/lead-practice/lead-practice.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\n  <div class=\"row\">\n    <div class=\"col-xs-12\">\n      <div class=\"row heading\">\n        <h2>This sections give you the chance to practice on how to lead as the defence</h2>\n      </div>\n      <div class=\"row\">\n        <span id=\"subheading\"> When you click the \"start practicing\" button, you will be served\n          a specific hand as well as the contract. You must find the most suitable lead, and then click it!</span>\n      </div>\n    </div>\n  </div>\n  <hr class=\"hline\">\n  <div class=\"row\">\n    <div class=\"col-xs-12\" style=\"display:flex; justify-content:center; padding:0px 20px 20px 20px;\">\n      <button class=\"btn btn-primary\" (click)=\"startPractice()\">Start Practicing</button>\n    </div>\n  </div>\n  <div class=\"row\" *ngIf=\"start\">\n    <!-- <div class=\"row contract\">\n    <div class=\"col-xs-3\">\n      <label>North</label>\n      <div class=\"row\" *ngFor=\"let north of North\">\n        <div id=\"contract-bid\">\n          {{north.numBid}} {{north.suitBid}}\n        </div>\n      </div>\n    </div>\n    <div class=\"col-xs-3\">\n      <label>East</label>\n      <div class=\"row\" *ngFor=\"let east of East\">\n        <div id=\"contract-bid\">\n          {{east.numBid}} {{east.suitBid}}\n        </div>\n      </div>\n    </div>\n    <div class=\"col-xs-3\">\n      <label>South</label>\n      <div class=\"row\" *ngFor=\"let south of South\">\n        <div id=\"contract-bid\">\n          {{south.numBid}} {{south.suitBid}}\n        </div>\n      </div>\n    </div>\n    <div class=\"col-xs-3\">\n      <label>West</label>\n      <div class=\"row\" *ngFor=\"let west of West\">\n        <div id=\"contract-bid\">\n          {{west.numBid}} {{west.suitBid}}\n        </div>\n      </div>\n    </div>\n  </div> -->\n    <app-contract-design [East]=\"East\" [West]=\"West\" [North]=\"North\" [South]=\"South\"></app-contract-design>\n    <hr class=\"hline\">\n    <div class=\"row\">\n      <div class=\"col-xs-12\">\n        <div class=\"col-xs-6\">\n          <div class=\"board\" *ngIf=\"handInitialized\">\n            <div class=\"row\">\n              <div class=\"card\" (click)=\"chooseLead(card)\" *ngFor=\"let card of spades\">{{card.name}}\n                <br>\n                <img class=\"suit\" src=\"https://i.imgur.com/tXgx0h3.png\">\n              </div>\n              <div class=\"card red\" (click)=\"chooseLead(card)\" *ngFor=\"let card of hearts\">{{card.name}}\n                <br>\n                <img class=\"suit\" src=\"https://i.imgur.com/Chg6eQ8.jpg\">\n              </div>\n              <div class=\"card\" (click)=\"chooseLead(card)\" *ngFor=\"let card of clubs\">{{card.name}}\n                <br>\n                <img class=\"suit\" src=\"https://i.imgur.com/TsBK3k9.jpg\">\n              </div>\n              <div class=\"card red\" (click)=\"chooseLead(card)\" *ngFor=\"let card of diamonds\">{{card.name}}\n                <br>\n                <img class=\"suit\" src=\"https://i.imgur.com/khCb5Vu.jpg\">\n              </div>\n            </div>\n          </div>\n        </div>\n        <div class=\"col-xs-6\">\n          <div *ngIf=\"handInitialized\" style=\"margin:10px\">\n            <div *ngIf=\"!leadClicked\" class=\"response\">\n              You can choose a lead.\n            </div>\n            <div class=\"response\" *ngIf=\"leadClicked && !answerSubmitted\">\n              <div class=\"row\">\n                <div class=\"row\" id=\"com\">\n                  <div class=\"col-xs-12\">\n                    <h3>You chose {{lead.name}} of {{lead.suit}} as your lead.</h3>\n                  </div>\n                </div>\n                <div class=\"row\">\n                  <div class=\"col-xs-12\" style=\"display: flex; justify-content: center;\">\n                    <button type=\"button\" class=\"btn btn-primary\" (click)=\"submitLead()\">Confirm\n                  </button>\n                  </div>\n                </div>\n              </div>\n            </div>\n            <div class=\"response\" *ngIf=\"answerSubmitted\">\n              <div class=\"row\">\n                <div class=\"row\">\n                  <div class=\"col-xs-12\">\n                    <h3 id=\"com\">{{answerComment}}</h3>\n                  </div>\n                </div>\n                <div class=\"form-control\" id=\"com\">\n                  <div class=\"row\">\n                    <div class=\"col-xs-12\"><strong>\n                    Suggested Lead: {{correctlead.name}} of {{correctlead.suit}}.\n                  </strong> <br> {{comments}}\n                    </div>\n                  </div>\n                </div>\n              </div>\n            </div>\n          </div>\n        </div>\n      </div>\n    </div>\n  </div>\n</div>\n"
+module.exports = "<div class=\"container\">\n  <div class=\"row\">\n    <div class=\"col-xs-12\">\n      <div class=\"row heading\">\n        <h2>This sections give you the chance to practice on how to lead as the defence</h2>\n      </div>\n      <div class=\"row\">\n        <span id=\"subheading\"> When you click the \"start practicing\" button, you will be served\n          a specific hand as well as the contract. You must find the most suitable lead, and then click it!</span>\n      </div>\n    </div>\n  </div>\n  <hr class=\"hline\">\n  <div class=\"row\">\n    <div class=\"col-xs-12\" style=\"display:flex; justify-content:center; padding:0px 20px 20px 20px;\">\n      <button class=\"btn btn-primary\" (click)=\"startPractice()\">Start Practicing</button>\n    </div>\n  </div>\n  <div class=\"row\" *ngIf=\"start\">\n    <app-contract-design [East]=\"East\" [West]=\"West\" [North]=\"North\" [South]=\"South\" [Colors]=\"Colors\"></app-contract-design>\n    <hr class=\"hline\">\n    <div class=\"row\">\n      <div class=\"col-xs-12\">\n        <div class=\"col-xs-6\">\n          <div class=\"board\" *ngIf=\"handInitialized\">\n            <div class=\"row\">\n              <div class=\"card\" (click)=\"chooseLead(card)\" *ngFor=\"let card of spades\">{{card.name}}\n                <br>\n                <img class=\"suit\" src=\"https://i.imgur.com/tXgx0h3.png\">\n              </div>\n              <div class=\"card red\" (click)=\"chooseLead(card)\" *ngFor=\"let card of hearts\">{{card.name}}\n                <br>\n                <img class=\"suit\" src=\"https://i.imgur.com/Chg6eQ8.jpg\">\n              </div>\n              <div class=\"card\" (click)=\"chooseLead(card)\" *ngFor=\"let card of clubs\">{{card.name}}\n                <br>\n                <img class=\"suit\" src=\"https://i.imgur.com/TsBK3k9.jpg\">\n              </div>\n              <div class=\"card red\" (click)=\"chooseLead(card)\" *ngFor=\"let card of diamonds\">{{card.name}}\n                <br>\n                <img class=\"suit\" src=\"https://i.imgur.com/khCb5Vu.jpg\">\n              </div>\n            </div>\n          </div>\n        </div>\n        <div class=\"col-xs-6\">\n          <div *ngIf=\"handInitialized\" style=\"margin:10px\">\n            <div *ngIf=\"!leadClicked\" class=\"response\">\n              You can choose a lead.\n            </div>\n            <div class=\"response\" *ngIf=\"leadClicked && !answerSubmitted\">\n              <div class=\"row\">\n                <div class=\"row\" id=\"com\">\n                  <div class=\"col-xs-12\">\n                    <h3>You chose {{lead.name}} of {{lead.suit}} as your lead.</h3>\n                  </div>\n                </div>\n                <div class=\"row\">\n                  <div class=\"col-xs-12\" style=\"display: flex; justify-content: center;\">\n                    <button type=\"button\" class=\"btn btn-primary\" (click)=\"submitLead()\">Confirm\n                  </button>\n                  </div>\n                </div>\n              </div>\n            </div>\n            <div class=\"response\" *ngIf=\"answerSubmitted\">\n              <div class=\"row\">\n                <div class=\"row\">\n                  <div class=\"col-xs-12\">\n                    <h3 id=\"com\">{{answerComment}}</h3>\n                  </div>\n                </div>\n                <div class=\"form-control\" id=\"com\">\n                  <div class=\"row\">\n                    <div class=\"col-xs-12\"><strong>\n                    Suggested Lead: {{correctlead.name}} of {{correctlead.suit}}.\n                  </strong> <br> {{comments}}\n                    </div>\n                  </div>\n                </div>\n              </div>\n            </div>\n          </div>\n        </div>\n      </div>\n    </div>\n  </div>\n</div>\n"
 
 /***/ }),
 
@@ -818,6 +828,7 @@ var LeadPracticeComponent = (function () {
             _this.answerSubmitted = false;
             _this.leadClicked = false;
             _this.start = true;
+            _this.Colors = result.colors;
             _this.correctlead = result.lead;
             _this.comments = result.comments;
             _this.East = result.EastBid;
@@ -1566,10 +1577,12 @@ var CardBoardComponent = (function () {
     }
     CardBoardComponent.prototype.ngOnInit = function () { };
     CardBoardComponent.prototype.ngOnChanges = function () {
-        this.spades = this.bridgeApi.filterArray(this.cards, 'Spades');
-        this.hearts = this.bridgeApi.filterArray(this.cards, 'Hearts');
-        this.diamonds = this.bridgeApi.filterArray(this.cards, 'Diamonds');
-        this.clubs = this.bridgeApi.filterArray(this.cards, 'Clubs');
+        if (this.Initialized) {
+            this.spades = this.bridgeApi.filterArray(this.cards, 'Spades');
+            this.hearts = this.bridgeApi.filterArray(this.cards, 'Hearts');
+            this.diamonds = this.bridgeApi.filterArray(this.cards, 'Diamonds');
+            this.clubs = this.bridgeApi.filterArray(this.cards, 'Clubs');
+        }
     };
     return CardBoardComponent;
 }());
@@ -1616,7 +1629,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/shared-components/contract-design/contract-design.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"row contract\">\n  <div class=\"col-xs-3\">\n    <label>North</label>\n    <div class=\"row\" *ngFor=\"let north of North\" (mouseenter)=\"onHover(north)\" (mouseleave)=\"onHover(north)\">\n      <div id=\"contract-bid\">\n        <div class=\"comment\" *ngIf=\"north.hover && north.bidComment !== ''\">\n          {{north.comment}}\n        </div>\n        {{north.numBid}} <span *ngIf=\"north.numBid === '' || north.numBid !== null\"> - </span>\n        <app-suit-img [suit]=\"north.suitBid\"></app-suit-img>\n      </div>\n    </div>\n  </div>\n  <div class=\"col-xs-3\">\n    <label>East</label>\n    <div class=\"row\" *ngFor=\"let east of East\" (mouseenter)=\"onHover(east)\" (mouseleave)=\"onHover(east)\">\n      <div id=\"contract-bid\">\n          <div class=\"comment\" *ngIf=\"east.hover && east.bidComment !== ''\">\n              {{east.bidComment}}\n            </div>\n        {{east.numBid}} <span *ngIf=\"east.numBid === ''  || east.numBid !== null\"> - </span>\n        <app-suit-img [suit]=\"east.suitBid\"></app-suit-img>\n      </div>\n    </div>\n  </div>\n  <div class=\"col-xs-3\">\n    <label>South</label>\n    <div class=\"row\" *ngFor=\"let south of South\" (mouseenter)=\"onHover(south)\" (mouseleave)=\"onHover(south)\">\n      <div id=\"contract-bid\">\n          <div class=\"comment\" *ngIf=\"south.hover && south.bidComment !== ''\">\n              {{south.bidComment}}\n            </div>\n        {{south.numBid}} <span *ngIf=\"south.numBid === ''  || south.numBid !== null\"> - </span>\n        <app-suit-img [suit]=\"south.suitBid\"></app-suit-img>\n      </div>\n    </div>\n  </div>\n  <div class=\"col-xs-3\">\n    <label>West</label>\n    <div class=\"row\" *ngFor=\"let west of West\" (mouseenter)=\"onHover(west)\" (mouseleave)=\"onHover(west)\">\n      <div id=\"contract-bid\">\n          <div class=\"comment\" *ngIf=\"west.hover && west.bidComment !== ''\">\n              {{west.bidComment}}\n            </div>\n        {{west.numBid}} <span *ngIf=\"west.numBid === ''  || west.numBid !== null \"> - </span>\n        <app-suit-img [suit]=\"west.suitBid\"></app-suit-img>\n      </div>\n    </div>\n  </div>\n</div>\n"
+module.exports = "<div class=\"row contract\">\n  <div class=\"col-xs-3\">\n    <label [ngStyle]=\"{'color': Colors.colorNorth === 'Green' ? 'green' : 'red'}\">North</label>\n    <div class=\"row\" *ngFor=\"let north of North\" (mouseenter)=\"onHover(north)\" (mouseleave)=\"onHover(north)\">\n      <div id=\"contract-bid\">\n        <div class=\"comment\" *ngIf=\"north.hover && north.bidComment !== ''\">\n          {{north.comment}}\n        </div>\n        {{north.numBid}} <span *ngIf=\"north.numBid === ''\"> - </span>\n        <app-suit-img [suit]=\"north.suitBid\"></app-suit-img>\n      </div>\n    </div>\n  </div>\n  <div class=\"col-xs-3\">\n    <label [ngStyle]=\"{'color': Colors.colorEast === 'Green' ? 'green' : 'red'}\">East</label>\n    <div class=\"row\" *ngFor=\"let east of East\" (mouseenter)=\"onHover(east)\" (mouseleave)=\"onHover(east)\">\n      <div id=\"contract-bid\">\n          <div class=\"comment\" *ngIf=\"east.hover && east.bidComment !== ''\">\n              {{east.bidComment}}\n            </div>\n        {{east.numBid}} <span *ngIf=\"east.numBid === ''\"> - </span>\n        <app-suit-img [suit]=\"east.suitBid\"></app-suit-img>\n      </div>\n    </div>\n  </div>\n  <div class=\"col-xs-3\">\n    <label [ngStyle]=\"{'color': Colors.colorSouth === 'Green' ? 'green' : 'red'}\">South</label>\n    <div class=\"row\" *ngFor=\"let south of South\" (mouseenter)=\"onHover(south)\" (mouseleave)=\"onHover(south)\">\n      <div id=\"contract-bid\">\n          <div class=\"comment\" *ngIf=\"south.hover && south.bidComment !== ''\">\n              {{south.bidComment}}\n            </div>\n        {{south.numBid}} <span *ngIf=\"south.numBid === ''\"> - </span>\n        <app-suit-img [suit]=\"south.suitBid\"></app-suit-img>\n      </div>\n    </div>\n  </div>\n  <div class=\"col-xs-3\">\n    <label [ngStyle]=\"{'color': Colors.colorWest === 'Green' ? 'green' : 'red'}\">West</label>\n    <div class=\"row\" *ngFor=\"let west of West\" (mouseenter)=\"onHover(west)\" (mouseleave)=\"onHover(west)\">\n      <div id=\"contract-bid\">\n          <div class=\"comment\" *ngIf=\"west.hover && west.bidComment !== ''\">\n              {{west.bidComment}}\n            </div>\n        {{west.numBid}} <span *ngIf=\"west.numBid === ''\"> - </span>\n        <app-suit-img [suit]=\"west.suitBid\"></app-suit-img>\n      </div>\n    </div>\n  </div>\n</div>\n"
 
 /***/ }),
 
@@ -1638,7 +1651,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 var ContractDesignComponent = (function () {
     function ContractDesignComponent() {
-        this.hover = false;
     }
     ContractDesignComponent.prototype.onHover = function (element) {
         element.hover = !element.hover;
@@ -1647,6 +1659,10 @@ var ContractDesignComponent = (function () {
     };
     return ContractDesignComponent;
 }());
+__decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["F" /* Input */])(),
+    __metadata("design:type", Object)
+], ContractDesignComponent.prototype, "Colors", void 0);
 __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["F" /* Input */])(),
     __metadata("design:type", Object)

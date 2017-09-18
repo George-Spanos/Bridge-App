@@ -1,48 +1,48 @@
 <div class="row contract">
   <div class="col-xs-3">
-    <label>North</label>
+    <label [ngStyle]="{'color': Colors.colorNorth === 'Green' ? 'green' : 'red'}">North</label>
     <div class="row" *ngFor="let north of North" (mouseenter)="onHover(north)" (mouseleave)="onHover(north)">
       <div id="contract-bid">
         <div class="comment" *ngIf="north.hover && north.bidComment !== ''">
           {{north.comment}}
         </div>
-        {{north.numBid}} <span *ngIf="north.numBid === '' || north.numBid !== null"> - </span>
+        {{north.numBid}} <span *ngIf="north.numBid === ''"> - </span>
         <app-suit-img [suit]="north.suitBid"></app-suit-img>
       </div>
     </div>
   </div>
   <div class="col-xs-3">
-    <label>East</label>
+    <label [ngStyle]="{'color': Colors.colorEast === 'Green' ? 'green' : 'red'}">East</label>
     <div class="row" *ngFor="let east of East" (mouseenter)="onHover(east)" (mouseleave)="onHover(east)">
       <div id="contract-bid">
           <div class="comment" *ngIf="east.hover && east.bidComment !== ''">
               {{east.bidComment}}
             </div>
-        {{east.numBid}} <span *ngIf="east.numBid === ''  || east.numBid !== null"> - </span>
+        {{east.numBid}} <span *ngIf="east.numBid === ''"> - </span>
         <app-suit-img [suit]="east.suitBid"></app-suit-img>
       </div>
     </div>
   </div>
   <div class="col-xs-3">
-    <label>South</label>
+    <label [ngStyle]="{'color': Colors.colorSouth === 'Green' ? 'green' : 'red'}">South</label>
     <div class="row" *ngFor="let south of South" (mouseenter)="onHover(south)" (mouseleave)="onHover(south)">
       <div id="contract-bid">
           <div class="comment" *ngIf="south.hover && south.bidComment !== ''">
               {{south.bidComment}}
             </div>
-        {{south.numBid}} <span *ngIf="south.numBid === ''  || south.numBid !== null"> - </span>
+        {{south.numBid}} <span *ngIf="south.numBid === ''"> - </span>
         <app-suit-img [suit]="south.suitBid"></app-suit-img>
       </div>
     </div>
   </div>
   <div class="col-xs-3">
-    <label>West</label>
+    <label [ngStyle]="{'color': Colors.colorWest === 'Green' ? 'green' : 'red'}">West</label>
     <div class="row" *ngFor="let west of West" (mouseenter)="onHover(west)" (mouseleave)="onHover(west)">
       <div id="contract-bid">
           <div class="comment" *ngIf="west.hover && west.bidComment !== ''">
               {{west.bidComment}}
             </div>
-        {{west.numBid}} <span *ngIf="west.numBid === ''  || west.numBid !== null "> - </span>
+        {{west.numBid}} <span *ngIf="west.numBid === ''"> - </span>
         <app-suit-img [suit]="west.suitBid"></app-suit-img>
       </div>
     </div>

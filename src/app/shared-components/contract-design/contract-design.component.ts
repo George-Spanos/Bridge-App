@@ -6,7 +6,12 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['./contract-design.component.css']
 })
 export class ContractDesignComponent implements OnInit {
-  hover = false;
+  @Input() Colors: {
+    colorWest: String,
+    colorSouth: String,
+    colorEast: String,
+    colorNorth: String
+  };
   @Input() North: {
     bidComment: String,
     suitBid: String,
