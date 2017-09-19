@@ -198,9 +198,12 @@ var BidThreadComponent = (function () {
                     sum = el.value + sum;
                 });
                 this_1.hcp = sum;
-                if (this_1.hcp >= 11) {
+                if (this_1.hcp > 10) {
                     hcpValid = false;
                     this_1.handInitialized = true;
+                }
+                else {
+                    array = this_1.bridgeApi.deck();
                 }
             };
             var this_1 = this;

@@ -66,9 +66,11 @@ export class BidThreadComponent implements OnInit {
           }
         );
         this.hcp = sum;
-        if (this.hcp >= 11) {
+        if (this.hcp > 10) {
           hcpValid = false;
           this.handInitialized = true;
+        }else {
+          array = this.bridgeApi.deck();
         }
       }
       this.bridgeApi.saveHand(this.hand, this.hcp);
