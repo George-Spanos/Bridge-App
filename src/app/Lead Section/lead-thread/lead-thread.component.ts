@@ -205,14 +205,13 @@ export class LeadThreadComponent implements OnInit {
         this.leadClicked = false;
         this.Colors = result.colors;
         this.correctlead = result.lead;
-        this.comments = result.comments;
         this.East = result.EastBid;
         this.North = result.NorthBid;
         this.South = result.SouthBid;
         this.West = result.WestBid;
         this.hand = result.hand;
         this.id = result._id;
-        // this.comments = result.answer.comments;
+        this.comments = result.answer.comments;
         this.spades = this.bridgeApi.filterArray(this.hand, 'Spades');
         this.hearts = this.bridgeApi.filterArray(this.hand, 'Hearts');
         this.diamonds = this.bridgeApi.filterArray(this.hand, 'Diamonds');

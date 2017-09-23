@@ -48,7 +48,7 @@
         <app-lead-thread-form [id]="id" [handInitialized]="handInitialized" [leadClicked]="leadClicked" [lead]="lead"></app-lead-thread-form>
       </div>
     </div>
-    <div class="row" *ngIf="bridgeApi.submitted">
+    <div class="row" *ngIf="bridgeApi.submitted && comments!==[]">
       <label for="comments"> Leads and Comments</label>
       <div class="col-xs-12" *ngFor="let comment of comments">
         <div class="form-control">
