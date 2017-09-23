@@ -164,6 +164,15 @@ app.get('/getrandomleadpractice', function (req, res , next) {
  * Create HTTP server.
  */
 // Bid.update({}, { $set: { votes: 0 } }, { multi: true }, () => console.log('done'));
+leadPractice.update({}, {$set: {answer:{
+  lead: {
+    name:String,
+    suit: String,
+  },
+  comment: String,
+  votes: 0
+}[]}},
+{multi: true},()=>console.log('done'));
 const server = http.createServer(app);
 
 // Set our api routes
