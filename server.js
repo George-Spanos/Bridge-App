@@ -41,7 +41,7 @@ const leadsSchema = new Schema({
   EastBid: [],
   SouthBid: [],
   WestBid: [],
-  answer: {}
+  answer: []
 })
 auctionSchema.plugin(randomEl);
 leadsSchema.plugin(randomEl);
@@ -163,26 +163,21 @@ app.get('/getrandomleadpractice', function (req, res, next) {
   });
 });
 app.post('/postleadanswer', function (req, res, next) {
-  leadPractice.findByIdAndUpdate(req.body.id, function (err, lead) {
+  leadPractice.findOne({_id:req.body.id}, function (err, lead) {
     if (err) {
       throw err;
-    }console.log(req.body);
-    // lead.answer.push(req.body.answer);
-    // lead.save(
-    //   function (err, result) {
-    //     if (err) {
-    //       return res.status(500).json({
-    //         title: 'An error occured',
-    //         err: error
-    //       })
-    //     }
-    //     console.log(result);
-    //     res.status(201).json({
-    //       message: 'Saved data',
-    //       obj: result
-    //     });
-    //   }
-    // );
+    }
+    lead.answer.push(req.body.answer);
+    lead.save(
+      function (err) {
+        if (err) {
+          return res.status(500).json({
+            title: 'An error occured',
+            err: error
+          })
+        }
+      }
+    );
   })
 })
 /**
