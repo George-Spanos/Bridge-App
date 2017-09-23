@@ -40,7 +40,8 @@ const leadsSchema = new Schema({
   NorthBid: [],
   EastBid: [],
   SouthBid: [],
-  WestBid: []
+  WestBid: [],
+  answer: {}
 })
 auctionSchema.plugin(randomEl);
 leadsSchema.plugin(randomEl);
@@ -57,7 +58,8 @@ app.post('/addlead', function (req, res, next) {
     NorthBid: req.body.North,
     EastBid: req.body.East,
     SouthBid: req.body.South,
-    WestBid: req.body.West
+    WestBid: req.body.West,
+    answer: []
   });
   lead.save(
     function (err, result) {
@@ -150,7 +152,7 @@ app.get('/getpracticehand', function (req, res, next) {
   });
 });
 app.get('/getrandomleadpractice', function (req, res, next) {
-  leadPractice.findOneRandom({}, { _id: 0, __v: 0 }, function (err, result) {
+  leadPractice.findOneRandom({}, { __v: 0 }, function (err, result) {
     if (err) {
       return err;
     }
@@ -160,23 +162,39 @@ app.get('/getrandomleadpractice', function (req, res, next) {
     });
   });
 });
+app.post('/postleadanswer', function (req, res, next) {
+  leadPractice.findByIdAndUpdate(req.body.id, function (err, lead) {
+    if (err) {
+      throw err;
+    }console.log(req.body);
+    // lead.answer.push(req.body.answer);
+    // lead.save(
+    //   function (err, result) {
+    //     if (err) {
+    //       return res.status(500).json({
+    //         title: 'An error occured',
+    //         err: error
+    //       })
+    //     }
+    //     console.log(result);
+    //     res.status(201).json({
+    //       message: 'Saved data',
+    //       obj: result
+    //     });
+    //   }
+    // );
+  })
+})
 /**
  * Create HTTP server.
  */
 // Bid.update({}, { $set: { votes: 0 } }, { multi: true }, () => console.log('done'));
-leadPractice.update({}, {
-  $set: {
-    answer: [{
-      lead: {
-        name: String,
-        suit: String,
-      },
-      comment: String,
-      votes: 0
-    }]
-  }
-},
-  { multi: true }, () => console.log('done'));
+// leadPractice.update({}, {
+//   $set: {
+//     answer: []
+//   }
+// },
+//   { multi: true }, () => console.log('done'));
 const server = http.createServer(app);
 
 // Set our api routes

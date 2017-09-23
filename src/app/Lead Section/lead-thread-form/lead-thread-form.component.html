@@ -1,0 +1,30 @@
+<form (ngSubmit)="onSubmit()" #form="ngForm">
+  <div class="col-xs-6">
+    <div *ngIf="handInitialized" style="margin:10px">
+      <div *ngIf="!leadClicked" class="response">
+        You can choose a lead.
+      </div>
+      <div class="response" *ngIf="leadClicked">
+        <div class="row">
+          <div class="row" id="com">
+            <div class="col-xs-12">
+              <h3>You chose {{lead.name}} of {{lead.suit}} as your lead.</h3>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <label>Add your comment</label>
+          <input type="text" class="form-control" name="comments" ngModel>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12" style="display: flex; justify-content: center; margin-top: 8px">
+          <button type="submit" [disabled]="lead===undefined" class="btn btn-primary">Submit Answer
+              </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

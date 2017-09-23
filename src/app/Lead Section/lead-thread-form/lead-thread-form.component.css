@@ -1,0 +1,9 @@
+.response {
+  box-sizing: border-box;
+  padding: 10px;
+  border: 2px solid lightseagreen;
+  border-radius: 1px;
+  margin-top: auto;
+  display: flex;
+  justify-content: center;
+}

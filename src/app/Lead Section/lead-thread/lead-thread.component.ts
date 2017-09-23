@@ -1,13 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 import { Card } from '../../Services/card.model';
-import { BridgeApi } from '../..//Services/bridge.service';
+import { BridgeApi } from '../../Services/bridge.service';
 @Component({
-  selector: 'app-lead-practice',
-  templateUrl: './lead-practice.component.html',
-  styleUrls: ['./lead-practice.component.css']
+  selector: 'app-lead-thread',
+  templateUrl: './lead-thread.component.html',
+  styleUrls: ['./lead-thread.component.css']
 })
-export class LeadPracticeComponent implements OnInit {
+export class LeadThreadComponent implements OnInit {
   dummyLead = {
     'colors': {
       'colorWest': 'Green',
@@ -178,29 +178,31 @@ export class LeadPracticeComponent implements OnInit {
   }[];
   correctlead: Card;
   lead: Card;
+  start = false;
   Colors: {
     colorWest: String,
     colorSouth: String,
     colorEast: String,
     colorNorth: String
   };
-  leadClicked = false;
+  id: string;
+  leadClicked: boolean;
   hand: Card[];
   spades: Card[];
   hearts: Card[];
   clubs: Card[];
   diamonds: Card[];
-  answerComment: string;
-  start = false;
-  answerValid = false;
-  answerSubmitted = false;
-  comments: string;
-  startPractice() {
+  comments: String[];
+  chooseLead(lead: Card) {
+    this.lead = lead;
+    this.leadClicked = true;
+  }
+  constructor(public bridgeApi: BridgeApi) { }
+  startLeading() {
     this.bridgeApi.fetchleadPractice().subscribe(
       (result) => {
-        this.answerSubmitted = false;
-        this.leadClicked = false;
         this.start = true;
+        this.leadClicked = false;
         this.Colors = result.colors;
         this.correctlead = result.lead;
         this.comments = result.comments;
@@ -208,41 +210,15 @@ export class LeadPracticeComponent implements OnInit {
         this.North = result.NorthBid;
         this.South = result.SouthBid;
         this.West = result.WestBid;
-        this.East.forEach(
-          (el) => { el.hover = false; }
-        );
-        this.North.forEach(
-          (el) => { el.hover = false; }
-        );
-        this.South.forEach(
-          (el) => { el.hover = false; }
-        );
-        this.West.forEach(
-          (el) => { el.hover = false; }
-        );
         this.hand = result.hand;
+        this.id = result._id;
+        // this.comments = result.answer.comments;
         this.spades = this.bridgeApi.filterArray(this.hand, 'Spades');
         this.hearts = this.bridgeApi.filterArray(this.hand, 'Hearts');
         this.diamonds = this.bridgeApi.filterArray(this.hand, 'Diamonds');
         this.clubs = this.bridgeApi.filterArray(this.hand, 'Clubs');
-      }
-    );
+      });
   }
-  chooseLead(lead: Card) {
-    this.lead = lead;
-    this.leadClicked = true;
+  ngOnInit() {
   }
-  submitLead() {
-    this.answerSubmitted = true;
-    if (this.lead.name === this.correctlead.name && this.lead.suit === this.correctlead.suit) {
-      this.answerValid = true;
-      this.answerComment = 'Your answer was correct';
-    } else {
-      this.answerValid = false;
-      this.answerComment = 'Your answer was incorrect';
-    }
-  }
-  constructor(public bridgeApi: BridgeApi) { }
-
-  ngOnInit() { }
 }

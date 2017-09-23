@@ -1,0 +1,112 @@
+.heading {
+  display:flex;
+  color: black;
+   justify-content: center;
+    border:1px solid black;
+    text-align: center;
+}
+.contract {
+  margin-bottom: 10px;
+  padding: 0px 25%;
+  text-align: center;
+}
+#contract-bid {
+  background-color: lightgoldenrodyellow;
+  border: 1px solid rgba(0, 0, 0, 0.23);
+}
+#custom-hover {
+  position: absolute;
+  justify-content: center;
+  display: flex;
+  background-color: lightgray;
+  border: 1px solid black;
+  text-align: center;
+  width: auto;
+}
+#subheading {
+  display:flex;
+  color: #974141;
+  justify-content: center;
+  font-size: large;
+  font-weight: bold;
+  box-sizing: border-box;
+  margin: 5px auto;
+  border: 3px dotted lightgrey;
+  border-radius: 3px;
+  width: 80%;
+  text-align: center;
+}
+.hline {
+  border-color: black;
+  width: 100%;
+}
+.card {
+  float: left;
+  width: auto;
+  height: 150px;
+  display: block;
+  border: 1px solid;
+  border-right:1px bold;
+  border-color: grey;;
+  padding: 6px;
+  text-align: center;
+  font-weight: bold;
+  font-size: 20px;
+  background-color: white;
+  border-radius: 3px;
+  cursor: pointer;
+}
+.suit {
+  width: 20px;
+  height: 20px;
+}
+.board {
+  padding: 100px 30px 60px 30px;
+  background-color: green;
+  display: flex;
+  justify-content: center;
+  border-radius: 10px;
+}
+.red {
+  color:#E31818;
+}
+.hcpdisplay {
+  font-weight: bold;
+  font-size: 18px;
+  display: flex;
+  justify-content: center;
+}
+.form-control {
+  height: auto;
+  margin-bottom: 3px;
+  padding: 5px 5px;
+}
+.response {
+  box-sizing: border-box;
+  padding: 10px;
+  border: 2px solid lightseagreen;
+  border-radius: 1px;
+  margin-top: auto;
+  display: flex;
+  justify-content: center;
+}
+#com {
+  text-align: center;
+}
+@media screen and (max-width: 480px) {
+  .board {
+    padding: 20px 20px 20px 20px;
+    background-color: green;
+    display: flex;
+    justify-content: center;
+    border-radius: 10px;
+  }
+  .card {
+    height: auto;
+    font-size: 15px;
+  }
+  .suit {
+    width: 18px;
+    height: 18px;
+  }
+}

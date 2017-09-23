@@ -569,67 +569,6 @@ var _a, _b, _c;
 
 /***/ }),
 
-/***/ "../../../../../src/app/Lead Section/lead-main/lead-main.component.css":
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
-// imports
-
-
-// module
-exports.push([module.i, "", ""]);
-
-// exports
-
-
-/*** EXPORTS FROM exports-loader ***/
-module.exports = module.exports.toString();
-
-/***/ }),
-
-/***/ "../../../../../src/app/Lead Section/lead-main/lead-main.component.html":
-/***/ (function(module, exports) {
-
-module.exports = "<p>\n  lead-main works!\n</p>\n"
-
-/***/ }),
-
-/***/ "../../../../../src/app/Lead Section/lead-main/lead-main.component.ts":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return LeadMainComponent; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-var LeadMainComponent = (function () {
-    function LeadMainComponent() {
-    }
-    LeadMainComponent.prototype.ngOnInit = function () {
-    };
-    return LeadMainComponent;
-}());
-LeadMainComponent = __decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["o" /* Component */])({
-        selector: 'app-lead-main',
-        template: __webpack_require__("../../../../../src/app/Lead Section/lead-main/lead-main.component.html"),
-        styles: [__webpack_require__("../../../../../src/app/Lead Section/lead-main/lead-main.component.css")]
-    }),
-    __metadata("design:paramtypes", [])
-], LeadMainComponent);
-
-//# sourceMappingURL=lead-main.component.js.map
-
-/***/ }),
-
 /***/ "../../../../../src/app/Lead Section/lead-practice/lead-practice.component.css":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -881,6 +820,338 @@ var _a;
 
 /***/ }),
 
+/***/ "../../../../../src/app/Lead Section/lead-thread-form/lead-thread-form.component.css":
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, ".response {\r\n  box-sizing: border-box;\r\n  padding: 10px;\r\n  border: 2px solid lightseagreen;\r\n  border-radius: 1px;\r\n  margin-top: auto;\r\n  display: -webkit-box;\r\n  display: -ms-flexbox;\r\n  display: flex;\r\n  -webkit-box-pack: center;\r\n      -ms-flex-pack: center;\r\n          justify-content: center;\r\n}\r\n", ""]);
+
+// exports
+
+
+/*** EXPORTS FROM exports-loader ***/
+module.exports = module.exports.toString();
+
+/***/ }),
+
+/***/ "../../../../../src/app/Lead Section/lead-thread-form/lead-thread-form.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<form (ngSubmit)=\"onSubmit()\" #form=\"ngForm\">\n  <div class=\"col-xs-6\">\n    <div *ngIf=\"handInitialized\" style=\"margin:10px\">\n      <div *ngIf=\"!leadClicked\" class=\"response\">\n        You can choose a lead.\n      </div>\n      <div class=\"response\" *ngIf=\"leadClicked\">\n        <div class=\"row\">\n          <div class=\"row\" id=\"com\">\n            <div class=\"col-xs-12\">\n              <h3>You chose {{lead.name}} of {{lead.suit}} as your lead.</h3>\n            </div>\n          </div>\n        </div>\n      </div>\n      <div class=\"row\">\n        <div class=\"col-xs-12\">\n          <label>Add your comment</label>\n          <input type=\"text\" class=\"form-control\" name=\"comments\" ngModel>\n        </div>\n      </div>\n      <div class=\"row\">\n        <div class=\"col-xs-12\" style=\"display: flex; justify-content: center; margin-top: 8px\">\n          <button type=\"submit\" [disabled]=\"lead===undefined\" class=\"btn btn-primary\">Submit Answer\n              </button>\n        </div>\n      </div>\n    </div>\n  </div>\n</form>\n"
+
+/***/ }),
+
+/***/ "../../../../../src/app/Lead Section/lead-thread-form/lead-thread-form.component.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return LeadThreadFormComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_forms__ = __webpack_require__("../../../forms/@angular/forms.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Services_bridge_service__ = __webpack_require__("../../../../../src/app/Services/bridge.service.ts");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+var LeadThreadFormComponent = (function () {
+    function LeadThreadFormComponent(bridgeApi) {
+        this.bridgeApi = bridgeApi;
+    }
+    LeadThreadFormComponent.prototype.onSubmit = function () {
+        var answer = {
+            lead: this.lead,
+            comments: this.leadForm.value.comments,
+            votes: 0
+        };
+        this.bridgeApi.submitted = true;
+        this.bridgeApi.postComment(this.id, answer).subscribe(function (data) { return console.log('A lead answer was succesfully sent'); }, function (error) { return console.error(error); });
+        console.log(answer);
+    };
+    LeadThreadFormComponent.prototype.ngOnInit = function () {
+    };
+    return LeadThreadFormComponent;
+}());
+__decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_16" /* ViewChild */])('form'),
+    __metadata("design:type", typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_forms__["b" /* NgForm */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_forms__["b" /* NgForm */]) === "function" && _a || Object)
+], LeadThreadFormComponent.prototype, "leadForm", void 0);
+__decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["F" /* Input */])(),
+    __metadata("design:type", Boolean)
+], LeadThreadFormComponent.prototype, "handInitialized", void 0);
+__decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["F" /* Input */])(),
+    __metadata("design:type", Boolean)
+], LeadThreadFormComponent.prototype, "leadClicked", void 0);
+__decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["F" /* Input */])(),
+    __metadata("design:type", Object)
+], LeadThreadFormComponent.prototype, "lead", void 0);
+__decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["F" /* Input */])(),
+    __metadata("design:type", String)
+], LeadThreadFormComponent.prototype, "id", void 0);
+LeadThreadFormComponent = __decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["o" /* Component */])({
+        selector: 'app-lead-thread-form',
+        template: __webpack_require__("../../../../../src/app/Lead Section/lead-thread-form/lead-thread-form.component.html"),
+        styles: [__webpack_require__("../../../../../src/app/Lead Section/lead-thread-form/lead-thread-form.component.css")]
+    }),
+    __metadata("design:paramtypes", [typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__Services_bridge_service__["a" /* BridgeApi */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__Services_bridge_service__["a" /* BridgeApi */]) === "function" && _b || Object])
+], LeadThreadFormComponent);
+
+var _a, _b;
+//# sourceMappingURL=lead-thread-form.component.js.map
+
+/***/ }),
+
+/***/ "../../../../../src/app/Lead Section/lead-thread/lead-thread.component.css":
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, ".heading {\r\n  display:-webkit-box;\r\n  display:-ms-flexbox;\r\n  display:flex;\r\n  color: black;\r\n   -webkit-box-pack: center;\r\n       -ms-flex-pack: center;\r\n           justify-content: center;\r\n    border:1px solid black;\r\n    text-align: center;\r\n}\r\n.contract {\r\n  margin-bottom: 10px;\r\n  padding: 0px 25%;\r\n  text-align: center;\r\n}\r\n#contract-bid {\r\n  background-color: lightgoldenrodyellow;\r\n  border: 1px solid rgba(0, 0, 0, 0.23);\r\n}\r\n#custom-hover {\r\n  position: absolute;\r\n  -webkit-box-pack: center;\r\n      -ms-flex-pack: center;\r\n          justify-content: center;\r\n  display: -webkit-box;\r\n  display: -ms-flexbox;\r\n  display: flex;\r\n  background-color: lightgray;\r\n  border: 1px solid black;\r\n  text-align: center;\r\n  width: auto;\r\n}\r\n#subheading {\r\n  display:-webkit-box;\r\n  display:-ms-flexbox;\r\n  display:flex;\r\n  color: #974141;\r\n  -webkit-box-pack: center;\r\n      -ms-flex-pack: center;\r\n          justify-content: center;\r\n  font-size: large;\r\n  font-weight: bold;\r\n  box-sizing: border-box;\r\n  margin: 5px auto;\r\n  border: 3px dotted lightgrey;\r\n  border-radius: 3px;\r\n  width: 80%;\r\n  text-align: center;\r\n}\r\n.hline {\r\n  border-color: black;\r\n  width: 100%;\r\n}\r\n.card {\r\n  float: left;\r\n  width: auto;\r\n  height: 150px;\r\n  display: block;\r\n  border: 1px solid;\r\n  border-right:1px bold;\r\n  border-color: grey;;\r\n  padding: 6px;\r\n  text-align: center;\r\n  font-weight: bold;\r\n  font-size: 20px;\r\n  background-color: white;\r\n  border-radius: 3px;\r\n  cursor: pointer;\r\n}\r\n.suit {\r\n  width: 20px;\r\n  height: 20px;\r\n}\r\n.board {\r\n  padding: 100px 30px 60px 30px;\r\n  background-color: green;\r\n  display: -webkit-box;\r\n  display: -ms-flexbox;\r\n  display: flex;\r\n  -webkit-box-pack: center;\r\n      -ms-flex-pack: center;\r\n          justify-content: center;\r\n  border-radius: 10px;\r\n}\r\n.red {\r\n  color:#E31818;\r\n}\r\n.hcpdisplay {\r\n  font-weight: bold;\r\n  font-size: 18px;\r\n  display: -webkit-box;\r\n  display: -ms-flexbox;\r\n  display: flex;\r\n  -webkit-box-pack: center;\r\n      -ms-flex-pack: center;\r\n          justify-content: center;\r\n}\r\n.form-control {\r\n  height: auto;\r\n  margin-bottom: 3px;\r\n  padding: 5px 5px;\r\n}\r\n.response {\r\n  box-sizing: border-box;\r\n  padding: 10px;\r\n  border: 2px solid lightseagreen;\r\n  border-radius: 1px;\r\n  margin-top: auto;\r\n  display: -webkit-box;\r\n  display: -ms-flexbox;\r\n  display: flex;\r\n  -webkit-box-pack: center;\r\n      -ms-flex-pack: center;\r\n          justify-content: center;\r\n}\r\n#com {\r\n  text-align: center;\r\n}\r\n@media screen and (max-width: 480px) {\r\n  .board {\r\n    padding: 20px 20px 20px 20px;\r\n    background-color: green;\r\n    display: -webkit-box;\r\n    display: -ms-flexbox;\r\n    display: flex;\r\n    -webkit-box-pack: center;\r\n        -ms-flex-pack: center;\r\n            justify-content: center;\r\n    border-radius: 10px;\r\n  }\r\n  .card {\r\n    height: auto;\r\n    font-size: 15px;\r\n  }\r\n  .suit {\r\n    width: 18px;\r\n    height: 18px;\r\n  }\r\n}\r\n", ""]);
+
+// exports
+
+
+/*** EXPORTS FROM exports-loader ***/
+module.exports = module.exports.toString();
+
+/***/ }),
+
+/***/ "../../../../../src/app/Lead Section/lead-thread/lead-thread.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"container\">\n  <div class=\"row\" *ngIf=\"!start\">\n    <div class=\"col-xs-12\">\n      <div class=\"row heading\">\n        <h2>This sections give you the chance to practice on how to lead as the defence</h2>\n      </div>\n      <div class=\"row\">\n        <span id=\"subheading\"> When you click the \"Start Leading\" button, you will be served\n          a specific hand accompanied by a contract.\n          After you choose your Lead and press Submit, the comment section will appear and you will be able to see what other people chose!</span>\n      </div>\n    </div>\n\n  </div>\n  <hr class=\"hline\" *ngIf=\"!start\">\n  <div class=\"row\">\n    <div class=\"col-xs-12\" style=\"display:flex; justify-content:center; padding:0px 20px 20px 20px;\">\n      <button class=\"btn btn-primary\" (click)=\"startLeading()\">Start Leading</button>\n    </div>\n  </div>\n  <div class=\"row\" *ngIf=\"start\">\n    <app-contract-design [East]=\"East\" [West]=\"West\" [North]=\"North\" [South]=\"South\" [Colors]=\"Colors\"></app-contract-design>\n    <hr class=\"hline\">\n    <div class=\"row\">\n      <div class=\"col-xs-12\">\n        <div class=\"col-xs-6\">\n          <div class=\"board\" *ngIf=\"handInitialized\">\n            <div class=\"row\">\n              <div class=\"card\" (click)=\"chooseLead(card)\" *ngFor=\"let card of spades\">{{card.name}}\n                <br>\n                <img class=\"suit\" src=\"https://i.imgur.com/tXgx0h3.png\">\n              </div>\n              <div class=\"card red\" (click)=\"chooseLead(card)\" *ngFor=\"let card of hearts\">{{card.name}}\n                <br>\n                <img class=\"suit\" src=\"https://i.imgur.com/Chg6eQ8.jpg\">\n              </div>\n              <div class=\"card\" (click)=\"chooseLead(card)\" *ngFor=\"let card of clubs\">{{card.name}}\n                <br>\n                <img class=\"suit\" src=\"https://i.imgur.com/TsBK3k9.jpg\">\n              </div>\n              <div class=\"card red\" (click)=\"chooseLead(card)\" *ngFor=\"let card of diamonds\">{{card.name}}\n                <br>\n                <img class=\"suit\" src=\"https://i.imgur.com/khCb5Vu.jpg\">\n              </div>\n            </div>\n          </div>\n        </div>\n        <app-lead-thread-form [id]=\"id\" [handInitialized]=\"handInitialized\" [leadClicked]=\"leadClicked\" [lead]=\"lead\"></app-lead-thread-form>\n      </div>\n    </div>\n    <div class=\"row\" *ngIf=\"bridgeApi.submitted\">\n      <label for=\"comments\"> Leads and Comments</label>\n      <div class=\"col-xs-12\" *ngFor=\"let comment of comments\">\n        <div class=\"form-control\">\n          <strong> Lead : {{lead.name}} of {{lead.suit}}</strong> <br>\n          <strong> Comments</strong> : {{comment}} </div>\n      </div>\n    </div>\n  </div>\n</div>\n"
+
+/***/ }),
+
+/***/ "../../../../../src/app/Lead Section/lead-thread/lead-thread.component.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return LeadThreadComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Services_bridge_service__ = __webpack_require__("../../../../../src/app/Services/bridge.service.ts");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+var LeadThreadComponent = (function () {
+    function LeadThreadComponent(bridgeApi) {
+        this.bridgeApi = bridgeApi;
+        this.dummyLead = {
+            'colors': {
+                'colorWest': 'Green',
+                'colorSouth': 'Green',
+                'colorEast': 'Green',
+                'colorNorth': 'Green'
+            },
+            'comments': 'Leading a major seems better at this sequence.',
+            'lead': {
+                'suit': 'Hearts',
+                'name': '2',
+                'value': 1,
+                'clicked': true
+            },
+            'WestBid': [
+                {
+                    'bidComment': 'Hello',
+                    'suitBid': '',
+                    'numBid': 'Pass'
+                },
+                {
+                    'bidComment': '',
+                    'suitBid': '',
+                    'numBid': 'Pass'
+                }
+            ],
+            'SouthBid': [
+                {
+                    'bidComment': '',
+                    'suitBid': 'Hearts',
+                    'numBid': '2'
+                },
+                {
+                    'bidComment': ' hello hello hello hello hello hello',
+                    'suitBid': '',
+                    'numBid': 'Pass'
+                }
+            ],
+            'EastBid': [
+                {
+                    'bidComment': '',
+                    'suitBid': '',
+                    'numBid': 'Pass'
+                },
+                {
+                    'bidComment': '',
+                    'suitBid': '',
+                    'numBid': 'Pass'
+                }
+            ],
+            'NorthBid': [
+                {
+                    'bidComment': '',
+                    'suitBid': '',
+                    'numBid': 'Pass'
+                },
+                {
+                    'bidComment': '',
+                    'suitBid': 'NoTrump',
+                    'numBid': '3'
+                }
+            ],
+            'hand': [
+                {
+                    'suit': 'Spades',
+                    'name': '8',
+                    'value': 7,
+                    'clicked': true
+                },
+                {
+                    'suit': 'Spades',
+                    'name': '6',
+                    'value': 5,
+                    'clicked': true
+                },
+                {
+                    'suit': 'Hearts',
+                    'name': 'J',
+                    'value': 10,
+                    'clicked': true
+                },
+                {
+                    'suit': 'Hearts',
+                    'name': '9',
+                    'value': 8,
+                    'clicked': true
+                },
+                {
+                    'suit': 'Hearts',
+                    'name': '3',
+                    'value': 2,
+                    'clicked': true
+                },
+                {
+                    'suit': 'Hearts',
+                    'name': '2',
+                    'value': 1,
+                    'clicked': true
+                },
+                {
+                    'suit': 'Diamonds',
+                    'name': 'Q',
+                    'value': 11,
+                    'clicked': true
+                },
+                {
+                    'suit': 'Diamonds',
+                    'name': '5',
+                    'value': 4,
+                    'clicked': true
+                },
+                {
+                    'suit': 'Diamonds',
+                    'name': '4',
+                    'value': 3,
+                    'clicked': true
+                },
+                {
+                    'suit': 'Diamonds',
+                    'name': '3',
+                    'value': 2,
+                    'clicked': true
+                },
+                {
+                    'suit': 'Clubs',
+                    'name': 'A',
+                    'value': 13,
+                    'clicked': true
+                },
+                {
+                    'suit': 'Clubs',
+                    'name': '10',
+                    'value': 9,
+                    'clicked': true
+                },
+                {
+                    'suit': 'Clubs',
+                    'name': '2',
+                    'value': 1,
+                    'clicked': true
+                }
+            ],
+        };
+        this.handInitialized = true;
+        this.start = false;
+    }
+    LeadThreadComponent.prototype.chooseLead = function (lead) {
+        this.lead = lead;
+        this.leadClicked = true;
+    };
+    LeadThreadComponent.prototype.startLeading = function () {
+        var _this = this;
+        this.bridgeApi.fetchleadPractice().subscribe(function (result) {
+            _this.start = true;
+            _this.leadClicked = false;
+            _this.Colors = result.colors;
+            _this.correctlead = result.lead;
+            _this.comments = result.comments;
+            _this.East = result.EastBid;
+            _this.North = result.NorthBid;
+            _this.South = result.SouthBid;
+            _this.West = result.WestBid;
+            _this.hand = result.hand;
+            _this.id = result._id;
+            // this.comments = result.answer.comments;
+            _this.spades = _this.bridgeApi.filterArray(_this.hand, 'Spades');
+            _this.hearts = _this.bridgeApi.filterArray(_this.hand, 'Hearts');
+            _this.diamonds = _this.bridgeApi.filterArray(_this.hand, 'Diamonds');
+            _this.clubs = _this.bridgeApi.filterArray(_this.hand, 'Clubs');
+        });
+    };
+    LeadThreadComponent.prototype.ngOnInit = function () {
+    };
+    return LeadThreadComponent;
+}());
+LeadThreadComponent = __decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["o" /* Component */])({
+        selector: 'app-lead-thread',
+        template: __webpack_require__("../../../../../src/app/Lead Section/lead-thread/lead-thread.component.html"),
+        styles: [__webpack_require__("../../../../../src/app/Lead Section/lead-thread/lead-thread.component.css")]
+    }),
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__Services_bridge_service__["a" /* BridgeApi */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__Services_bridge_service__["a" /* BridgeApi */]) === "function" && _a || Object])
+], LeadThreadComponent);
+
+var _a;
+//# sourceMappingURL=lead-thread.component.js.map
+
+/***/ }),
+
 /***/ "../../../../../src/app/Services/bridge.service.ts":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -1018,6 +1289,15 @@ var BridgeApi = (function () {
     };
     BridgeApi.prototype.fetchleadPractice = function () {
         return this.http.get('/getrandomleadpractice').map(function (response) { return response.json().result; }).catch(function (error) { return __WEBPACK_IMPORTED_MODULE_1_rxjs_Rx__["Observable"].throw(error.json()); });
+    };
+    BridgeApi.prototype.postComment = function (id, answer) {
+        var header = new __WEBPACK_IMPORTED_MODULE_2__angular_http__["a" /* Headers */]({ 'Content-Type': 'application/json' });
+        var ans = {
+            id: id,
+            answer: answer
+        };
+        var body = JSON.stringify(ans);
+        return this.http.post('/postleadanswer', body, { headers: header }).map(function (response) { response.json(); }).catch(function (error) { return __WEBPACK_IMPORTED_MODULE_1_rxjs_Rx__["Observable"].throw(error.json()); });
     };
     return BridgeApi;
 }());
@@ -1203,17 +1483,21 @@ AppComponent = __decorate([
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__Lead_Section_lead_form_lead_form_component__ = __webpack_require__("../../../../../src/app/Lead Section/lead-form/lead-form.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__Lead_Section_lead_practice_lead_practice_component__ = __webpack_require__("../../../../../src/app/Lead Section/lead-practice/lead-practice.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__Bid_Section_practiceform_practiceform_component__ = __webpack_require__("../../../../../src/app/Bid Section/practiceform/practiceform.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__Lead_Section_lead_main_lead_main_component__ = __webpack_require__("../../../../../src/app/Lead Section/lead-main/lead-main.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__testpage_testpage_component__ = __webpack_require__("../../../../../src/app/testpage/testpage.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__shared_components_card_board_card_board_component__ = __webpack_require__("../../../../../src/app/shared-components/card-board/card-board.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__shared_components_contract_design_contract_design_component__ = __webpack_require__("../../../../../src/app/shared-components/contract-design/contract-design.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__shared_components_suit_img_suit_img_component__ = __webpack_require__("../../../../../src/app/shared-components/suit-img/suit-img.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__testpage_testpage_component__ = __webpack_require__("../../../../../src/app/testpage/testpage.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__shared_components_card_board_card_board_component__ = __webpack_require__("../../../../../src/app/shared-components/card-board/card-board.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__shared_components_contract_design_contract_design_component__ = __webpack_require__("../../../../../src/app/shared-components/contract-design/contract-design.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__shared_components_suit_img_suit_img_component__ = __webpack_require__("../../../../../src/app/shared-components/suit-img/suit-img.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__shared_directives_dropdown_directive__ = __webpack_require__("../../../../../src/app/shared-directives/dropdown.directive.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__Lead_Section_lead_thread_lead_thread_component__ = __webpack_require__("../../../../../src/app/Lead Section/lead-thread/lead-thread.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__Lead_Section_lead_thread_form_lead_thread_form_component__ = __webpack_require__("../../../../../src/app/Lead Section/lead-thread-form/lead-thread-form.component.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
+
 
 
 
@@ -1244,7 +1528,8 @@ var routes = [
     { path: 'donate', component: __WEBPACK_IMPORTED_MODULE_12__donate_donate_component__["a" /* DonateComponent */] },
     { path: 'contact', component: __WEBPACK_IMPORTED_MODULE_13__contact_contact_component__["a" /* ContactComponent */] },
     { path: 'lead', component: __WEBPACK_IMPORTED_MODULE_14__Lead_Section_lead_form_lead_form_component__["a" /* LeadFormComponent */] },
-    { path: 'test', component: __WEBPACK_IMPORTED_MODULE_18__testpage_testpage_component__["a" /* TestpageComponent */] },
+    { path: 'leadthread', component: __WEBPACK_IMPORTED_MODULE_22__Lead_Section_lead_thread_lead_thread_component__["a" /* LeadThreadComponent */] },
+    { path: 'test', component: __WEBPACK_IMPORTED_MODULE_17__testpage_testpage_component__["a" /* TestpageComponent */] },
     { path: '**', redirectTo: '' }
 ];
 var AppModule = (function () {
@@ -1266,11 +1551,13 @@ AppModule = __decorate([
             __WEBPACK_IMPORTED_MODULE_14__Lead_Section_lead_form_lead_form_component__["a" /* LeadFormComponent */],
             __WEBPACK_IMPORTED_MODULE_15__Lead_Section_lead_practice_lead_practice_component__["a" /* LeadPracticeComponent */],
             __WEBPACK_IMPORTED_MODULE_16__Bid_Section_practiceform_practiceform_component__["a" /* PracticeformComponent */],
-            __WEBPACK_IMPORTED_MODULE_17__Lead_Section_lead_main_lead_main_component__["a" /* LeadMainComponent */],
-            __WEBPACK_IMPORTED_MODULE_18__testpage_testpage_component__["a" /* TestpageComponent */],
-            __WEBPACK_IMPORTED_MODULE_19__shared_components_card_board_card_board_component__["a" /* CardBoardComponent */],
-            __WEBPACK_IMPORTED_MODULE_20__shared_components_contract_design_contract_design_component__["a" /* ContractDesignComponent */],
-            __WEBPACK_IMPORTED_MODULE_21__shared_components_suit_img_suit_img_component__["a" /* SuitImgComponent */],
+            __WEBPACK_IMPORTED_MODULE_17__testpage_testpage_component__["a" /* TestpageComponent */],
+            __WEBPACK_IMPORTED_MODULE_18__shared_components_card_board_card_board_component__["a" /* CardBoardComponent */],
+            __WEBPACK_IMPORTED_MODULE_19__shared_components_contract_design_contract_design_component__["a" /* ContractDesignComponent */],
+            __WEBPACK_IMPORTED_MODULE_20__shared_components_suit_img_suit_img_component__["a" /* SuitImgComponent */],
+            __WEBPACK_IMPORTED_MODULE_21__shared_directives_dropdown_directive__["a" /* DropdownDirective */],
+            __WEBPACK_IMPORTED_MODULE_22__Lead_Section_lead_thread_lead_thread_component__["a" /* LeadThreadComponent */],
+            __WEBPACK_IMPORTED_MODULE_23__Lead_Section_lead_thread_form_lead_thread_form_component__["a" /* LeadThreadFormComponent */]
         ],
         imports: [
             __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["a" /* BrowserModule */],
@@ -1430,7 +1717,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/header/header.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<nav class=\"navbar navbar-inverse\" style=\"background: linear-gradient(to right, darkgreen , green)\">\n      <div class=\"collapse navbar-collapse\" id=\"bs-example-navbar-collapse-1\">\n        <ul class=\"nav navbar-nav\">\n          <li style=\"cursor:pointer;\" routerLinkActive=\"active\" [routerLinkActiveOptions]=\"{exact: true}\">\n            <a id=\"menu-item\" routerLink=\"/\">Home</a></li>\n          <li style=\"cursor:pointer\" routerLinkActive=\"active\">\n            <a id=\"menu-item\" routerLink=\"/bid\">Bid Now</a></li>\n          <li style=\"cursor:pointer\" routerLinkActive=\"active\">\n            <a id=\"menu-item\" routerLink=\"/practice\">Practice</a> </li>\n          <li style=\"cursor:pointer\" routerLinkActive=\"active\">\n            <a id=\"menu-item\" routerLink=\"/lead\">Lead</a></li>\n            <li style=\"cursor:pointer\" routerLinkActive=\"active\">\n                <a id=\"menu-item\" routerLink=\"/leadpractice\">Lead Practice</a></li>\n          <li style=\"cursor:pointer\" routerLinkActive=\"active\">\n            <a id=\"menu-item\" routerLink=\"/donate\">Donate</a></li>\n          <li style=\"cursor:pointer\" routerLinkActive=\"active\">\n            <a id=\"menu-item\" routerLink=\"/contact\">Contact</a></li>\n        </ul>\n      </div>\n</nav>\n"
+module.exports = "<nav class=\"navbar navbar-inverse\" style=\"background: linear-gradient(to right, darkgreen , green)\">\n      <div class=\"collapse navbar-collapse\" id=\"bs-example-navbar-collapse-1\">\n        <ul class=\"nav navbar-nav\">\n          <li style=\"cursor:pointer;\" routerLinkActive=\"active\" [routerLinkActiveOptions]=\"{exact: true}\">\n            <a id=\"menu-item\" routerLink=\"/\">Home</a></li>\n          <li style=\"cursor:pointer\" routerLinkActive=\"active\">\n            <a id=\"menu-item\" routerLink=\"/bid\">Bid Thread</a></li>\n          <li style=\"cursor:pointer\" routerLinkActive=\"active\">\n            <a id=\"menu-item\" routerLink=\"/practice\">Practice</a> </li>\n          <li style=\"cursor:pointer\" routerLinkActive=\"active\">\n            <a id=\"menu-item\" routerLink=\"/lead\">Lead Post</a></li>\n          <li style=\"cursor:pointer\" routerLinkActive=\"active\">\n            <a id=\"menu-item\" routerLink=\"/leadthread\">Lead Thread</a></li>\n            <li style=\"cursor:pointer\" routerLinkActive=\"active\">\n                <a id=\"menu-item\" routerLink=\"/leadpractice\">Lead Practice</a></li>\n          <li style=\"cursor:pointer\" routerLinkActive=\"active\">\n            <a id=\"menu-item\" routerLink=\"/donate\">Donate</a></li>\n          <li style=\"cursor:pointer\" routerLinkActive=\"active\">\n            <a id=\"menu-item\" routerLink=\"/contact\">Contact</a></li>\n        </ul>\n      </div>\n</nav>\n"
 
 /***/ }),
 
@@ -1777,6 +2064,51 @@ SuitImgComponent = __decorate([
 ], SuitImgComponent);
 
 //# sourceMappingURL=suit-img.component.js.map
+
+/***/ }),
+
+/***/ "../../../../../src/app/shared-directives/dropdown.directive.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return DropdownDirective; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+var DropdownDirective = (function () {
+    function DropdownDirective() {
+        this.isOpen = false;
+    }
+    DropdownDirective.prototype.toggleOpen = function () {
+        this.isOpen = !this.isOpen;
+    };
+    return DropdownDirective;
+}());
+__decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["z" /* HostBinding */])('class.open'),
+    __metadata("design:type", Object)
+], DropdownDirective.prototype, "isOpen", void 0);
+__decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* HostListener */])('click'),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", void 0)
+], DropdownDirective.prototype, "toggleOpen", null);
+DropdownDirective = __decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["u" /* Directive */])({
+        selector: '[appDropdown]'
+    })
+], DropdownDirective);
+
+//# sourceMappingURL=dropdown.directive.js.map
 
 /***/ }),
 

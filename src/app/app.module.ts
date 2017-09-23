@@ -17,11 +17,13 @@ import { ContactComponent } from './contact/contact.component';
 import { LeadFormComponent } from './Lead Section/lead-form/lead-form.component';
 import { LeadPracticeComponent } from './Lead Section/lead-practice/lead-practice.component';
 import { PracticeformComponent } from './Bid Section/practiceform/practiceform.component';
-import { LeadMainComponent } from './Lead Section/lead-main/lead-main.component';
 import { TestpageComponent } from './testpage/testpage.component';
 import { CardBoardComponent } from './shared-components/card-board/card-board.component';
 import { ContractDesignComponent } from './shared-components/contract-design/contract-design.component';
 import { SuitImgComponent } from './shared-components/suit-img/suit-img.component';
+import { DropdownDirective } from './shared-directives/dropdown.directive';
+import { LeadThreadComponent } from './Lead Section/lead-thread/lead-thread.component';
+import { LeadThreadFormComponent } from './Lead Section/lead-thread-form/lead-thread-form.component';
 const routes = [
   { path: '', component: HomepageComponent },
   { path: 'bid', component: BidThreadComponent },
@@ -30,7 +32,8 @@ const routes = [
   { path: 'donate', component: DonateComponent },
   { path: 'contact', component: ContactComponent },
   { path: 'lead', component: LeadFormComponent },
-  {path: 'test', component: TestpageComponent},
+  {path: 'leadthread', component: LeadThreadComponent},
+  { path: 'test', component: TestpageComponent },
   { path: '**', redirectTo: '' }
 ];
 
@@ -47,11 +50,13 @@ const routes = [
     LeadFormComponent,
     LeadPracticeComponent,
     PracticeformComponent,
-    LeadMainComponent,
     TestpageComponent,
     CardBoardComponent,
     ContractDesignComponent,
     SuitImgComponent,
+    DropdownDirective,
+    LeadThreadComponent,
+    LeadThreadFormComponent
   ],
   imports: [
     BrowserModule,

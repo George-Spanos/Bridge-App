@@ -138,4 +138,17 @@ export class BridgeApi {
       (error: Response) => Observable.throw(error.json())
       );
   }
+  postComment(id, answer) {
+    const header = new Headers({ 'Content-Type': 'application/json' });
+    const ans = {
+      id: id,
+      answer: answer
+    };
+    const body = JSON.stringify(ans);
+    return this.http.post('/postleadanswer', body, { headers: header }).map(
+      (response: Response) => { response.json(); }
+    ).catch(
+      (error: Response) => Observable.throw(error.json())
+      );
+  }
 }
