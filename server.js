@@ -139,7 +139,7 @@ app.get('/randomhand', function (req, res, next) {
   });
 });
 app.get('/getpracticehand', function (req, res, next) {
-  practiceBids.findOneRandom({} , {_id: 0, __v: 0}, function (err, result) {
+  practiceBids.findOneRandom({}, { _id: 0, __v: 0 }, function (err, result) {
     if (err) {
       return err;
     }
@@ -149,8 +149,8 @@ app.get('/getpracticehand', function (req, res, next) {
     });
   });
 });
-app.get('/getrandomleadpractice', function (req, res , next) {
-  leadPractice.findOneRandom({},{_id:0,__v:0}, function(err, result){
+app.get('/getrandomleadpractice', function (req, res, next) {
+  leadPractice.findOneRandom({}, { _id: 0, __v: 0 }, function (err, result) {
     if (err) {
       return err;
     }
@@ -164,20 +164,23 @@ app.get('/getrandomleadpractice', function (req, res , next) {
  * Create HTTP server.
  */
 // Bid.update({}, { $set: { votes: 0 } }, { multi: true }, () => console.log('done'));
-leadPractice.update({}, {$set: {answer:{
-  lead: {
-    name:String,
-    suit: String,
-  },
-  comment: String,
-  votes: 0
-}[]}},
-{multi: true},()=>console.log('done'));
+leadPractice.update({}, {
+  $set: {
+    answer: [{
+      lead: {
+        name: String,
+        suit: String,
+      },
+      comment: String,
+      votes: 0
+    }]
+  }
+},
+  { multi: true }, () => console.log('done'));
 const server = http.createServer(app);
 
 // Set our api routes
 app.use('/api', api);
-
 // Catch all other routes and return the index file
 app.get('**', (req, res) => {
   res.sendFile(path.join(__dirname, 'dist/index.html'));
