@@ -1,0 +1,9 @@
+<div class="row">
+  <div class="col-xs-12">
+    <div [ngClass]="{'clicked':votevalue===1}" class="glyphicon glyphicon-arrow-up" (click)="Upvote()">
+    </div>
+    <span class="vote">{{votes}}</span>
+    <div [ngClass]="{'clicked':votevalue===-1}" class="glyphicon glyphicon-arrow-down" (click)="Downvote()">
+    </div>
+  </div>
+</div>

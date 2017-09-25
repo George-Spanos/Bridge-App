@@ -24,6 +24,7 @@ import { SuitImgComponent } from './shared-components/suit-img/suit-img.componen
 import { DropdownDirective } from './shared-directives/dropdown.directive';
 import { LeadThreadComponent } from './Lead Section/lead-thread/lead-thread.component';
 import { LeadThreadFormComponent } from './Lead Section/lead-thread-form/lead-thread-form.component';
+import { CommentComponent } from './shared-components/comment/comment.component';
 const routes = [
   { path: '', component: HomepageComponent },
   { path: 'bid', component: BidThreadComponent },
@@ -56,7 +57,8 @@ const routes = [
     SuitImgComponent,
     DropdownDirective,
     LeadThreadComponent,
-    LeadThreadFormComponent
+    LeadThreadFormComponent,
+    CommentComponent
   ],
   imports: [
     BrowserModule,

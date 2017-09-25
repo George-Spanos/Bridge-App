@@ -938,7 +938,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/Lead Section/lead-thread/lead-thread.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\n  <div class=\"row\" *ngIf=\"!start\">\n    <div class=\"col-xs-12\">\n      <div class=\"row heading\">\n        <h2>This sections give you the chance to practice on how to lead as the defence</h2>\n      </div>\n      <div class=\"row\">\n        <span id=\"subheading\"> When you click the \"Start Leading\" button, you will be served\n          a specific hand accompanied by a contract.\n          After you choose your Lead and press Submit, the comment section will appear and you will be able to see what other people chose!</span>\n      </div>\n    </div>\n\n  </div>\n  <hr class=\"hline\" *ngIf=\"!start\">\n  <div class=\"row\">\n    <div class=\"col-xs-12\" style=\"display:flex; justify-content:center; padding:0px 20px 20px 20px;\">\n      <button class=\"btn btn-primary\" (click)=\"startLeading()\">Start Leading</button>\n    </div>\n  </div>\n  <div class=\"row\" *ngIf=\"start\">\n    <app-contract-design [East]=\"East\" [West]=\"West\" [North]=\"North\" [South]=\"South\" [Colors]=\"Colors\"></app-contract-design>\n    <hr class=\"hline\">\n    <div class=\"row\">\n      <div class=\"col-xs-12\">\n        <div class=\"col-xs-6\">\n          <div class=\"board\" *ngIf=\"handInitialized\">\n            <div class=\"row\">\n              <div class=\"card\" (click)=\"chooseLead(card)\" *ngFor=\"let card of spades\">{{card.name}}\n                <br>\n                <img class=\"suit\" src=\"https://i.imgur.com/tXgx0h3.png\">\n              </div>\n              <div class=\"card red\" (click)=\"chooseLead(card)\" *ngFor=\"let card of hearts\">{{card.name}}\n                <br>\n                <img class=\"suit\" src=\"https://i.imgur.com/Chg6eQ8.jpg\">\n              </div>\n              <div class=\"card\" (click)=\"chooseLead(card)\" *ngFor=\"let card of clubs\">{{card.name}}\n                <br>\n                <img class=\"suit\" src=\"https://i.imgur.com/TsBK3k9.jpg\">\n              </div>\n              <div class=\"card red\" (click)=\"chooseLead(card)\" *ngFor=\"let card of diamonds\">{{card.name}}\n                <br>\n                <img class=\"suit\" src=\"https://i.imgur.com/khCb5Vu.jpg\">\n              </div>\n            </div>\n          </div>\n        </div>\n        <app-lead-thread-form [id]=\"id\" [handInitialized]=\"handInitialized\" [leadClicked]=\"leadClicked\" [lead]=\"lead\"></app-lead-thread-form>\n      </div>\n    </div>\n    <div class=\"row\" *ngIf=\"bridgeApi.submitted && comments!==[]\">\n      <label for=\"comments\"> Leads and Comments</label>\n      <div class=\"col-xs-12\" *ngFor=\"let comment of comments\">\n        <div class=\"form-control\">\n          <strong> Lead : {{lead.name}} of {{lead.suit}}</strong> <br>\n          <strong> Comments</strong> : {{comment}} </div>\n      </div>\n    </div>\n  </div>\n</div>\n"
+module.exports = "<div class=\"container\">\n  <div class=\"row\" *ngIf=\"!start\">\n    <div class=\"col-xs-12\">\n      <div class=\"row heading\">\n        <h2>This sections give you the chance to practice on how to lead as the defence</h2>\n      </div>\n      <div class=\"row\">\n        <span id=\"subheading\"> When you click the \"Start Leading\" button, you will be served\n          a specific hand accompanied by a contract.\n          After you choose your Lead and press Submit, the comment section will appear and you will be able to see what other people chose!</span>\n      </div>\n    </div>\n\n  </div>\n  <hr class=\"hline\" *ngIf=\"!start\">\n  <div class=\"row\">\n    <div class=\"col-xs-12\" style=\"display:flex; justify-content:center; padding:0px 20px 20px 20px;\">\n      <button class=\"btn btn-primary\" (click)=\"startLeading()\">Start Leading</button>\n    </div>\n  </div>\n  <div class=\"row\" *ngIf=\"start\">\n    <app-contract-design [East]=\"East\" [West]=\"West\" [North]=\"North\" [South]=\"South\" [Colors]=\"Colors\"></app-contract-design>\n    <hr class=\"hline\">\n    <div class=\"row\">\n      <div class=\"col-xs-12\">\n        <div class=\"col-xs-6\">\n          <div class=\"board\" *ngIf=\"handInitialized\">\n            <div class=\"row\">\n              <div class=\"card\" (click)=\"chooseLead(card)\" *ngFor=\"let card of spades\">{{card.name}}\n                <br>\n                <img class=\"suit\" src=\"https://i.imgur.com/tXgx0h3.png\">\n              </div>\n              <div class=\"card red\" (click)=\"chooseLead(card)\" *ngFor=\"let card of hearts\">{{card.name}}\n                <br>\n                <img class=\"suit\" src=\"https://i.imgur.com/Chg6eQ8.jpg\">\n              </div>\n              <div class=\"card\" (click)=\"chooseLead(card)\" *ngFor=\"let card of clubs\">{{card.name}}\n                <br>\n                <img class=\"suit\" src=\"https://i.imgur.com/TsBK3k9.jpg\">\n              </div>\n              <div class=\"card red\" (click)=\"chooseLead(card)\" *ngFor=\"let card of diamonds\">{{card.name}}\n                <br>\n                <img class=\"suit\" src=\"https://i.imgur.com/khCb5Vu.jpg\">\n              </div>\n            </div>\n          </div>\n        </div>\n        <app-lead-thread-form [id]=\"id\" [handInitialized]=\"handInitialized\" [leadClicked]=\"leadClicked\" [lead]=\"lead\"></app-lead-thread-form>\n      </div>\n    </div>\n    <div class=\"row\" *ngIf=\"bridgeApi.submitted\" style=\"margin-top: 10px;\">\n      <div *ngIf=\"answers[0]!==undefined\">\n        <label for=\"comments\"> Leads and Comments</label>\n        <div class=\"col-xs-12\" *ngFor=\"let answer of answers\">\n          <div class=\"form-control\">\n            <strong> Lead : {{answer.lead.name}} of {{answer.lead.suit}}</strong> <br>\n            <strong> Comments</strong> : {{answer.comments}} </div>\n        </div>\n      </div>\n      <div class=\"row\" *ngIf=\"answers[0]===undefined\">\n        <div class=\"col-xs-12 form-control\">\n          <label> This lead has no comments yet. Thank you for contributing!</label>\n        </div>\n      </div>\n    </div>\n  </div>\n</div>\n"
 
 /***/ }),
 
@@ -963,149 +963,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var LeadThreadComponent = (function () {
     function LeadThreadComponent(bridgeApi) {
         this.bridgeApi = bridgeApi;
-        this.dummyLead = {
-            'colors': {
-                'colorWest': 'Green',
-                'colorSouth': 'Green',
-                'colorEast': 'Green',
-                'colorNorth': 'Green'
-            },
-            'comments': 'Leading a major seems better at this sequence.',
-            'lead': {
-                'suit': 'Hearts',
-                'name': '2',
-                'value': 1,
-                'clicked': true
-            },
-            'WestBid': [
-                {
-                    'bidComment': 'Hello',
-                    'suitBid': '',
-                    'numBid': 'Pass'
-                },
-                {
-                    'bidComment': '',
-                    'suitBid': '',
-                    'numBid': 'Pass'
-                }
-            ],
-            'SouthBid': [
-                {
-                    'bidComment': '',
-                    'suitBid': 'Hearts',
-                    'numBid': '2'
-                },
-                {
-                    'bidComment': ' hello hello hello hello hello hello',
-                    'suitBid': '',
-                    'numBid': 'Pass'
-                }
-            ],
-            'EastBid': [
-                {
-                    'bidComment': '',
-                    'suitBid': '',
-                    'numBid': 'Pass'
-                },
-                {
-                    'bidComment': '',
-                    'suitBid': '',
-                    'numBid': 'Pass'
-                }
-            ],
-            'NorthBid': [
-                {
-                    'bidComment': '',
-                    'suitBid': '',
-                    'numBid': 'Pass'
-                },
-                {
-                    'bidComment': '',
-                    'suitBid': 'NoTrump',
-                    'numBid': '3'
-                }
-            ],
-            'hand': [
-                {
-                    'suit': 'Spades',
-                    'name': '8',
-                    'value': 7,
-                    'clicked': true
-                },
-                {
-                    'suit': 'Spades',
-                    'name': '6',
-                    'value': 5,
-                    'clicked': true
-                },
-                {
-                    'suit': 'Hearts',
-                    'name': 'J',
-                    'value': 10,
-                    'clicked': true
-                },
-                {
-                    'suit': 'Hearts',
-                    'name': '9',
-                    'value': 8,
-                    'clicked': true
-                },
-                {
-                    'suit': 'Hearts',
-                    'name': '3',
-                    'value': 2,
-                    'clicked': true
-                },
-                {
-                    'suit': 'Hearts',
-                    'name': '2',
-                    'value': 1,
-                    'clicked': true
-                },
-                {
-                    'suit': 'Diamonds',
-                    'name': 'Q',
-                    'value': 11,
-                    'clicked': true
-                },
-                {
-                    'suit': 'Diamonds',
-                    'name': '5',
-                    'value': 4,
-                    'clicked': true
-                },
-                {
-                    'suit': 'Diamonds',
-                    'name': '4',
-                    'value': 3,
-                    'clicked': true
-                },
-                {
-                    'suit': 'Diamonds',
-                    'name': '3',
-                    'value': 2,
-                    'clicked': true
-                },
-                {
-                    'suit': 'Clubs',
-                    'name': 'A',
-                    'value': 13,
-                    'clicked': true
-                },
-                {
-                    'suit': 'Clubs',
-                    'name': '10',
-                    'value': 9,
-                    'clicked': true
-                },
-                {
-                    'suit': 'Clubs',
-                    'name': '2',
-                    'value': 1,
-                    'clicked': true
-                }
-            ],
-        };
         this.handInitialized = true;
         this.start = false;
     }
@@ -1116,6 +973,7 @@ var LeadThreadComponent = (function () {
     LeadThreadComponent.prototype.startLeading = function () {
         var _this = this;
         this.bridgeApi.fetchleadPractice().subscribe(function (result) {
+            _this.bridgeApi.submitted = false;
             _this.start = true;
             _this.leadClicked = false;
             _this.Colors = result.colors;
@@ -1126,7 +984,7 @@ var LeadThreadComponent = (function () {
             _this.West = result.WestBid;
             _this.hand = result.hand;
             _this.id = result._id;
-            _this.comments = result.answer.comments;
+            _this.answers = result.answer;
             _this.spades = _this.bridgeApi.filterArray(_this.hand, 'Spades');
             _this.hearts = _this.bridgeApi.filterArray(_this.hand, 'Hearts');
             _this.diamonds = _this.bridgeApi.filterArray(_this.hand, 'Diamonds');
@@ -1489,12 +1347,14 @@ AppComponent = __decorate([
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__shared_directives_dropdown_directive__ = __webpack_require__("../../../../../src/app/shared-directives/dropdown.directive.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__Lead_Section_lead_thread_lead_thread_component__ = __webpack_require__("../../../../../src/app/Lead Section/lead-thread/lead-thread.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__Lead_Section_lead_thread_form_lead_thread_form_component__ = __webpack_require__("../../../../../src/app/Lead Section/lead-thread-form/lead-thread-form.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_24__shared_components_comment_comment_component__ = __webpack_require__("../../../../../src/app/shared-components/comment/comment.component.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
@@ -1556,7 +1416,8 @@ AppModule = __decorate([
             __WEBPACK_IMPORTED_MODULE_20__shared_components_suit_img_suit_img_component__["a" /* SuitImgComponent */],
             __WEBPACK_IMPORTED_MODULE_21__shared_directives_dropdown_directive__["a" /* DropdownDirective */],
             __WEBPACK_IMPORTED_MODULE_22__Lead_Section_lead_thread_lead_thread_component__["a" /* LeadThreadComponent */],
-            __WEBPACK_IMPORTED_MODULE_23__Lead_Section_lead_thread_form_lead_thread_form_component__["a" /* LeadThreadFormComponent */]
+            __WEBPACK_IMPORTED_MODULE_23__Lead_Section_lead_thread_form_lead_thread_form_component__["a" /* LeadThreadFormComponent */],
+            __WEBPACK_IMPORTED_MODULE_24__shared_components_comment_comment_component__["a" /* CommentComponent */]
         ],
         imports: [
             __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["a" /* BrowserModule */],
@@ -1897,6 +1758,95 @@ var _a;
 
 /***/ }),
 
+/***/ "../../../../../src/app/shared-components/comment/comment.component.css":
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, ".glyphicon {\r\n  color: grey;\r\n  margin: 2px;\r\n  display: -webkit-box;\r\n  display: -ms-flexbox;\r\n  display: flex;\r\n  -webkit-box-pack: center;\r\n      -ms-flex-pack: center;\r\n          justify-content: center;\r\n  cursor: pointer;\r\n}\r\n.vote {\r\n  display: -webkit-box;\r\n  display: -ms-flexbox;\r\n  display: flex;\r\n  -webkit-box-pack: center;\r\n      -ms-flex-pack: center;\r\n          justify-content: center;\r\n}\r\n.clicked {\r\n  color: #BE1717;\r\n}\r\n", ""]);
+
+// exports
+
+
+/*** EXPORTS FROM exports-loader ***/
+module.exports = module.exports.toString();
+
+/***/ }),
+
+/***/ "../../../../../src/app/shared-components/comment/comment.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"row\">\n  <div class=\"col-xs-12\">\n    <div [ngClass]=\"{'clicked':votevalue===1}\" class=\"glyphicon glyphicon-arrow-up\" (click)=\"Upvote()\">\n    </div>\n    <span class=\"vote\">{{votes}}</span>\n    <div [ngClass]=\"{'clicked':votevalue===-1}\" class=\"glyphicon glyphicon-arrow-down\" (click)=\"Downvote()\">\n    </div>\n  </div>\n</div>\n"
+
+/***/ }),
+
+/***/ "../../../../../src/app/shared-components/comment/comment.component.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return CommentComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__("../../../http/@angular/http.es5.js");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+var CommentComponent = (function () {
+    function CommentComponent(http) {
+        this.http = http;
+        this.votevalue = 0;
+    }
+    CommentComponent.prototype.Upvote = function () {
+        // return this.http;
+        if (this.votevalue < 1) {
+            this.votes += 1;
+            this.votevalue += 1;
+        }
+    };
+    CommentComponent.prototype.Downvote = function () {
+        // return this.http;
+        if (this.votevalue > -1) {
+            this.votes -= 1;
+            this.votevalue -= 1;
+        }
+    };
+    CommentComponent.prototype.ngOnInit = function () {
+        this.votes = 5;
+    };
+    return CommentComponent;
+}());
+__decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["F" /* Input */])(),
+    __metadata("design:type", Number)
+], CommentComponent.prototype, "votes", void 0);
+__decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["F" /* Input */])(),
+    __metadata("design:type", String)
+], CommentComponent.prototype, "link", void 0);
+CommentComponent = __decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["o" /* Component */])({
+        selector: 'app-comment',
+        template: __webpack_require__("../../../../../src/app/shared-components/comment/comment.component.html"),
+        styles: [__webpack_require__("../../../../../src/app/shared-components/comment/comment.component.css")]
+    }),
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Http */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Http */]) === "function" && _a || Object])
+], CommentComponent);
+
+var _a;
+//# sourceMappingURL=comment.component.js.map
+
+/***/ }),
+
 /***/ "../../../../../src/app/shared-components/contract-design/contract-design.component.css":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2132,7 +2082,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/testpage/testpage.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<app-contract-design></app-contract-design>\n"
+module.exports = "<app-comment></app-comment>\n"
 
 /***/ }),
 
