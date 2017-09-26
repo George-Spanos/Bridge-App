@@ -202,6 +202,27 @@ app.post('/bidvote', function (req, res, next) {
     );
   })
 })
+app.post('/leadvote', function (req, res, next) {
+  //doesn't work
+  leadPractice.findOne({ _id: req.body.id }, function (err, lead) {
+    if (err) {
+      throw err;
+    }
+    if (req.body.value === 1) {
+      lead.answer[req.body.index].votes += 1;
+    } else if (req.body.value === -1) {
+      lead.answer[req.body.index].votes -= 1;
+    }
+    lead.save(
+      function (err, results) {
+        if (err) {
+          throw err;
+        }
+        console.log(results)
+      }
+    );
+  })
+})
 /**
  * Create HTTP server.
  */

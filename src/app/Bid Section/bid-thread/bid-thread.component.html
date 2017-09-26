@@ -29,7 +29,7 @@
     <div class="row" *ngFor="let bid of bids">
       <div class="col-xs-12">
         <div class="vote">
-          <app-comment [id]="bid._id" [votes]="bid.votes"></app-comment>
+          <app-comment [link]="'/bidvote'" [id]="bid._id" [votes]="bid.votes"></app-comment>
         </div>
         <div class="form-control" id="comment"><strong> Bid : </strong>{{bid.numericBid}}
           <span *ngIf="bid.numericBid!=='Pass'">of {{bid.suitBid}}</span> <br>

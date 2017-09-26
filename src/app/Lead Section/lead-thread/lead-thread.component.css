@@ -110,3 +110,11 @@
     height: 18px;
   }
 }
+.vote{
+  width:4%;
+  float: left;
+}
+#comment {
+  width:96%;
+  float: left;
+}

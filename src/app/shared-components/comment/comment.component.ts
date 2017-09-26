@@ -11,6 +11,13 @@ export class CommentComponent implements OnInit {
   @Input() id: string;
   votevalue = 0;
   value: number;
+  @Input() link: string;
+  bid: {
+    value: Number,
+    id: String,
+    index?: Number
+  };
+  @Input() index: number;
   Upvote() {
     if (this.votevalue < 1) {
       this.votes += 1;
@@ -29,12 +36,13 @@ export class CommentComponent implements OnInit {
   }
   Vote(value) {
     const header = new Headers({ 'Content-Type': 'application/json' });
-    const bid = {
+    this.bid = {
       value: value,
-      id: this.id
+      id: this.id,
+      index: this.index
     };
-    const body = JSON.stringify(bid);
-    return this.http.post('/bidvote', body, { headers: header }).map(
+    const body = JSON.stringify(this.bid);
+    return this.http.post(this.link, body, { headers: header }).map(
       (response: Response) => { response.json(); }
     ).catch(
       (error: Response) => Observable.throw(error.json())

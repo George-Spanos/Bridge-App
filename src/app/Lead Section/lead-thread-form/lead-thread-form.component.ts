@@ -29,7 +29,7 @@ export class LeadThreadFormComponent implements OnInit {
       error => console.error(error)
     );
     console.log(answer);
-
+    this.leadForm.reset();
   }
   ngOnInit() {
   }
