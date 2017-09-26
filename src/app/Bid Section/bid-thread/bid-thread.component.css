@@ -8,3 +8,11 @@
   height: auto;
   margin-bottom: 3px;
 }
+.vote{
+  width:4%;
+  float: left;
+}
+#comment {
+  width:96%;
+  float: left;
+}

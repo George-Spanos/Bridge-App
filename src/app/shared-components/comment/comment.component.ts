@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Http } from '@angular/http';
+import { Http, Headers, Response } from '@angular/http';
+import { Observable } from 'rxjs/Rx';
 @Component({
   selector: 'app-comment',
   templateUrl: './comment.component.html',
@@ -7,26 +8,42 @@ import { Http } from '@angular/http';
 })
 export class CommentComponent implements OnInit {
   @Input() votes: number;
-  @Input() link: string;
+  @Input() id: string;
   votevalue = 0;
+  value: number;
   Upvote() {
-    // return this.http;
     if (this.votevalue < 1) {
       this.votes += 1;
       this.votevalue += 1;
+      this.value = 1;
+      this.Vote(this.value).subscribe();
     }
   }
   Downvote() {
-    // return this.http;
     if (this.votevalue > -1) {
       this.votes -= 1;
       this.votevalue -= 1;
+      this.value = -1;
+      this.Vote(this.value).subscribe();
     }
+  }
+  Vote(value) {
+    const header = new Headers({ 'Content-Type': 'application/json' });
+    const bid = {
+      value: value,
+      id: this.id
+    };
+    const body = JSON.stringify(bid);
+    return this.http.post('/bidvote', body, { headers: header }).map(
+      (response: Response) => { response.json(); }
+    ).catch(
+      (error: Response) => Observable.throw(error.json())
+      );
+
   }
   constructor(public http: Http) { }
 
   ngOnInit() {
-    this.votes = 5;
   }
 
 }

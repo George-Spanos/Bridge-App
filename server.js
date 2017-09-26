@@ -130,7 +130,7 @@ app.get('/randomhand', function (req, res, next) {
       return err;
     }
     this.bidsArray = result.array;
-    Bid.find({ array: this.bidsArray }, { hcp: 1, comments: 1, numericBid: 1, suitBid: 1, array: 1 },
+    Bid.find({ array: this.bidsArray }, { hcp: 1, comments: 1, numericBid: 1, suitBid: 1, array: 1, votes: 1 },
       function (err, arrayFin) {
         res.status(200).json({
           title: ' Success',
@@ -163,12 +163,34 @@ app.get('/getrandomleadpractice', function (req, res, next) {
   });
 });
 app.post('/postleadanswer', function (req, res, next) {
-  leadPractice.findOne({_id:req.body.id}, function (err, lead) {
+  leadPractice.findOne({ _id: req.body.id }, function (err, lead) {
     if (err) {
       throw err;
     }
     lead.answer.push(req.body.answer);
     lead.save(
+      function (err) {
+        if (err) {
+          return res.status(500).json({
+            title: 'An error occured',
+            err: error
+          })
+        }
+      }
+    );
+  })
+})
+app.post('/bidvote', function (req, res, next) {
+  Bid.findOne({ _id: req.body.id }, function (err, bid) {
+    if (err) {
+      throw err;
+    }
+    if (req.body.value === 1) {
+      bid.votes += 1;
+    } else if (req.body.value === -1) {
+      bid.votes -= 1;
+    }
+    bid.save(
       function (err) {
         if (err) {
           return res.status(500).json({

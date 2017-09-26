@@ -33,6 +33,13 @@ export class BidThreadComponent implements OnInit {
           results.forEach(
             (el) => { this.bids.push(el); }
           );
+          this.bids.sort(
+            (a, b) => {
+              const value1 = a.votes;
+              const value2 = b.votes;
+              return value2 - value1;
+            }
+          );
           this.spades = this.bridgeApi.filterArray(this.hand, 'Spades');
           this.hearts = this.bridgeApi.filterArray(this.hand, 'Hearts');
           this.diamonds = this.bridgeApi.filterArray(this.hand, 'Diamonds');
@@ -69,7 +76,7 @@ export class BidThreadComponent implements OnInit {
         if (this.hcp > 10) {
           hcpValid = false;
           this.handInitialized = true;
-        }else {
+        } else {
           array = this.bridgeApi.deck();
         }
       }

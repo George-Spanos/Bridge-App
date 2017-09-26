@@ -25,12 +25,17 @@
     </div>
   </div>
   <div class="row" *ngIf="handInitialized && bridgeApi.submitted && !newHand">
-    <div class="col-xs-12">
-      <label for="comments"> Bid and Comments</label>
-      <div class="form-control" *ngFor="let bid of bids">
-        <strong> Bid : </strong>{{bid.numericBid}}
-        <span *ngIf="bid.numericBid!=='Pass'">of {{bid.suitBid}}</span> <br>
-        <strong> Comments</strong> : {{bid.comments}} </div>
+    <label class="row" for="comments"> Bid and Comments</label>
+    <div class="row" *ngFor="let bid of bids">
+      <div class="col-xs-12">
+        <div class="vote">
+          <app-comment [id]="bid._id" [votes]="bid.votes"></app-comment>
+        </div>
+        <div class="form-control" id="comment"><strong> Bid : </strong>{{bid.numericBid}}
+          <span *ngIf="bid.numericBid!=='Pass'">of {{bid.suitBid}}</span> <br>
+          <strong> Comments</strong> : {{bid.comments}}
+        </div>
+      </div>
     </div>
   </div>
 </div>

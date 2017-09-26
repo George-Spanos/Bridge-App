@@ -110,7 +110,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, ".hcpdisplay {\r\n  font-weight: bold;\r\n  font-size: 18px;\r\n  display: -webkit-box;\r\n  display: -ms-flexbox;\r\n  display: flex;\r\n  -webkit-box-pack: center;\r\n      -ms-flex-pack: center;\r\n          justify-content: center;\r\n}\r\n.form-control {\r\n  height: auto;\r\n  margin-bottom: 3px;\r\n}\r\n", ""]);
+exports.push([module.i, ".hcpdisplay {\r\n  font-weight: bold;\r\n  font-size: 18px;\r\n  display: -webkit-box;\r\n  display: -ms-flexbox;\r\n  display: flex;\r\n  -webkit-box-pack: center;\r\n      -ms-flex-pack: center;\r\n          justify-content: center;\r\n}\r\n.form-control {\r\n  height: auto;\r\n  margin-bottom: 3px;\r\n}\r\n.vote{\r\n  width:4%;\r\n  float: left;\r\n}\r\n#comment {\r\n  width:96%;\r\n  float: left;\r\n}\r\n", ""]);
 
 // exports
 
@@ -123,7 +123,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/Bid Section/bid-thread/bid-thread.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\r\n  <div class=\"row\">\r\n    <div class=\"col-xs-12\" style=\"display:flex; justify-content:center; padding:0px 20px 20px 20px;\">\r\n      <button class=\"btn btn-primary\" (click)=\"getHand(cardsArray)\">Initialize Hand</button>\r\n    </div>\r\n  </div>\r\n  <div class=\"row\">\r\n    <div class=\"col-xs-12\">\r\n      <div class=\"col-xs-6\">\r\n        <app-card-board [cards]=\"hand\" [Initialized]=\"handInitialized\"></app-card-board>\r\n        <div class=\"row\" *ngIf=\"handInitialized\">\r\n          <div class=\"col-xs-12 hcpdisplay\">Total HCP = {{hcp}}</div>\r\n        </div>\r\n      </div>\r\n      <div class=\"col-xs-6\">\r\n        <div *ngIf=\"handInitialized\" style=\"margin:10px\">\r\n          <app-bid-form></app-bid-form>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </div>\r\n  <div class=\"row\" *ngIf=\"newHand\">\r\n    <div class=\"col-xs-12 form-control\">\r\n      <label> This is a new hand. Thank you for contributing!</label>\r\n    </div>\r\n  </div>\r\n  <div class=\"row\" *ngIf=\"handInitialized && bridgeApi.submitted && !newHand\">\r\n    <div class=\"col-xs-12\">\r\n      <label for=\"comments\"> Bid and Comments</label>\r\n      <div class=\"form-control\" *ngFor=\"let bid of bids\">\r\n        <strong> Bid : </strong>{{bid.numericBid}}\r\n        <span *ngIf=\"bid.numericBid!=='Pass'\">of {{bid.suitBid}}</span> <br>\r\n        <strong> Comments</strong> : {{bid.comments}} </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n"
+module.exports = "<div class=\"container\">\r\n  <div class=\"row\">\r\n    <div class=\"col-xs-12\" style=\"display:flex; justify-content:center; padding:0px 20px 20px 20px;\">\r\n      <button class=\"btn btn-primary\" (click)=\"getHand(cardsArray)\">Initialize Hand</button>\r\n    </div>\r\n  </div>\r\n  <div class=\"row\">\r\n    <div class=\"col-xs-12\">\r\n      <div class=\"col-xs-6\">\r\n        <app-card-board [cards]=\"hand\" [Initialized]=\"handInitialized\"></app-card-board>\r\n        <div class=\"row\" *ngIf=\"handInitialized\">\r\n          <div class=\"col-xs-12 hcpdisplay\">Total HCP = {{hcp}}</div>\r\n        </div>\r\n      </div>\r\n      <div class=\"col-xs-6\">\r\n        <div *ngIf=\"handInitialized\" style=\"margin:10px\">\r\n          <app-bid-form></app-bid-form>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </div>\r\n  <div class=\"row\" *ngIf=\"newHand\">\r\n    <div class=\"col-xs-12 form-control\">\r\n      <label> This is a new hand. Thank you for contributing!</label>\r\n    </div>\r\n  </div>\r\n  <div class=\"row\" *ngIf=\"handInitialized && bridgeApi.submitted && !newHand\">\r\n    <label class=\"row\" for=\"comments\"> Bid and Comments</label>\r\n    <div class=\"row\" *ngFor=\"let bid of bids\">\r\n      <div class=\"col-xs-12\">\r\n        <div class=\"vote\">\r\n          <app-comment [id]=\"bid._id\" [votes]=\"bid.votes\"></app-comment>\r\n        </div>\r\n        <div class=\"form-control\" id=\"comment\"><strong> Bid : </strong>{{bid.numericBid}}\r\n          <span *ngIf=\"bid.numericBid!=='Pass'\">of {{bid.suitBid}}</span> <br>\r\n          <strong> Comments</strong> : {{bid.comments}}\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -167,6 +167,11 @@ var BidThreadComponent = (function () {
                 _this.hand = results[0].array;
                 _this.hcp = results[0].hcp;
                 results.forEach(function (el) { _this.bids.push(el); });
+                _this.bids.sort(function (a, b) {
+                    var value1 = a.votes;
+                    var value2 = b.votes;
+                    return value2 - value1;
+                });
                 _this.spades = _this.bridgeApi.filterArray(_this.hand, 'Spades');
                 _this.hearts = _this.bridgeApi.filterArray(_this.hand, 'Hearts');
                 _this.diamonds = _this.bridgeApi.filterArray(_this.hand, 'Diamonds');
@@ -1779,7 +1784,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/shared-components/comment/comment.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"row\">\n  <div class=\"col-xs-12\">\n    <div [ngClass]=\"{'clicked':votevalue===1}\" class=\"glyphicon glyphicon-arrow-up\" (click)=\"Upvote()\">\n    </div>\n    <span class=\"vote\">{{votes}}</span>\n    <div [ngClass]=\"{'clicked':votevalue===-1}\" class=\"glyphicon glyphicon-arrow-down\" (click)=\"Downvote()\">\n    </div>\n  </div>\n</div>\n"
+module.exports = "<div [ngClass]=\"{'clicked':votevalue===1}\" class=\"glyphicon glyphicon-arrow-up\" (click)=\"Upvote()\">\n</div>\n<span class=\"vote\">{{votes}}</span>\n<div [ngClass]=\"{'clicked':votevalue===-1}\" class=\"glyphicon glyphicon-arrow-down\" (click)=\"Downvote()\">\n</div>\n"
 
 /***/ }),
 
@@ -1790,6 +1795,8 @@ module.exports = "<div class=\"row\">\n  <div class=\"col-xs-12\">\n    <div [ng
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return CommentComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__("../../../http/@angular/http.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_Rx__ = __webpack_require__("../../../../rxjs/Rx.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_Rx___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_Rx__);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1801,27 +1808,38 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 
 
+
 var CommentComponent = (function () {
     function CommentComponent(http) {
         this.http = http;
         this.votevalue = 0;
     }
     CommentComponent.prototype.Upvote = function () {
-        // return this.http;
         if (this.votevalue < 1) {
             this.votes += 1;
             this.votevalue += 1;
+            this.value = 1;
+            this.Vote(this.value).subscribe();
         }
     };
     CommentComponent.prototype.Downvote = function () {
-        // return this.http;
         if (this.votevalue > -1) {
             this.votes -= 1;
             this.votevalue -= 1;
+            this.value = -1;
+            this.Vote(this.value).subscribe();
         }
     };
+    CommentComponent.prototype.Vote = function (value) {
+        var header = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* Headers */]({ 'Content-Type': 'application/json' });
+        var bid = {
+            value: value,
+            id: this.id
+        };
+        var body = JSON.stringify(bid);
+        return this.http.post('/bidvote', body, { headers: header }).map(function (response) { response.json(); }).catch(function (error) { return __WEBPACK_IMPORTED_MODULE_2_rxjs_Rx__["Observable"].throw(error.json()); });
+    };
     CommentComponent.prototype.ngOnInit = function () {
-        this.votes = 5;
     };
     return CommentComponent;
 }());
@@ -1832,7 +1850,7 @@ __decorate([
 __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["F" /* Input */])(),
     __metadata("design:type", String)
-], CommentComponent.prototype, "link", void 0);
+], CommentComponent.prototype, "id", void 0);
 CommentComponent = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["o" /* Component */])({
         selector: 'app-comment',
