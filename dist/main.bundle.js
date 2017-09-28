@@ -1277,7 +1277,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, ".board {\r\n  padding: 100px 30px 60px 30px;\r\n  background-color: green;\r\n  display: -webkit-box;\r\n  display: -ms-flexbox;\r\n  display: flex;\r\n  -webkit-box-pack: center;\r\n      -ms-flex-pack: center;\r\n          justify-content: center;\r\n  border-radius: 10px;\r\n}\r\n", ""]);
+exports.push([module.i, ".sidebar {\r\n  background-color: black;\r\n  display: -webkit-box;\r\n  display: -ms-flexbox;\r\n  display: flex;\r\n  -webkit-box-pack: center;\r\n      -ms-flex-pack: center;\r\n          justify-content: center;\r\n  float: right;\r\n  height:100%;\r\n  max-width: 18%; /* For Safari 5.1 to 6.0 */ /* For Opera 11.1 to 12.0 */ /* For Firefox 3.6 to 15 */\r\n  background: linear-gradient(rgba(190, 190, 190, 0.9), rgba(255, 255, 255, 0)); /* Standard syntax */\r\n}\r\n.main-content {\r\n  padding: 0px;\r\n}\r\n", ""]);
 
 // exports
 
@@ -1290,7 +1290,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/app.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<app-header>\r\n</app-header>\r\n<router-outlet></router-outlet>\r\n"
+module.exports = "<app-header>\r\n</app-header>\r\n<div class=\"col-xs-10 main-content\">\r\n  <router-outlet>\r\n\r\n        </router-outlet>\r\n</div>\r\n\r\n  <div class=\"sidebar col-xs-2\">\r\n    <app-register></app-register>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -1354,12 +1354,14 @@ AppComponent = __decorate([
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__Lead_Section_lead_thread_lead_thread_component__ = __webpack_require__("../../../../../src/app/Lead Section/lead-thread/lead-thread.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__Lead_Section_lead_thread_form_lead_thread_form_component__ = __webpack_require__("../../../../../src/app/Lead Section/lead-thread-form/lead-thread-form.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_24__shared_components_comment_comment_component__ = __webpack_require__("../../../../../src/app/shared-components/comment/comment.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_25__register_register_component__ = __webpack_require__("../../../../../src/app/register/register.component.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
@@ -1423,7 +1425,8 @@ AppModule = __decorate([
             __WEBPACK_IMPORTED_MODULE_21__shared_directives_dropdown_directive__["a" /* DropdownDirective */],
             __WEBPACK_IMPORTED_MODULE_22__Lead_Section_lead_thread_lead_thread_component__["a" /* LeadThreadComponent */],
             __WEBPACK_IMPORTED_MODULE_23__Lead_Section_lead_thread_form_lead_thread_form_component__["a" /* LeadThreadFormComponent */],
-            __WEBPACK_IMPORTED_MODULE_24__shared_components_comment_comment_component__["a" /* CommentComponent */]
+            __WEBPACK_IMPORTED_MODULE_24__shared_components_comment_comment_component__["a" /* CommentComponent */],
+            __WEBPACK_IMPORTED_MODULE_25__register_register_component__["a" /* RegisterComponent */]
         ],
         imports: [
             __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["a" /* BrowserModule */],
@@ -1681,6 +1684,71 @@ HomepageComponent = __decorate([
 ], HomepageComponent);
 
 //# sourceMappingURL=homepage.component.js.map
+
+/***/ }),
+
+/***/ "../../../../../src/app/register/register.component.css":
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, ".register{\r\n  height:90vh;\r\n  max-height: 100%;\r\n}\r\n#header{\r\n  text-align: center;\r\n}\r\n#login-text{\r\n  font-weight: bolder;\r\n  margin: 10px 0px;\r\n  cursor: pointer;\r\n  font-size: 18px;\r\n  text-align: center;\r\n  background-color: rgba(211, 211, 211, 0.8);\r\n  border-radius: 5px;\r\n  padding: 3px;\r\n}\r\n#login-text:hover{\r\n  color: blue;\r\n\r\n}\r\n.btn {\r\n  margin-top: 10px;\r\n  display: -webkit-box;\r\n  display: -ms-flexbox;\r\n  display: flex;\r\n  -webkit-box-pack: center;\r\n      -ms-flex-pack: center;\r\n          justify-content: center;\r\n}\r\n", ""]);
+
+// exports
+
+
+/*** EXPORTS FROM exports-loader ***/
+module.exports = module.exports.toString();
+
+/***/ }),
+
+/***/ "../../../../../src/app/register/register.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"register\">\n  <div class=\"col-xs-12\">\n    <div *ngIf=\"!loginbool\">\n      <div class=\"row\">\n        <h2 id=\"header\">Register</h2>\n      </div>\n      <div class=\"row\">\n        <label>Username</label>\n        <input class=\"form-control\" type=\"text\">\n      </div>\n      <div class=\"row\">\n        <label>Password</label>\n        <input class=\"form-control\" type=\"password\">\n      </div>\n      <div class=\"row\">\n        <button type=\"Submit\" class=\"btn btn btn-primary\">Register</button>\n      </div>\n      <p (click)=\"changeForm()\" id=\"login-text\">Already have an account?<br> Click here to login</p>\n    </div>\n  </div>\n  <div class=\"col-xs-12\" *ngIf=\"loginbool\">\n    <div class=\"row\">\n      <h2 id=\"header\">Login</h2>\n    </div>\n    <div class=\"row\">\n      <label>Username</label>\n      <input class=\"form-control\" type=\"text\">\n    </div>\n    <div class=\"row\">\n      <label>Password</label>\n      <input class=\"form-control\" type=\"password\">\n    </div>\n    <button type=\"Submit\" class=\"btn btn btn-primary\">Login</button>\n    <p (click)=\"changeForm()\" id=\"login-text\">Click here to register</p>\n  </div>\n\n</div>\n"
+
+/***/ }),
+
+/***/ "../../../../../src/app/register/register.component.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return RegisterComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+var RegisterComponent = (function () {
+    function RegisterComponent() {
+        this.loginbool = false;
+    }
+    RegisterComponent.prototype.changeForm = function () {
+        this.loginbool = !this.loginbool;
+    };
+    RegisterComponent.prototype.ngOnInit = function () {
+    };
+    return RegisterComponent;
+}());
+RegisterComponent = __decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["o" /* Component */])({
+        selector: 'app-register',
+        template: __webpack_require__("../../../../../src/app/register/register.component.html"),
+        styles: [__webpack_require__("../../../../../src/app/register/register.component.css")]
+    }),
+    __metadata("design:paramtypes", [])
+], RegisterComponent);
+
+//# sourceMappingURL=register.component.js.map
 
 /***/ }),
 
@@ -2110,7 +2178,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/testpage/testpage.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<app-comment></app-comment>\n"
+module.exports = "<div class=\"container\">\n</div>\n"
 
 /***/ }),
 

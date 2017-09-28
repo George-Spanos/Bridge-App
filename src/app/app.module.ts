@@ -25,6 +25,7 @@ import { DropdownDirective } from './shared-directives/dropdown.directive';
 import { LeadThreadComponent } from './Lead Section/lead-thread/lead-thread.component';
 import { LeadThreadFormComponent } from './Lead Section/lead-thread-form/lead-thread-form.component';
 import { CommentComponent } from './shared-components/comment/comment.component';
+import { RegisterComponent } from './register/register.component';
 const routes = [
   { path: '', component: HomepageComponent },
   { path: 'bid', component: BidThreadComponent },
@@ -58,7 +59,8 @@ const routes = [
     DropdownDirective,
     LeadThreadComponent,
     LeadThreadFormComponent,
-    CommentComponent
+    CommentComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,

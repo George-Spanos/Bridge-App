@@ -1,0 +1,26 @@
+.register{
+  height:90vh;
+  max-height: 100%;
+}
+#header{
+  text-align: center;
+}
+#login-text{
+  font-weight: bolder;
+  margin: 10px 0px;
+  cursor: pointer;
+  font-size: 18px;
+  text-align: center;
+  background-color: rgba(211, 211, 211, 0.8);
+  border-radius: 5px;
+  padding: 3px;
+}
+#login-text:hover{
+  color: blue;
+
+}
+.btn {
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+}

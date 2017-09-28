@@ -213,14 +213,12 @@ app.post('/leadvote', function (req, res, next) {
     } else if (req.body.value === -1) {
       lead.answer[req.body.index].votes -= 1;
     }
-    lead.save(
-      function (err, results) {
-        if (err) {
-          throw err;
-        }
-        console.log(results)
+    const ans = lead.answer;
+    leadPractice.update({ _id: req.body.id }, { $set: { answer: ans } }, function (err, result) {
+      if (err) {
+        throw err;
       }
-    );
+    });
   })
 })
 /**
