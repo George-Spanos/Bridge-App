@@ -1424,7 +1424,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/app.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<app-header>\r\n</app-header>\r\n<div class=\"col-xs-10 main-content\">\r\n  <router-outlet>\r\n  </router-outlet>\r\n</div>\r\n<div class=\"sidebar col-xs-2\" *ngIf=\"!user.loggedIn\">\r\n  <app-register></app-register>\r\n</div>\r\n"
+module.exports = "<app-header>\r\n</app-header>\r\n<div class=\"col-xs-10 main-content\" *ngIf=\"!user.loggedIn\">\r\n  <router-outlet>\r\n  </router-outlet>\r\n</div>\r\n<div class=\"sidebar col-xs-2\" *ngIf=\"!user.loggedIn\">\r\n  <app-register></app-register>\r\n</div>\r\n<div class=\"col-xs-12 main-content\" *ngIf=\"user.loggedIn\">\r\n  <router-outlet>\r\n  </router-outlet>\r\n</div>\r\n"
 
 /***/ }),
 
