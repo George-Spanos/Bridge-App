@@ -6,6 +6,12 @@
 #menu-item:hover {
   color: white;
 }
+#bs-example-navbar-collapse-1{
+  width: 100%;
+}
 .navbar {
   border-radius: 0px;
+}
+#bs-example-navbar-collapse-1>ul {
+  width: 100%;
 }

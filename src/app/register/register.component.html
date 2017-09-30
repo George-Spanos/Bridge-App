@@ -1,37 +1,64 @@
-<div class="register">
-  <div class="col-xs-12">
+<form class="register" (ngSubmit)="onSubmit()" #f="ngForm">
+  <div class="col-xs-12" ngModelGroup="Register">
     <div *ngIf="!loginbool">
       <div class="row">
         <h2 id="header">Register</h2>
       </div>
       <div class="row">
         <label>Username</label>
-        <input class="form-control" type="text">
+        <input ngModel name="username" class="form-control" type="text" required #username="ngModel">
+        <div class="row warning" *ngIf="username.invalid && username.touched">
+          <span>Please type a username</span>
+        </div>
+        <div class="row warning" *ngIf="user.exists">
+          <span>Username already exists! Please select another Username</span>
+        </div>
+      </div>
+      <div class="row">
+        <label>E-mail</label>
+        <input ngModel name="email" class="form-control" type="email" required email #mail="ngModel">
+        <div class="row warning" *ngIf="mail.invalid && mail.touched">
+          <span>Please type your e-mail correctly</span>
+        </div>
       </div>
       <div class="row">
         <label>Password</label>
-        <input class="form-control" type="password">
+        <input ngModel name="password" class="form-control" type="password" required #pass="ngModel">
       </div>
       <div class="row">
-        <button type="Submit" class="btn btn btn-primary">Register</button>
+        <label>Retype Password</label>
+        <input ngModel name="retypepass" class="form-control" type="password" required #retypepass="ngModel">
+      </div>
+      <div class="row warning" *ngIf="pass.value !== retypepass.value && pass.touched && retypepass.touched">
+        <span style="color: rgba(0, 0, 0, 0.9); font-weight: bold; font-size:16px">
+          Passwords don't match</span>
+      </div>
+      <div class="subbutton">
+        <button type="submit" [disabled]="!f.valid" class="btn btn btn-primary">Register</button>
       </div>
       <p (click)="changeForm()" id="login-text">Already have an account?<br> Click here to login</p>
     </div>
   </div>
-  <div class="col-xs-12" *ngIf="loginbool">
-    <div class="row">
-      <h2 id="header">Login</h2>
+  <div ngModelGroup="Login">
+    <div class="col-xs-12" *ngIf="loginbool">
+      <div class="row">
+        <h2 id="header">Login</h2>
+      </div>
+      <div class="row">
+        <label>Username</label>
+        <input ngModel name="username" class="form-control" type="text">
+      </div>
+      <div class="row">
+        <label>Password</label>
+        <input ngModel name="password" class="form-control" type="password">
+      </div>
+      <div class="subbutton">
+        <button type="submit" class="btn btn btn-primary">Login</button>
+      </div>
+      <div class="row warning" *ngIf="user.logValid">
+        <span>Incorrect Username or Password.</span>
+      </div>
+      <p (click)="changeForm()" id="login-text">Click here to register</p>
     </div>
-    <div class="row">
-      <label>Username</label>
-      <input class="form-control" type="text">
-    </div>
-    <div class="row">
-      <label>Password</label>
-      <input class="form-control" type="password">
-    </div>
-    <button type="Submit" class="btn btn btn-primary">Login</button>
-    <p (click)="changeForm()" id="login-text">Click here to register</p>
   </div>
-
-</div>
+</form>

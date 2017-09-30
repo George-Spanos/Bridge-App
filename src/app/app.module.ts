@@ -8,6 +8,7 @@ import { AppComponent } from './app.component';
 
 import { BidThreadComponent } from './Bid Section/bid-thread/bid-thread.component';
 import { BridgeApi } from './Services/bridge.service';
+import { User } from './Services/user.service';
 import { BidFormComponent } from './Bid Section/bid-form/bid-form.component';
 import { HeaderComponent } from './header/header.component';
 import { HomepageComponent } from './homepage/homepage.component';
@@ -26,6 +27,7 @@ import { LeadThreadComponent } from './Lead Section/lead-thread/lead-thread.comp
 import { LeadThreadFormComponent } from './Lead Section/lead-thread-form/lead-thread-form.component';
 import { CommentComponent } from './shared-components/comment/comment.component';
 import { RegisterComponent } from './register/register.component';
+import { AccountComponent } from './account-page/account/account.component';
 const routes = [
   { path: '', component: HomepageComponent },
   { path: 'bid', component: BidThreadComponent },
@@ -34,7 +36,8 @@ const routes = [
   { path: 'donate', component: DonateComponent },
   { path: 'contact', component: ContactComponent },
   { path: 'lead', component: LeadFormComponent },
-  {path: 'leadthread', component: LeadThreadComponent},
+  { path: 'leadthread', component: LeadThreadComponent },
+  { path: 'myaccount', component: AccountComponent },
   { path: 'test', component: TestpageComponent },
   { path: '**', redirectTo: '' }
 ];
@@ -60,7 +63,8 @@ const routes = [
     LeadThreadComponent,
     LeadThreadFormComponent,
     CommentComponent,
-    RegisterComponent
+    RegisterComponent,
+    AccountComponent
   ],
   imports: [
     BrowserModule,
@@ -68,7 +72,7 @@ const routes = [
     HttpModule,
     RouterModule.forRoot(routes),
   ],
-  providers: [BridgeApi],
+  providers: [BridgeApi, User],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

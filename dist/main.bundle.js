@@ -1269,6 +1269,140 @@ var _a;
 
 /***/ }),
 
+/***/ "../../../../../src/app/Services/user.service.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return User; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_http__ = __webpack_require__("../../../http/@angular/http.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_Rx__ = __webpack_require__("../../../../rxjs/Rx.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_Rx___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_Rx__);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+var User = (function () {
+    function User(http) {
+        this.http = http;
+        this.premium = false;
+        this.loggedIn = false;
+        this.registered = false;
+        this.exists = false;
+        this.logValid = false;
+    }
+    User.prototype.createUser = function () {
+        var _this = this;
+        var header = new __WEBPACK_IMPORTED_MODULE_0__angular_http__["a" /* Headers */]({ 'Content-Type': 'application/json' });
+        var user = {
+            username: this.username,
+            password: this.password,
+            email: this.email
+        };
+        var body = JSON.stringify(user);
+        return this.http.post('/register', body, { headers: header }).map(function (response) {
+            _this.exists = response.json().result;
+            console.log(_this.exists);
+        }).catch(function (error) { return __WEBPACK_IMPORTED_MODULE_2_rxjs_Rx__["Observable"].throw(error.json()); });
+    };
+    User.prototype.loginUser = function () {
+        var _this = this;
+        var header = new __WEBPACK_IMPORTED_MODULE_0__angular_http__["a" /* Headers */]({ 'Content-Type': 'application/json' });
+        var user = {
+            username: this.username,
+            password: this.password,
+        };
+        var body = JSON.stringify(user);
+        return this.http.post('/login', body, { headers: header }).map(function (response) {
+            _this.loggedIn = response.json().result;
+            if (!_this.loggedIn) {
+                _this.logValid = true;
+            }
+        }).catch(function (error) { return __WEBPACK_IMPORTED_MODULE_2_rxjs_Rx__["Observable"].throw(error.json()); });
+    };
+    User.prototype.editUser = function () { };
+    return User;
+}());
+User = __decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["C" /* Injectable */])(),
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_0__angular_http__["b" /* Http */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_http__["b" /* Http */]) === "function" && _a || Object])
+], User);
+
+var _a;
+//# sourceMappingURL=user.service.js.map
+
+/***/ }),
+
+/***/ "../../../../../src/app/account-page/account/account.component.css":
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "", ""]);
+
+// exports
+
+
+/*** EXPORTS FROM exports-loader ***/
+module.exports = module.exports.toString();
+
+/***/ }),
+
+/***/ "../../../../../src/app/account-page/account/account.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<p>\n  account works!\n</p>\n"
+
+/***/ }),
+
+/***/ "../../../../../src/app/account-page/account/account.component.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AccountComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+var AccountComponent = (function () {
+    function AccountComponent() {
+    }
+    AccountComponent.prototype.ngOnInit = function () {
+    };
+    return AccountComponent;
+}());
+AccountComponent = __decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["o" /* Component */])({
+        selector: 'app-account',
+        template: __webpack_require__("../../../../../src/app/account-page/account/account.component.html"),
+        styles: [__webpack_require__("../../../../../src/app/account-page/account/account.component.css")]
+    }),
+    __metadata("design:paramtypes", [])
+], AccountComponent);
+
+//# sourceMappingURL=account.component.js.map
+
+/***/ }),
+
 /***/ "../../../../../src/app/app.component.css":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1290,7 +1424,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/app.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<app-header>\r\n</app-header>\r\n<div class=\"col-xs-10 main-content\">\r\n  <router-outlet>\r\n\r\n        </router-outlet>\r\n</div>\r\n\r\n  <div class=\"sidebar col-xs-2\">\r\n    <app-register></app-register>\r\n</div>\r\n"
+module.exports = "<app-header>\r\n</app-header>\r\n<div class=\"col-xs-10 main-content\">\r\n  <router-outlet>\r\n  </router-outlet>\r\n</div>\r\n<div class=\"sidebar col-xs-2\" *ngIf=\"!user.loggedIn\">\r\n  <app-register></app-register>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -1300,15 +1434,21 @@ module.exports = "<app-header>\r\n</app-header>\r\n<div class=\"col-xs-10 main-c
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Services_user_service__ = __webpack_require__("../../../../../src/app/Services/user.service.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
 
 var AppComponent = (function () {
-    function AppComponent() {
+    function AppComponent(user) {
+        this.user = user;
     }
     return AppComponent;
 }());
@@ -1317,9 +1457,11 @@ AppComponent = __decorate([
         selector: 'app-root',
         template: __webpack_require__("../../../../../src/app/app.component.html"),
         styles: [__webpack_require__("../../../../../src/app/app.component.css")]
-    })
+    }),
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__Services_user_service__["a" /* User */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__Services_user_service__["a" /* User */]) === "function" && _a || Object])
 ], AppComponent);
 
+var _a;
 //# sourceMappingURL=app.component.js.map
 
 /***/ }),
@@ -1337,30 +1479,34 @@ AppComponent = __decorate([
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__app_component__ = __webpack_require__("../../../../../src/app/app.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__Bid_Section_bid_thread_bid_thread_component__ = __webpack_require__("../../../../../src/app/Bid Section/bid-thread/bid-thread.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__Services_bridge_service__ = __webpack_require__("../../../../../src/app/Services/bridge.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__Bid_Section_bid_form_bid_form_component__ = __webpack_require__("../../../../../src/app/Bid Section/bid-form/bid-form.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__header_header_component__ = __webpack_require__("../../../../../src/app/header/header.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__homepage_homepage_component__ = __webpack_require__("../../../../../src/app/homepage/homepage.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__Bid_Section_practice_practice_component__ = __webpack_require__("../../../../../src/app/Bid Section/practice/practice.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__donate_donate_component__ = __webpack_require__("../../../../../src/app/donate/donate.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__contact_contact_component__ = __webpack_require__("../../../../../src/app/contact/contact.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__Lead_Section_lead_form_lead_form_component__ = __webpack_require__("../../../../../src/app/Lead Section/lead-form/lead-form.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__Lead_Section_lead_practice_lead_practice_component__ = __webpack_require__("../../../../../src/app/Lead Section/lead-practice/lead-practice.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__Bid_Section_practiceform_practiceform_component__ = __webpack_require__("../../../../../src/app/Bid Section/practiceform/practiceform.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__testpage_testpage_component__ = __webpack_require__("../../../../../src/app/testpage/testpage.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__shared_components_card_board_card_board_component__ = __webpack_require__("../../../../../src/app/shared-components/card-board/card-board.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__shared_components_contract_design_contract_design_component__ = __webpack_require__("../../../../../src/app/shared-components/contract-design/contract-design.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__shared_components_suit_img_suit_img_component__ = __webpack_require__("../../../../../src/app/shared-components/suit-img/suit-img.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__shared_directives_dropdown_directive__ = __webpack_require__("../../../../../src/app/shared-directives/dropdown.directive.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__Lead_Section_lead_thread_lead_thread_component__ = __webpack_require__("../../../../../src/app/Lead Section/lead-thread/lead-thread.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__Lead_Section_lead_thread_form_lead_thread_form_component__ = __webpack_require__("../../../../../src/app/Lead Section/lead-thread-form/lead-thread-form.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_24__shared_components_comment_comment_component__ = __webpack_require__("../../../../../src/app/shared-components/comment/comment.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_25__register_register_component__ = __webpack_require__("../../../../../src/app/register/register.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__Services_user_service__ = __webpack_require__("../../../../../src/app/Services/user.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__Bid_Section_bid_form_bid_form_component__ = __webpack_require__("../../../../../src/app/Bid Section/bid-form/bid-form.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__header_header_component__ = __webpack_require__("../../../../../src/app/header/header.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__homepage_homepage_component__ = __webpack_require__("../../../../../src/app/homepage/homepage.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__Bid_Section_practice_practice_component__ = __webpack_require__("../../../../../src/app/Bid Section/practice/practice.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__donate_donate_component__ = __webpack_require__("../../../../../src/app/donate/donate.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__contact_contact_component__ = __webpack_require__("../../../../../src/app/contact/contact.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__Lead_Section_lead_form_lead_form_component__ = __webpack_require__("../../../../../src/app/Lead Section/lead-form/lead-form.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__Lead_Section_lead_practice_lead_practice_component__ = __webpack_require__("../../../../../src/app/Lead Section/lead-practice/lead-practice.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__Bid_Section_practiceform_practiceform_component__ = __webpack_require__("../../../../../src/app/Bid Section/practiceform/practiceform.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__testpage_testpage_component__ = __webpack_require__("../../../../../src/app/testpage/testpage.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__shared_components_card_board_card_board_component__ = __webpack_require__("../../../../../src/app/shared-components/card-board/card-board.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__shared_components_contract_design_contract_design_component__ = __webpack_require__("../../../../../src/app/shared-components/contract-design/contract-design.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__shared_components_suit_img_suit_img_component__ = __webpack_require__("../../../../../src/app/shared-components/suit-img/suit-img.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__shared_directives_dropdown_directive__ = __webpack_require__("../../../../../src/app/shared-directives/dropdown.directive.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__Lead_Section_lead_thread_lead_thread_component__ = __webpack_require__("../../../../../src/app/Lead Section/lead-thread/lead-thread.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_24__Lead_Section_lead_thread_form_lead_thread_form_component__ = __webpack_require__("../../../../../src/app/Lead Section/lead-thread-form/lead-thread-form.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_25__shared_components_comment_comment_component__ = __webpack_require__("../../../../../src/app/shared-components/comment/comment.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_26__register_register_component__ = __webpack_require__("../../../../../src/app/register/register.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_27__account_page_account_account_component__ = __webpack_require__("../../../../../src/app/account-page/account/account.component.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
+
 
 
 
@@ -1388,15 +1534,16 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 var routes = [
-    { path: '', component: __WEBPACK_IMPORTED_MODULE_10__homepage_homepage_component__["a" /* HomepageComponent */] },
+    { path: '', component: __WEBPACK_IMPORTED_MODULE_11__homepage_homepage_component__["a" /* HomepageComponent */] },
     { path: 'bid', component: __WEBPACK_IMPORTED_MODULE_6__Bid_Section_bid_thread_bid_thread_component__["a" /* BidThreadComponent */] },
-    { path: 'practice', component: __WEBPACK_IMPORTED_MODULE_11__Bid_Section_practice_practice_component__["a" /* PracticeComponent */] },
-    { path: 'leadpractice', component: __WEBPACK_IMPORTED_MODULE_15__Lead_Section_lead_practice_lead_practice_component__["a" /* LeadPracticeComponent */] },
-    { path: 'donate', component: __WEBPACK_IMPORTED_MODULE_12__donate_donate_component__["a" /* DonateComponent */] },
-    { path: 'contact', component: __WEBPACK_IMPORTED_MODULE_13__contact_contact_component__["a" /* ContactComponent */] },
-    { path: 'lead', component: __WEBPACK_IMPORTED_MODULE_14__Lead_Section_lead_form_lead_form_component__["a" /* LeadFormComponent */] },
-    { path: 'leadthread', component: __WEBPACK_IMPORTED_MODULE_22__Lead_Section_lead_thread_lead_thread_component__["a" /* LeadThreadComponent */] },
-    { path: 'test', component: __WEBPACK_IMPORTED_MODULE_17__testpage_testpage_component__["a" /* TestpageComponent */] },
+    { path: 'practice', component: __WEBPACK_IMPORTED_MODULE_12__Bid_Section_practice_practice_component__["a" /* PracticeComponent */] },
+    { path: 'leadpractice', component: __WEBPACK_IMPORTED_MODULE_16__Lead_Section_lead_practice_lead_practice_component__["a" /* LeadPracticeComponent */] },
+    { path: 'donate', component: __WEBPACK_IMPORTED_MODULE_13__donate_donate_component__["a" /* DonateComponent */] },
+    { path: 'contact', component: __WEBPACK_IMPORTED_MODULE_14__contact_contact_component__["a" /* ContactComponent */] },
+    { path: 'lead', component: __WEBPACK_IMPORTED_MODULE_15__Lead_Section_lead_form_lead_form_component__["a" /* LeadFormComponent */] },
+    { path: 'leadthread', component: __WEBPACK_IMPORTED_MODULE_23__Lead_Section_lead_thread_lead_thread_component__["a" /* LeadThreadComponent */] },
+    { path: 'myaccount', component: __WEBPACK_IMPORTED_MODULE_27__account_page_account_account_component__["a" /* AccountComponent */] },
+    { path: 'test', component: __WEBPACK_IMPORTED_MODULE_18__testpage_testpage_component__["a" /* TestpageComponent */] },
     { path: '**', redirectTo: '' }
 ];
 var AppModule = (function () {
@@ -1409,24 +1556,25 @@ AppModule = __decorate([
         declarations: [
             __WEBPACK_IMPORTED_MODULE_5__app_component__["a" /* AppComponent */],
             __WEBPACK_IMPORTED_MODULE_6__Bid_Section_bid_thread_bid_thread_component__["a" /* BidThreadComponent */],
-            __WEBPACK_IMPORTED_MODULE_8__Bid_Section_bid_form_bid_form_component__["a" /* BidFormComponent */],
-            __WEBPACK_IMPORTED_MODULE_9__header_header_component__["a" /* HeaderComponent */],
-            __WEBPACK_IMPORTED_MODULE_10__homepage_homepage_component__["a" /* HomepageComponent */],
-            __WEBPACK_IMPORTED_MODULE_11__Bid_Section_practice_practice_component__["a" /* PracticeComponent */],
-            __WEBPACK_IMPORTED_MODULE_12__donate_donate_component__["a" /* DonateComponent */],
-            __WEBPACK_IMPORTED_MODULE_13__contact_contact_component__["a" /* ContactComponent */],
-            __WEBPACK_IMPORTED_MODULE_14__Lead_Section_lead_form_lead_form_component__["a" /* LeadFormComponent */],
-            __WEBPACK_IMPORTED_MODULE_15__Lead_Section_lead_practice_lead_practice_component__["a" /* LeadPracticeComponent */],
-            __WEBPACK_IMPORTED_MODULE_16__Bid_Section_practiceform_practiceform_component__["a" /* PracticeformComponent */],
-            __WEBPACK_IMPORTED_MODULE_17__testpage_testpage_component__["a" /* TestpageComponent */],
-            __WEBPACK_IMPORTED_MODULE_18__shared_components_card_board_card_board_component__["a" /* CardBoardComponent */],
-            __WEBPACK_IMPORTED_MODULE_19__shared_components_contract_design_contract_design_component__["a" /* ContractDesignComponent */],
-            __WEBPACK_IMPORTED_MODULE_20__shared_components_suit_img_suit_img_component__["a" /* SuitImgComponent */],
-            __WEBPACK_IMPORTED_MODULE_21__shared_directives_dropdown_directive__["a" /* DropdownDirective */],
-            __WEBPACK_IMPORTED_MODULE_22__Lead_Section_lead_thread_lead_thread_component__["a" /* LeadThreadComponent */],
-            __WEBPACK_IMPORTED_MODULE_23__Lead_Section_lead_thread_form_lead_thread_form_component__["a" /* LeadThreadFormComponent */],
-            __WEBPACK_IMPORTED_MODULE_24__shared_components_comment_comment_component__["a" /* CommentComponent */],
-            __WEBPACK_IMPORTED_MODULE_25__register_register_component__["a" /* RegisterComponent */]
+            __WEBPACK_IMPORTED_MODULE_9__Bid_Section_bid_form_bid_form_component__["a" /* BidFormComponent */],
+            __WEBPACK_IMPORTED_MODULE_10__header_header_component__["a" /* HeaderComponent */],
+            __WEBPACK_IMPORTED_MODULE_11__homepage_homepage_component__["a" /* HomepageComponent */],
+            __WEBPACK_IMPORTED_MODULE_12__Bid_Section_practice_practice_component__["a" /* PracticeComponent */],
+            __WEBPACK_IMPORTED_MODULE_13__donate_donate_component__["a" /* DonateComponent */],
+            __WEBPACK_IMPORTED_MODULE_14__contact_contact_component__["a" /* ContactComponent */],
+            __WEBPACK_IMPORTED_MODULE_15__Lead_Section_lead_form_lead_form_component__["a" /* LeadFormComponent */],
+            __WEBPACK_IMPORTED_MODULE_16__Lead_Section_lead_practice_lead_practice_component__["a" /* LeadPracticeComponent */],
+            __WEBPACK_IMPORTED_MODULE_17__Bid_Section_practiceform_practiceform_component__["a" /* PracticeformComponent */],
+            __WEBPACK_IMPORTED_MODULE_18__testpage_testpage_component__["a" /* TestpageComponent */],
+            __WEBPACK_IMPORTED_MODULE_19__shared_components_card_board_card_board_component__["a" /* CardBoardComponent */],
+            __WEBPACK_IMPORTED_MODULE_20__shared_components_contract_design_contract_design_component__["a" /* ContractDesignComponent */],
+            __WEBPACK_IMPORTED_MODULE_21__shared_components_suit_img_suit_img_component__["a" /* SuitImgComponent */],
+            __WEBPACK_IMPORTED_MODULE_22__shared_directives_dropdown_directive__["a" /* DropdownDirective */],
+            __WEBPACK_IMPORTED_MODULE_23__Lead_Section_lead_thread_lead_thread_component__["a" /* LeadThreadComponent */],
+            __WEBPACK_IMPORTED_MODULE_24__Lead_Section_lead_thread_form_lead_thread_form_component__["a" /* LeadThreadFormComponent */],
+            __WEBPACK_IMPORTED_MODULE_25__shared_components_comment_comment_component__["a" /* CommentComponent */],
+            __WEBPACK_IMPORTED_MODULE_26__register_register_component__["a" /* RegisterComponent */],
+            __WEBPACK_IMPORTED_MODULE_27__account_page_account_account_component__["a" /* AccountComponent */]
         ],
         imports: [
             __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["a" /* BrowserModule */],
@@ -1434,7 +1582,7 @@ AppModule = __decorate([
             __WEBPACK_IMPORTED_MODULE_4__angular_http__["c" /* HttpModule */],
             __WEBPACK_IMPORTED_MODULE_2__angular_router__["a" /* RouterModule */].forRoot(routes),
         ],
-        providers: [__WEBPACK_IMPORTED_MODULE_7__Services_bridge_service__["a" /* BridgeApi */]],
+        providers: [__WEBPACK_IMPORTED_MODULE_7__Services_bridge_service__["a" /* BridgeApi */], __WEBPACK_IMPORTED_MODULE_8__Services_user_service__["a" /* User */]],
         bootstrap: [__WEBPACK_IMPORTED_MODULE_5__app_component__["a" /* AppComponent */]]
     })
 ], AppModule);
@@ -1573,7 +1721,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, "#menu-item {\r\n  color: lightgrey;\r\n  font-size: 16px;\r\n  font-family: Arial, Helvetica, sans-serif;\r\n}\r\n#menu-item:hover {\r\n  color: white;\r\n}\r\n.navbar {\r\n  border-radius: 0px;\r\n}\r\n", ""]);
+exports.push([module.i, "#menu-item {\r\n  color: lightgrey;\r\n  font-size: 16px;\r\n  font-family: Arial, Helvetica, sans-serif;\r\n}\r\n#menu-item:hover {\r\n  color: white;\r\n}\r\n#bs-example-navbar-collapse-1{\r\n  width: 100%;\r\n}\r\n.navbar {\r\n  border-radius: 0px;\r\n}\r\n#bs-example-navbar-collapse-1>ul {\r\n  width: 100%;\r\n}\r\n", ""]);
 
 // exports
 
@@ -1586,7 +1734,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/header/header.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<nav class=\"navbar navbar-inverse\" style=\"background: linear-gradient(to right, darkgreen , green)\">\n      <div class=\"collapse navbar-collapse\" id=\"bs-example-navbar-collapse-1\">\n        <ul class=\"nav navbar-nav\">\n          <li style=\"cursor:pointer;\" routerLinkActive=\"active\" [routerLinkActiveOptions]=\"{exact: true}\">\n            <a id=\"menu-item\" routerLink=\"/\">Home</a></li>\n          <li style=\"cursor:pointer\" routerLinkActive=\"active\">\n            <a id=\"menu-item\" routerLink=\"/bid\">Bid Thread</a></li>\n          <li style=\"cursor:pointer\" routerLinkActive=\"active\">\n            <a id=\"menu-item\" routerLink=\"/practice\">Practice</a> </li>\n          <li style=\"cursor:pointer\" routerLinkActive=\"active\">\n            <a id=\"menu-item\" routerLink=\"/lead\">Lead Post</a></li>\n          <li style=\"cursor:pointer\" routerLinkActive=\"active\">\n            <a id=\"menu-item\" routerLink=\"/leadthread\">Lead Thread</a></li>\n            <li style=\"cursor:pointer\" routerLinkActive=\"active\">\n                <a id=\"menu-item\" routerLink=\"/leadpractice\">Lead Practice</a></li>\n          <li style=\"cursor:pointer\" routerLinkActive=\"active\">\n            <a id=\"menu-item\" routerLink=\"/donate\">Donate</a></li>\n          <li style=\"cursor:pointer\" routerLinkActive=\"active\">\n            <a id=\"menu-item\" routerLink=\"/contact\">Contact</a></li>\n        </ul>\n      </div>\n</nav>\n"
+module.exports = "<nav class=\"navbar navbar-inverse\" style=\"background: linear-gradient(to right, darkgreen , green)\">\n      <div class=\"collapse navbar-collapse\" id=\"bs-example-navbar-collapse-1\">\n        <ul class=\"nav navbar-nav\">\n          <li style=\"cursor:pointer;\" routerLinkActive=\"active\" [routerLinkActiveOptions]=\"{exact: true}\">\n            <a id=\"menu-item\" routerLink=\"/\">Home</a></li>\n          <li style=\"cursor:pointer\" routerLinkActive=\"active\">\n            <a id=\"menu-item\" routerLink=\"/bid\">Bid Thread</a></li>\n          <li style=\"cursor:pointer\" routerLinkActive=\"active\">\n            <a id=\"menu-item\" routerLink=\"/practice\">Practice</a> </li>\n          <li style=\"cursor:pointer\" routerLinkActive=\"active\">\n            <a id=\"menu-item\" routerLink=\"/lead\">Lead Post</a></li>\n          <li style=\"cursor:pointer\" routerLinkActive=\"active\">\n            <a id=\"menu-item\" routerLink=\"/leadthread\">Lead Thread</a></li>\n            <li style=\"cursor:pointer\" routerLinkActive=\"active\">\n                <a id=\"menu-item\" routerLink=\"/leadpractice\">Lead Practice</a></li>\n          <li style=\"cursor:pointer\" routerLinkActive=\"active\">\n            <a id=\"menu-item\" routerLink=\"/donate\">Donate</a></li>\n          <li style=\"cursor:pointer\" routerLinkActive=\"active\">\n            <a id=\"menu-item\" routerLink=\"/contact\">Contact</a></li>\n          <li *ngIf=\"user.loggedIn\" style=\"cursor:pointer; float: right;\" routerLinkActive=\"active\">\n            <a id=\"menu-item\" routerLink=\"/myaccount\">My Account</a></li>\n        </ul>\n      </div>\n</nav>\n"
 
 /***/ }),
 
@@ -1596,6 +1744,7 @@ module.exports = "<nav class=\"navbar navbar-inverse\" style=\"background: linea
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return HeaderComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Services_user_service__ = __webpack_require__("../../../../../src/app/Services/user.service.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1606,8 +1755,10 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
+
 var HeaderComponent = (function () {
-    function HeaderComponent() {
+    function HeaderComponent(user) {
+        this.user = user;
     }
     HeaderComponent.prototype.ngOnInit = function () {
     };
@@ -1619,9 +1770,10 @@ HeaderComponent = __decorate([
         template: __webpack_require__("../../../../../src/app/header/header.component.html"),
         styles: [__webpack_require__("../../../../../src/app/header/header.component.css")]
     }),
-    __metadata("design:paramtypes", [])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__Services_user_service__["a" /* User */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__Services_user_service__["a" /* User */]) === "function" && _a || Object])
 ], HeaderComponent);
 
+var _a;
 //# sourceMappingURL=header.component.js.map
 
 /***/ }),
@@ -1695,7 +1847,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, ".register{\r\n  height:90vh;\r\n  max-height: 100%;\r\n}\r\n#header{\r\n  text-align: center;\r\n}\r\n#login-text{\r\n  font-weight: bolder;\r\n  margin: 10px 0px;\r\n  cursor: pointer;\r\n  font-size: 18px;\r\n  text-align: center;\r\n  background-color: rgba(211, 211, 211, 0.8);\r\n  border-radius: 5px;\r\n  padding: 3px;\r\n}\r\n#login-text:hover{\r\n  color: blue;\r\n\r\n}\r\n.btn {\r\n  margin-top: 10px;\r\n  display: -webkit-box;\r\n  display: -ms-flexbox;\r\n  display: flex;\r\n  -webkit-box-pack: center;\r\n      -ms-flex-pack: center;\r\n          justify-content: center;\r\n}\r\n", ""]);
+exports.push([module.i, ".register{\r\n  height:90vh;\r\n  max-height: 100%;\r\n}\r\n#header{\r\n  text-align: center;\r\n}\r\n.subbutton {\r\n  display: -webkit-box;\r\n  display: -ms-flexbox;\r\n  display: flex;\r\n  -webkit-box-pack: center;\r\n      -ms-flex-pack: center;\r\n          justify-content: center;\r\n}\r\n#login-text{\r\n  font-weight: bolder;\r\n  margin: 5px 0px;\r\n  cursor: pointer;\r\n  font-size: 18px;\r\n  text-align: center;\r\n  background-color: rgba(211, 211, 211, 0.8);\r\n  border-radius: 5px;\r\n  padding: 3px;\r\n}\r\n#login-text:hover{\r\n  color: blue;\r\n\r\n}\r\n.btn {\r\n  margin-top: 5px;\r\n  display: -webkit-box;\r\n  display: -ms-flexbox;\r\n  display: flex;\r\n  -webkit-box-pack: center;\r\n      -ms-flex-pack: center;\r\n          justify-content: center;\r\n}\r\n.form-control.ng-invalid.ng-touched{\r\n  border: 2px solid red;\r\n}\r\n.warning {\r\n  text-align: center;\r\n  margin: 5px 0px;\r\n  font-weight: bold;\r\n  background-color: rgba(255, 255, 255, 0.35);\r\n  border-radius: 2px;\r\n  border: 1px solid rgba(255, 0, 0, 0.3);\r\n}\r\n", ""]);
 
 // exports
 
@@ -1708,7 +1860,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/register/register.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"register\">\n  <div class=\"col-xs-12\">\n    <div *ngIf=\"!loginbool\">\n      <div class=\"row\">\n        <h2 id=\"header\">Register</h2>\n      </div>\n      <div class=\"row\">\n        <label>Username</label>\n        <input class=\"form-control\" type=\"text\">\n      </div>\n      <div class=\"row\">\n        <label>Password</label>\n        <input class=\"form-control\" type=\"password\">\n      </div>\n      <div class=\"row\">\n        <button type=\"Submit\" class=\"btn btn btn-primary\">Register</button>\n      </div>\n      <p (click)=\"changeForm()\" id=\"login-text\">Already have an account?<br> Click here to login</p>\n    </div>\n  </div>\n  <div class=\"col-xs-12\" *ngIf=\"loginbool\">\n    <div class=\"row\">\n      <h2 id=\"header\">Login</h2>\n    </div>\n    <div class=\"row\">\n      <label>Username</label>\n      <input class=\"form-control\" type=\"text\">\n    </div>\n    <div class=\"row\">\n      <label>Password</label>\n      <input class=\"form-control\" type=\"password\">\n    </div>\n    <button type=\"Submit\" class=\"btn btn btn-primary\">Login</button>\n    <p (click)=\"changeForm()\" id=\"login-text\">Click here to register</p>\n  </div>\n\n</div>\n"
+module.exports = "<form class=\"register\" (ngSubmit)=\"onSubmit()\" #f=\"ngForm\">\n  <div class=\"col-xs-12\" ngModelGroup=\"Register\">\n    <div *ngIf=\"!loginbool\">\n      <div class=\"row\">\n        <h2 id=\"header\">Register</h2>\n      </div>\n      <div class=\"row\">\n        <label>Username</label>\n        <input ngModel name=\"username\" class=\"form-control\" type=\"text\" required #username=\"ngModel\">\n        <div class=\"row warning\" *ngIf=\"username.invalid && username.touched\">\n          <span>Please type a username</span>\n        </div>\n        <div class=\"row warning\" *ngIf=\"user.exists\">\n          <span>Username already exists! Please select another Username</span>\n        </div>\n      </div>\n      <div class=\"row\">\n        <label>E-mail</label>\n        <input ngModel name=\"email\" class=\"form-control\" type=\"email\" required email #mail=\"ngModel\">\n        <div class=\"row warning\" *ngIf=\"mail.invalid && mail.touched\">\n          <span>Please type your e-mail correctly</span>\n        </div>\n      </div>\n      <div class=\"row\">\n        <label>Password</label>\n        <input ngModel name=\"password\" class=\"form-control\" type=\"password\" required #pass=\"ngModel\">\n      </div>\n      <div class=\"row\">\n        <label>Retype Password</label>\n        <input ngModel name=\"retypepass\" class=\"form-control\" type=\"password\" required #retypepass=\"ngModel\">\n      </div>\n      <div class=\"row warning\" *ngIf=\"pass.value !== retypepass.value && pass.touched && retypepass.touched\">\n        <span style=\"color: rgba(0, 0, 0, 0.9); font-weight: bold; font-size:16px\">\n          Passwords don't match</span>\n      </div>\n      <div class=\"subbutton\">\n        <button type=\"submit\" [disabled]=\"!f.valid\" class=\"btn btn btn-primary\">Register</button>\n      </div>\n      <p (click)=\"changeForm()\" id=\"login-text\">Already have an account?<br> Click here to login</p>\n    </div>\n  </div>\n  <div ngModelGroup=\"Login\">\n    <div class=\"col-xs-12\" *ngIf=\"loginbool\">\n      <div class=\"row\">\n        <h2 id=\"header\">Login</h2>\n      </div>\n      <div class=\"row\">\n        <label>Username</label>\n        <input ngModel name=\"username\" class=\"form-control\" type=\"text\">\n      </div>\n      <div class=\"row\">\n        <label>Password</label>\n        <input ngModel name=\"password\" class=\"form-control\" type=\"password\">\n      </div>\n      <div class=\"subbutton\">\n        <button type=\"submit\" class=\"btn btn btn-primary\">Login</button>\n      </div>\n      <div class=\"row warning\" *ngIf=\"user.logValid\">\n        <span>Incorrect Username or Password.</span>\n      </div>\n      <p (click)=\"changeForm()\" id=\"login-text\">Click here to register</p>\n    </div>\n  </div>\n</form>\n"
 
 /***/ }),
 
@@ -1718,6 +1870,8 @@ module.exports = "<div class=\"register\">\n  <div class=\"col-xs-12\">\n    <di
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return RegisterComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_forms__ = __webpack_require__("../../../forms/@angular/forms.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Services_user_service__ = __webpack_require__("../../../../../src/app/Services/user.service.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1728,26 +1882,61 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
+
+
 var RegisterComponent = (function () {
-    function RegisterComponent() {
+    function RegisterComponent(user) {
+        this.user = user;
         this.loginbool = false;
     }
     RegisterComponent.prototype.changeForm = function () {
         this.loginbool = !this.loginbool;
+        console.log(this.logForm.value);
+    };
+    RegisterComponent.prototype.onSubmit = function () {
+        var _this = this;
+        if (!this.loginbool) {
+            this.user.username = this.logForm.value.Register.username;
+            this.user.password = this.logForm.value.Register.password;
+            this.user.email = this.logForm.value.Register.email;
+            this.user.createUser().subscribe(function (data) {
+                console.log('Success');
+                if (!_this.user.exists) {
+                    _this.logForm.reset();
+                    _this.loginbool = true;
+                    _this.user.registered = true;
+                }
+            }, function (error) { return console.error(error); });
+        }
+        else {
+            this.user.username = this.logForm.value.Login.username;
+            this.user.password = this.logForm.value.Login.password;
+            this.user.loginUser().subscribe(function (data) {
+                console.log('Success');
+                if (_this.user.loggedIn) {
+                    _this.logForm.reset();
+                }
+            }, function (error) { return console.error(error); });
+        }
     };
     RegisterComponent.prototype.ngOnInit = function () {
     };
     return RegisterComponent;
 }());
+__decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_16" /* ViewChild */])('f'),
+    __metadata("design:type", typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_forms__["b" /* NgForm */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_forms__["b" /* NgForm */]) === "function" && _a || Object)
+], RegisterComponent.prototype, "logForm", void 0);
 RegisterComponent = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["o" /* Component */])({
         selector: 'app-register',
         template: __webpack_require__("../../../../../src/app/register/register.component.html"),
-        styles: [__webpack_require__("../../../../../src/app/register/register.component.css")]
+        styles: [__webpack_require__("../../../../../src/app/register/register.component.css")],
     }),
-    __metadata("design:paramtypes", [])
+    __metadata("design:paramtypes", [typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__Services_user_service__["a" /* User */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__Services_user_service__["a" /* User */]) === "function" && _b || Object])
 ], RegisterComponent);
 
+var _a, _b;
 //# sourceMappingURL=register.component.js.map
 
 /***/ }),

@@ -43,9 +43,20 @@ const leadsSchema = new Schema({
   WestBid: [],
   answer: []
 })
+const userSchema = new Schema({
+  username: String,
+  password: String,
+  email: String,
+  leadsVoted: [],
+  bidsVoted: [],
+  premium: Boolean,
+  rank: String,
+  donationammount: Number
+})
 auctionSchema.plugin(randomEl);
 leadsSchema.plugin(randomEl);
 practiceSchema.plugin(randomEl);
+const User = mongoose.model('Users', userSchema);
 const leadPractice = mongoose.model('LeadPractice', leadsSchema);
 const practiceBids = mongoose.model('Practice Bids', practiceSchema);
 const Bid = mongoose.model('Bid', auctionSchema);
@@ -203,7 +214,6 @@ app.post('/bidvote', function (req, res, next) {
   })
 })
 app.post('/leadvote', function (req, res, next) {
-  //doesn't work
   leadPractice.findOne({ _id: req.body.id }, function (err, lead) {
     if (err) {
       throw err;
@@ -219,6 +229,56 @@ app.post('/leadvote', function (req, res, next) {
         throw err;
       }
     });
+  })
+})
+app.post('/register', function (req, res, next) {
+  User.findOne({ username: req.body.username }, function (err, result) {
+    if (result === null) {
+      var user = new User({
+        username: req.body.username,
+        password: req.body.password,
+        email: req.body.email,
+        premium: false,
+        leadsVoted: [],
+        bidsVoted: [],
+        rank: 'Begginer',
+        donationammount: 0
+      })
+      user.save(
+        function (err, result) {
+          if (err) {
+            return res.status(500).json({
+              title: 'An error occured',
+              err: error
+            })
+          }
+          res.status(200).json({
+            title: 'A user was created!',
+            result: false
+          });
+        }
+      );
+    } else {
+      res.status(200).json({
+        title: 'Username already exists!',
+        result: true
+      });
+    }
+  })
+})
+app.post('/login', function (req, res, next) {
+  User.findOne({ username: req.body.username }, function (err, result) {
+    if (result.password === req.body.password) {
+      res.status(200).json({
+        title: 'Correct credentials for' + req.body.username,
+        result: true
+      })
+    } else {
+      res.status(200).json({
+        title: 'Wrong username or password',
+        result: false
+      })
+    }
   })
 })
 /**
