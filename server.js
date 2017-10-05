@@ -51,7 +51,9 @@ const userSchema = new Schema({
   bidsVoted: [],
   premium: Boolean,
   rank: String,
-  donationammount: Number
+  donationammount: Number,
+  img: String,
+  description: String
 })
 auctionSchema.plugin(randomEl);
 leadsSchema.plugin(randomEl);
@@ -268,23 +270,82 @@ app.post('/register', function (req, res, next) {
 })
 app.post('/login', function (req, res, next) {
   User.findOne({ username: req.body.username }, function (err, result) {
-    if (result.password === req.body.password) {
+    if (result === null) {
+      res.status(200).json({
+        title: "Username doesn't exist",
+        result: { valid: false}
+      })
+    } else if (result.password === req.body.password) {
       res.status(200).json({
         title: 'Correct credentials for' + req.body.username,
-        result: true
+        result: {
+          valid: true,
+          img: result.img,
+          desc: result.description,
+          rank: result.rank,
+          username: result.username,
+          premium: result.premium
+        }
       })
-    } else {
+    }else {
       res.status(200).json({
-        title: 'Wrong username or password',
-        result: false
+        title: 'Incorrect password for user ' + req.body.username,
+        result: {
+          valid: false
+        }
       })
+    }
+  })
+})
+app.post('/changeDesc', function (req, res, next){
+  User.findOne({username: req.body.username}, function (err, result){
+    if (!err){
+      result.description = req.body.value;
+      result.save(
+        (err, response) => {
+          if (err) {
+            return res.status(500).json({
+              title: 'An error occured',
+              err: error
+            })
+          }else {
+            return res.status(200).json({
+              title: 'A description for the user ' + result.username + ' was updated',
+              result: 'Sucess'
+            })
+          }
+        }
+      );
+    }
+  })
+})
+app.post('/changeImg', function (req, res, next){
+  User.findOne({username: req.body.username}, function (err, result){
+    if (!err){
+      result.img = req.body.value;
+      result.save(
+        (err, response) => {
+          if (err) {
+            return res.status(500).json({
+              title: 'An error occured',
+              err: error
+            })
+          }else {
+            return res.status(200).json({
+              title: 'Profile Image for the user ' + result.username + ' was updated',
+              result: 'Sucess'
+            })
+          }
+        }
+      );
     }
   })
 })
 /**
  * Create HTTP server.
  */
-// Bid.update({}, { $set: { votes: 0 } }, { multi: true }, () => console.log('done'));
+// User.update({}, { $set:
+// { description: 'Please fill out your description'} }, { multi: true }, () => console.log('done'));
 // leadPractice.update({}, {
 //   $set: {
 //     answer: []

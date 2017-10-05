@@ -16,6 +16,9 @@ export class User {
   registered = false;
   exists = false;
   logValid = false;
+  description: string;
+  rank: string;
+  errorMessage: string;
   createUser() {
     const header = new Headers({ 'Content-Type': 'application/json' });
     const user = {
@@ -42,14 +45,35 @@ export class User {
     const body = JSON.stringify(user);
     return this.http.post('/login', body, { headers: header }).map(
       (response: Response) => {
-        this.loggedIn = response.json().result;
+        const result = response.json();
+        console.log(result);
+        this.loggedIn = result.result.valid;
         if (!this.loggedIn) {
           this.logValid = true;
+          this.errorMessage = result.title;
+        } else {
+          this.img = result.result.img;
+          this.rank = result.result.rank;
+          this.description = result.result.desc;
+          this.username = result.result.username;
+          this.premium = result.result.premium;
         }
       }
     ).catch(
       (error: Response) => Observable.throw(error.json())
       );
   }
-  editUser() { }
+  editUser(link: string, value: any) {
+    const header = new Headers({ 'Content-Type': 'application/json' });
+    const change = {
+      username: this.username,
+      value: value
+    };
+    const body = JSON.stringify(change);
+    return this.http.post(link, body, { headers: header }).map(
+      (response: Response) => { response.json(); }
+    ).catch(
+      (error: Response) => Observable.throw(error.json())
+      );
+  }
 }

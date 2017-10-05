@@ -1323,13 +1323,31 @@ var User = (function () {
         };
         var body = JSON.stringify(user);
         return this.http.post('/login', body, { headers: header }).map(function (response) {
-            _this.loggedIn = response.json().result;
+            var result = response.json();
+            console.log(result);
+            _this.loggedIn = result.result.valid;
             if (!_this.loggedIn) {
                 _this.logValid = true;
+                _this.errorMessage = result.title;
+            }
+            else {
+                _this.img = result.result.img;
+                _this.rank = result.result.rank;
+                _this.description = result.result.desc;
+                _this.username = result.result.username;
+                _this.premium = result.result.premium;
             }
         }).catch(function (error) { return __WEBPACK_IMPORTED_MODULE_2_rxjs_Rx__["Observable"].throw(error.json()); });
     };
-    User.prototype.editUser = function () { };
+    User.prototype.editUser = function (link, value) {
+        var header = new __WEBPACK_IMPORTED_MODULE_0__angular_http__["a" /* Headers */]({ 'Content-Type': 'application/json' });
+        var change = {
+            username: this.username,
+            value: value
+        };
+        var body = JSON.stringify(change);
+        return this.http.post(link, body, { headers: header }).map(function (response) { response.json(); }).catch(function (error) { return __WEBPACK_IMPORTED_MODULE_2_rxjs_Rx__["Observable"].throw(error.json()); });
+    };
     return User;
 }());
 User = __decorate([
@@ -1350,7 +1368,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, "", ""]);
+exports.push([module.i, ".img {\r\n  width: 100px;\r\n  height: 100px;\r\n  background-repeat: no-repeat;\r\n  background-size:contain;\r\n  margin: 10px;\r\n  -o-object-fit: cover;\r\n     object-fit: cover;\r\n}\r\n.form-control {\r\n  height: auto;\r\n  margin: 10px;\r\n  min-height: 100px;\r\n}\r\n.heading {\r\n  text-align: center; /* For Safari 5.1 to 6.0 */ /* For Opera 11.1 to 12.0 */ /* For Firefox 3.6 to 15 */\r\n  background: linear-gradient(rgba(190, 190, 190, 0.9), rgba(190, 190, 190, 0.2)); /* Standard syntax */\r\n}\r\n#premium {\r\n  color: green;\r\n}\r\n.info {\r\n  font-size: 14px;\r\n  font-weight: bold;\r\n}\r\n.hr {\r\n  border: 1px solid rgba(0, 0, 0, 0.3);\r\n  margin: 10px;\r\n}\r\n.columns {\r\n  float: left;\r\n}\r\n#imgText{\r\n  margin-top: 10px;\r\n}\r\n", ""]);
 
 // exports
 
@@ -1363,7 +1381,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/account-page/account/account.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<p>\n  account works!\n</p>\n"
+module.exports = "<div class=\"container\">\n  <div class=\"row\">\n    <div class=\"heading col-xs-12\">\n      <h2>Welcome {{username}}</h2>\n    </div>\n  </div>\n  <div class=\"row\">\n    <div class=\"col-xs-12\">\n      <div class=\"col-xs-2 columns\">\n        <img src={{img}} class=\"img\" *ngIf=\"!editImg\">\n        <textarea [(ngModel)]=\"newImg\" *ngIf=\"editImg\" id=\"imgText\"></textarea>\n        <button class=\"btn btn-primary\" *ngIf=\"!editImg\" (click)=\"editImage()\">Change Image</button>\n        <button class=\"btn btn-primary\" *ngIf=\"editImg\" (click)=\"saveImg()\">Save Image</button>\n      </div>\n      <div class=\"col-xs-10 columns\">\n        <textarea class=\"form-control\" *ngIf=\"!editDesc\" readonly>{{description}}</textarea>\n        <textarea class=\"form-control\" *ngIf=\"editDesc\" type=\"text\" value={{description}} [(ngModel)]=\"description\"></textarea>\n        <button class=\"btn btn-primary\" *ngIf=\"!editDesc\" (click)=\"editDescription()\">Edit Description</button>\n        <button class=\"btn btn-primary\" *ngIf=\"editDesc\" (click)=\"saveDescription()\">Save Description Changes</button>\n      </div>\n    </div>\n  </div>\n  <div class=\"row\">\n    <div class=\"col-xs-12 form-control\">\n      <label>User Info</label>\n      <hr class=\"hr\">\n      <ul class=\"info\">\n        <li> Rank: {{rank}}</li>\n        <li id=\"premium\" *ngIf=\"premium\"> Premium User</li>\n      </ul>\n    </div>\n  </div>\n  <button class=\"btn btn-primary\"  (click)=\"Logout()\">Log out</button>\n</div>\n"
 
 /***/ }),
 
@@ -1373,6 +1391,8 @@ module.exports = "<p>\n  account works!\n</p>\n"
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AccountComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__("../../../router/@angular/router.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Services_user_service__ = __webpack_require__("../../../../../src/app/Services/user.service.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1383,10 +1403,51 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
+
+
 var AccountComponent = (function () {
-    function AccountComponent() {
+    function AccountComponent(user, router) {
+        this.user = user;
+        this.router = router;
+        this.editDesc = false;
+        this.editImg = false;
+        this.newImg = 'Please paste your new image\'s url';
     }
+    AccountComponent.prototype.editDescription = function () {
+        this.editDesc = true;
+    };
+    AccountComponent.prototype.saveDescription = function () {
+        this.editDesc = false;
+        this.user.editUser('/changeDesc', this.description).subscribe(function (result) {
+            console.log(result);
+        });
+    };
+    AccountComponent.prototype.editImage = function () {
+        this.editImg = true;
+    };
+    AccountComponent.prototype.saveImg = function () {
+        this.editImg = false;
+        this.img = this.newImg;
+        this.user.editUser('/changeImg', this.img).subscribe(function (result) {
+            console.log(result);
+        });
+    };
+    AccountComponent.prototype.Logout = function () {
+        this.user.loggedIn = false;
+        this.user.logValid = false;
+        this.user.registered = false;
+        this.user.exists = false;
+        this.premium = false;
+        this.router.navigate(['/home']);
+    };
     AccountComponent.prototype.ngOnInit = function () {
+        if (this.user.loggedIn) {
+            this.username = this.user.username;
+            this.img = this.user.img;
+            this.rank = this.user.rank;
+            this.description = this.user.description;
+            this.premium = this.user.premium;
+        }
     };
     return AccountComponent;
 }());
@@ -1396,9 +1457,10 @@ AccountComponent = __decorate([
         template: __webpack_require__("../../../../../src/app/account-page/account/account.component.html"),
         styles: [__webpack_require__("../../../../../src/app/account-page/account/account.component.css")]
     }),
-    __metadata("design:paramtypes", [])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2__Services_user_service__["a" /* User */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__Services_user_service__["a" /* User */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["a" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_router__["a" /* Router */]) === "function" && _b || Object])
 ], AccountComponent);
 
+var _a, _b;
 //# sourceMappingURL=account.component.js.map
 
 /***/ }),
@@ -1580,7 +1642,7 @@ AppModule = __decorate([
             __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["a" /* BrowserModule */],
             __WEBPACK_IMPORTED_MODULE_3__angular_forms__["a" /* FormsModule */],
             __WEBPACK_IMPORTED_MODULE_4__angular_http__["c" /* HttpModule */],
-            __WEBPACK_IMPORTED_MODULE_2__angular_router__["a" /* RouterModule */].forRoot(routes),
+            __WEBPACK_IMPORTED_MODULE_2__angular_router__["b" /* RouterModule */].forRoot(routes),
         ],
         providers: [__WEBPACK_IMPORTED_MODULE_7__Services_bridge_service__["a" /* BridgeApi */], __WEBPACK_IMPORTED_MODULE_8__Services_user_service__["a" /* User */]],
         bootstrap: [__WEBPACK_IMPORTED_MODULE_5__app_component__["a" /* AppComponent */]]
@@ -1860,7 +1922,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/register/register.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<form class=\"register\" (ngSubmit)=\"onSubmit()\" #f=\"ngForm\">\n  <div class=\"col-xs-12\" ngModelGroup=\"Register\">\n    <div *ngIf=\"!loginbool\">\n      <div class=\"row\">\n        <h2 id=\"header\">Register</h2>\n      </div>\n      <div class=\"row\">\n        <label>Username</label>\n        <input ngModel name=\"username\" class=\"form-control\" type=\"text\" required #username=\"ngModel\">\n        <div class=\"row warning\" *ngIf=\"username.invalid && username.touched\">\n          <span>Please type a username</span>\n        </div>\n        <div class=\"row warning\" *ngIf=\"user.exists\">\n          <span>Username already exists! Please select another Username</span>\n        </div>\n      </div>\n      <div class=\"row\">\n        <label>E-mail</label>\n        <input ngModel name=\"email\" class=\"form-control\" type=\"email\" required email #mail=\"ngModel\">\n        <div class=\"row warning\" *ngIf=\"mail.invalid && mail.touched\">\n          <span>Please type your e-mail correctly</span>\n        </div>\n      </div>\n      <div class=\"row\">\n        <label>Password</label>\n        <input ngModel name=\"password\" class=\"form-control\" type=\"password\" required #pass=\"ngModel\">\n      </div>\n      <div class=\"row\">\n        <label>Retype Password</label>\n        <input ngModel name=\"retypepass\" class=\"form-control\" type=\"password\" required #retypepass=\"ngModel\">\n      </div>\n      <div class=\"row warning\" *ngIf=\"pass.value !== retypepass.value && pass.touched && retypepass.touched\">\n        <span style=\"color: rgba(0, 0, 0, 0.9); font-weight: bold; font-size:16px\">\n          Passwords don't match</span>\n      </div>\n      <div class=\"subbutton\">\n        <button type=\"submit\" [disabled]=\"!f.valid\" class=\"btn btn btn-primary\">Register</button>\n      </div>\n      <p (click)=\"changeForm()\" id=\"login-text\">Already have an account?<br> Click here to login</p>\n    </div>\n  </div>\n  <div ngModelGroup=\"Login\">\n    <div class=\"col-xs-12\" *ngIf=\"loginbool\">\n      <div class=\"row\">\n        <h2 id=\"header\">Login</h2>\n      </div>\n      <div class=\"row\">\n        <label>Username</label>\n        <input ngModel name=\"username\" class=\"form-control\" type=\"text\">\n      </div>\n      <div class=\"row\">\n        <label>Password</label>\n        <input ngModel name=\"password\" class=\"form-control\" type=\"password\">\n      </div>\n      <div class=\"subbutton\">\n        <button type=\"submit\" class=\"btn btn btn-primary\">Login</button>\n      </div>\n      <div class=\"row warning\" *ngIf=\"user.logValid\">\n        <span>Incorrect Username or Password.</span>\n      </div>\n      <p (click)=\"changeForm()\" id=\"login-text\">Click here to register</p>\n    </div>\n  </div>\n</form>\n"
+module.exports = "<form class=\"register\" (ngSubmit)=\"onSubmit()\" #f=\"ngForm\">\n  <div class=\"col-xs-12\" ngModelGroup=\"Register\">\n    <div *ngIf=\"!loginbool\">\n      <div class=\"row\">\n        <h2 id=\"header\">Register</h2>\n      </div>\n      <div class=\"row\">\n        <label>Username</label>\n        <input ngModel name=\"username\" class=\"form-control\" type=\"text\" required #username=\"ngModel\">\n        <div class=\"row warning\" *ngIf=\"username.invalid && username.touched\">\n          <span>Please type a username</span>\n        </div>\n        <div class=\"row warning\" *ngIf=\"user.exists\">\n          <span>Username already exists! Please select another Username</span>\n        </div>\n      </div>\n      <div class=\"row\">\n        <label>E-mail</label>\n        <input ngModel name=\"email\" class=\"form-control\" type=\"email\" required email #mail=\"ngModel\">\n        <div class=\"row warning\" *ngIf=\"mail.invalid && mail.touched\">\n          <span>Please type your e-mail correctly</span>\n        </div>\n      </div>\n      <div class=\"row\">\n        <label>Password</label>\n        <input ngModel name=\"password\" class=\"form-control\" type=\"password\" required #pass=\"ngModel\">\n      </div>\n      <div class=\"row\">\n        <label>Retype Password</label>\n        <input ngModel name=\"retypepass\" class=\"form-control\" type=\"password\" required #retypepass=\"ngModel\">\n      </div>\n      <div class=\"row warning\" *ngIf=\"pass.value !== retypepass.value && pass.touched && retypepass.touched\">\n        <span style=\"color: rgba(0, 0, 0, 0.9); font-weight: bold; font-size:16px\">\n          Passwords don't match</span>\n      </div>\n      <div class=\"subbutton\">\n        <button type=\"submit\" [disabled]=\"!f.valid\" class=\"btn btn btn-primary\">Register</button>\n      </div>\n      <p (click)=\"changeForm()\" id=\"login-text\">Already have an account?<br> Click here to login</p>\n    </div>\n  </div>\n  <div ngModelGroup=\"Login\">\n    <div class=\"col-xs-12\" *ngIf=\"loginbool\">\n      <div class=\"row\">\n        <h2 id=\"header\">Login</h2>\n      </div>\n      <div class=\"row\">\n        <label>Username</label>\n        <input ngModel name=\"username\" class=\"form-control\" type=\"text\">\n      </div>\n      <div class=\"row\">\n        <label>Password</label>\n        <input ngModel name=\"password\" class=\"form-control\" type=\"password\">\n      </div>\n      <div class=\"subbutton\">\n        <button type=\"submit\" class=\"btn btn btn-primary\">Login</button>\n      </div>\n      <div class=\"row warning\" *ngIf=\"user.logValid\">\n        <span>{{user.errorMessage}}</span>\n      </div>\n      <p (click)=\"changeForm()\" id=\"login-text\">Click here to register</p>\n    </div>\n  </div>\n</form>\n"
 
 /***/ }),
 

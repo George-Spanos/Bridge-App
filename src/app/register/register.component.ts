@@ -8,6 +8,7 @@ import { User } from '../Services/user.service';
 })
 export class RegisterComponent implements OnInit {
   loginbool = false;
+  errorMessage: string;
   @ViewChild('f') logForm: NgForm;
 
   changeForm() {
