@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Http, Response } from '@angular/http';
 import { BridgeApi } from '../../Services/bridge.service';
 import { Card } from '../../Services/card.model';
+import { User } from '../../Services/user.service';
 @Component({
   selector: 'app-bid-thread',
   templateUrl: './bid-thread.component.html',
@@ -17,7 +18,7 @@ export class BidThreadComponent implements OnInit {
   hearts: Card[];
   diamonds: Card[];
   clubs: Card[];
-  constructor(public bridgeApi: BridgeApi, private http: Http) { }
+  constructor(public bridgeApi: BridgeApi, private http: Http, public user: User) { }
   hand: Card[];
   getHand(array) {
     this.bridgeApi.submitted = false;

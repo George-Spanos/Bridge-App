@@ -1,13 +1,13 @@
-<div class="container">
+<div class="container" *ngIf="user.loggedIn">
   <div class="row" *ngIf="!start">
     <div class="col-xs-12">
       <div class="row heading">
         <h2>This sections give you the chance to practice on how to lead as the defence</h2>
       </div>
       <div class="row">
-        <span id="subheading"> When you click the "Start Leading" button, you will be served
-          a specific hand accompanied by a contract.
-          After you choose your Lead and press Submit, the comment section will appear and you will be able to see what other people chose!</span>
+        <span id="subheading"> When you click the "Start Leading" button, you will be served a specific hand accompanied by a contract. After you
+          choose your Lead and press Submit, the comment section will appear and you will be able to see what other people
+          chose!</span>
       </div>
     </div>
 
@@ -57,7 +57,8 @@
               <app-comment [link]="'/leadvote'" [id]="id" [index]="i" [votes]="answer.votes"></app-comment>
             </div>
             <div class="form-control" id="comment">
-              <strong> Lead : {{answer.lead.name}} of {{answer.lead.suit}}</strong> <br>
+              <strong> Lead : {{answer.lead.name}} of {{answer.lead.suit}}</strong>
+              <br>
               <strong> Comments</strong> : {{answer.comments}} </div>
           </div>
         </div>
@@ -68,5 +69,10 @@
         </div>
       </div>
     </div>
+  </div>
+</div>
+<div class="container" *ngIf="!user.loggedIn">
+  <div id="subheading">
+    <h2>Please log in, in order to be able to use this section.</h2>
   </div>
 </div>

@@ -110,7 +110,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, ".hcpdisplay {\r\n  font-weight: bold;\r\n  font-size: 18px;\r\n  display: -webkit-box;\r\n  display: -ms-flexbox;\r\n  display: flex;\r\n  -webkit-box-pack: center;\r\n      -ms-flex-pack: center;\r\n          justify-content: center;\r\n}\r\n.form-control {\r\n  height: auto;\r\n  margin-bottom: 3px;\r\n}\r\n.vote{\r\n  width:4%;\r\n  float: left;\r\n}\r\n#comment {\r\n  width:96%;\r\n  float: left;\r\n}\r\n", ""]);
+exports.push([module.i, ".hcpdisplay {\r\n  font-weight: bold;\r\n  font-size: 18px;\r\n  display: -webkit-box;\r\n  display: -ms-flexbox;\r\n  display: flex;\r\n  -webkit-box-pack: center;\r\n      -ms-flex-pack: center;\r\n          justify-content: center;\r\n}\r\n.form-control {\r\n  height: auto;\r\n  margin-bottom: 3px;\r\n}\r\n.vote{\r\n  width:4%;\r\n  float: left;\r\n}\r\n#comment {\r\n  width:96%;\r\n  float: left;\r\n}\r\n#subheading {\r\n  display:-webkit-box;\r\n  display:-ms-flexbox;\r\n  display:flex;\r\n  color: #974141;\r\n  -webkit-box-pack: center;\r\n      -ms-flex-pack: center;\r\n          justify-content: center;\r\n  font-size: large;\r\n  font-weight: bold;\r\n  box-sizing: border-box;\r\n  margin: 5px auto;\r\n  border: 3px dotted lightgrey;\r\n  border-radius: 3px;\r\n  width: 80%;\r\n  text-align: center;\r\n}\r\n", ""]);
 
 // exports
 
@@ -123,7 +123,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/Bid Section/bid-thread/bid-thread.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\r\n  <div class=\"row\">\r\n    <div class=\"col-xs-12\" style=\"display:flex; justify-content:center; padding:0px 20px 20px 20px;\">\r\n      <button class=\"btn btn-primary\" (click)=\"getHand(cardsArray)\">Initialize Hand</button>\r\n    </div>\r\n  </div>\r\n  <div class=\"row\">\r\n    <div class=\"col-xs-12\">\r\n      <div class=\"col-xs-6\">\r\n        <app-card-board [cards]=\"hand\" [Initialized]=\"handInitialized\"></app-card-board>\r\n        <div class=\"row\" *ngIf=\"handInitialized\">\r\n          <div class=\"col-xs-12 hcpdisplay\">Total HCP = {{hcp}}</div>\r\n        </div>\r\n      </div>\r\n      <div class=\"col-xs-6\">\r\n        <div *ngIf=\"handInitialized\" style=\"margin:10px\">\r\n          <app-bid-form></app-bid-form>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </div>\r\n  <div class=\"row\" *ngIf=\"newHand\">\r\n    <div class=\"col-xs-12 form-control\">\r\n      <label> This is a new hand. Thank you for contributing!</label>\r\n    </div>\r\n  </div>\r\n  <div class=\"row\" *ngIf=\"handInitialized && bridgeApi.submitted && !newHand\">\r\n    <label class=\"row\" for=\"comments\"> Bid and Comments</label>\r\n    <div class=\"row\" *ngFor=\"let bid of bids\">\r\n      <div class=\"col-xs-12\">\r\n        <div class=\"vote\">\r\n          <app-comment [link]=\"'/bidvote'\" [id]=\"bid._id\" [votes]=\"bid.votes\"></app-comment>\r\n        </div>\r\n        <div class=\"form-control\" id=\"comment\"><strong> Bid : </strong>{{bid.numericBid}}\r\n          <span *ngIf=\"bid.numericBid!=='Pass'\">of {{bid.suitBid}}</span> <br>\r\n          <strong> Comments</strong> : {{bid.comments}}\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n"
+module.exports = "<div class=\"container\" *ngIf=\"user.loggedIn\">\r\n  <div class=\"row\">\r\n    <div class=\"col-xs-12\" style=\"display:flex; justify-content:center; padding:0px 20px 20px 20px;\">\r\n      <button class=\"btn btn-primary\" (click)=\"getHand(cardsArray)\">Initialize Hand</button>\r\n    </div>\r\n  </div>\r\n  <div class=\"row\">\r\n    <div class=\"col-xs-12\">\r\n      <div class=\"col-xs-6\">\r\n        <app-card-board [cards]=\"hand\" [Initialized]=\"handInitialized\"></app-card-board>\r\n        <div class=\"row\" *ngIf=\"handInitialized\">\r\n          <div class=\"col-xs-12 hcpdisplay\">Total HCP = {{hcp}}</div>\r\n        </div>\r\n      </div>\r\n      <div class=\"col-xs-6\">\r\n        <div *ngIf=\"handInitialized\" style=\"margin:10px\">\r\n          <app-bid-form></app-bid-form>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </div>\r\n  <div class=\"row\" *ngIf=\"newHand\">\r\n    <div class=\"col-xs-12 form-control\">\r\n      <label> This is a new hand. Thank you for contributing!</label>\r\n    </div>\r\n  </div>\r\n  <div class=\"row\" *ngIf=\"handInitialized && bridgeApi.submitted && !newHand\">\r\n    <label class=\"row\" for=\"comments\"> Bid and Comments</label>\r\n    <div class=\"row\" *ngFor=\"let bid of bids\">\r\n      <div class=\"col-xs-12\">\r\n        <div class=\"vote\">\r\n          <app-comment [link]=\"'/bidvote'\" [id]=\"bid._id\" [votes]=\"bid.votes\"></app-comment>\r\n        </div>\r\n        <div class=\"form-control\" id=\"comment\"><strong> Bid : </strong>{{bid.numericBid}}\r\n          <span *ngIf=\"bid.numericBid!=='Pass'\">of {{bid.suitBid}}</span> <br>\r\n          <strong> Comments</strong> : {{bid.comments}}\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n<div class=\"container\" *ngIf=\"!user.loggedIn\">\r\n  <div id=\"subheading\">\r\n    <h2>Please log in, in order to be able to use this section.</h2>\r\n  </div>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -135,6 +135,7 @@ module.exports = "<div class=\"container\">\r\n  <div class=\"row\">\r\n    <div
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__("../../../http/@angular/http.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Services_bridge_service__ = __webpack_require__("../../../../../src/app/Services/bridge.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Services_user_service__ = __webpack_require__("../../../../../src/app/Services/user.service.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -147,10 +148,12 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 var BidThreadComponent = (function () {
-    function BidThreadComponent(bridgeApi, http) {
+    function BidThreadComponent(bridgeApi, http, user) {
         this.bridgeApi = bridgeApi;
         this.http = http;
+        this.user = user;
         this.handInitialized = false;
         this.bids = [];
         this.newHand = false;
@@ -231,10 +234,10 @@ BidThreadComponent = __decorate([
         template: __webpack_require__("../../../../../src/app/Bid Section/bid-thread/bid-thread.component.html"),
         styles: [__webpack_require__("../../../../../src/app/Bid Section/bid-thread/bid-thread.component.css")]
     }),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2__Services_bridge_service__["a" /* BridgeApi */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__Services_bridge_service__["a" /* BridgeApi */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Http */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Http */]) === "function" && _b || Object])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2__Services_bridge_service__["a" /* BridgeApi */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__Services_bridge_service__["a" /* BridgeApi */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Http */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Http */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_3__Services_user_service__["a" /* User */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__Services_user_service__["a" /* User */]) === "function" && _c || Object])
 ], BidThreadComponent);
 
-var _a, _b;
+var _a, _b, _c;
 //# sourceMappingURL=bid-thread.component.js.map
 
 /***/ }),
@@ -944,7 +947,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/Lead Section/lead-thread/lead-thread.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\n  <div class=\"row\" *ngIf=\"!start\">\n    <div class=\"col-xs-12\">\n      <div class=\"row heading\">\n        <h2>This sections give you the chance to practice on how to lead as the defence</h2>\n      </div>\n      <div class=\"row\">\n        <span id=\"subheading\"> When you click the \"Start Leading\" button, you will be served\n          a specific hand accompanied by a contract.\n          After you choose your Lead and press Submit, the comment section will appear and you will be able to see what other people chose!</span>\n      </div>\n    </div>\n\n  </div>\n  <hr class=\"hline\" *ngIf=\"!start\">\n  <div class=\"row\">\n    <div class=\"col-xs-12\" style=\"display:flex; justify-content:center; padding:0px 20px 20px 20px;\">\n      <button class=\"btn btn-primary\" (click)=\"startLeading()\">Start Leading</button>\n    </div>\n  </div>\n  <div class=\"row\" *ngIf=\"start\">\n    <app-contract-design [East]=\"East\" [West]=\"West\" [North]=\"North\" [South]=\"South\" [Colors]=\"Colors\"></app-contract-design>\n    <hr class=\"hline\">\n    <div class=\"row\">\n      <div class=\"col-xs-12\">\n        <div class=\"col-xs-6\">\n          <div class=\"board\" *ngIf=\"handInitialized\">\n            <div class=\"row\">\n              <div class=\"card\" (click)=\"chooseLead(card)\" *ngFor=\"let card of spades\">{{card.name}}\n                <br>\n                <img class=\"suit\" src=\"https://i.imgur.com/tXgx0h3.png\">\n              </div>\n              <div class=\"card red\" (click)=\"chooseLead(card)\" *ngFor=\"let card of hearts\">{{card.name}}\n                <br>\n                <img class=\"suit\" src=\"https://i.imgur.com/Chg6eQ8.jpg\">\n              </div>\n              <div class=\"card\" (click)=\"chooseLead(card)\" *ngFor=\"let card of clubs\">{{card.name}}\n                <br>\n                <img class=\"suit\" src=\"https://i.imgur.com/TsBK3k9.jpg\">\n              </div>\n              <div class=\"card red\" (click)=\"chooseLead(card)\" *ngFor=\"let card of diamonds\">{{card.name}}\n                <br>\n                <img class=\"suit\" src=\"https://i.imgur.com/khCb5Vu.jpg\">\n              </div>\n            </div>\n          </div>\n        </div>\n        <app-lead-thread-form [id]=\"id\" [handInitialized]=\"handInitialized\" [leadClicked]=\"leadClicked\" [lead]=\"lead\"></app-lead-thread-form>\n      </div>\n    </div>\n    <div class=\"row\" *ngIf=\"bridgeApi.submitted\" style=\"margin-top: 10px;\">\n      <div *ngIf=\"answers[0]!==undefined\">\n        <label for=\"comments\"> Leads and Comments</label>\n        <div class=\"row\" *ngFor=\"let answer of answers; let i = index\">\n          <div class=\"col-xs-12\">\n            <div class=\"vote\">\n              <app-comment [link]=\"'/leadvote'\" [id]=\"id\" [index]=\"i\" [votes]=\"answer.votes\"></app-comment>\n            </div>\n            <div class=\"form-control\" id=\"comment\">\n              <strong> Lead : {{answer.lead.name}} of {{answer.lead.suit}}</strong> <br>\n              <strong> Comments</strong> : {{answer.comments}} </div>\n          </div>\n        </div>\n      </div>\n      <div class=\"row\" *ngIf=\"answers[0]===undefined\">\n        <div class=\"col-xs-12 form-control\">\n          <label> This lead has no comments yet. Thank you for contributing!</label>\n        </div>\n      </div>\n    </div>\n  </div>\n</div>\n"
+module.exports = "<div class=\"container\" *ngIf=\"user.loggedIn\">\n  <div class=\"row\" *ngIf=\"!start\">\n    <div class=\"col-xs-12\">\n      <div class=\"row heading\">\n        <h2>This sections give you the chance to practice on how to lead as the defence</h2>\n      </div>\n      <div class=\"row\">\n        <span id=\"subheading\"> When you click the \"Start Leading\" button, you will be served a specific hand accompanied by a contract. After you\n          choose your Lead and press Submit, the comment section will appear and you will be able to see what other people\n          chose!</span>\n      </div>\n    </div>\n\n  </div>\n  <hr class=\"hline\" *ngIf=\"!start\">\n  <div class=\"row\">\n    <div class=\"col-xs-12\" style=\"display:flex; justify-content:center; padding:0px 20px 20px 20px;\">\n      <button class=\"btn btn-primary\" (click)=\"startLeading()\">Start Leading</button>\n    </div>\n  </div>\n  <div class=\"row\" *ngIf=\"start\">\n    <app-contract-design [East]=\"East\" [West]=\"West\" [North]=\"North\" [South]=\"South\" [Colors]=\"Colors\"></app-contract-design>\n    <hr class=\"hline\">\n    <div class=\"row\">\n      <div class=\"col-xs-12\">\n        <div class=\"col-xs-6\">\n          <div class=\"board\" *ngIf=\"handInitialized\">\n            <div class=\"row\">\n              <div class=\"card\" (click)=\"chooseLead(card)\" *ngFor=\"let card of spades\">{{card.name}}\n                <br>\n                <img class=\"suit\" src=\"https://i.imgur.com/tXgx0h3.png\">\n              </div>\n              <div class=\"card red\" (click)=\"chooseLead(card)\" *ngFor=\"let card of hearts\">{{card.name}}\n                <br>\n                <img class=\"suit\" src=\"https://i.imgur.com/Chg6eQ8.jpg\">\n              </div>\n              <div class=\"card\" (click)=\"chooseLead(card)\" *ngFor=\"let card of clubs\">{{card.name}}\n                <br>\n                <img class=\"suit\" src=\"https://i.imgur.com/TsBK3k9.jpg\">\n              </div>\n              <div class=\"card red\" (click)=\"chooseLead(card)\" *ngFor=\"let card of diamonds\">{{card.name}}\n                <br>\n                <img class=\"suit\" src=\"https://i.imgur.com/khCb5Vu.jpg\">\n              </div>\n            </div>\n          </div>\n        </div>\n        <app-lead-thread-form [id]=\"id\" [handInitialized]=\"handInitialized\" [leadClicked]=\"leadClicked\" [lead]=\"lead\"></app-lead-thread-form>\n      </div>\n    </div>\n    <div class=\"row\" *ngIf=\"bridgeApi.submitted\" style=\"margin-top: 10px;\">\n      <div *ngIf=\"answers[0]!==undefined\">\n        <label for=\"comments\"> Leads and Comments</label>\n        <div class=\"row\" *ngFor=\"let answer of answers; let i = index\">\n          <div class=\"col-xs-12\">\n            <div class=\"vote\">\n              <app-comment [link]=\"'/leadvote'\" [id]=\"id\" [index]=\"i\" [votes]=\"answer.votes\"></app-comment>\n            </div>\n            <div class=\"form-control\" id=\"comment\">\n              <strong> Lead : {{answer.lead.name}} of {{answer.lead.suit}}</strong>\n              <br>\n              <strong> Comments</strong> : {{answer.comments}} </div>\n          </div>\n        </div>\n      </div>\n      <div class=\"row\" *ngIf=\"answers[0]===undefined\">\n        <div class=\"col-xs-12 form-control\">\n          <label> This lead has no comments yet. Thank you for contributing!</label>\n        </div>\n      </div>\n    </div>\n  </div>\n</div>\n<div class=\"container\" *ngIf=\"!user.loggedIn\">\n  <div id=\"subheading\">\n    <h2>Please log in, in order to be able to use this section.</h2>\n  </div>\n</div>\n"
 
 /***/ }),
 
@@ -955,6 +958,7 @@ module.exports = "<div class=\"container\">\n  <div class=\"row\" *ngIf=\"!start
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return LeadThreadComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Services_bridge_service__ = __webpack_require__("../../../../../src/app/Services/bridge.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Services_user_service__ = __webpack_require__("../../../../../src/app/Services/user.service.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -966,9 +970,11 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 
 
+
 var LeadThreadComponent = (function () {
-    function LeadThreadComponent(bridgeApi) {
+    function LeadThreadComponent(bridgeApi, user) {
         this.bridgeApi = bridgeApi;
+        this.user = user;
         this.handInitialized = true;
         this.start = false;
     }
@@ -1007,10 +1013,10 @@ LeadThreadComponent = __decorate([
         template: __webpack_require__("../../../../../src/app/Lead Section/lead-thread/lead-thread.component.html"),
         styles: [__webpack_require__("../../../../../src/app/Lead Section/lead-thread/lead-thread.component.css")]
     }),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__Services_bridge_service__["a" /* BridgeApi */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__Services_bridge_service__["a" /* BridgeApi */]) === "function" && _a || Object])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__Services_bridge_service__["a" /* BridgeApi */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__Services_bridge_service__["a" /* BridgeApi */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__Services_user_service__["a" /* User */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__Services_user_service__["a" /* User */]) === "function" && _b || Object])
 ], LeadThreadComponent);
 
-var _a;
+var _a, _b;
 //# sourceMappingURL=lead-thread.component.js.map
 
 /***/ }),

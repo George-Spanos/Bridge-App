@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" *ngIf="user.loggedIn">
   <div class="row">
     <div class="col-xs-12" style="display:flex; justify-content:center; padding:0px 20px 20px 20px;">
       <button class="btn btn-primary" (click)="getHand(cardsArray)">Initialize Hand</button>
@@ -37,5 +37,10 @@
         </div>
       </div>
     </div>
+  </div>
+</div>
+<div class="container" *ngIf="!user.loggedIn">
+  <div id="subheading">
+    <h2>Please log in, in order to be able to use this section.</h2>
   </div>
 </div>
