@@ -1,8 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 
-import { Card } from '../../Services/card.model';
-import { BridgeApi } from '../../Services/bridge.service';
-import { User } from '../../Services/user.service';
+import { Card } from '../../shared/Services/card.model';
+import { BridgeApi } from '../../shared/Services/bridge.service';
+import { User } from '../../shared/Services/user.service';
 @Component({
   selector: 'app-lead-thread',
   templateUrl: './lead-thread.component.html',

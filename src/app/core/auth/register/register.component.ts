@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { User } from '../Services/user.service';
+import { User } from '../../../shared/Services/user.service';
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',

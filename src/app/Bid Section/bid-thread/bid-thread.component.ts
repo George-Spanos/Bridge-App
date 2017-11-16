@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Http, Response } from '@angular/http';
-import { BridgeApi } from '../../Services/bridge.service';
-import { Card } from '../../Services/card.model';
-import { User } from '../../Services/user.service';
+import { BridgeApi } from '../../shared/Services/bridge.service';
+import { Card } from '../../shared/Services/card.model';
+import { User } from '../../shared/Services/user.service';
 @Component({
   selector: 'app-bid-thread',
   templateUrl: './bid-thread.component.html',

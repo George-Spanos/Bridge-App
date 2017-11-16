@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 
-import { BridgeApi } from '../../Services/bridge.service';
+import { BridgeApi } from '../../shared/Services/bridge.service';
 @Component({
   selector: 'app-practiceform',
   templateUrl: './practiceform.component.html',

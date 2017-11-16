@@ -1,9 +1,9 @@
 import { Component, OnInit, ViewChild, } from '@angular/core';
 import { NgForm, FormControl } from '@angular/forms';
 
-import { BridgeApi } from '../../Services/bridge.service';
-import { Card } from '../../Services/card.model';
-import { Contract } from '../../Services/contract.model';
+import { BridgeApi } from '../../shared/Services/bridge.service';
+import { Card } from '../../shared/Services/card.model';
+import { Contract } from '../../shared/Services/contract.model';
 @Component({
   selector: 'app-lead-form',
   templateUrl: './lead-form.component.html',
