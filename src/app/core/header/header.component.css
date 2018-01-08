@@ -11,6 +11,7 @@
 }
 .navbar {
   border-radius: 0px;
+  z-index: 2;
 }
 #bs-example-navbar-collapse-1>ul {
   width: 100%;
