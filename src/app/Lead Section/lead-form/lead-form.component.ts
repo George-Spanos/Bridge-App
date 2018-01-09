@@ -1,16 +1,21 @@
-import { Component, OnInit, ViewChild, } from '@angular/core';
+import { Component, OnInit, ViewChild, HostBinding, } from '@angular/core';
 import { NgForm, FormControl } from '@angular/forms';
 
 import { BridgeApi } from '../../shared/Services/bridge.service';
 import { Card } from '../../shared/Services/card.model';
 import { Contract } from '../../shared/Services/contract.model';
+import { routeFadeStateTrigger } from '../../shared/animations/animations';
 @Component({
   selector: 'app-lead-form',
   templateUrl: './lead-form.component.html',
   styleUrls: ['./lead-form.component.css'],
+  animations: [
+    routeFadeStateTrigger
+  ],
   providers: [Contract]
 })
 export class LeadFormComponent implements OnInit {
+  @HostBinding('@routeFadeState') routeAnimation = true;
   constructor(private bridgeApi: BridgeApi, public contract: Contract) { }
   @ViewChild('f') contractform: NgForm;
   colors = ['Red', 'Green'];

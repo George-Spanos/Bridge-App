@@ -1,14 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostBinding } from '@angular/core';
 import { Http, Response } from '@angular/http';
 import { BridgeApi } from '../../shared/Services/bridge.service';
 import { Card } from '../../shared/Services/card.model';
 import { User } from '../../shared/Services/user.service';
+import { routeFadeStateTrigger } from '../../shared/animations/animations';
 @Component({
   selector: 'app-bid-thread',
   templateUrl: './bid-thread.component.html',
-  styleUrls: ['./bid-thread.component.css']
+  styleUrls: ['./bid-thread.component.css'],
+  animations: [
+    routeFadeStateTrigger
+  ]
 })
 export class BidThreadComponent implements OnInit {
+  @HostBinding('@routeFadeState') routeAnimation = true;
   handInitialized = false;
   bids = [];
   newHand = false;

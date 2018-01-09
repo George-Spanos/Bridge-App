@@ -1,13 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostBinding } from '@angular/core';
 
 import { Card } from '../../shared/Services/card.model';
 import { BridgeApi } from '../../shared/Services/bridge.service';
+import { routeFadeStateTrigger } from '../../shared/animations/animations';
 @Component({
   selector: 'app-lead-practice',
   templateUrl: './lead-practice.component.html',
-  styleUrls: ['./lead-practice.component.css']
+  styleUrls: ['./lead-practice.component.css'],
+  animations: [
+    routeFadeStateTrigger
+  ]
 })
 export class LeadPracticeComponent implements OnInit {
+  @HostBinding('@routeFadeState') routeAnimation = true;
   dummyLead = {
     'colors': {
       'colorWest': 'Green',

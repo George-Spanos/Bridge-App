@@ -16,6 +16,7 @@ import { LeadModule } from './Lead Section/lead.module';
 import { DonateComponent } from './donate/donate.component';
 import { ContactComponent } from './contact/contact.component';
 import { TestpageComponent } from './testpage/testpage.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 @NgModule({
   declarations: [
     AppComponent,
@@ -31,7 +32,8 @@ import { TestpageComponent } from './testpage/testpage.component';
     SharedModule,
     FormsModule,
     HttpModule,
-    AppRoutingModule
+    AppRoutingModule,
+    BrowserAnimationsModule
   ],
   providers: [BridgeApi, User],
   bootstrap: [AppComponent]

@@ -1,3 +1,6 @@
+:host {
+  display: block;
+}
 .hcpdisplay {
   font-weight: bold;
   font-size: 18px;

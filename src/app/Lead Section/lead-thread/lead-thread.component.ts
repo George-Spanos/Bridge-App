@@ -1,14 +1,19 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, HostBinding } from '@angular/core';
 
 import { Card } from '../../shared/Services/card.model';
 import { BridgeApi } from '../../shared/Services/bridge.service';
 import { User } from '../../shared/Services/user.service';
+import { routeFadeStateTrigger } from '../../shared/animations/animations';
 @Component({
   selector: 'app-lead-thread',
   templateUrl: './lead-thread.component.html',
-  styleUrls: ['./lead-thread.component.css']
+  styleUrls: ['./lead-thread.component.css'],
+  animations: [
+    routeFadeStateTrigger
+  ]
 })
 export class LeadThreadComponent implements OnInit {
+  @HostBinding('@routeFadeState') routeAnimation = true;
   handInitialized = true;
   East: {
     bidComment: String,

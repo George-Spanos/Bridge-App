@@ -1,12 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostBinding } from '@angular/core';
 import { Card } from '../../shared/Services/card.model';
 import { BridgeApi } from '../../shared/Services/bridge.service';
+import { routeFadeStateTrigger } from '../../shared/animations/animations';
 @Component({
   selector: 'app-practice',
   templateUrl: './practice.component.html',
-  styleUrls: ['./practice.component.css']
+  styleUrls: ['./practice.component.css'],
+  animations: [
+    routeFadeStateTrigger
+  ]
 })
 export class PracticeComponent implements OnInit {
+  @HostBinding('@routeFadeState') routeAnimation = true;
   handInitialized = false;
   spades: Card[];
   hearts: Card[];

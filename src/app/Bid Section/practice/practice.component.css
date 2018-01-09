@@ -1,3 +1,7 @@
+
+:host {
+  display: block;
+}
 .heading {
   display:flex;
   color: black;

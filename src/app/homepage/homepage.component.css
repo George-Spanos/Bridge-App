@@ -17,13 +17,14 @@
   display:flex;
   justify-content: center;
   background-color: rgba(253, 253, 253, 0.70);
-  margin: 15% auto;
-  width: 50%;
+  margin: 20% 20%;
+  max-width: 50%;
+  width: auto;
   height: auto;
   max-height: 70%;
   padding: 10px;
   border-radius: 2px;
-  position: relative;
+  position: absolute;
 }
 .sliderText {
   margin-left: 2px;
@@ -31,14 +32,39 @@
   font-weight: bold;
   font-size: 20px;
 }
-@media screen and (max-width:480px) {
+@media screen and (max-width:1080px) {
   .sliderText {
-    margin-left: 2px;
     color: black;
     font-weight: bold;
     font-size: 14px;
   }
   .intro {
     width: 75%;
+    margin: 20% 20%;
   }
+}
+@media screen and (max-width:768px) {
+  .sliderText {
+    color: black;
+    font-weight: bold;
+    font-size: 14px;
+  }
+  .intro {
+    width: 60%;
+    margin: 20% 5%;
+  }
+}
+@media screen and (max-width:480px) {
+  .sliderText {
+    color: black;
+    font-weight: bold;
+    font-size: 12px;
+    }
+    .intro {
+      max-width: 20%;
+      margin: 20% 0;
+    }
+  }
+:host{
+  display: block;
 }

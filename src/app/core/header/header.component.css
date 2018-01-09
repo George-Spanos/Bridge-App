@@ -12,7 +12,11 @@
 .navbar {
   border-radius: 0px;
   z-index: 2;
+  width: 100%;
 }
 #bs-example-navbar-collapse-1>ul {
+  width: 100%;
+}
+:host{
   width: 100%;
 }
