@@ -4,10 +4,11 @@ export const routeFadeStateTrigger = trigger('routeFadeState', [
     style({
       opacity: 0
     }),
-    animate(500)
+    animate('250ms 400ms')
   ]),
   transition(':leave', [
-    animate(500, style({
+    animate(300, style({
+      transform: 'translateY(100%)',
       opacity: 0
     }))
   ])
