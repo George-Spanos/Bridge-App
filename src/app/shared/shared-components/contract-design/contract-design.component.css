@@ -1,12 +1,10 @@
 .contract {
   margin-bottom: 10px;
-  padding: 0px 25%;
   text-align: center;
 }
 #contract-bid {
   background-color: lightgoldenrodyellow;
   border: 1px solid rgba(0, 0, 0, 0.23);
-  cursor: pointer;
 }
 .comment {
   display: block;
@@ -17,4 +15,7 @@
   background-color: rgba(211, 211, 211, 0.95);
   padding: 5px 10px;
   border-radius: 7px;
+}
+#west, #south, #north, #east  {
+ width: 100px; 
 }

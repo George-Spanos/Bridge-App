@@ -1,6 +1,5 @@
 .card {
   float: left;
-  width: auto;
   height: 150px;
   display: block;
   border: 1px solid;
@@ -19,9 +18,7 @@
 }
 .board {
   padding: 100px 30px 60px 30px;
-  background-color: green;
-  display: flex;
-  justify-content: center;
+  background-color: darkgreen;
   border-radius: 10px;
 }
 .red {
@@ -31,8 +28,6 @@
   .board {
     padding: 20px 20px 20px 20px;
     background-color: green;
-    display: flex;
-    justify-content: center;
     border-radius: 10px;
   }
   .card {

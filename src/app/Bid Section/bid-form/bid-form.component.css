@@ -1,6 +1,8 @@
 select.ng-invalid.ng-touched, textarea.ng-invalid.ng-touched  {
-  border: 2px solid red;
+  border: 1px solid lightcoral;
+  border-radius: 3px;
+  padding: 2px;
 }
-.warning {
-  margin: 5px 0px;
+textarea {
+  border-top: 1px solid grey;
 }

@@ -1,49 +1,31 @@
-<div class="container">
-  <div class="row">
-    <div class="col-xs-12">
-      <div class="row heading">
-        <h2>This sections give you the chance to practice on how to open the bidding phase</h2>
-      </div>
-      <div class="row">
-        <span id="subheading"> When you click the "start practicing" button, you will be served
-          a specific hand that has a specific bid as an answer</span>
-      </div>
-    </div>
-  </div>
+<section fxLayout="column" fxLayoutGap="8px">
+  <h2 class="heading">
+    This sections give you the chance to practice on how to open the bidding phase</h2>
+  <span id="subheading"> When you click the "start practicing" button, you will be served a specific hand that has a specific bid as an answer</span>
   <hr class="hline">
-  <div class="row">
-    <div class="col-xs-12" style="display:flex; justify-content:center; padding:0px 20px 20px 20px;">
-      <button class="btn btn-primary" (click)="startPractice()">Start Practicing</button>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-xs-12">
-      <div class="col-xs-6">
-        <app-card-board [cards]="hand" [Initialized]="handInitialized"></app-card-board>
-        <div class="row" *ngIf="handInitialized">
-          <div class="col-xs-12 hcpdisplay">Total HCP = {{hcp}}</div>
+  <section fxLayout fxLayoutAlign="center stretch">
+    <button mat-raised-button color="primary" (click)="startPractice()">{{buttonText}}</button>
+  </section>
+  <section fxLayout fxLayoutGap="7px" fxLayoutAlign="space-around stretch">
+    <app-card-board [cards]="hand" [Initialized]="handInitialized"></app-card-board>
+    <div fxFlex="50%" *ngIf="handInitialized">
+      <app-practiceform *ngIf="handInitialized && !bridgeApi.answerStatus"></app-practiceform>
+      <div class="hcpdisplay">Total HCP = {{hcp}}</div>
+      <div *ngIf="bridgeApi.answerStatus" class="response">
+        <div *ngIf="correctbid === bridgeApi.answer">
+          <h3 id="com">Your answer is correct!</h3>
+          <br>
+          <strong>Tip: </strong>{{comment}}
         </div>
-      </div>
-      <div class="col-xs-6">
-        <div *ngIf="handInitialized && !bridgeApi.answerStatus" style="margin:10px">
-          <app-practiceform></app-practiceform>
-        </div>
-        <div *ngIf="bridgeApi.answerStatus" class="response">
-          <div *ngIf="correctbid === bridgeApi.answer">
-            <h3 id="com">Your answer is correct!</h3><br>
-            <div class="form-control">
-              <strong>Tip: </strong>{{comment}}
-            </div>
-          </div>
-          <div *ngIf="correctbid !== bridgeApi.answer">
-            <h3 id="com">
-              Your answer is incorrect. You should
-              <span *ngIf="correctbid !=='Pass Pass'"> bid {{correctbid}}</span>
-              <span *ngIf="correctbid ==='Pass Pass'"> Pass</span></h3>
-            <div class="form-control"> <strong>Tip: </strong> {{comment}}</div>
-          </div>
+        <div *ngIf="correctbid !== bridgeApi.answer">
+          <h3 id="com">
+            Your answer is incorrect. You should
+            <span *ngIf="correctbid !=='Pass Pass'"> bid {{correctbid}}</span>
+            <span *ngIf="correctbid ==='Pass Pass'"> Pass</span>
+          </h3>
+          <strong>Tip: </strong> {{comment}}
         </div>
       </div>
     </div>
-  </div>
-</div>
+  </section>
+</section>

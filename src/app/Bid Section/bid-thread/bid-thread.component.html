@@ -1,46 +1,36 @@
-<div class="container" *ngIf="user.loggedIn">
-  <div class="row">
-    <div class="col-xs-12" style="display:flex; justify-content:center; padding:0px 20px 20px 20px;">
-      <button class="btn btn-primary" (click)="getHand(cardsArray)">Initialize Hand</button>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-xs-12">
-      <div class="col-xs-6">
-        <app-card-board [cards]="hand" [Initialized]="handInitialized"></app-card-board>
-        <div class="row" *ngIf="handInitialized">
-          <div class="col-xs-12 hcpdisplay">Total HCP = {{hcp}}</div>
-        </div>
-      </div>
-      <div class="col-xs-6">
-        <div *ngIf="handInitialized" style="margin:10px">
-          <app-bid-form></app-bid-form>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="row" *ngIf="newHand">
-    <div class="col-xs-12 form-control">
-      <label> This is a new hand. Thank you for contributing!</label>
-    </div>
-  </div>
-  <div class="row" *ngIf="handInitialized && bridgeApi.submitted && !newHand">
-    <label class="row" for="comments"> Bid and Comments</label>
-    <div class="row" *ngFor="let bid of bids">
-      <div class="col-xs-12">
-        <div class="vote">
+<section fxLayout="column" *ngIf="user.loggedIn">
+    <h2 class="heading">
+        This sections give you the chance to practice on how to open the bidding phase</h2>
+      <span id="subheading">After you choose your bid, you will be able to see other's people answers!</span>
+      <hr class="hline">
+  <section fxLayout fxLayoutAlign="center stretch">
+    <button mat-raised-button color="primary" (click)="getHand(cardsArray)">{{buttonText}}</button>
+  </section>
+  <section fxLayout fxLayoutGap="7px" fxLayoutAlign="space-around stretch">
+    <app-card-board [cards]="hand" [Initialized]="handInitialized"></app-card-board>
+    <app-bid-form fxFlex="50%" *ngIf="handInitialized"></app-bid-form>
+  </section>
+  <section *ngIf="handInitialized" class="hcpdisplay">Total HCP = {{hcp}}</section>
+  <label *ngIf="newHand" class="form-control"> This is a new hand. Thank you for contributing!</label>
+  <section *ngIf="handInitialized && bridgeApi.submitted && !newHand">
+    <label  for="comments"> Bid and Comments</label>
+    <section  *ngFor="let bid of bids">
+      <section>
+        <section class="vote">
           <app-comment [link]="'/bidvote'" [id]="bid._id" [votes]="bid.votes"></app-comment>
-        </div>
-        <div class="form-control" id="comment"><strong> Bid : </strong>{{bid.numericBid}}
-          <span *ngIf="bid.numericBid!=='Pass'">of {{bid.suitBid}}</span> <br>
+        </section>
+        <section class="form-control" id="comment">
+          <strong> Bid : </strong>{{bid.numericBid}}
+          <span *ngIf="bid.numericBid!=='Pass'">of {{bid.suitBid}}</span>
+          <br>
           <strong> Comments</strong> : {{bid.comments}}
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-<div class="container" *ngIf="!user.loggedIn">
-  <div id="subheading">
+        </section>
+      </section>
+    </section>
+  </section>
+</section>
+<section *ngIf="!user.loggedIn">
+  <section id="subheading">
     <h2>Please log in, in order to be able to use this section.</h2>
-  </div>
-</div>
+  </section>
+</section>

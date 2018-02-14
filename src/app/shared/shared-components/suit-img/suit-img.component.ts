@@ -23,7 +23,7 @@ export class SuitImgComponent implements OnInit {
       this.diamonds = true;
     } else if (this.suit === 'Clubs') {
       this.clubs = true;
-    }else if (this.suit === 'NoTrump') {
+    } else if (this.suit === 'NoTrump') {
       this.nt = true;
     }
   }

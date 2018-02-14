@@ -13,6 +13,7 @@ import { routeFadeStateTrigger } from '../../shared/animations/animations';
 export class PracticeComponent implements OnInit {
   @HostBinding('@routeFadeState') routeAnimation = true;
   handInitialized = false;
+  buttonText = 'Start Practicing!';
   spades: Card[];
   hearts: Card[];
   clubs: Card[];
@@ -35,7 +36,7 @@ export class PracticeComponent implements OnInit {
         this.comment = results.comments;
         this.correctbid = results.numericBid + ' ' + results.suitBid;
         this.handInitialized = true;
-        console.log( this.comment, this.correctbid);
+        this.buttonText = 'Fetch another Practice Hand';
       }
     );
   }

@@ -12,7 +12,7 @@ export class User {
   img: string;
   leadVoted: string[];
   bidVoted: string[];
-  loggedIn = false;
+  loggedIn = true; // REMOVING BOOTSTRAP -> ANGULAR MATERIAL
   registered = false;
   exists = false;
   logValid = false;
@@ -43,7 +43,7 @@ export class User {
       password: this.password,
     };
     const body = JSON.stringify(user);
-    return this.http.post('/login', body, { headers: header }).map(
+    return this.http.post('https://bridge-auction-app.herokuapp.com/login', body, { headers: header }).map(
       (response: Response) => {
         const result = response.json();
         console.log(result);

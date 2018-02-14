@@ -13,150 +13,8 @@ import { routeFadeStateTrigger } from '../../shared/animations/animations';
 })
 export class LeadPracticeComponent implements OnInit {
   @HostBinding('@routeFadeState') routeAnimation = true;
-  dummyLead = {
-    'colors': {
-      'colorWest': 'Green',
-      'colorSouth': 'Green',
-      'colorEast': 'Green',
-      'colorNorth': 'Green'
-    },
-    'comments': 'Leading a major seems better at this sequence.',
-    'lead': {
-      'suit': 'Hearts',
-      'name': '2',
-      'value': 1,
-      'clicked': true
-    },
-    'WestBid': [
-      {
-        'bidComment': 'Hello',
-        'suitBid': '',
-        'numBid': 'Pass'
-      },
-      {
-        'bidComment': '',
-        'suitBid': '',
-        'numBid': 'Pass'
-      }
-    ],
-    'SouthBid': [
-      {
-        'bidComment': '',
-        'suitBid': 'Hearts',
-        'numBid': '2'
-      },
-      {
-        'bidComment': ' hello hello hello hello hello hello',
-        'suitBid': '',
-        'numBid': 'Pass'
-      }
-    ],
-    'EastBid': [
-      {
-        'bidComment': '',
-        'suitBid': '',
-        'numBid': 'Pass'
-      },
-      {
-        'bidComment': '',
-        'suitBid': '',
-        'numBid': 'Pass'
-      }
-    ],
-    'NorthBid': [
-      {
-        'bidComment': '',
-        'suitBid': '',
-        'numBid': 'Pass'
-      },
-      {
-        'bidComment': '',
-        'suitBid': 'NoTrump',
-        'numBid': '3'
-      }
-    ],
-    'hand': [
-      {
-        'suit': 'Spades',
-        'name': '8',
-        'value': 7,
-        'clicked': true
-      },
-      {
-        'suit': 'Spades',
-        'name': '6',
-        'value': 5,
-        'clicked': true
-      },
-      {
-        'suit': 'Hearts',
-        'name': 'J',
-        'value': 10,
-        'clicked': true
-      },
-      {
-        'suit': 'Hearts',
-        'name': '9',
-        'value': 8,
-        'clicked': true
-      },
-      {
-        'suit': 'Hearts',
-        'name': '3',
-        'value': 2,
-        'clicked': true
-      },
-      {
-        'suit': 'Hearts',
-        'name': '2',
-        'value': 1,
-        'clicked': true
-      },
-      {
-        'suit': 'Diamonds',
-        'name': 'Q',
-        'value': 11,
-        'clicked': true
-      },
-      {
-        'suit': 'Diamonds',
-        'name': '5',
-        'value': 4,
-        'clicked': true
-      },
-      {
-        'suit': 'Diamonds',
-        'name': '4',
-        'value': 3,
-        'clicked': true
-      },
-      {
-        'suit': 'Diamonds',
-        'name': '3',
-        'value': 2,
-        'clicked': true
-      },
-      {
-        'suit': 'Clubs',
-        'name': 'A',
-        'value': 13,
-        'clicked': true
-      },
-      {
-        'suit': 'Clubs',
-        'name': '10',
-        'value': 9,
-        'clicked': true
-      },
-      {
-        'suit': 'Clubs',
-        'name': '2',
-        'value': 1,
-        'clicked': true
-      }
-    ],
-  };
   handInitialized = true;
+  buttonText = 'Start Practising';
   East: {
     bidComment: String,
     suitBid: String,
@@ -230,6 +88,7 @@ export class LeadPracticeComponent implements OnInit {
         this.hearts = this.bridgeApi.filterArray(this.hand, 'Hearts');
         this.diamonds = this.bridgeApi.filterArray(this.hand, 'Diamonds');
         this.clubs = this.bridgeApi.filterArray(this.hand, 'Clubs');
+        this.buttonText = 'Fetch another practice pand';
       }
     );
   }

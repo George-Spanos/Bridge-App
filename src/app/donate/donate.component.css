@@ -1,11 +1,9 @@
-.page {
+section {
   background: -webkit-linear-gradient(lightgray, white);
   background: -o-linear-gradient(lightgray, white);
   background: -moz-linear-gradient(lightgray, white);
   background: linear-gradient(lightgray, white);
-  height: auto;
   min-height: 400px;
-  width: 100%;
 }
 :host {
   display: block;

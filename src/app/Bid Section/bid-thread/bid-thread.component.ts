@@ -17,6 +17,7 @@ export class BidThreadComponent implements OnInit {
   handInitialized = false;
   bids = [];
   newHand = false;
+  buttonText = 'Initialize Hand';
   hcp: number;
   cardsArray: Card[];
   spades: Card[];
@@ -90,6 +91,7 @@ export class BidThreadComponent implements OnInit {
       console.log(this.bridgeApi.bid);
     }
     this.cardsArray = this.bridgeApi.deck();
+    this.buttonText = 'Fetch another hand';
   }
   ngOnInit() {
     this.cardsArray = this.bridgeApi.deck();

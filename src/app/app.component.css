@@ -1,15 +1,12 @@
-.sidebar {
-  display: flex;
-  justify-content: center;
-  float: right;
-  height:100%;
-  max-width: 18%;
-  background: -webkit-linear-gradient(rgb(190, 190, 190), rgba(255, 255, 255, 0.6));
-  background: -o-linear-gradient(rgb(190, 190, 190),rgba(255, 255, 255, 0.6));
-  background: -moz-linear-gradient(rgb(190, 190, 190),rgba(255, 255, 255, 0.6));
-  background: linear-gradient(rgb(190, 190, 190), rgba(255, 255, 255, 0.6));
-  border-radius: 10px;
+.parent {
+  width: 100%;
+  margin: 5px;
+  /* background: url(https://static.independent.co.uk/s3fs-public/thumbnails/image/2015/05/02/23/7-Bridge-Card-Rex.jpg);
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover; */
 }
-.main-content {
-  padding: 0px;
+aside {
+  padding-right: 7px;
 }

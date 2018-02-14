@@ -118,21 +118,21 @@ export class BridgeApi {
       );
   }
   fetchHand() {
-    return this.http.get('/randomhand').map(
+    return this.http.get('https://bridge-auction-app.herokuapp.com/randomhand').map(
       (response: Response) => response.json().result
     ).catch(
       (error: Response) => Observable.throw(error.json())
       );
   }
   fetchPractice() {
-    return this.http.get('/getpracticehand').map(
+    return this.http.get('https://bridge-auction-app.herokuapp.com/getpracticehand').map(
       (response: Response) => response.json().result
     ).catch(
       (error: Response) => Observable.throw(error.json())
       );
   }
   fetchleadPractice() {
-    return this.http.get('/getrandomleadpractice').map(
+    return this.http.get('https://bridge-auction-app.herokuapp.com/getrandomleadpractice').map(
       (response: Response) => response.json().result
     ).catch(
       (error: Response) => Observable.throw(error.json())
@@ -145,7 +145,7 @@ export class BridgeApi {
       answer: answer
     };
     const body = JSON.stringify(ans);
-    return this.http.post('/postleadanswer', body, { headers: header }).map(
+    return this.http.post('https://bridge-auction-app.herokuapp.com/postleadanswer', body, { headers: header }).map(
       (response: Response) => { response.json(); }
     ).catch(
       (error: Response) => Observable.throw(error.json())

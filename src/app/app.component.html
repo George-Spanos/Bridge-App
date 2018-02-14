@@ -1,16 +1,14 @@
-    <app-header>
-    </app-header>
-    <div class="col-xs-12">
-        <div class="col-xs-10 main-content" *ngIf="!user.loggedIn">
-            <router-outlet>
-            </router-outlet>
-          </div>
-          <div class="sidebar col-xs-2" *ngIf="!user.loggedIn">
-            <app-register></app-register>
-          </div>
-    </div>
-<div class="col-xs-12 main-content" *ngIf="user.loggedIn">
-  <router-outlet>
-  </router-outlet>
-</div>
-
+<section class="full-width">
+  <app-header>
+  </app-header>
+</section>
+<main fxLayout fxLayoutAlign="space-between start" fxLayoutGap="5px" style="overflow:hidden">
+  <section fxLayout="column" class="full-width">
+    <router-outlet>
+    </router-outlet>
+  </section>
+  <aside>
+    <app-register>
+    </app-register>
+  </aside>
+</main>

@@ -12,7 +12,8 @@ export class BidFormComponent implements OnInit {
   password: string;
   @ViewChild('f') bridgeForm: NgForm;
   onSubmit() {
-    this.bridgeApi.saveBid(this.bridgeForm.value.numericBid,
+    this.bridgeApi.saveBid(
+      this.bridgeForm.value.numericBid,
       this.bridgeForm.value.suitBid,
       this.bridgeForm.value.comments);
     console.log(this.bridgeApi.bid);

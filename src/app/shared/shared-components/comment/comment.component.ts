@@ -47,7 +47,6 @@ export class CommentComponent implements OnInit {
     ).catch(
       (error: Response) => Observable.throw(error.json())
       );
-
   }
   constructor(public http: Http) { }
 

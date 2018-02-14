@@ -1,22 +1,21 @@
-#menu-item {
-  color: lightgrey;
-  font-size: 16px;
-  font-family: Arial, Helvetica, sans-serif;
+.navigation-items {
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
-#menu-item:hover {
+
+.navigation-items li a,
+a {
   color: white;
+  margin: 5px;
+  text-decoration: none;
 }
-#bs-example-navbar-collapse-1{
-  width: 100%;
+
+.navigation-items li a:hover,
+a:hover {
+  color: lightgrey;
 }
-.navbar {
-  border-radius: 0px;
-  z-index: 2;
-  width: 100%;
-}
-#bs-example-navbar-collapse-1>ul {
-  width: 100%;
-}
-:host{
-  width: 100%;
+
+mat-toolbar {
+  margin-bottom: 7px;
 }

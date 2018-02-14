@@ -1,88 +1,50 @@
-<div class="container">
-  <div class="row">
-    <div class="col-xs-12">
-      <div class="row heading">
-        <h2>This sections give you the chance to practice on how to lead as the defence</h2>
-      </div>
-      <div class="row">
-        <span id="subheading"> When you click the "start practicing" button, you will be served
-          a specific hand as well as the contract. You must find the most suitable lead, and then click it!</span>
-      </div>
-    </div>
-  </div>
+<section fxLayout="column" fxLayoutGap="7px">
+  <h2 class="heading">This sections give you the chance to practice on how to lead as the defence</h2>
+  <span id="subheading"> When you click the "start practicing" button, you will be served a specific hand as well as the contract. You must find
+    the most suitable lead, and then click it!</span>
   <hr class="hline">
-  <div class="row">
-    <div class="col-xs-12" style="display:flex; justify-content:center; padding:0px 20px 20px 20px;">
-      <button class="btn btn-primary" (click)="startPractice()">Start Practicing</button>
-    </div>
-  </div>
-  <div class="row" *ngIf="start">
+  <button mat-raised-button color="primary" fxFlexAlign="center" (click)="startPractice()">{{buttonText}}</button>
+  <div *ngIf="start">
     <app-contract-design [East]="East" [West]="West" [North]="North" [South]="South" [Colors]="Colors"></app-contract-design>
     <hr class="hline">
-    <div class="row">
-      <div class="col-xs-12">
-        <div class="col-xs-6">
-          <div class="board" *ngIf="handInitialized">
-            <div class="row">
-              <div class="card" (click)="chooseLead(card)" *ngFor="let card of spades">{{card.name}}
-                <br>
-                <img class="suit" src="https://i.imgur.com/tXgx0h3.png">
-              </div>
-              <div class="card red" (click)="chooseLead(card)" *ngFor="let card of hearts">{{card.name}}
-                <br>
-                <img class="suit" src="https://i.imgur.com/Chg6eQ8.jpg">
-              </div>
-              <div class="card" (click)="chooseLead(card)" *ngFor="let card of clubs">{{card.name}}
-                <br>
-                <img class="suit" src="https://i.imgur.com/TsBK3k9.jpg">
-              </div>
-              <div class="card red" (click)="chooseLead(card)" *ngFor="let card of diamonds">{{card.name}}
-                <br>
-                <img class="suit" src="https://i.imgur.com/khCb5Vu.jpg">
-              </div>
-            </div>
-          </div>
+    <div fxLayout fxLayoutAlign="space-around stretch" fxLayoutGap="7px">
+      <div class="board" *ngIf="handInitialized">
+        <div class="card" (click)="chooseLead(card)" *ngFor="let card of spades">{{card.name}}
+          <br>
+          <img class="suit" src="https://i.imgur.com/tXgx0h3.png">
         </div>
-        <div class="col-xs-6">
-          <div *ngIf="handInitialized" style="margin:10px">
-            <div *ngIf="!leadClicked" class="response">
-              You can choose a lead.
-            </div>
-            <div class="response" *ngIf="leadClicked && !answerSubmitted">
-              <div class="row">
-                <div class="row" id="com">
-                  <div class="col-xs-12">
-                    <h3>You chose {{lead.name}} of {{lead.suit}} as your lead.</h3>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-xs-12" style="display: flex; justify-content: center;">
-                    <button type="button" class="btn btn-primary" (click)="submitLead()">Confirm
-                  </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="response" *ngIf="answerSubmitted">
-              <div class="row">
-                <div class="row">
-                  <div class="col-xs-12">
-                    <h3 id="com">{{answerComment}}</h3>
-                  </div>
-                </div>
-                <div class="form-control" id="com">
-                  <div class="row">
-                    <div class="col-xs-12"><strong>
-                    Suggested Lead: {{correctlead.name}} of {{correctlead.suit}}.
-                  </strong> <br> {{comments}}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+        <div class="card red" (click)="chooseLead(card)" *ngFor="let card of hearts">{{card.name}}
+          <br>
+          <img class="suit" src="https://i.imgur.com/Chg6eQ8.jpg">
+        </div>
+        <div class="card" (click)="chooseLead(card)" *ngFor="let card of clubs">{{card.name}}
+          <br>
+          <img class="suit" src="https://i.imgur.com/TsBK3k9.jpg">
+        </div>
+        <div class="card red" (click)="chooseLead(card)" *ngFor="let card of diamonds">{{card.name}}
+          <br>
+          <img class="suit" src="https://i.imgur.com/khCb5Vu.jpg">
+        </div>
+      </div>
+      <div *ngIf="handInitialized" fxFlex="50%">
+        <div *ngIf="!leadClicked" class="response">
+          You can choose a lead.
+        </div>
+        <div class="response" id="com" *ngIf="leadClicked && !answerSubmitted">
+          <h3>You chose {{lead.name}} of {{lead.suit}} as your lead.</h3>
+        </div>
+        <div class="response" *ngIf="answerSubmitted" fxLayout="column">
+          <h3 id="com">{{answerComment}}</h3>
+          <strong>
+            Suggested Lead: {{correctlead.name}} of {{correctlead.suit}}.
+            <br> Comment: {{comments}}
+          </strong>
+        </div>
+        <div fxLayout fxLayoutAlign="center stretch" style="margin-top:10px;">
+          <button mat-raised-button color="primary" type="button" [disabled]="!leadClicked" (click)="submitLead()">Confirm
+          </button>
         </div>
       </div>
     </div>
   </div>
-</div>
+</section>

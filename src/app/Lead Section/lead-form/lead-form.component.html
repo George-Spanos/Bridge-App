@@ -1,279 +1,263 @@
-<div class="container">
-  <div class="col-xs-12">
-    <form (ngSubmit)="onSubmit()" #f="ngForm">
-      <div class="row">
-        <div class="col-xs-12" ngModelGroup="Colors" required>
-          <div class="row" style="display:flex; color: red; justify-content: center; border:1px dashed black">
-            <label>Set Colors</label>
-          </div>
-          <div class="col-xs-3">
-            <label for="">North</label>
-            <div class="radio" *ngFor="let color of colors">
-              <label>
-              <input type="radio"
-              name="colorNorth"
-              ngModel
-              required
-              [value]="color">
-              {{color}}
+<div class="col-xs-12">
+  <form (ngSubmit)="onSubmit()" #f="ngForm">
+    <div class="row">
+      <div class="col-xs-12" ngModelGroup="Colors" required>
+        <div class="row" style="display:flex; color: red; justify-content: center; border:1px dashed black">
+          <label>Set Colors</label>
+        </div>
+        <div class="col-xs-3">
+          <label for="">North</label>
+          <div class="radio" *ngFor="let color of colors">
+            <label>
+              <input type="radio" name="colorNorth" ngModel required [value]="color"> {{color}}
             </label>
-            </div>
-          </div>
-          <div class="col-xs-3">
-            <label for="">East</label>
-            <div class="radio" *ngFor="let color of colors">
-              <label>
-                <input type="radio"
-                name="colorEast"
-                ngModel
-                required
-                [value]="color">
-                {{color}}
-              </label>
-            </div>
-          </div>
-          <div class="col-xs-3">
-            <label for="">South</label>
-            <div class="radio" *ngFor="let color of colors">
-              <label>
-                  <input type="radio"
-                  name="colorSouth"
-                  ngModel
-                  required
-                  [value]="color">
-                  {{color}}
-                </label>
-            </div>
-          </div>
-          <div class="col-xs-3">
-            <label for="">West</label>
-            <div class="radio" *ngFor="let color of colors">
-              <label>
-                    <input type="radio"
-                    name="colorWest"
-                    ngModel
-                    required
-                    [value]="color">
-                    {{color}}
-                  </label>
-            </div>
           </div>
         </div>
-        <div>
-          <hr style="border: 1px solid lightblue;">
+        <div class="col-xs-3">
+          <label for="">East</label>
+          <div class="radio" *ngFor="let color of colors">
+            <label>
+              <input type="radio" name="colorEast" ngModel required [value]="color"> {{color}}
+            </label>
+          </div>
         </div>
-      </div>
-      <div class="row">
-        <div class="col-xs-3" ngModelGroup="North" #northBid="ngModelGroup">
-          <label for="North"> North</label>
-          <select name="numBid" class="form-control" ngModel>
-              <option value="Empty"></option>
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-              <option value="4">4</option>
-              <option value="5">5</option>
-              <option value="6">6</option>
-              <option value="7">7</option>
-              <option value="Pass">Pass</option>
-              <option value="Double">Double</option>
-              <option value="Ddouble">Ddouble</option>
-          </select>
-          <select class="form-control" name="suitBid" ngModel>
-              <option value="Empty"></option>
-              <option value="Spades">Spades</option>
-              <option value="Hearts">Hearts</option>
-              <option value="Diamonds">Diamonds</option>
-              <option value="Clubs">Clubs</option>
-              <option value="NoTrump">NoTrump</option>
-              <option value="Pass">Pass</option>
-              <option value="Double">Double</option>
-              <option value="Ddouble">Ddouble</option>
-          </select>
-          <input type="text" class="form-control" name="bidComment" ngModel>
-          <button type="button" class="btn btn-primary" (click)="toSideArray('North',northBid)">Submit</button>
+        <div class="col-xs-3">
+          <label for="">South</label>
+          <div class="radio" *ngFor="let color of colors">
+            <label>
+              <input type="radio" name="colorSouth" ngModel required [value]="color"> {{color}}
+            </label>
+          </div>
         </div>
-        <div class="col-xs-3" ngModelGroup="East" #eastBid="ngModelGroup">
-          <label for="East"> East</label>
-          <select name="numBid" class="form-control" ngModel>
-              <option value="Empty"></option>
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-              <option value="4">4</option>
-              <option value="5">5</option>
-              <option value="6">6</option>
-              <option value="7">7</option>
-              <option value="Pass">Pass</option>
-              <option value="Double">Double</option>
-              <option value="Ddouble">Ddouble</option>
-    </select>
-          <select class="form-control" name="suitBid" ngModel>
-              <option value="Empty"></option>
-              <option value="Spades">Spades</option>
-              <option value="Hearts">Hearts</option>
-              <option value="Diamonds">Diamonds</option>
-              <option value="Clubs">Clubs</option>
-              <option value="NoTrump">NoTrump</option>
-              <option value="Pass">Pass</option>
-              <option value="Double">Double</option>
-              <option value="Ddouble">Ddouble</option>
-      </select>
-          <input type="text" class="form-control" name="bidComment" ngModel>
-          <button type="button" class="btn btn-primary" (click)="toSideArray('East',eastBid)">Submit</button>
-        </div>
-        <div class="col-xs-3" ngModelGroup="South" #southBid="ngModelGroup">
-          <label for="South">South</label>
-          <select name="numBid" class="form-control" ngModel>
-              <option value="Empty"></option>
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-              <option value="4">4</option>
-              <option value="5">5</option>
-              <option value="6">6</option>
-              <option value="7">7</option>
-              <option value="Pass">Pass</option>
-              <option value="Double">Double</option>
-              <option value="Ddouble">Ddouble</option>
-    </select>
-          <select class="form-control" name="suitBid" ngModel>
-              <option value="Empty"></option>
-              <option value="Spades">Spades</option>
-              <option value="Hearts">Hearts</option>
-              <option value="Diamonds">Diamonds</option>
-              <option value="Clubs">Clubs</option>
-              <option value="NoTrump">NoTrump</option>
-              <option value="Pass">Pass</option>
-              <option value="Double">Double</option>
-              <option value="Ddouble">Ddouble</option>
-      </select>
-          <input type="text" class="form-control" name="bidComment" ngModel>
-          <button type="button" class="btn btn-primary" (click)="toSideArray('South',southBid)">Submit</button>
-        </div>
-        <div class="col-xs-3" ngModelGroup="West" #westBid="ngModelGroup">
-          <label for="West">West</label>
-          <select name="numBid" class="form-control" ngModel>
-                <option value="Empty"></option>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-                <option value="6">6</option>
-                <option value="7">7</option>
-                <option value="Pass">Pass</option>
-                <option value="Double">Double</option>
-                <option value="Ddouble">Ddouble</option>
-    </select>
-          <select class="form-control" name="suitBid" ngModel>
-                <option value="Empty"></option>
-                <option value="Spades">Spades</option>
-                <option value="Hearts">Hearts</option>
-                <option value="Diamonds">Diamonds</option>
-                <option value="Clubs">Clubs</option>
-                <option value="NoTrump">NoTrump</option>
-                <option value="Pass">Pass</option>
-                <option value="Double">Double</option>
-                <option value="Ddouble">Ddouble</option>
-      </select>
-          <input type="text" class="form-control" name="bidComment" ngModel>
-          <button type="button" class="btn btn-primary" (click)="toSideArray('West',westBid)">Submit</button>
+        <div class="col-xs-3">
+          <label for="">West</label>
+          <div class="radio" *ngFor="let color of colors">
+            <label>
+              <input type="radio" name="colorWest" ngModel required [value]="color"> {{color}}
+            </label>
+          </div>
         </div>
       </div>
       <div>
         <hr style="border: 1px solid lightblue;">
       </div>
-      <div class="row">
-        <div class="col-xs-12">
-          <div class="col-xs-3 contract-table">
-            <label for="NorthBid">North</label>
-            <div class="form-control" *ngFor="let bid of contract.North">
-              {{bid.numBid}}
-              <span *ngIf="bid.numBid !== 'Pass'">{{bid.suitBid}}</span>
-            </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-3" ngModelGroup="North" #northBid="ngModelGroup">
+        <label for="North"> North</label>
+        <select name="numBid" class="form-control" ngModel>
+          <option value="Empty"></option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+          <option value="6">6</option>
+          <option value="7">7</option>
+          <option value="Pass">Pass</option>
+          <option value="Double">Double</option>
+          <option value="Ddouble">Ddouble</option>
+        </select>
+        <select class="form-control" name="suitBid" ngModel>
+          <option value="Empty"></option>
+          <option value="Spades">Spades</option>
+          <option value="Hearts">Hearts</option>
+          <option value="Diamonds">Diamonds</option>
+          <option value="Clubs">Clubs</option>
+          <option value="NoTrump">NoTrump</option>
+          <option value="Pass">Pass</option>
+          <option value="Double">Double</option>
+          <option value="Ddouble">Ddouble</option>
+        </select>
+        <input type="text" class="form-control" name="bidComment" ngModel>
+        <button type="button" class="btn btn-primary" (click)="toSideArray('North',northBid)">Submit</button>
+      </div>
+      <div class="col-xs-3" ngModelGroup="East" #eastBid="ngModelGroup">
+        <label for="East"> East</label>
+        <select name="numBid" class="form-control" ngModel>
+          <option value="Empty"></option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+          <option value="6">6</option>
+          <option value="7">7</option>
+          <option value="Pass">Pass</option>
+          <option value="Double">Double</option>
+          <option value="Ddouble">Ddouble</option>
+        </select>
+        <select class="form-control" name="suitBid" ngModel>
+          <option value="Empty"></option>
+          <option value="Spades">Spades</option>
+          <option value="Hearts">Hearts</option>
+          <option value="Diamonds">Diamonds</option>
+          <option value="Clubs">Clubs</option>
+          <option value="NoTrump">NoTrump</option>
+          <option value="Pass">Pass</option>
+          <option value="Double">Double</option>
+          <option value="Ddouble">Ddouble</option>
+        </select>
+        <input type="text" class="form-control" name="bidComment" ngModel>
+        <button type="button" class="btn btn-primary" (click)="toSideArray('East',eastBid)">Submit</button>
+      </div>
+      <div class="col-xs-3" ngModelGroup="South" #southBid="ngModelGroup">
+        <label for="South">South</label>
+        <select name="numBid" class="form-control" ngModel>
+          <option value="Empty"></option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+          <option value="6">6</option>
+          <option value="7">7</option>
+          <option value="Pass">Pass</option>
+          <option value="Double">Double</option>
+          <option value="Ddouble">Ddouble</option>
+        </select>
+        <select class="form-control" name="suitBid" ngModel>
+          <option value="Empty"></option>
+          <option value="Spades">Spades</option>
+          <option value="Hearts">Hearts</option>
+          <option value="Diamonds">Diamonds</option>
+          <option value="Clubs">Clubs</option>
+          <option value="NoTrump">NoTrump</option>
+          <option value="Pass">Pass</option>
+          <option value="Double">Double</option>
+          <option value="Ddouble">Ddouble</option>
+        </select>
+        <input type="text" class="form-control" name="bidComment" ngModel>
+        <button type="button" class="btn btn-primary" (click)="toSideArray('South',southBid)">Submit</button>
+      </div>
+      <div class="col-xs-3" ngModelGroup="West" #westBid="ngModelGroup">
+        <label for="West">West</label>
+        <select name="numBid" class="form-control" ngModel>
+          <option value="Empty"></option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+          <option value="6">6</option>
+          <option value="7">7</option>
+          <option value="Pass">Pass</option>
+          <option value="Double">Double</option>
+          <option value="Ddouble">Ddouble</option>
+        </select>
+        <select class="form-control" name="suitBid" ngModel>
+          <option value="Empty"></option>
+          <option value="Spades">Spades</option>
+          <option value="Hearts">Hearts</option>
+          <option value="Diamonds">Diamonds</option>
+          <option value="Clubs">Clubs</option>
+          <option value="NoTrump">NoTrump</option>
+          <option value="Pass">Pass</option>
+          <option value="Double">Double</option>
+          <option value="Ddouble">Ddouble</option>
+        </select>
+        <input type="text" class="form-control" name="bidComment" ngModel>
+        <button type="button" class="btn btn-primary" (click)="toSideArray('West',westBid)">Submit</button>
+      </div>
+    </div>
+    <div>
+      <hr style="border: 1px solid lightblue;">
+    </div>
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="col-xs-3 contract-table">
+          <label for="NorthBid">North</label>
+          <div class="form-control" *ngFor="let bid of contract.North">
+            {{bid.numBid}}
+            <span *ngIf="bid.numBid !== 'Pass'">{{bid.suitBid}}</span>
           </div>
-          <div class="col-xs-3 contract-table">
-            <label for="EastBid">East</label>
-            <div class="form-control" *ngFor="let bid of contract.East">
-              {{bid.numBid}}
-              <span *ngIf="bid.numBid !== 'Pass'"> {{bid.suitBid}}</span>
-            </div>
+        </div>
+        <div class="col-xs-3 contract-table">
+          <label for="EastBid">East</label>
+          <div class="form-control" *ngFor="let bid of contract.East">
+            {{bid.numBid}}
+            <span *ngIf="bid.numBid !== 'Pass'"> {{bid.suitBid}}</span>
           </div>
-          <div class="col-xs-3 contract-table">
-            <label for="SouthBid">South</label>
-            <div class="form-control" *ngFor="let bid of contract.South">
-              {{bid.numBid}}
-              <span *ngIf="bid.numBid !== 'Pass'"> {{bid.suitBid}}</span>
-            </div>
+        </div>
+        <div class="col-xs-3 contract-table">
+          <label for="SouthBid">South</label>
+          <div class="form-control" *ngFor="let bid of contract.South">
+            {{bid.numBid}}
+            <span *ngIf="bid.numBid !== 'Pass'"> {{bid.suitBid}}</span>
           </div>
-          <div class="col-xs-3 contract-table">
-            <label for="WestBid">West</label>
-            <div class="form-control" *ngFor="let bid of contract.West">
-              {{bid.numBid}}
-              <span *ngIf="bid.numBid !=='Pass'"> {{bid.suitBid}}</span>
-            </div>
+        </div>
+        <div class="col-xs-3 contract-table">
+          <label for="WestBid">West</label>
+          <div class="form-control" *ngFor="let bid of contract.West">
+            {{bid.numBid}}
+            <span *ngIf="bid.numBid !=='Pass'"> {{bid.suitBid}}</span>
           </div>
         </div>
       </div>
-      <div class="row" *ngIf="!handSubmitted"><label for="Hand" class="pull-left">Create your Hand</label></div>
-      <div class="row" *ngIf="handSubmitted"><label for="Hand" class="pull-left">Choose a Lead</label></div>
-      <div class="row pull-right" style="border: 2px solid red; font-size:20px;" *ngIf="leadSubmitted"><label> You Chose {{contract.lead.name}} of {{contract.lead.suit}}</label></div>
-      <div class="row" *ngIf="!handSubmitted">
-        <div class="card" (click)="toHand(card)" [ngClass]="{'clicked':card.clicked}" *ngFor="let card of spades">{{card.name}}
-          <br>
-          <img class="suit" src="https://i.imgur.com/tXgx0h3.png">
-        </div>
-        <div class="card red" (click)="toHand(card)" [ngClass]="{'clicked':card.clicked}" *ngFor="let card of hearts">{{card.name}}
-          <br>
-          <img class="suit" src="https://i.imgur.com/Chg6eQ8.jpg">
-        </div>
-        <div class="card" (click)="toHand(card)" [ngClass]="{'clicked': card.clicked}" *ngFor="let card of clubs">{{card.name}}
-          <br>
-          <img class="suit" src="https://i.imgur.com/TsBK3k9.jpg">
-        </div>
-        <div class="card red" (click)="toHand(card)" [ngClass]="{'clicked':card.clicked}" *ngFor="let card of diamonds">{{card.name}}
-          <br>
-          <img class="suit" src="https://i.imgur.com/khCb5Vu.jpg">
+    </div>
+    <div class="row" *ngIf="!handSubmitted">
+      <label for="Hand" class="pull-left">Create your Hand</label>
+    </div>
+    <div class="row" *ngIf="handSubmitted">
+      <label for="Hand" class="pull-left">Choose a Lead</label>
+    </div>
+    <div class="row pull-right" style="border: 2px solid red; font-size:20px;" *ngIf="leadSubmitted">
+      <label> You Chose {{contract.lead.name}} of {{contract.lead.suit}}</label>
+    </div>
+    <div class="row" *ngIf="!handSubmitted">
+      <div class="card" (click)="toHand(card)" [ngClass]="{'clicked':card.clicked}" *ngFor="let card of spades">{{card.name}}
+        <br>
+        <img class="suit" src="https://i.imgur.com/tXgx0h3.png">
+      </div>
+      <div class="card red" (click)="toHand(card)" [ngClass]="{'clicked':card.clicked}" *ngFor="let card of hearts">{{card.name}}
+        <br>
+        <img class="suit" src="https://i.imgur.com/Chg6eQ8.jpg">
+      </div>
+      <div class="card" (click)="toHand(card)" [ngClass]="{'clicked': card.clicked}" *ngFor="let card of clubs">{{card.name}}
+        <br>
+        <img class="suit" src="https://i.imgur.com/TsBK3k9.jpg">
+      </div>
+      <div class="card red" (click)="toHand(card)" [ngClass]="{'clicked':card.clicked}" *ngFor="let card of diamonds">{{card.name}}
+        <br>
+        <img class="suit" src="https://i.imgur.com/khCb5Vu.jpg">
+      </div>
+    </div>
+    <div class="row" *ngIf="handSubmitted">
+      <div class="card" (click)="chooseLead(card)" *ngFor="let card of handSpades">{{card.name}}
+        <br>
+        <img class="suit" src="https://i.imgur.com/tXgx0h3.png">
+      </div>
+      <div class="card red" (click)="chooseLead(card)" *ngFor="let card of handHearts">{{card.name}}
+        <br>
+        <img class="suit" src="https://i.imgur.com/Chg6eQ8.jpg">
+      </div>
+      <div class="card" (click)="chooseLead(card)" *ngFor="let card of handClubs">{{card.name}}
+        <br>
+        <img class="suit" src="https://i.imgur.com/TsBK3k9.jpg">
+      </div>
+      <div class="card red" (click)="chooseLead(card)" *ngFor="let card of handDiamonds">{{card.name}}
+        <br>
+        <img class="suit" src="https://i.imgur.com/khCb5Vu.jpg">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12" style="display: flex; justify-content: center; margin-top: 10px;">
+        <button type="button" class="btn btn-default" (click)="submitHand()">Submit Hand</button>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="form-group">
+          <label for="comment">Comments:</label>
+          <textarea class="form-control col-xs-12" id="comment" ngModel name="comments" required #comment="ngModel"></textarea>
         </div>
       </div>
-      <div class="row" *ngIf="handSubmitted">
-        <div class="card" (click)="chooseLead(card)" *ngFor="let card of handSpades">{{card.name}}
-          <br>
-          <img class="suit" src="https://i.imgur.com/tXgx0h3.png">
-        </div>
-        <div class="card red" (click)="chooseLead(card)" *ngFor="let card of handHearts">{{card.name}}
-          <br>
-          <img class="suit" src="https://i.imgur.com/Chg6eQ8.jpg">
-        </div>
-        <div class="card" (click)="chooseLead(card)" *ngFor="let card of handClubs">{{card.name}}
-          <br>
-          <img class="suit" src="https://i.imgur.com/TsBK3k9.jpg">
-        </div>
-        <div class="card red" (click)="chooseLead(card)" *ngFor="let card of handDiamonds">{{card.name}}
-          <br>
-          <img class="suit" src="https://i.imgur.com/khCb5Vu.jpg">
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-xs-12" style="display: flex; justify-content: center; margin-top: 10px;">
-          <button type="button" class="btn btn-default" (click)="submitHand()">Submit Hand</button>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-xs-12">
-          <div class="form-group">
-            <label for="comment">Comments:</label>
-            <textarea class="form-control col-xs-12" id="comment" ngModel name="comments" required #comment="ngModel"></textarea>
-          </div>
-        </div>
-      </div>
+    </div>
 
-      <div class="row">
-        <div class="col-xs-12" style="display: flex; justify-content: center; margin-top: 10px;">
-          <button type="submit" class="btn btn-danger" [disabled]="!(f.valid && leadSubmitted)">Submit Contract</button>
-        </div>
+    <div class="row">
+      <div class="col-xs-12" style="display: flex; justify-content: center; margin-top: 10px;">
+        <button type="submit" class="btn btn-danger" [disabled]="!(f.valid && leadSubmitted)">Submit Contract</button>
       </div>
-    </form>
-  </div>
+    </div>
+  </form>
 </div>

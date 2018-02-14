@@ -1,22 +1,8 @@
-
 :host{
   display: block;
 }
-.heading {
-  display:flex;
-  color: black;
-   justify-content: center;
-    border:1px solid black;
-    text-align: center;
-}
-.contract {
-  margin-bottom: 10px;
-  padding: 0px 25%;
-  text-align: center;
-}
-#contract-bid {
-  background-color: lightgoldenrodyellow;
-  border: 1px solid rgba(0, 0, 0, 0.23);
+button {
+  margin: 7px;
 }
 #custom-hover {
   position: absolute;
@@ -27,23 +13,7 @@
   text-align: center;
   width: auto;
 }
-#subheading {
-  display:flex;
-  color: #974141;
-  justify-content: center;
-  font-size: large;
-  font-weight: bold;
-  box-sizing: border-box;
-  margin: 5px auto;
-  border: 3px dotted lightgrey;
-  border-radius: 3px;
-  width: 80%;
-  text-align: center;
-}
-.hline {
-  border-color: black;
-  width: 100%;
-}
+
 .card {
   float: left;
   width: auto;
@@ -73,29 +43,6 @@
 }
 .red {
   color:#E31818;
-}
-.hcpdisplay {
-  font-weight: bold;
-  font-size: 18px;
-  display: flex;
-  justify-content: center;
-}
-.form-control {
-  height: auto;
-  margin-bottom: 3px;
-  padding: 5px 5px;
-}
-.response {
-  box-sizing: border-box;
-  padding: 10px;
-  border: 2px solid lightseagreen;
-  border-radius: 1px;
-  margin-top: auto;
-  display: flex;
-  justify-content: center;
-}
-#com {
-  text-align: center;
 }
 @media screen and (max-width: 480px) {
   .board {
