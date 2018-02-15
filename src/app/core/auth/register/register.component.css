@@ -1,6 +1,5 @@
 .register{
   height:100%;
-  max-width: 200px;
 }
 #header{
   text-align: center;
@@ -18,11 +17,6 @@
 #login-text:hover{
   color: darkslategray;
 }
-/* .warning {
-  text-align: center;
-  margin: 5px 0px;
-  font-weight: bold;
-  background-color: rgba(255, 255, 255, 0.35);
-  border-radius: 2px;
-  border: 1px solid rgba(255, 0, 0, 0.3);
-} */
+form{
+  width: 190px;
+}

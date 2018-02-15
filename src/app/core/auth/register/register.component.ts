@@ -1,3 +1,4 @@
+import { FadeStateTrigger } from './../../../shared/animations/animations';
 import { Component, OnInit, ViewChild} from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { User } from '../../../shared/Services/user.service';
@@ -5,6 +6,7 @@ import { User } from '../../../shared/Services/user.service';
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css'],
+  animations: [FadeStateTrigger]
 })
 export class RegisterComponent implements OnInit {
   loginbool = false;
