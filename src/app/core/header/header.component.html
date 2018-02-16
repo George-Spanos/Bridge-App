@@ -1,39 +1,19 @@
-<mat-toolbar fxLayout class="full-width" color="primary">
-  <div fxFlex="0 0.05 auto">
-    <a routerLink="/">Bridge App</a>
-  </div>
-  <div fxFlex fxLayout fxLayoutAlign="flex-end" fxHide.xs>
-    <ul fxLayoutAlign="flex-end" fxLayoutWrap class="navigation-items" fxLayoutGap="10px">
-      <li style="cursor:pointer;" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
-        <a routerLink="/">Home</a>
-      </li>
-      <li style="cursor:pointer" routerLinkActive="active">
-        <a routerLink="/bid">Bid Thread</a>
-      </li>
-      <li style="cursor:pointer" routerLinkActive="active">
-        <a routerLink="/practice">Practice</a>
-      </li>
-      <li style="cursor:pointer" routerLinkActive="active">
-        <a routerLink="/lead">Lead Post</a>
-      </li>
-      <li style="cursor:pointer" routerLinkActive="active">
-        <a routerLink="/leadthread">Lead Thread</a>
-      </li>
-      <li style="cursor:pointer" routerLinkActive="active">
-        <a routerLink="/leadpractice">Lead Practice</a>
-      </li>
-      <li style="cursor:pointer" routerLinkActive="active">
-        <a routerLink="/donate">Donate</a>
-      </li>
-      <li style="cursor:pointer" routerLinkActive="active">
-        <a routerLink="/contact">Contact</a>
-      </li>
-      <!-- <li style="cursor:pointer" routerLinkActive="active">
+<mat-toolbar fxLayout class="full-width" color="primary" fxLayoutAlign="center center">
+  <button *ngIf="user.rank === 'Admin'" mat-icon-button (click)="onToggleSidenav()">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <a routerLink="/">Bridge App</a>
+  <div  fxFlex fxLayout fxLayoutAlign="end" fxLayoutGap="10px" fxLayoutWrap fxHide.xs>
+    <a style="cursor:pointer;" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" routerLink="/">Home</a>
+    <a routerLink="/bid" style="cursor:pointer" routerLinkActive="active">Bid Thread</a>
+    <a routerLink="/practice" style="cursor:pointer" routerLinkActive="active">Practice</a>
+    <a routerLink="/leadthread" style="cursor:pointer" routerLinkActive="active">Lead Thread</a>
+    <a routerLink="/leadpractice" style="cursor:pointer" routerLinkActive="active">Lead Practice</a>
+    <a routerLink="/donate" style="cursor:pointer" routerLinkActive="active">Donate</a>
+    <a routerLink="/contact" style="cursor:pointer" routerLinkActive="active">Contact</a>
+    <!-- <li style="cursor:pointer" routerLinkActive="active">
         <a routerLink="/test">Test</a>
       </li> -->
-      <li *ngIf="user.loggedIn" style="cursor:pointer; float: right;" routerLinkActive="active">
-        <a routerLink="/myaccount">My Account</a>
-      </li>
-    </ul>
+    <a routerLink="/myaccount" *ngIf="user.loggedIn" style="cursor:pointer;" routerLinkActive="active">My Account</a>
   </div>
 </mat-toolbar>

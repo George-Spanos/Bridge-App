@@ -15,6 +15,7 @@ import { routeFadeStateTrigger } from '../../shared/animations/animations';
 export class BidThreadComponent implements OnInit {
   @HostBinding('@routeFadeState') routeAnimation = true;
   handInitialized = false;
+  isLoading = false;
   bids = [];
   newHand = false;
   buttonText = 'Initialize Hand';
@@ -27,6 +28,7 @@ export class BidThreadComponent implements OnInit {
   constructor(public bridgeApi: BridgeApi, private http: Http, public user: User) { }
   hand: Card[];
   getHand(array) {
+    this.isLoading = true;
     this.bridgeApi.submitted = false;
     const coin = this.bridgeApi.coinFlip();
     this.bids = [];
@@ -91,6 +93,7 @@ export class BidThreadComponent implements OnInit {
       console.log(this.bridgeApi.bid);
     }
     this.cardsArray = this.bridgeApi.deck();
+    this.isLoading = false;
     this.buttonText = 'Fetch another hand';
   }
   ngOnInit() {

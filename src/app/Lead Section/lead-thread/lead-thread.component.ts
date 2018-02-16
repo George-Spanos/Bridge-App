@@ -15,6 +15,7 @@ import { routeFadeStateTrigger } from '../../shared/animations/animations';
 export class LeadThreadComponent implements OnInit {
   @HostBinding('@routeFadeState') routeAnimation = true;
   buttonText = 'Start Leading';
+  isLoading = false;
   handInitialized = true;
   East: {
     bidComment: String,
@@ -72,6 +73,7 @@ export class LeadThreadComponent implements OnInit {
   }
   constructor(public bridgeApi: BridgeApi, public user: User) { }
   startLeading() {
+    this.isLoading = true;
     this.bridgeApi.fetchleadPractice().subscribe(
       (result) => {
         this.bridgeApi.submitted = false;
@@ -92,6 +94,7 @@ export class LeadThreadComponent implements OnInit {
         this.clubs = this.bridgeApi.filterArray(this.hand, 'Clubs');
         this.buttonText = 'Fetch Another Hand';
       });
+      this.isLoading = false;
   }
   ngOnInit() {
   }

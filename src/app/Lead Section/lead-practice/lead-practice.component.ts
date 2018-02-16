@@ -14,6 +14,7 @@ import { routeFadeStateTrigger } from '../../shared/animations/animations';
 export class LeadPracticeComponent implements OnInit {
   @HostBinding('@routeFadeState') routeAnimation = true;
   handInitialized = true;
+  isLoading = false;
   buttonText = 'Start Practising';
   East: {
     bidComment: String,
@@ -59,6 +60,7 @@ export class LeadPracticeComponent implements OnInit {
   answerSubmitted = false;
   comments: string;
   startPractice() {
+    this.isLoading = true;
     this.bridgeApi.fetchleadPractice().subscribe(
       (result) => {
         this.answerSubmitted = false;
@@ -88,9 +90,10 @@ export class LeadPracticeComponent implements OnInit {
         this.hearts = this.bridgeApi.filterArray(this.hand, 'Hearts');
         this.diamonds = this.bridgeApi.filterArray(this.hand, 'Diamonds');
         this.clubs = this.bridgeApi.filterArray(this.hand, 'Clubs');
-        this.buttonText = 'Fetch another practice pand';
+        this.buttonText = 'Fetch another practice hand';
       }
     );
+    this.isLoading = false;
   }
   chooseLead(lead: Card) {
     this.lead = lead;

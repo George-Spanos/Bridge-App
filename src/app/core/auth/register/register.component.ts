@@ -1,7 +1,8 @@
 import { FadeStateTrigger } from './../../../shared/animations/animations';
-import { Component, OnInit, ViewChild} from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { User } from '../../../shared/Services/user.service';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -41,12 +42,9 @@ export class RegisterComponent implements OnInit {
         if (this.user.loggedIn) {
           this.logForm.reset();
         }
-      }
-        ,
-        error => console.error(error));
+      }, error => console.error(error));
     }
   }
-
   constructor(public user: User) { }
   ngOnInit() {
   }

@@ -46,6 +46,7 @@ export class AccountComponent implements OnInit {
     this.user.registered = false;
     this.user.exists = false;
     this.premium = false;
+    this.user.rank = null;
     this.router.navigate(['/home']);
   }
   ngOnInit() {

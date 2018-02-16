@@ -1,32 +1,35 @@
-<section fxLayout="column" fxLayoutGap="7px">
+<section class="full-width" fxLayout="column" fxLayoutGap="7px" fxLayoutAlign="start center">
   <h2 class="heading">This sections give you the chance to practice on how to lead as the defence</h2>
   <span id="subheading"> When you click the "start practicing" button, you will be served a specific hand as well as the contract. You must find
     the most suitable lead, and then click it!</span>
   <hr class="hline">
-  <button mat-raised-button color="primary" fxFlexAlign="center" (click)="startPractice()">{{buttonText}}</button>
-  <div *ngIf="start">
+  <button *ngIf="!isLoading" mat-raised-button color="primary" fxFlexAlign="center" (click)="startPractice()">{{buttonText}}</button>
+  <mat-spinner diameter='30' *ngIf="isLoading"></mat-spinner>
+  <div class="full-width" *ngIf="start" fxLayout="column">
     <app-contract-design [East]="East" [West]="West" [North]="North" [South]="South" [Colors]="Colors"></app-contract-design>
     <hr class="hline">
-    <div fxLayout fxLayoutAlign="space-around stretch" fxLayoutGap="7px">
-      <div class="board" *ngIf="handInitialized">
-        <div class="card" (click)="chooseLead(card)" *ngFor="let card of spades">{{card.name}}
-          <br>
-          <img class="suit" src="https://i.imgur.com/tXgx0h3.png">
-        </div>
-        <div class="card red" (click)="chooseLead(card)" *ngFor="let card of hearts">{{card.name}}
-          <br>
-          <img class="suit" src="https://i.imgur.com/Chg6eQ8.jpg">
-        </div>
-        <div class="card" (click)="chooseLead(card)" *ngFor="let card of clubs">{{card.name}}
-          <br>
-          <img class="suit" src="https://i.imgur.com/TsBK3k9.jpg">
-        </div>
-        <div class="card red" (click)="chooseLead(card)" *ngFor="let card of diamonds">{{card.name}}
-          <br>
-          <img class="suit" src="https://i.imgur.com/khCb5Vu.jpg">
-        </div>
-      </div>
-      <div *ngIf="handInitialized" fxFlex="50%">
+    <div fxLayout fxLayoutAlign="space-around stretch" fxLayoutGap="7px" fxLayout.lt-md="column">
+        <div class="board" *ngIf="handInitialized">
+            <div fxLayout fxLayoutAlign="center center">
+              <div class="card" *ngFor="let card of spades" (click)="chooseLead(card)" fxLayout="column" fxLayoutAlign="start center">
+                <span>{{card.name}}</span>
+                <img class="suit" src="https://i.imgur.com/tXgx0h3.png">
+              </div>
+              <div class="card red" *ngFor="let card of hearts" (click)="chooseLead(card)" fxLayout="column" fxLayoutAlign="start center">
+                <span>{{card.name}}</span>
+                <img class="suit" src="https://i.imgur.com/Chg6eQ8.jpg">
+              </div>
+              <div class="card" *ngFor="let card of clubs" (click)="chooseLead(card)" fxLayout="column" fxLayoutAlign="start center">
+                <span>{{card.name}}</span>
+                <img class="suit" src="https://i.imgur.com/TsBK3k9.jpg">
+              </div>
+              <div class="card red" *ngFor="let card of diamonds" (click)="chooseLead(card)" fxLayout="column" fxLayoutAlign="start center">
+                <span>{{card.name}}</span>
+                <img class="suit" src="https://i.imgur.com/khCb5Vu.jpg">
+              </div>
+            </div>
+          </div>          
+      <div *ngIf="handInitialized" fxFlex="50">
         <div *ngIf="!leadClicked" class="response">
           You can choose a lead.
         </div>

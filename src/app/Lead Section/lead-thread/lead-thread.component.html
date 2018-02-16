@@ -1,34 +1,37 @@
-<div *ngIf="user.loggedIn" fxLayout="column">
+<div *ngIf="user.loggedIn" fxLayout="column" fxLayoutAlign="start center">
   <h2 class="heading">This sections give you the chance to practice on how to lead as the defence</h2>
   <span id="subheading"> When you click the "Start Leading" button, you will be served a specific hand accompanied by a contract. After you choose
     your Lead and press Submit, the comment section will appear and you will be able to see what other people chose!
   </span>
   <hr class="hline" *ngIf="!start">
-  <button fxFlexAlign="center" mat-raised-button color="primary" (click)="startLeading()">{{buttonText}}</button>
+  <button *ngIf="!isLoading" fxFlexAlign="center" mat-raised-button color="primary" (click)="startLeading()">{{buttonText}}</button>
+  <mat-spinner diameter='30' *ngIf="isLoading"></mat-spinner>
 </div>
 <div *ngIf="start" fxLayout="column">
   <app-contract-design [East]="East" [West]="West" [North]="North" [South]="South" [Colors]="Colors"></app-contract-design>
   <hr class="hline">
   <div *ngIf="handInitialized" fxLayout fxLayoutAlign="space-around stretch" fxLayoutGap="7px">
-    <div class="board">
-      <div class="card" (click)="chooseLead(card)" *ngFor="let card of spades">{{card.name}}
-        <br>
-        <img class="suit" src="https://i.imgur.com/tXgx0h3.png">
-      </div>
-      <div class="card red" (click)="chooseLead(card)" *ngFor="let card of hearts">{{card.name}}
-        <br>
-        <img class="suit" src="https://i.imgur.com/Chg6eQ8.jpg">
-      </div>
-      <div class="card" (click)="chooseLead(card)" *ngFor="let card of clubs">{{card.name}}
-        <br>
-        <img class="suit" src="https://i.imgur.com/TsBK3k9.jpg">
-      </div>
-      <div class="card red" (click)="chooseLead(card)" *ngFor="let card of diamonds">{{card.name}}
-        <br>
-        <img class="suit" src="https://i.imgur.com/khCb5Vu.jpg">
-      </div>
-    </div>
-    <app-lead-thread-form fxFlex="50%" [id]="id" [handInitialized]="handInitialized" [leadClicked]="leadClicked" [lead]="lead"></app-lead-thread-form>
+      <div class="board" *ngIf="handInitialized">
+          <div fxLayout fxLayoutAlign="center center" fxLayout.lt-md="column">
+            <div class="card" *ngFor="let card of spades"  (click)="chooseLead(card)"fxLayout="column" fxLayoutAlign="start center">
+              <span>{{card.name}}</span>
+              <img class="suit" src="https://i.imgur.com/tXgx0h3.png">
+            </div>
+            <div class="card red" *ngFor="let card of hearts"  (click)="chooseLead(card)"fxLayout="column" fxLayoutAlign="start center">
+              <span>{{card.name}}</span>
+              <img class="suit" src="https://i.imgur.com/Chg6eQ8.jpg">
+            </div>
+            <div class="card" *ngFor="let card of clubs"  (click)="chooseLead(card)" fxLayout="column" fxLayoutAlign="start center">
+              <span>{{card.name}}</span>
+              <img class="suit" src="https://i.imgur.com/TsBK3k9.jpg">
+            </div>
+            <div class="card red" *ngFor="let card of diamonds" (click)="chooseLead(card)" fxLayout="column" fxLayoutAlign="start center">
+              <span>{{card.name}}</span>
+              <img class="suit" src="https://i.imgur.com/khCb5Vu.jpg">
+            </div>
+          </div>
+        </div>
+    <app-lead-thread-form fxFlex="50" [id]="id" [handInitialized]="handInitialized" [leadClicked]="leadClicked" [lead]="lead"></app-lead-thread-form>
   </div>
 </div>
 <div *ngIf="bridgeApi.submitted" style="margin-top: 10px;">

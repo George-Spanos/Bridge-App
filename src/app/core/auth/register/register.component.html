@@ -1,6 +1,5 @@
-<form class="register full-width" (ngSubmit)="onSubmit()" #f="ngForm">
-  <div ngModelGroup="Register" *ngIf="!loginbool"
-  fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="3px">
+<form class="full-width" (ngSubmit)="onSubmit()" #f="ngForm">
+  <div ngModelGroup="Register" *ngIf="!loginbool" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="3px">
     <h2 id="header">Register</h2>
     <mat-form-field>
       <mat-label>Username</mat-label>
@@ -23,12 +22,13 @@
     </mat-form-field>
     <mat-error *ngIf="pass.value !== retypepass.value && pass.touched && retypepass.touched">
       Passwords don't match</mat-error>
-    <button mat-raised-button color="primary" class="subbutton" type="submit" [disabled]="!f.valid">Register</button>
+    <button *ngIf="!user.isLoading" mat-raised-button color="primary" class="subbutton" type="submit" [disabled]="!f.valid">Register</button>
+    <mat-spinner diameter='30' *ngIf="user.isLoading"></mat-spinner>
     <p (click)="changeForm()" id="login-text">Already have an account?
       <br> Click here to login</p>
+
   </div>
-  <div ngModelGroup="Login" *ngIf="loginbool"
-  fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="3px">
+  <div ngModelGroup="Login" *ngIf="loginbool" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="3px">
     <h2 id="header">Login</h2>
     <mat-form-field>
       <mat-label>Username</mat-label>
@@ -39,7 +39,8 @@
       <input matInput ngModel name="password" type="password">
     </mat-form-field>
     <mat-error *ngIf="user.logValid">{{user.errorMessage}}</mat-error>
-    <button mat-raised-button color="primary" class="subbutton" type="submit" [disabled]="!f.valid">Login</button>
+    <button *ngIf="!user.isLoading" mat-raised-button color="primary" class="subbutton" type="submit" [disabled]="!f.valid">Login</button>
+    <mat-spinner *ngIf="user.isLoading" diameter='30'></mat-spinner>
     <p (click)="changeForm()" id="login-text">Click here to register</p>
   </div>
 </form>

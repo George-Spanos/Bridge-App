@@ -1,8 +1,7 @@
-
-  <div class="heading">
+  <div class="heading full-width">
     <h2>Welcome {{username}}</h2>
   </div>
-  <section fxLayout fxLayoutAlign="space-around center">
+<section fxLayout fxLayoutAlign="space-around center">
   <div fxLayout="column" fxLayoutAlign="">
     <img src={{img}} class="img" *ngIf="!editImg">
     <button mat-raised-button color="primary" *ngIf="!editImg" (click)="editImage()">Change Image</button>
@@ -16,12 +15,12 @@
     <button fxFlexAlign="center" mat-raised-button color="primary" *ngIf="editDesc" (click)="saveDescription()">Save Description Changes</button>
   </div>
 </section>
-  <div class="userInfo">
-    <label>User Info</label>
-    <hr class="hr">
-    <ul class="info">
-      <li> Rank: {{rank}}</li>
-      <li id="premium" *ngIf="premium"> Premium User</li>
-    </ul>
-    <button mat-raised-button color="primary" (click)="Logout()">Log out</button>
-  </div>
+<div class="userInfo">
+  <label>User Info</label>
+  <hr class="hr">
+  <ul class="info">
+    <li> Rank: {{rank}}</li>
+    <li id="premium" *ngIf="premium"> Premium User</li>
+  </ul>
+  <button mat-raised-button color="primary" (click)="Logout()">Log out</button>
+</div>

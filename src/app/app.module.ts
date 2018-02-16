@@ -18,12 +18,14 @@ import { LeadModule } from './Lead Section/lead.module';
 import { DonateComponent } from './donate/donate.component';
 import { ContactComponent } from './contact/contact.component';
 import { TestpageComponent } from './testpage/testpage.component';
+import { SidenavComponent } from './core/sidenav/sidenav.component';
 @NgModule({
   declarations: [
     AppComponent,
     DonateComponent,
     ContactComponent,
     TestpageComponent,
+    SidenavComponent
   ],
   imports: [
     BrowserModule,

@@ -1,10 +1,15 @@
-.register{
-  height:100%;
+form {
+  height: 100%;
+  background-color: rgba(9, 70, 67, 0.06);
+  width: 250px;
+  border-radius: 3px;
 }
-#header{
+
+#header {
   text-align: center;
 }
-#login-text{
+
+#login-text {
   font-weight: bolder;
   margin: 5px 0px;
   cursor: pointer;
@@ -14,9 +19,8 @@
   border-radius: 5px;
   padding: 3px;
 }
-#login-text:hover{
+
+#login-text:hover {
   color: darkslategray;
 }
-form{
-  width: 190px;
-}
+

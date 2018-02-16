@@ -12,6 +12,7 @@ import { routeFadeStateTrigger } from '../../shared/animations/animations';
 })
 export class PracticeComponent implements OnInit {
   @HostBinding('@routeFadeState') routeAnimation = true;
+  isLoading = false;
   handInitialized = false;
   buttonText = 'Start Practicing!';
   spades: Card[];
@@ -23,6 +24,7 @@ export class PracticeComponent implements OnInit {
   comment: string;
   correctbid: string;
   startPractice() {
+    this.isLoading = true;
     this.bridgeApi.answerStatus = false;
     this.bridgeApi.answer = '';
     this.bridgeApi.fetchPractice().subscribe(
@@ -39,6 +41,7 @@ export class PracticeComponent implements OnInit {
         this.buttonText = 'Fetch another Practice Hand';
       }
     );
+    this.isLoading = false;
   }
   constructor(public bridgeApi: BridgeApi) { }
 

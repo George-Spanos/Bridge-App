@@ -1,12 +1,13 @@
-<section fxLayout="column" *ngIf="user.loggedIn">
+<section class="full-width" fxLayout="column" *ngIf="user.loggedIn" fxLayoutAlign="start center">
     <h2 class="heading">
         This sections give you the chance to practice on how to open the bidding phase</h2>
       <span id="subheading">After you choose your bid, you will be able to see other's people answers!</span>
       <hr class="hline">
   <section fxLayout fxLayoutAlign="center stretch">
-    <button mat-raised-button color="primary" (click)="getHand(cardsArray)">{{buttonText}}</button>
+    <button *ngIf="!isLoading" mat-raised-button color="primary" (click)="getHand(cardsArray)">{{buttonText}}</button>
+    <mat-spinner diameter='30' *ngIf="isLoading"></mat-spinner>
   </section>
-  <section fxLayout fxLayoutGap="7px" fxLayoutAlign="space-around stretch">
+  <section class="full-width" fxLayout fxLayoutGap="7px" fxLayoutAlign="space-around stretch" fxLayout.lt-md="column">
     <app-card-board [cards]="hand" [Initialized]="handInitialized"></app-card-board>
     <app-bid-form fxFlex="50%" *ngIf="handInitialized"></app-bid-form>
   </section>

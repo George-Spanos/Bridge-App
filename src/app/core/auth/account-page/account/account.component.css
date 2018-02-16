@@ -13,6 +13,7 @@ textarea {
   height: 70px;
 }
 .heading {
+  width: 100%;
   text-align: center;
   background: -webkit-linear-gradient(rgba(190, 190, 190, 0.9), rgba(190, 190, 190, 0.2)); /* For Safari 5.1 to 6.0 */
   background: -o-linear-gradient(rgba(190, 190, 190, 0.9),rgba(190, 190, 190, 0.2)); /* For Opera 11.1 to 12.0 */

@@ -3,8 +3,13 @@ section {
   background: -o-linear-gradient(lightgray, white);
   background: -moz-linear-gradient(lightgray, white);
   background: linear-gradient(lightgray, white);
-  min-height: 400px;
+  height: 300px;
 }
 :host {
   display: block;
+  margin: 0 4px;
+}
+h2 {
+  width: 70%;
+  text-align: center;
 }

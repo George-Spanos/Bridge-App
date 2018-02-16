@@ -8,6 +8,7 @@ import { HeaderComponent } from './header/header.component';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { MaterialModule } from '../shared/material.module';
+import { SidenavComponent } from './sidenav/sidenav.component';
 @NgModule({
   declarations: [
     HomepageComponent,
@@ -15,13 +16,17 @@ import { MaterialModule } from '../shared/material.module';
     RegisterComponent,
     AccountComponent,
   ],
-  imports: [CommonModule, RouterModule, FormsModule, SharedModule],
+  imports: [
+    CommonModule,
+    RouterModule,
+    FormsModule,
+    SharedModule],
   exports: [
-  CommonModule,
-  HomepageComponent,
-  RegisterComponent,
-  AccountComponent,
-  HeaderComponent
+    CommonModule,
+    HomepageComponent,
+    RegisterComponent,
+    AccountComponent,
+    HeaderComponent
   ]
 })
-export class CoreModule {}
+export class CoreModule { }
