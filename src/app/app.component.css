@@ -10,3 +10,6 @@
 aside {
   padding-right: 7px;
 }
+mat-sidenav-container {
+  min-height:100vh;
+}
