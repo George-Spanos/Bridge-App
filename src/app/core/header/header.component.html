@@ -1,5 +1,8 @@
 <mat-toolbar fxLayout class="full-width" color="primary" fxLayoutAlign="center center">
-  <button *ngIf="user.rank === 'Admin'" mat-icon-button (click)="onToggleSidenav()">
+  <!-- <button *ngIf="user.rank === 'Admin'" mat-icon-button (click)="onToggleSidenav()">
+    <mat-icon>menu</mat-icon>
+  </button> -->
+  <button fxHide.gt-xs mat-icon-button (click)="onToggleMobilenav()">
     <mat-icon>menu</mat-icon>
   </button>
   <a routerLink="/">Bridge App</a>

@@ -19,13 +19,15 @@ import { DonateComponent } from './donate/donate.component';
 import { ContactComponent } from './contact/contact.component';
 import { TestpageComponent } from './testpage/testpage.component';
 import { SidenavComponent } from './core/sidenav/sidenav.component';
+import { MobileNavComponent } from './core/mobile-nav/mobile-nav.component';
 @NgModule({
   declarations: [
     AppComponent,
     DonateComponent,
     ContactComponent,
     TestpageComponent,
-    SidenavComponent
+    SidenavComponent,
+    MobileNavComponent
   ],
   imports: [
     BrowserModule,

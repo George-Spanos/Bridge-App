@@ -7,11 +7,15 @@ import { Subject } from 'rxjs/Subject';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-  @Output() sidenavToggle = new Subject<void>();
+  @Output() adminNavToggle = new Subject<void>();
+  @Output() mobilenavToggle = new Subject<void>();
   constructor(public user: User) { }
 
   onToggleSidenav() {
-    this.sidenavToggle.next();
+    this.adminNavToggle.next();
+  }
+  onToggleMobilenav() {
+    this.mobilenavToggle.next();
   }
   ngOnInit() {
   }
