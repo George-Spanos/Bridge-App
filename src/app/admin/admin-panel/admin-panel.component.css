@@ -3,6 +3,3 @@ mat-toolbar {
   margin-right:5px;
   background:linear-gradient(rgba(236, 239, 239,1),rgba(236, 239, 239,0)) ;
 }
-section {
-    min-height:100vh;
-}
