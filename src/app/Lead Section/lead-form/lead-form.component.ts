@@ -30,9 +30,6 @@ export class LeadFormComponent implements OnInit {
   handClubs: Card[];
   handSubmitted = false;
   leadSubmitted = false;
-  formlog() {
-    console.log(this.contractform);
-  }
   toSideArray(name: string, el: FormControl) {
     this.contract.changeValue(name, el);
     this.contractform.form.patchValue({
@@ -76,7 +73,6 @@ export class LeadFormComponent implements OnInit {
   }
   chooseLead(card: Card) {
     this.contract.lead = card;
-    console.log('You chose ' + this.contract.lead.name + ' of ' + this.contract.lead.suit + ' as a lead');
     this.leadSubmitted = true;
   }
   submitHand() {

@@ -25,7 +25,7 @@ export class BidThreadComponent implements OnInit {
   hearts: Card[];
   diamonds: Card[];
   clubs: Card[];
-  constructor(public bridgeApi: BridgeApi, private http: Http, public user: User) { }
+  constructor(public bridgeApi: BridgeApi, public user: User) { }
   hand: Card[];
   getHand(array) {
     this.isLoading = true;

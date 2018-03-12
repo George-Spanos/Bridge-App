@@ -1,9 +1,9 @@
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Card } from './card.model';
 
 import { Observable } from 'rxjs/Rx';
 import { Injectable } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { Http, Headers, Response } from '@angular/http';
 @Injectable()
 export class Contract {
   colors: {};
@@ -30,7 +30,7 @@ export class Contract {
   Hand: Card[];
   lead: Card;
   comments: string;
-  constructor(public http: Http) {
+  constructor(public http: HttpClient) {
     this.North = [];
     this.East = [];
     this.South = [];
@@ -53,7 +53,7 @@ export class Contract {
     }
   }
   leadtoDatabase() {
-    const header = new Headers({ 'Content-Type': 'application/json' });
+    const header = new HttpHeaders({ 'Content-Type': 'application/json' });
     const leadObj = {
       colors: this.colors,
       lead: this.lead,
@@ -67,9 +67,9 @@ export class Contract {
     const body = JSON.stringify(leadObj);
     return this.http.post('https://bridge-auction-app.herokuapp.com/addlead', body, { headers: header })
       .map(
-      (response: Response) => { response.json(); }
+      (response: any) => response.result
       ).catch(
-      (error: Response) => Observable.throw(error.json())
+      (error) => Observable.throw(error)
       );
   }
 }

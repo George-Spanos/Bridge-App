@@ -1,5 +1,5 @@
 import { Component, OnInit, Output } from '@angular/core';
-import { Subject } from 'rxjs';
+import { Subject } from 'rxjs/Subject';
 
 @Component({
   selector: 'app-mobile-nav',

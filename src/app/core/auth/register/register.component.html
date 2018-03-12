@@ -5,7 +5,6 @@
       <mat-label>Username</mat-label>
       <input matInput ngModel name="username" type="text" required #username="ngModel">
       <mat-error *ngIf="username.invalid && username.touched">Please type a username</mat-error>
-      <mat-error *ngIf="user.exists">Username already exists! Please select another Username</mat-error>
     </mat-form-field>
     <mat-form-field>
       <mat-label>E-mail</mat-label>
@@ -24,10 +23,11 @@
       Passwords don't match</mat-error>
     <button *ngIf="!user.isLoading" mat-raised-button color="primary" class="subbutton" type="submit" [disabled]="!f.valid">Register</button>
     <mat-spinner diameter='30' *ngIf="user.isLoading"></mat-spinner>
+    <div style="color:red" *ngIf="user.exists">{{user.errorMessage}}</div>
     <p (click)="changeForm()" id="login-text">Already have an account?
       <br> Click here to login</p>
-
   </div>
+
   <div ngModelGroup="Login" *ngIf="loginbool" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="3px">
     <h2 id="header">Login</h2>
     <mat-form-field>

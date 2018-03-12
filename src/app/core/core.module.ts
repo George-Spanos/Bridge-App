@@ -8,7 +8,6 @@ import { HeaderComponent } from './header/header.component';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { MaterialModule } from '../shared/material.module';
-import { SidenavComponent } from './sidenav/sidenav.component';
 @NgModule({
   declarations: [
     HomepageComponent,

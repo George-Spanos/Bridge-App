@@ -1,7 +1,4 @@
 <mat-toolbar fxLayout class="full-width" color="primary" fxLayoutAlign="center center">
-  <!-- <button *ngIf="user.rank === 'Admin'" mat-icon-button (click)="onToggleSidenav()">
-    <mat-icon>menu</mat-icon>
-  </button> -->
   <button fxHide.gt-xs mat-icon-button (click)="onToggleMobilenav()">
     <mat-icon>menu</mat-icon>
   </button>
@@ -14,9 +11,9 @@
     <a routerLink="/leadpractice" style="cursor:pointer" routerLinkActive="active">Lead Practice</a>
     <a routerLink="/donate" style="cursor:pointer" routerLinkActive="active">Donate</a>
     <a routerLink="/contact" style="cursor:pointer" routerLinkActive="active">Contact</a>
-    <!-- <li style="cursor:pointer" routerLinkActive="active">
-        <a routerLink="/test">Test</a>
-      </li> -->
+    <a routerLink="/donate" style="cursor:pointer" routerLinkActive="active">Donate</a>
+    <a *ngIf="user.rank==='Admin'" routerLink="/admin" style="cursor:pointer" routerLinkActive="active">Admin</a>
+    <!-- <a routerLink="/test" style="cursor:pointer" routerLinkActive="active">Test</a> -->
     <a routerLink="/myaccount" *ngIf="user.loggedIn" style="cursor:pointer;" routerLinkActive="active">My Account</a>
   </div>
 </mat-toolbar>

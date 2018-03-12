@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Http, Headers, Response } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
+import { HttpHeaders, HttpClient } from '@angular/common/http';
 @Component({
   selector: 'app-comment',
   templateUrl: './comment.component.html',
@@ -35,7 +35,7 @@ export class CommentComponent implements OnInit {
     }
   }
   Vote(value) {
-    const header = new Headers({ 'Content-Type': 'application/json' });
+    const header = new HttpHeaders({ 'Content-Type': 'application/json' });
     this.bid = {
       value: value,
       id: this.id,
@@ -43,12 +43,12 @@ export class CommentComponent implements OnInit {
     };
     const body = JSON.stringify(this.bid);
     return this.http.post(this.link, body, { headers: header }).map(
-      (response: Response) => { response.json(); }
+      (response: any) =>  response.result
     ).catch(
-      (error: Response) => Observable.throw(error.json())
+      (error) => Observable.throw(error)
       );
   }
-  constructor(public http: Http) { }
+  constructor(public http: HttpClient) { }
 
   ngOnInit() {
   }

@@ -25,7 +25,6 @@ export class RegisterComponent implements OnInit {
       this.user.email = this.logForm.value.Register.email;
       this.user.createUser().subscribe(
         data => {
-          console.log('Success');
           if (!this.user.exists) {
             this.logForm.reset();
             this.loginbool = true;
@@ -38,7 +37,6 @@ export class RegisterComponent implements OnInit {
       this.user.username = this.logForm.value.Login.username;
       this.user.password = this.logForm.value.Login.password;
       this.user.loginUser().subscribe(data => {
-        console.log('Success');
         if (this.user.loggedIn) {
           this.logForm.reset();
         }

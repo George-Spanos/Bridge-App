@@ -1,11 +1,11 @@
 import { Card } from './card.model';
 import { Observable } from 'rxjs/Rx';
 import 'rxjs/Rx';
-import { Http, Headers, Response } from '@angular/http';
 import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 @Injectable()
 export class BridgeApi {
-  constructor(public http: Http) { }
+  constructor(public http: HttpClient) { }
   submitted = false;
   bid = {
     hand: [],
@@ -96,59 +96,59 @@ export class BridgeApi {
     this.bid.suit = suit;
   }
   toDatabase() {
-    const header = new Headers({ 'Content-Type': 'application/json' });
+    const header = new HttpHeaders({ 'Content-Type': 'application/json' });
     const body = JSON.stringify(this.bid);
     this.submitted = true;
     return this.http.post('https://bridge-auction-app.herokuapp.com/addauction', body, { headers: header })
       .map(
-      (response: Response) => { response.json(); }
+        (response: any) => response.result
       ).catch(
-      (error: Response) => Observable.throw(error.json())
+        (error) => Observable.throw(error.json())
       );
   }
   toPracticeCollection() {
-    const header = new Headers({ 'Content-Type': 'application/json' });
+    const header = new HttpHeaders({ 'Content-Type': 'application/json' });
     const body = JSON.stringify(this.bid);
     this.submitted = true;
     return this.http.post('https://bridge-auction-app.herokuapp.com/addpracticebid', body, { headers: header })
       .map(
-      (response: Response) => { response.json(); }
+        (response: any) => response.result
       ).catch(
-      (error: Response) => Observable.throw(error.json())
+        (error) => Observable.throw(error)
       );
   }
   fetchHand() {
     return this.http.get('https://bridge-auction-app.herokuapp.com/randomhand').map(
-      (response: Response) => response.json().result
+      (response: any) => response.result
     ).catch(
-      (error: Response) => Observable.throw(error.json())
-      );
+      (error) => Observable.throw(error)
+    );
   }
   fetchPractice() {
     return this.http.get('https://bridge-auction-app.herokuapp.com/getpracticehand').map(
-      (response: Response) => response.json().result
+      (response: any) => response.result
     ).catch(
-      (error: Response) => Observable.throw(error.json())
-      );
+      (error) => Observable.throw(error)
+    );
   }
   fetchleadPractice() {
     return this.http.get('https://bridge-auction-app.herokuapp.com/getrandomleadpractice').map(
-      (response: Response) => response.json().result
+      (response: any) => response.result
     ).catch(
-      (error: Response) => Observable.throw(error.json())
-      );
+      (error) => Observable.throw(error)
+    );
   }
   postComment(id, answer) {
-    const header = new Headers({ 'Content-Type': 'application/json' });
+    const header = new HttpHeaders({ 'Content-Type': 'application/json' });
     const ans = {
       id: id,
       answer: answer
     };
     const body = JSON.stringify(ans);
     return this.http.post('https://bridge-auction-app.herokuapp.com/postleadanswer', body, { headers: header }).map(
-      (response: Response) => { response.json(); }
+      (response: any) => response.result
     ).catch(
-      (error: Response) => Observable.throw(error.json())
-      );
+      (error) => Observable.throw(error)
+    );
   }
 }

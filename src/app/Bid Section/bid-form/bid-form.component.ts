@@ -1,5 +1,4 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { Http, Headers } from '@angular/http';
 
 import { BridgeApi } from '../../shared/Services/bridge.service';
 import { NgForm } from '@angular/forms';
@@ -41,6 +40,6 @@ export class BidFormComponent implements OnInit {
   Pass() {
     this.bridgeForm.setValue({numericBid: 'Pass', suitBid: 'Pass', comments: ''});
   }
-  constructor(public bridgeApi: BridgeApi, private http: Http) { }
+  constructor(public bridgeApi: BridgeApi) { }
   ngOnInit() { }
 }
