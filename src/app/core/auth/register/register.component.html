@@ -1,5 +1,10 @@
+<<<<<<< HEAD
 <form class="full-width" (ngSubmit)="onSubmit()" #f="ngForm">
   <div ngModelGroup="Register" *ngIf="!loginbool" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="3px">
+=======
+<form class="register" (ngSubmit)="onSubmit()" #f="ngForm">
+  <div ngModelGroup="Register" *ngIf="!loginbool" fxLayout="column" fxLayoutAlign="center center">
+>>>>>>> parent of 9b1a21b... Minor fixes to users
     <h2 id="header">Register</h2>
     <mat-form-field>
       <mat-label>Username</mat-label>
@@ -18,7 +23,10 @@
     <mat-form-field>
       <mat-label>Retype Password</mat-label>
       <input matInput ngModel name="retypepass" type="password" required #retypepass="ngModel">
+      <mat-error class="warning" *ngIf="pass.value !== retypepass.value && pass.touched && retypepass.touched" style="color: rgba(0, 0, 0, 0.9); font-weight: bold; font-size:16px">
+        Passwords don't match</mat-error>
     </mat-form-field>
+<<<<<<< HEAD
     <mat-error *ngIf="pass.value !== retypepass.value && pass.touched && retypepass.touched">
       Passwords don't match</mat-error>
     <button *ngIf="!user.isLoading" mat-raised-button color="primary" class="subbutton" type="submit" [disabled]="!f.valid">Register</button>
@@ -29,6 +37,13 @@
   </div>
 
   <div ngModelGroup="Login" *ngIf="loginbool" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="3px">
+=======
+    <button mat-raised-button color="primary" class="subbutton" type="submit" [disabled]="!f.valid">Register</button>
+    <p (click)="changeForm()" id="login-text">Already have an account?
+      <br> Click here to login</p>
+  </div>
+  <div ngModelGroup="Login" *ngIf="loginbool" fxLayout="column" fxLayoutAlign="center center">
+>>>>>>> parent of 9b1a21b... Minor fixes to users
     <h2 id="header">Login</h2>
     <mat-form-field>
       <mat-label>Username</mat-label>

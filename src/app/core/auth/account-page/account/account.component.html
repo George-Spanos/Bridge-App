@@ -1,3 +1,4 @@
+<<<<<<< HEAD
   <div class="heading full-width">
     <h2>Welcome {{username}}</h2>
   </div>
@@ -24,3 +25,39 @@
   </ul>
   <button mat-raised-button color="primary" (click)="Logout()">Log out</button>
 </div>
+=======
+<div class="container">
+  <div class="row">
+    <div class="heading col-xs-12">
+      <h2>Welcome {{username}}</h2>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="col-xs-2 columns">
+        <img src={{img}} class="img" *ngIf="!editImg">
+        <textarea [(ngModel)]="newImg" *ngIf="editImg" id="imgText"></textarea>
+        <button class="btn btn-primary" *ngIf="!editImg" (click)="editImage()">Change Image</button>
+        <button class="btn btn-primary" *ngIf="editImg" (click)="saveImg()">Save Image</button>
+      </div>
+      <div class="col-xs-10 columns">
+        <textarea class="form-control" *ngIf="!editDesc" readonly>{{description}}</textarea>
+        <textarea class="form-control" *ngIf="editDesc" type="text" value={{description}} [(ngModel)]="description"></textarea>
+        <button class="btn btn-primary" *ngIf="!editDesc" (click)="editDescription()">Edit Description</button>
+        <button class="btn btn-primary" *ngIf="editDesc" (click)="saveDescription()">Save Description Changes</button>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12 form-control">
+      <label>User Info</label>
+      <hr class="hr">
+      <ul class="info">
+        <li> Rank: {{rank}}</li>
+        <li id="premium" *ngIf="premium"> Premium User</li>
+      </ul>
+    </div>
+  </div>
+  <button class="btn btn-primary"  (click)="Logout()">Log out</button>
+</div>
+>>>>>>> parent of 9b1a21b... Minor fixes to users
