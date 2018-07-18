@@ -18,14 +18,22 @@ import { LeadModule } from './Lead Section/lead.module';
 import { DonateComponent } from './donate/donate.component';
 import { ContactComponent } from './contact/contact.component';
 import { TestpageComponent } from './testpage/testpage.component';
+<<<<<<< HEAD
 import { MobileNavComponent } from './core/mobile-nav/mobile-nav.component';
+=======
+import { SidenavComponent } from './core/sidenav/sidenav.component';
+>>>>>>> parent of 442be76... mobile nav ready
 @NgModule({
   declarations: [
     AppComponent,
     DonateComponent,
     ContactComponent,
     TestpageComponent,
+<<<<<<< HEAD
     MobileNavComponent
+=======
+    SidenavComponent
+>>>>>>> parent of 442be76... mobile nav ready
   ],
   imports: [
     BrowserModule,

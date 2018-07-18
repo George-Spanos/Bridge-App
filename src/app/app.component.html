@@ -1,5 +1,6 @@
 <<<<<<< HEAD
 <mat-sidenav-container>
+<<<<<<< HEAD
   <mat-sidenav #mobilenav role="navigation">
     <app-mobile-nav (close)="mobilenav.toggle()"></app-mobile-nav>
   </mat-sidenav>
@@ -36,3 +37,31 @@
   </aside>
 </main>
 >>>>>>> parent of 9b1a21b... Minor fixes to users
+=======
+    <mat-sidenav #sidenav role="navigation">
+        <app-sidenav (close)="sidenav.toggle()"></app-sidenav>
+    </mat-sidenav>
+    <mat-sidenav-content>
+        <section class="full-width" >
+            <app-header (sidenavToggle)="sidenav.toggle()">
+            </app-header>
+          </section>
+        <main 
+        fxLayout 
+        fxLayoutAlign="space-between start" 
+        fxLayoutGap="5px" 
+        style="overflow:hidden"
+        fxLayout.lt-sm="column"
+        fxLayoutAlign.lt-sm="center center">
+            <section fxLayout="column" class="full-width" >
+              <router-outlet>
+              </router-outlet>
+            </section>
+            <aside *ngIf="!user.loggedIn">
+              <app-register>
+              </app-register>
+            </aside>
+          </main>
+    </mat-sidenav-content>
+</mat-sidenav-container>
+>>>>>>> parent of 442be76... mobile nav ready
