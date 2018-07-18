@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <mat-toolbar fxLayout class="full-width" color="primary" fxLayoutAlign="center center">
   <button fxHide.gt-xs mat-icon-button (click)="onToggleMobilenav()">
     <mat-icon>menu</mat-icon>
@@ -15,5 +16,44 @@
     <a *ngIf="user.rank==='Admin'" routerLink="/admin" style="cursor:pointer" routerLinkActive="active">Admin</a>
     <!-- <a routerLink="/test" style="cursor:pointer" routerLinkActive="active">Test</a> -->
     <a routerLink="/myaccount" *ngIf="user.loggedIn" style="cursor:pointer;" routerLinkActive="active">My Account</a>
+=======
+<mat-toolbar fxLayout class="full-width" color="primary">
+  <div fxFlex="0 0.05 auto">
+    <a routerLink="/">Bridge App</a>
+  </div>
+  <div fxFlex fxLayout fxLayoutAlign="flex-end" fxHide.xs>
+    <ul fxLayoutAlign="flex-end" fxLayoutWrap class="navigation-items" fxLayoutGap="10px">
+      <li style="cursor:pointer;" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+        <a routerLink="/">Home</a>
+      </li>
+      <li style="cursor:pointer" routerLinkActive="active">
+        <a routerLink="/bid">Bid Thread</a>
+      </li>
+      <li style="cursor:pointer" routerLinkActive="active">
+        <a routerLink="/practice">Practice</a>
+      </li>
+      <li style="cursor:pointer" routerLinkActive="active">
+        <a routerLink="/lead">Lead Post</a>
+      </li>
+      <li style="cursor:pointer" routerLinkActive="active">
+        <a routerLink="/leadthread">Lead Thread</a>
+      </li>
+      <li style="cursor:pointer" routerLinkActive="active">
+        <a routerLink="/leadpractice">Lead Practice</a>
+      </li>
+      <li style="cursor:pointer" routerLinkActive="active">
+        <a routerLink="/donate">Donate</a>
+      </li>
+      <li style="cursor:pointer" routerLinkActive="active">
+        <a routerLink="/contact">Contact</a>
+      </li>
+      <li style="cursor:pointer" routerLinkActive="active">
+        <a routerLink="/test">Test</a>
+      </li>
+      <li *ngIf="user.loggedIn" style="cursor:pointer; float: right;" routerLinkActive="active">
+        <a routerLink="/myaccount">My Account</a>
+      </li>
+    </ul>
+>>>>>>> parent of 9b1a21b... Minor fixes to users
   </div>
 </mat-toolbar>

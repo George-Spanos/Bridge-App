@@ -1,5 +1,9 @@
+<<<<<<< HEAD
 import { FadeStateTrigger } from './../../../shared/animations/animations';
 import { Component, OnInit, ViewChild } from '@angular/core';
+=======
+import { Component, OnInit, ViewChild} from '@angular/core';
+>>>>>>> parent of 9b1a21b... Minor fixes to users
 import { NgForm } from '@angular/forms';
 import { User } from '../../../shared/Services/user.service';
 import { Router } from '@angular/router';
@@ -7,7 +11,6 @@ import { Router } from '@angular/router';
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css'],
-  animations: [FadeStateTrigger]
 })
 export class RegisterComponent implements OnInit {
   loginbool = false;

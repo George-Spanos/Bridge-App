@@ -14,15 +14,3 @@ export const routeFadeStateTrigger = trigger('routeFadeState', [
     }))
   ])
 ]);
-export const FadeStateTrigger = trigger('fade', [
-  transition(':enter', [
-    style({
-      opacity: 0,
-    }), animate(300)]),
-  transition(':leave', [
-  animate(300, style({
-    opacity: 0
-  }))
-  ])
-]);
-
