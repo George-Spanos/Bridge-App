@@ -1,3 +1,6 @@
+:host {
+  background-color:rgba(41, 109, 104, 0.041);
+}
 .img {
   width: 100px;
   height: 100px;
@@ -6,10 +9,8 @@
   margin: 10px;
   object-fit: cover;
 }
-.form-control {
-  height: auto;
-  margin: 10px;
-  min-height: 100px;
+textarea {
+  height: 70px;
 }
 .heading {
   width: 100%;
@@ -33,6 +34,9 @@
 .columns {
   float: left;
 }
-#imgText{
-  margin-top: 10px;
+.userInfo{
+  border: 2px solid lightgrey;
+  margin: 2% 5%;
+  padding: 10px;
+  border-radius: 3px;
 }

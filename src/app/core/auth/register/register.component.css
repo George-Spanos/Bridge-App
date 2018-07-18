@@ -1,14 +1,8 @@
-<<<<<<< HEAD
 form {
   height: 100%;
   background-color: rgba(9, 70, 67, 0.06);
   width: 250px;
   border-radius: 3px;
-=======
-.register{
-  height:100%;
-  max-width: 200px;
->>>>>>> parent of 9b1a21b... Minor fixes to users
 }
 
 #header {
@@ -29,15 +23,4 @@ form {
 #login-text:hover {
   color: darkslategray;
 }
-<<<<<<< HEAD
 
-=======
-/* .warning {
-  text-align: center;
-  margin: 5px 0px;
-  font-weight: bold;
-  background-color: rgba(255, 255, 255, 0.35);
-  border-radius: 2px;
-  border: 1px solid rgba(255, 0, 0, 0.3);
-} */
->>>>>>> parent of 9b1a21b... Minor fixes to users

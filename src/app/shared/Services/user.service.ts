@@ -14,7 +14,7 @@ export class User {
   img: string;
   leadVoted: string[];
   bidVoted: string[];
-  loggedIn = true; // REMOVING BOOTSTRAP -> ANGULAR MATERIAL
+  loggedIn = false; // REMOVING BOOTSTRAP -> ANGULAR MATERIAL
   registered = false;
   exists = false;
   logValid = false;
